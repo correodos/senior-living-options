@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /search/
+Disallow: /api/
+
+Sitemap: https://seniorlivingoptions.com/sitemap-index.xml
