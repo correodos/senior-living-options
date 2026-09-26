@@ -1,0 +1,66 @@
+<header class="c-header" role="banner">
+  <div class="c-header__inner u-container u-flex u-items-center u-justify-between">
+    <a href="/" class="c-header__logo" aria-label="Senior Living Options - Inicio">
+      <svg class="c-header__logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 8v8M12 12h8M16 16v8M12 20h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>Senior Living Options</span>
+    </a>
+
+    <nav class="c-header__nav" role="navigation" aria-label="Navegación principal">
+      <a href="/category/assisted-living/" class="c-header__nav-link">Assisted Living</a>
+      <a href="/category/memory-care/" class="c-header__nav-link">Memory Care</a>
+      <a href="/category/nursing-homes/" class="c-header__nav-link">Nursing Homes</a>
+      <a href="/category/in-home-care/" class="c-header__nav-link">In-Home Care</a>
+      <a href="/category/senior-care-costs/" class="c-header__nav-link">Costs & Finance</a>
+      <a href="/category/caregiver-resources/" class="c-header__nav-link">Caregiver Help</a>
+    </nav>
+
+    <button
+      class="c-header__mobile-toggle"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Abrir menú"
+      data-mobile-toggle
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="c-header__mobile-menu u-hidden" id="mobile-menu" role="navigation" aria-label="Menú móvil">
+    <nav class="u-p-4 u-flex u-flex-col u-gap-2">
+      <a href="/category/assisted-living/" class="c-header__nav-link u-py-2">Assisted Living</a>
+      <a href="/category/memory-care/" class="c-header__nav-link u-py-2">Memory Care</a>
+      <a href="/category/nursing-homes/" class="c-header__nav-link u-py-2">Nursing Homes</a>
+      <a href="/category/in-home-care/" class="c-header__nav-link u-py-2">In-Home Care</a>
+      <a href="/category/senior-care-costs/" class="c-header__nav-link u-py-2">Costs & Finance</a>
+      <a href="/category/caregiver-resources/" class="c-header__nav-link u-py-2">Caregiver Help</a>
+      <a href="/search/" class="c-btn c-btn--primary u-mt-4">Buscar</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('[data-mobile-toggle]');
+  const menu = document.getElementById('mobile-menu');
+
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      menu.classList.toggle('u-hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.add('u-hidden');
+      }
+    });
+  }
+</script>

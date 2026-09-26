@@ -1,0 +1,46 @@
+---
+interface Props {
+  headings: Array<{ level: number; text: string; slug: string }>;
+}
+const { headings } = Astro.props;
+---
+{headings.length > 0 && (
+  <aside class="c-toc" aria-label="Tabla de contenido">
+    <h3 class="c-toc__title">En este artículo</h3>
+    <nav>
+      <ul class="c-toc__list">
+        {headings.map((heading) => (
+          <li style={{ marginLeft: heading.level === 3 ? 'var(--sl-space-4)' : 0 }}>
+            <a href={`#${heading.slug}`} class="c-toc__link" data-toc-link>
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </aside>
+)}
+
+<script>
+  const links = document.querySelectorAll('[data-toc-link]');
+  const headings = document.querySelectorAll('h2[id], h3[id]');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute('id');
+        const link = document.querySelector(`[data-toc-link][href="#${id}"]`);
+        if (link) {
+          if (entry.isIntersecting) {
+            link.classList.add('c-toc__link--active');
+          } else {
+            link.classList.remove('c-toc__link--active');
+          }
+        }
+      });
+    },
+    { rootMargin: '-100px 0px -66%' }
+  );
+
+  headings.forEach((heading) => observer.observe(heading));
+</script>

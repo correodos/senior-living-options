@@ -1,0 +1,37 @@
+---
+interface Props {
+  children: any;
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'accent' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  full?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  class?: string;
+}
+const { children, href, variant = 'primary', size = 'md', full = false, type = 'button', disabled = false, class: className = '' } = Astro.props;
+
+const variants = {
+  primary: 'c-btn--primary',
+  secondary: 'c-btn--secondary',
+  accent: 'c-btn--accent',
+  outline: 'c-btn--outline',
+};
+
+const sizes = {
+  sm: 'c-btn--sm',
+  md: '',
+  lg: 'c-btn--lg',
+};
+
+const classes = `c-btn ${variants[variant]} ${sizes[size]} ${full ? 'c-btn--full' : ''} ${className}`.trim();
+---
+{href ? (
+  <a href={href} class={classes} aria-disabled={disabled} tabindex={disabled ? -1 : undefined}>
+    <slot />
+  </a>
+) : (
+  <button class={classes} type={type} disabled={disabled}>
+    <slot />
+  </button>
+)}

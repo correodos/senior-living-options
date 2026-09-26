@@ -1,0 +1,60 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: Record<string, unknown> | null;
+  robots?: string;
+  noScript?: boolean;
+}
+const { title, description, canonical, ogImage, ogType = 'website', jsonLd, robots = 'index,follow', noScript = false } = Astro.props;
+
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://seniorlivingoptions.com';
+const SITE_NAME = import.meta.env.PUBLIC_SITE_NAME || 'Senior Living Options';
+const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.webp`;
+const finalCanonical = canonical || Astro.url.href;
+const finalOgImage = ogImage || DEFAULT_OG_IMAGE;
+const finalTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={finalCanonical} />
+    <meta name="robots" content={robots} />
+
+    <title>{finalTitle}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={finalCanonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={finalOgImage} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="es_ES" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={finalOgImage} />
+
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
+
+    {noScript && <noscript><style>{`body{visibility:hidden}`}</style></noscript>}
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

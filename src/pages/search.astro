@@ -1,0 +1,143 @@
+---
+import HomeLayout from '../../layouts/HomeLayout.astro';
+import { buildSearchSEOMeta } from '../../utils/seo';
+import Search from '../../components/ui/Search.astro';
+
+const { q } = Astro.url.searchParams;
+const query = q || '';
+const seo = buildSearchSEOMeta(query);
+---
+<HomeLayout {...seo}>
+  <section class="u-container u-py-16">
+    <header class="u-mb-12">
+      <h1 class="u-mb-4">Buscar en Senior Living Options</h1>
+      {query && <p class="u-text-muted">Resultados para: <strong>"{query}"</strong></p>}
+    </header>
+
+    <div style="max-width: 700px; margin: 0 auto;">
+      <Search />
+      <div id="search-results-container" class="u-mt-8"></div>
+    </div>
+  </section>
+</HomeLayout>
+
+<script>
+  const container = document.getElementById('search-results-container');
+  let searchIndex: Array<{ title: string; description: string; url: string; category: string; content: string }> = [];
+
+  async function loadSearchIndex() {
+    try {
+      const res = await fetch('/search-index.json');
+      if (res.ok) {
+        searchIndex = await res.json();
+      }
+    } catch (e) {
+      console.warn('Search index not available');
+    }
+  }
+
+  function search(query: string) {
+    if (!container) return;
+    if (!query.trim()) {
+      container.innerHTML = '';
+      return;
+    }
+
+    const terms = query.toLowerCase().split(' ').filter(Boolean);
+    const results = searchIndex
+      .map((item) => {
+        const haystack = `${item.title} ${item.description} ${item.category} ${item.content}`.toLowerCase();
+        let score = 0;
+        terms.forEach((term) => {
+          const titleMatches = (item.title.toLowerCase().match(new RegExp(term, 'g')) || []).length;
+          const contentMatches = (item.content.toLowerCase().match(new RegExp(term, 'g')) || []).length;
+          score += titleMatches * 5 + contentMatches * 1;
+          if (item.category.toLowerCase().includes(term)) score += 3;
+        });
+        return { ...item, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 20);
+
+    renderResults(results, query);
+  }
+
+  function renderResults(results: typeof searchIndex, query: string) {
+    if (!container) return;
+
+    if (results.length === 0) {
+      container.innerHTML = `
+        <div class="u-text-center u-py-12 u-bg-primary-light u-rounded-lg">
+          <p class="u-text-muted u-mb-4">No se encontraron resultados para "<strong>${escapeHtml(query)}</strong>"</p>
+          <p class="u-fs-sm u-text-light">Prueba con términos más generales o revisa nuestras <a href="/category/" class="u-text-primary">categorías principales</a>.</p>
+        </div>
+      `;
+      return;
+    }
+
+    const categoryInfo: Record<string, { label: string; color: string }> = {
+      'assisted-living': { label: 'Assisted Living', color: 'var(--sl-color-al)' },
+      'memory-care': { label: 'Memory Care', color: 'var(--sl-color-mc)' },
+      'nursing-homes': { label: 'Nursing Homes', color: 'var(--sl-color-nh)' },
+      'in-home-care': { label: 'In-Home Care', color: 'var(--sl-color-ihc)' },
+      'senior-care-costs': { label: 'Costs & Finance', color: 'var(--sl-color-cf)' },
+      'caregiver-resources': { label: 'Caregiver Help', color: 'var(--sl-color-cr)' },
+    };
+
+    container.innerHTML = `
+      <p class="u-text-muted u-mb-6">{results.length} resultado{s} encontrado{s}</p>
+      <div class="c-grid c-grid--2" style="gap: var(--sl-space-4);">
+        ${results
+          .map((item) => {
+            const cat = categoryInfo[item.category] || { label: item.category, color: 'var(--sl-color-primary)' };
+            const excerpt = item.content.slice(0, 200).replace(/\s+\S*$/, '') + '…';
+            return `
+              <article class="c-card">
+                <div class="c-card__content">
+                  <span class="c-badge" style="background-color: ${cat.color}15; color: ${cat.color}">${cat.label}</span>
+                  <h3 class="c-card__title"><a href="${item.url}">${escapeHtml(item.title)}</a></h3>
+                  <p class="c-card__excerpt">${escapeHtml(excerpt)}</p>
+                  <a href="${item.url}" class="c-btn c-btn--secondary c-btn--sm u-mt-4">Leer artículo</a>
+                </div>
+              </article>
+            `;
+          })
+          .join('')}
+      </div>
+    `;
+  }
+
+  function escapeHtml(text: string) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialQuery = urlParams.get('q') || '';
+
+  const searchInput = document.querySelector('[data-search-input]');
+  if (searchInput && initialQuery) {
+    (searchInput as HTMLInputElement).value = initialQuery;
+  }
+
+  loadSearchIndex().then(() => {
+    if (initialQuery) {
+      search(initialQuery);
+    }
+  });
+
+  if (searchInput) {
+    let debounceTimer: number;
+    searchInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(() => {
+        const value = (searchInput as HTMLInputElement).value;
+        search(value);
+        urlParams.set('q', value);
+        window.history.replaceState({}, '', `${window.location.pathname}?${urlParams.toString()}`);
+      }, 150);
+    });
+  }
+</script>

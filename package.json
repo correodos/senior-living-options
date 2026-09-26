@@ -1,0 +1,41 @@
+{
+  "name": "senior-living-options",
+  "version": "1.0.0",
+  "description": "Senior Living Options - Guías completas para opciones de vivienda y cuidado de adultos mayores",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint": "eslint src --ext .astro,.ts,.js",
+    "lint:fix": "eslint src --ext .astro,.ts,.js --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "validate:content": "node scripts/validate-content.mjs",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "astro": "^4.16.0",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.1.6",
+    "@astrojs/robots-txt": "^1.0.0",
+    "typescript": "^5.6.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "eslint": "^9.11.0",
+    "eslint-plugin-astro": "^1.2.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10"
+  },
+  "engines": {
+    "node": ">=18.20.0"
+  },
+  "packageManager": "npm@10.8.0"
+}

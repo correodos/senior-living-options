@@ -1,0 +1,55 @@
+---
+interface Props {
+  data: any;
+}
+const { data } = Astro.props;
+
+const categoryInfo = {
+  'assisted-living': { label: 'Assisted Living', color: 'var(--sl-color-al)' },
+  'memory-care': { label: 'Memory Care', color: 'var(--sl-color-mc)' },
+  'nursing-homes': { label: 'Nursing Homes', color: 'var(--sl-color-nh)' },
+  'in-home-care': { label: 'In-Home Care', color: 'var(--sl-color-ihc)' },
+  'senior-care-costs': { label: 'Costs & Finance', color: 'var(--sl-color-cf)' },
+  'caregiver-resources': { label: 'Caregiver Help', color: 'var(--sl-color-cr)' },
+};
+const cat = categoryInfo[data.category as keyof typeof categoryInfo] || { label: data.category, color: 'var(--sl-color-primary)' };
+---
+<div class="c-article-meta">
+  <span class="c-article-meta__item">
+    <span
+      class="c-badge"
+      style={{ backgroundColor: `${cat.color}15`, color: cat.color }}
+    >
+      {cat.label}
+    </span>
+  </span>
+  <time class="c-article-meta__item" dateTime={data.publishDate.toISOString()}>
+    <svg class="c-article-meta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+      <line x1="16" y1="2" x2="16" y2="6"/>
+      <line x1="8" y1="2" x2="8" y2="6"/>
+      <line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+    Publicado: {new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(data.publishDate))}
+  </time>
+  <time class="c-article-meta__item" dateTime={data.lastReviewed.toISOString()}>
+    <svg class="c-article-meta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M23 4v6h-6"/>
+      <path d="M1 20v-6h6"/>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+    </svg>
+    Revisado: {new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(data.lastReviewed))}
+  </time>
+  {data.readingTime && (
+    <span class="c-article-meta__item">
+      <svg class="c-article-meta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+      {data.readingTime} min de lectura
+    </span>
+  )}
+  {data.isPillar && (
+    <span class="c-badge c-badge--pillar">Artículo pilar</span>
+  )}
+</div>

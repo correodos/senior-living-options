@@ -1,0 +1,112 @@
+<div class="c-search" role="search">
+  <svg class="c-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <circle cx="11" cy="11" r="8"/>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </svg>
+  <input
+    type="search"
+    class="c-search__input"
+    placeholder="Buscar artículos..."
+    aria-label="Buscar artículos"
+    autocomplete="off"
+    data-search-input
+  />
+  <div class="c-search__results u-hidden" role="listbox" aria-label="Resultados de búsqueda" data-search-results></div>
+</div>
+
+<script>
+  const input = document.querySelector('[data-search-input]');
+  const resultsContainer = document.querySelector('[data-search-results]');
+  let debounceTimer: number;
+  let searchIndex: Array<{ title: string; description: string; url: string; category: string }> = [];
+
+  async function loadSearchIndex() {
+    try {
+      const res = await fetch('/search-index.json');
+      if (res.ok) {
+        searchIndex = await res.json();
+      }
+    } catch (e) {
+      console.warn('Search index not available');
+    }
+  }
+
+  function search(query: string) {
+    if (!query.trim()) {
+      resultsContainer.classList.add('u-hidden');
+      return;
+    }
+
+    const terms = query.toLowerCase().split(' ').filter(Boolean);
+    const results = searchIndex
+      .map((item) => {
+        const haystack = `${item.title} ${item.description} ${item.category}`.toLowerCase();
+        let score = 0;
+        terms.forEach((term) => {
+          if (haystack.includes(term)) score += 1;
+          if (item.title.toLowerCase().includes(term)) score += 3;
+          if (item.category.toLowerCase().includes(term)) score += 2;
+        });
+        return { ...item, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 8);
+
+    renderResults(results);
+  }
+
+  function renderResults(results: typeof searchIndex) {
+    if (results.length === 0) {
+      resultsContainer.innerHTML = '<div class="u-p-4 u-text-center u-text-muted">Sin resultados</div>';
+      resultsContainer.classList.remove('u-hidden');
+      return;
+    }
+
+    resultsContainer.innerHTML = results
+      .map(
+        (item) => `
+        <a href="${item.url}" class="c-search__result-item" role="option">
+          <span class="c-search__result-title">${escapeHtml(item.title)}</span>
+          <span class="c-search__result-category">${escapeHtml(item.category)}</span>
+        </a>
+      `
+      )
+      .join('');
+    resultsContainer.classList.remove('u-hidden');
+  }
+
+  function escapeHtml(text: string) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  if (input) {
+    input.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(() => {
+        search(input.value);
+      }, 150);
+    });
+
+    input.addEventListener('focus', () => {
+      if (input.value.trim()) search(input.value);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!input.contains(e.target) && !resultsContainer.contains(e.target)) {
+        resultsContainer.classList.add('u-hidden');
+      }
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        resultsContainer.classList.add('u-hidden');
+        input.blur();
+      }
+    });
+  }
+
+  loadSearchIndex();
+</script>

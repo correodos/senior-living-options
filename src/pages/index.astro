@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import HomeLayout from '../layouts/HomeLayout.astro';
+import { buildHomeSEOMeta } from '../utils/seo';
+import { getAllCategories, getCategoryPillarSlug } from '../utils/category';
+import Card from '../components/content/Card.astro';
+import Button from '../components/ui/Button.astro';
+
+const allEntries = await getCollection('entries');
+const pillars = allEntries.filter((e) => e.data.isPillar).sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+const latest = allEntries.filter((e) => !e.data.isPillar).sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()).slice(0, 6);
+
+const categories = getAllCategories();
+const seo = buildHomeSEOMeta();
+---
+<HomeLayout {...seo}>
+  <section class="c-hero" aria-labelledby="hero-title">
+    <div class="u-container">
+      <h1 id="hero-title" class="c-hero__title">Guías Completas para Opciones de Vivienda y Cuidado de Adultos Mayores</h1>
+      <p class="c-hero__description">
+        Encuentra la mejor opción para tu ser querido. Investigamos, comparamos y explicamos todo sobre Assisted Living, Memory Care, Nursing Homes, In-Home Care, costos y recursos para cuidadores.
+      </p>
+      <div class="c-hero__actions">
+        <Button href="/search/" variant="primary" size="lg">Buscar guías</Button>
+        <Button href="/category/senior-care-costs/" variant="outline" size="lg">Ver costos por estado</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="u-container u-py-16" aria-labelledby="categories-title">
+    <header class="u-text-center u-mb-12">
+      <h2 id="categories-title" class="u-mb-4">Explorar por Categoría</h2>
+      <p class="u-text-muted u-fs-lg u-mx-auto" style="max-width: 600px;">Seis áreas clave para tomar decisiones informadas sobre el cuidado de adultos mayores</p>
+    </header>
+    <div class="c-grid c-grid--2 c-grid--3">
+      {categories.map((cat) => (
+        <a href={`/category/${cat.slug}/`} class="c-card u-transition" style={{ borderColor: `${cat.color}40` }}>
+          <div class="c-card__content u-text-center">
+            <span class="u-inline-flex u-items-center u-justify-center u-mb-4" style="width: 64px; height: 64px; border-radius: var(--sl-radius-xl); background-color: `${cat.color}15`; color: {cat.color}; font-size: 2rem;">{cat.icon}</span>
+            <h3 class="c-card__title u-mb-2">{cat.label}</h3>
+            <p class="c-card__excerpt u-mb-4">{cat.description}</p>
+            <Button variant="outline" size="sm">Ver guías →</Button>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {pillars.length > 0 && (
+    <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="pillars-title">
+      <header class="u-text-center u-mb-12">
+        <h2 id="pillars-title" class="u-mb-4">Guías Fundamentales (Artículos Pilar)</h2>
+        <p class="u-text-muted u-fs-lg u-mx-auto" style="max-width: 600px;">Nuestros artículos más completos y actualizados, revisados por expertos cada 6 meses</p>
+      </header>
+      <div class="c-grid c-grid--2 c-grid--3">
+        {pillars.slice(0, 6).map((entry) => (
+          <Card entry={entry} />
+        ))}
+      </div>
+      <div class="u-text-center u-mt-10">
+        <Button href="/search/" variant="secondary" size="lg">Ver todas las guías →</Button>
+      </div>
+    </section>
+  )}
+
+  <section class="u-container u-py-16" aria-labelledby="latest-title">
+    <header class="u-flex u-items-center u-justify-between u-mb-8">
+      <h2 id="latest-title" class="u-mb-0">Artículos Recientes</h2>
+      <a href="/search/" class="c-btn c-btn--secondary c-btn--sm">Ver todos</a>
+    </header>
+    <div class="c-grid c-grid--2 c-grid--3">
+      {latest.map((entry) => (
+        <Card entry={entry} />
+      ))}
+    </div>
+  </section>
+
+  <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="newsletter-title">
+    <div class="u-text-center u-mx-auto" style="max-width: 600px;">
+      <h2 id="newsletter-title" class="u-mb-4">Mantente Informado</h2>
+      <p class="u-text-muted u-mb-6">Recibe las últimas guías, actualizaciones de costos y recursos para cuidadores directamente en tu correo.</p>
+      <form class="u-flex u-flex-col sm:u-flex-row u-gap-3 u-mx-auto" style="max-width: 400px;">
+        <input type="email" placeholder="tu@email.com" class="c-search__input u-flex-1" aria-label="Email" required />
+        <Button type="submit" variant="primary" size="lg">Suscribirse</Button>
+      </form>
+      <p class="u-fs-xs u-text-light u-mt-4">Sin spam. Cancelar en cualquier momento. <a href="/privacy/">Política de privacidad</a></p>
+    </div>
+  </section>
+</HomeLayout>

@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import CategoryLayout from '../../layouts/CategoryLayout.astro';
+import { buildCategorySEOMeta } from '../../utils/seo';
+import { getCategoryInfo, getAllCategories } from '../../utils/category';
+import Card from '../../components/content/Card.astro';
+import { slugify } from '../../utils/markdown';
+
+export async function getStaticPaths() {
+  const categories = getAllCategories();
+  return categories.map((cat) => ({
+    params: { slug: cat.slug },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+const catInfo = getCategoryInfo(category.slug);
+
+if (!catInfo) {
+  return Astro.redirect('/404');
+}
+
+const allEntries = await getCollection('entries');
+const categoryEntries = allEntries
+  .filter((e) => e.data.category === category.slug)
+  .sort((a, b) => {
+    if (a.data.isPillar && !b.data.isPillar) return -1;
+    if (!a.data.isPillar && b.data.isPillar) return 1;
+    return b.data.publishDate.getTime() - a.data.publishDate.getTime();
+  });
+
+const pillarEntries = categoryEntries.filter((e) => e.data.isPillar);
+const articleEntries = categoryEntries.filter((e) => !e.data.isPillar);
+
+const seo = buildCategorySEOMeta(
+  category.slug,
+  catInfo.label,
+  catInfo.description
+);
+---
+<CategoryLayout title={seo.title} description={seo.description} category={category.slug} {...seo}>
+  <header class="c-category-header u-container">
+    <span class="c-category-header__badge" style={{ backgroundColor: `${catInfo.color}15`, color: catInfo.color }}>
+      {catInfo.icon} {catInfo.label}
+    </span>
+    <h1 class="c-category-header__title">{catInfo.label}</h1>
+    <p class="c-category-header__description">{catInfo.description}</p>
+  </header>
+
+  {pillarEntries.length > 0 && (
+    <section class="u-container u-mb-16" aria-labelledby="pillars-heading">
+      <h2 id="pillars-heading" class="u-sr-only">Guías Fundamentales</h2>
+      <div class="c-grid c-grid--2 c-grid--3">
+        {pillarEntries.map((entry) => (
+          <Card entry={entry} featured />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="u-container u-mb-16" aria-labelledby="articles-heading">
+    <div class="u-flex u-items-center u-justify-between u-mb-8">
+      <h2 id="articles-heading">Artículos y Guías</h2>
+      <span class="u-text-muted u-fs-sm">{articleEntries.length} artículos</span>
+    </div>
+
+    {articleEntries.length > 0 ? (
+      <>
+        <div class="c-grid c-grid--2 c-grid--3">
+          {articleEntries.map((entry) => (
+            <Card entry={entry} />
+          ))}
+        </div>
+      </>
+    ) : (
+      <div class="u-text-center u-py-16 u-bg-primary-light u-rounded-lg">
+        <p class="u-text-muted">Próximamente más artículos sobre {catInfo.label.toLowerCase()}.</p>
+      </div>
+    )}
+  </section>
+
+  <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="related-heading">
+    <h2 id="related-heading" class="u-text-center u-mb-8">Explorar Otras Categorías</h2>
+    <div class="c-grid c-grid--2 c-grid--3">
+      {getAllCategories()
+        .filter((c) => c.slug !== category.slug)
+        .map((cat) => (
+          <a href={`/category/${cat.slug}/`} class="c-card u-transition" style={{ borderColor: `${cat.color}40` }}>
+            <div class="c-card__content u-text-center">
+              <span class="u-inline-flex u-items-center u-justify-center u-mb-4" style="width: 64px; height: 64px; border-radius: var(--sl-radius-xl); background-color: `${cat.color}15`; color: {cat.color}; font-size: 2rem;">{cat.icon}</span>
+              <h3 class="c-card__title u-mb-2">{cat.label}</h3>
+              <p class="c-card__excerpt u-mb-4">{cat.description}</p>
+              <Button variant="outline" size="sm">Ver guías →</Button>
+            </div>
+          </a>
+        ))}
+    </div>
+  </section>
+</CategoryLayout>
