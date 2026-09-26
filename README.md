@@ -4,13 +4,14 @@ Guías completas para opciones de vivienda y cuidado de adultos mayores.
 
 ## Stack Tecnológico
 
-- **Framework**: Astro 4.x (SSG puro, 0-JS por defecto)
-- **Lenguaje**: TypeScript 5.x
+- **Framework**: Astro 7.x (SSG puro, 0-JS por defecto)
+- **Lenguaje**: TypeScript 6.x
+- **Validación**: Zod 4.x
 - **Estilos**: CSS Vanilla con Design Tokens (Custom Properties)
 - **JS**: Vanilla ES Modules (solo search, nav, analytics)
 - **Contenido**: Markdown + Frontmatter (Collections Astro)
-- **Hosting**: Cloudflare Pages
-- **CI/CD**: GitHub Actions
+- **Hosting**: Cloudflare Pages (integración nativa Git)
+- **CI**: GitHub Actions (validación y build)
 
 ## Inicio Rápido
 
@@ -24,7 +25,8 @@ npm run dev        # http://localhost:4321
 # Validaciones
 npm run check      # TypeScript + Astro
 npm run lint       # ESLint
-npm run validate:content  # Frontmatter, fechas, imágenes
+npm run format:check  # Prettier
+npm run validate:content  # Frontmatter, fechas, imágenes, links
 
 # Build producción
 npm run build      # Genera dist/
@@ -67,9 +69,20 @@ src/
 - [Guía de Desarrollo](DEVELOPMENT.md)
 - [Guía de Despliegue](DEPLOYMENT.md)
 
-## Despliegue
+## CI / Despliegue
 
-Push a `main` → GitHub Actions → Cloudflare Pages (automático)
+**CI (GitHub Actions)**: En cada push/PR se ejecuta:
+- `npm ci` — instalación limpia
+- `npm run lint` — ESLint
+- `npm run format:check` — Prettier
+- `npm run check` — TypeScript + Astro
+- `npm run validate:content` — Frontmatter, fechas, imágenes, links
+- `npm run build` — Compilación completa a `dist/`
+
+**Despliegue (Cloudflare Pages nativo)**:
+- Push a `main` → Cloudflare Pages detecta commit → build automático → publica `dist/`
+- PRs → Cloudflare Pages genera preview automático
+- Configuración de build en Cloudflare: `npm run build` / output `dist/` / Node 22.x
 
 Ver [DEPLOYMENT.md](DEPLOYMENT.md) para configuración completa.
 
