@@ -14,7 +14,7 @@ async function generateSearchIndex() {
   const searchIndex = entries.map((entry) => ({
     title: entry.data.title,
     description: entry.data.description,
-    url: `/article/${entry.slug}/`,
+    url: `/article/${entry.id}/`,
     category: entry.data.category,
     content: entry.body,
     isPillar: entry.data.isPillar,

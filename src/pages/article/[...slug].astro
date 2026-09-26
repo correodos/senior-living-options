@@ -19,8 +19,8 @@ export async function getStaticPaths() {
 const { entry, slug } = Astro.props as { entry: CollectionEntry<'entries'>; slug: string };
 const { data, body } = entry;
 
-const processedContent = addHeadingAnchors(body);
-const tocHeadings = getTableOfContents(body);
+const processedContent = addHeadingAnchors(body ?? '');
+const tocHeadings = getTableOfContents(body ?? '');
 
 const seoMeta = buildSEOMeta(entry);
 const jsonLd = generateArticleJsonLd(entry);

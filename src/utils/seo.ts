@@ -23,7 +23,7 @@ const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.webp`;
 
 export function generateArticleJsonLd(entry: CollectionEntry<'entries'>): Record<string, unknown> {
   const { data } = entry;
-  const url = `${SITE_URL}/article/${entry.slug}/`;
+  const url = `${SITE_URL}/article/${entry.id}/`;
 
   return {
     '@context': 'https://schema.org',
@@ -105,7 +105,7 @@ export function generateCategoryJsonLd(
 
 export function buildSEOMeta(entry: CollectionEntry<'entries'>, customOgImage?: string): SEOMeta {
   const { data } = entry;
-  const url = `${SITE_URL}/article/${entry.slug}/`;
+  const url = `${SITE_URL}/article/${entry.id}/`;
   const ogImage = customOgImage || (data.image ? `${SITE_URL}${data.image}` : DEFAULT_OG_IMAGE);
 
   return {
