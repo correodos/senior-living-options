@@ -5,13 +5,7 @@ import astroParser from 'astro-eslint-parser';
 
 export default [
   {
-    ignores: [
-      'dist/',
-      'node_modules/',
-      '.astro/',
-      'public/',
-      'scripts/',
-    ],
+    ignores: ['dist/', 'node_modules/', '.astro/', 'public/', 'scripts/'],
   },
 
   ...eslintPluginAstro.configs.recommended,
