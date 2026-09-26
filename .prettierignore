@@ -6,3 +6,5 @@ public/**
 package-lock.json
 dist/
 .node/
+src/content/entries/**/*.md
+src/content/entries/**/*.mdx

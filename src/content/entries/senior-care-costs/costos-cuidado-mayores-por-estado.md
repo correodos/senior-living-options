@@ -1,85 +1,18 @@
 ---
 title: 'Guía Completa de Costos de Cuidado de Adultos Mayores por Estado (2024)'
-description:
-  'Costos actualizados de assisted living, memory care, nursing homes e in-home care por estado.
-  Incluye calculadora interactiva, opciones de financiamiento y beneficios estatales.'
+description: 'Costos actualizados de assisted living, memory care, nursing homes e in-home care por estado. Incluye calculadora interactiva, opciones de financiamiento y beneficios estatales para planificación financiera.'
 publishDate: 2024-02-01
 lastReviewed: 2024-11-15
 category: senior-care-costs
 isPillar: true
-sources:
-  - 'https://www.genworth.com/aging-and-you/finances/cost-of-care.html'
-  - 'https://www.medicaid.gov/medicaid/long-term-services-supports/index.html'
-  - 'https://www.va.gov/resources/long-term-care-copay-rates/'
-  - 'https://www.medicare.gov/coverage/long-term-care'
+sources: ["https://www.genworth.com/aging-and-you/finances/cost-of-care.html", "https://www.medicaid.gov/medicaid/long-term-services-supports/index.html", "https://www.va.gov/resources/long-term-care-copay-rates/", "https://www.medicare.gov/coverage/long-term-care"]
 readingTime: 15
 image: /images/senior-care-costs-by-state-hero.webp
 imageAlt: 'Mapa de Estados Unidos con costos de cuidado por estado'
-tags:
-  - 'costos'
-  - 'por-estado'
-  - 'financiamiento'
-  - 'medicaid'
-  - 'veteranos'
-states:
-  - 'AL'
-  - 'AK'
-  - 'AZ'
-  - 'AR'
-  - 'CA'
-  - 'CO'
-  - 'CT'
-  - 'DE'
-  - 'FL'
-  - 'GA'
-  - 'HI'
-  - 'ID'
-  - 'IL'
-  - 'IN'
-  - 'IA'
-  - 'KS'
-  - 'KY'
-  - 'LA'
-  - 'ME'
-  - 'MD'
-  - 'MA'
-  - 'MI'
-  - 'MN'
-  - 'MS'
-  - 'MO'
-  - 'MT'
-  - 'NE'
-  - 'NV'
-  - 'NH'
-  - 'NJ'
-  - 'NM'
-  - 'NY'
-  - 'NC'
-  - 'ND'
-  - 'OH'
-  - 'OK'
-  - 'OR'
-  - 'PA'
-  - 'RI'
-  - 'SC'
-  - 'SD'
-  - 'TN'
-  - 'TX'
-  - 'UT'
-  - 'VT'
-  - 'VA'
-  - 'WA'
-  - 'WV'
-  - 'WI'
-  - 'WY'
+tags: ["costos", "por-estado", "financiamiento", "medicaid", "veteranos"]
+states: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
 showTableOfContents: true
-relatedArticles:
-  - 'medicare-medicaid-diferencias'
-  - 'seguros-cuidado-largo-plazo'
-  - 'beneficios-veteranos-aid-attendance'
-  - 'como-pagar-assisted-living'
 ---
-
 # Guía Completa de Costos de Cuidado de Adultos Mayores por Estado (2024)
 
 Entender los costos del cuidado de adultos mayores es fundamental para la planificación financiera.

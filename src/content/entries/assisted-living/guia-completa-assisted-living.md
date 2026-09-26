@@ -1,36 +1,18 @@
 ---
 title: 'Guía Completa de Assisted Living: Costos, Servicios y Cómo Elegir'
-description:
-  'Todo lo que necesitas saber sobre comunidades de assisted living: costos promedio por estado,
-  servicios incluidos, señales de que es momento de mudarse y checklist de evaluación.'
+description: 'Todo lo que necesitas saber sobre comunidades de assisted living: costos promedio por estado, servicios incluidos, señales de que es momento de mudarse y checklist de evaluación completa para elegir la mejor opción.'
 publishDate: 2024-01-15
 lastReviewed: 2024-11-20
 category: assisted-living
 isPillar: true
-sources:
-  - 'https://www.medicare.gov/coverage/assisted-living'
-  - 'https://www.nia.nih.gov/health/assisted-living-facilities'
-  - 'https://www.medicaid.gov/medicaid/long-term-services-supports/assisted-living/index.html'
+sources: ["https://www.medicare.gov/coverage/assisted-living", "https://www.nia.nih.gov/health/assisted-living-facilities", "https://www.medicaid.gov/medicaid/long-term-services-supports/assisted-living/index.html"]
 readingTime: 12
 image: /images/assisted-living-guide-hero.webp
 imageAlt: 'Adulto mayor sonriendo en área común de comunidad assisted living'
-tags:
-  - 'costos'
-  - 'checklist'
-  - 'servicios'
-  - 'elegir'
-states:
-  - 'CA'
-  - 'TX'
-  - 'FL'
-  - 'NY'
+tags: ["costos", "checklist", "servicios", "elegir"]
+states: ["CA", "TX", "FL", "NY"]
 showTableOfContents: true
-relatedArticles:
-  - 'senales-que-es-momento-assisted-living'
-  - 'como-pagar-assisted-living'
-  - 'assisted-living-vs-memory-care'
 ---
-
 # Guía Completa de Assisted Living: Costos, Servicios y Cómo Elegir
 
 El **assisted living** (vida asistida) es una opción de vivienda residencial para adultos mayores
