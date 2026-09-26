@@ -17,7 +17,7 @@ export interface SEOMeta {
   robots: string;
 }
 
-const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://seniorlivingoptions.com';
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
 const SITE_NAME = import.meta.env.PUBLIC_SITE_NAME || 'Senior Living Options';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.webp`;
 

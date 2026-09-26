@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 
-const SITE_URL = 'https://seniorlivingoptions.com';
+const SITE_URL = 'https://senior-living-options.pages.dev';
 
 export default defineConfig({
   site: SITE_URL,

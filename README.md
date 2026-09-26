@@ -72,6 +72,7 @@ src/
 ## CI / Despliegue
 
 **CI (GitHub Actions)**: En cada push/PR se ejecuta:
+
 - `npm ci` — instalación limpia
 - `npm run lint` — ESLint
 - `npm run format:check` — Prettier
@@ -80,6 +81,7 @@ src/
 - `npm run build` — Compilación completa a `dist/`
 
 **Despliegue (Cloudflare Pages nativo)**:
+
 - Push a `main` → Cloudflare Pages detecta commit → build automático → publica `dist/`
 - PRs → Cloudflare Pages genera preview automático
 - Configuración de build en Cloudflare: `npm run build` / output `dist/` / Node 22.x
