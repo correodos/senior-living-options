@@ -74,6 +74,9 @@ jobs:
     needs: build
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     steps:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -82,13 +85,11 @@ jobs:
           path: dist/
 
       - name: Deploy to Cloudflare Pages (Preview)
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: senior-living-options
-          directory: dist
-          branch: preview-${{ github.event.number }}
+          command: pages deploy ./dist --project-name=senior-living-options --branch=preview-${{ github.event.number }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-production:
@@ -96,6 +97,9 @@ jobs:
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     steps:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -104,11 +108,9 @@ jobs:
           path: dist/
 
       - name: Deploy to Cloudflare Pages (Production)
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: senior-living-options
-          directory: dist
-          branch: main
+          command: pages deploy ./dist --project-name=senior-living-options --branch=main
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
