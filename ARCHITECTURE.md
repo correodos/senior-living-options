@@ -2,15 +2,16 @@
 
 ## Stack Tecnológico
 
-| Capa      | Tecnología             | Versión | Justificación                                                    |
-| --------- | ---------------------- | ------- | ---------------------------------------------------------------- |
-| Framework | Astro                  | 4.x     | SSG nativo, islas de hidratación 0-JS por defecto, excelente SEO |
-| Lenguaje  | TypeScript             | 5.x     | Tipado estricto para collections y componentes                   |
-| Estilos   | CSS Vanilla            | -       | Sin dependencias, tokens CSS custom properties, ligero           |
-| JS        | Vanilla ES Modules     | -       | Solo para interactividad mínima (search, nav, analytics)         |
-| Contenido | Markdown + Frontmatter | -       | Archivos locales, versionados en Git, sin CMS externo            |
-| Hosting   | Cloudflare Pages       | -       | Gratis, edge network, deploy automático desde GitHub             |
-| CI/CD     | GitHub Actions         | -       | Lint, typecheck, build, deploy en push a main                    |
+| Capa       | Tecnología             | Versión | Justificación                                                    |
+| ---------- | ---------------------- | ------- | ---------------------------------------------------------------- |
+| Framework  | Astro                  | 7.x     | SSG nativo, islas de hidratación 0-JS por defecto, excelente SEO |
+| Lenguaje   | TypeScript             | 6.x     | Tipado estricto para collections y componentes                   |
+| Estilos    | CSS Vanilla            | -       | Sin dependencias, tokens CSS custom properties, ligero           |
+| JS         | Vanilla ES Modules     | -       | Solo para interactividad mínima (search, nav, analytics)         |
+| Contenido  | Markdown + Frontmatter | -       | Archivos locales, versionados en Git, sin CMS externo            |
+| Validación | Zod                    | 4.x     | Schema validation para content collections                       |
+| Hosting    | Cloudflare Pages       | -       | Gratis, edge network, integración nativa Git                     |
+| CI         | GitHub Actions         | -       | Lint, typecheck, build, validación en push/PR                    |
 
 ## Decisiones Clave
 
@@ -41,15 +42,16 @@
 ```
 /                           → Home (pillar pages destacadas + latest)
 /category/[slug]/           → Listing por categoría (paginado)
-/article/[slug]/            → Detail page individual
+/article/[...slug]/         → Detail page individual (rest parameter para rutas anidadas)
 /search/                    → Búsqueda client-side (JS vanilla)
-/sitemap-index.xml          → Generado automáticamente
-/robots.txt                 → Generado automáticamente
+/sitemap-index.xml          → Generado automáticamente (temporalmente deshabilitado por bug)
+/robots.txt                 → Estático en public/
 ```
 
 ### 5. SEO Técnico
 
-- `@astrojs/sitemap` + `@astrojs/robots-txt`
+- `@astrojs/sitemap` temporalmente deshabilitado (bug con `trailingSlash: always`)
+- `@astrojs/robots-txt` reemplazado por `public/robots.txt` estático
 - Meta tags dinámicos por página (Open Graph, Twitter Cards)
 - JSON-LD: `Article`, `WebSite`, `BreadcrumbList`, `FAQPage` (si aplica)
 - Canonical URLs automáticas
@@ -57,9 +59,10 @@
 
 ### 6. Content Model (Ver CONTENT_MODEL.md)
 
-- Un solo collection `entries` con schema Zod definido
+- Un solo collection `entries` con schema Zod 4.x definido
 - Frontmatter validado en build time
 - Imágenes en `public/images/` referenciadas por ruta relativa
+- Loader `glob` para content collections (Astro 7)
 
 ### 7. Performance Budget
 
@@ -113,12 +116,12 @@
 ├── public/                 # Assets estáticos servidos tal cual
 │   ├── images/             # Imágenes optimizadas (WebP/AVIF)
 │   ├── favicon.ico
-│   └── robots.txt          # Generado en build
+│   └── robots.txt          # Estático (generado en build temporalmente deshabilitado)
 ├── src/
 │   ├── components/         # Componentes Astro reutilizables
 │   │   ├── layout/         # Header, Footer, SkipLink, Breadcrumbs
 │   │   ├── content/        # Card, ArticleMeta, TableOfContents
-│   │   └── ui/             # Button, Link, Icon, Badge
+│   │   └── ui/             # Button, Link, Icon, Badge, Search
 │   ├── layouts/            # Layouts de página
 │   │   ├── BaseLayout.astro
 │   │   ├── HomeLayout.astro
@@ -129,7 +132,7 @@
 │   │   ├── category/
 │   │   │   └── [slug].astro
 │   │   ├── article/
-│   │   │   └── [slug].astro
+│   │   │   └── [...slug].astro
 │   │   └── search.astro
 │   ├── styles/             # CSS vanilla
 │   │   ├── tokens.css      # Design tokens (custom properties)
@@ -138,11 +141,11 @@
 │   │   ├── utilities.css   # Utility classes
 │   │   └── global.css      # Importa todo (importado en BaseLayout)
 │   ├── scripts/            # JS vanilla (ES Modules)
-│   │   ├── search.js       # Búsqueda client-side (Fuse.js opcional)
+│   │   ├── search.js       # Búsqueda client-side
 │   │   ├── navigation.js   # Mobile menu, smooth scroll
 │   │   └── analytics.js    # Plausible/GA4 consent-mode
 │   ├── content/            # Collections Astro
-│   │   ├── config.ts       # Definición de collections
+│   │   ├── config.ts       # Definición de collections (Zod 4 + glob loader)
 │   │   └── entries/        # Archivos .md/.mdx
 │   │       ├── assisted-living/
 │   │       ├── memory-care/
@@ -157,17 +160,24 @@
 │   │   └── category.ts     # Helpers de categoría (labels, colors)
 │   └── types/              # Tipos globales (env.d.ts, content.d.ts)
 ├── scripts/                # Scripts de build/utilidades Node
-│   ├── validate-content.mjs
-│   └── generate-sitemap.mjs
+│   ├── validate-content.ts
+│   └── generate-search-index.ts
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml      # CI/CD a Cloudflare Pages
+│       └── deploy.yml      # CI pipeline (validación + build verification)
 ├── astro.config.mjs
 ├── package.json
 ├── tsconfig.json
 ├── eslint.config.js
 ├── prettier.config.js
-└── CONTENT_MODEL.md
+├── .prettierignore
+├── .gitignore
+├── README.md
+├── ARCHITECTURE.md
+├── CONTENT_MODEL.md
+├── DEVELOPMENT.md
+├── DEPLOYMENT.md
+└── .prettierignore
 ```
 
 ## Scripts NPM
@@ -179,27 +189,67 @@
   "preview": "astro preview", // Test build local
   "check": "astro check", // TypeScript + Astro validation
   "lint": "eslint src --ext .astro,.ts,.js",
+  "lint:fix": "eslint src --ext .astro,.ts,.js --fix",
   "format": "prettier --write .",
-  "validate:content": "node scripts/validate-content.mjs"
+  "format:check": "prettier --check .",
+  "validate:content": "tsx scripts/validate-content.ts",
+  "prepare": "husky install"
 }
 ```
 
 ## Variables de Entorno
 
-| Variable           | Descripción                                          | Requerida |
-| ------------------ | ---------------------------------------------------- | --------- |
-| `PUBLIC_SITE_URL`  | URL producción (ej. https://seniorlivingoptions.com) | Sí        |
-| `PUBLIC_SITE_NAME` | Nombre del sitio para SEO                            | Sí        |
-| `ANALYTICS_ID`     | ID Plausible/GA4 (opcional)                          | No        |
+| Variable           | Dónde configurar | Requerida | Valor por defecto                         |
+| ------------------ | ---------------- | --------- | ----------------------------------------- |
+| `PUBLIC_SITE_URL`  | Cloudflare Pages | Sí        | `https://senior-living-options.pages.dev` |
+| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Living Options`                   |
+| `ANALYTICS_ID`     | Cloudflare Pages | No        | -                                         |
+
+### Desarrollo Local (`.env.local`)
+
+```env
+PUBLIC_SITE_URL=http://localhost:4321
+PUBLIC_SITE_NAME=Senior Living Options (Dev)
+```
+
+## CI / Despliegue
+
+### CI (GitHub Actions)
+
+En cada push/PR se ejecuta:
+
+- `npm ci` — instalación limpia
+- `npm run lint` — ESLint
+- `npm run format:check` — Prettier
+- `npm run check` — TypeScript + Astro
+- `npm run validate:content` — Frontmatter, fechas, imágenes, links
+- `npm run build` — Compilación completa a `dist/` (verificación)
+
+### Despliegue (Cloudflare Pages Nativo)
+
+- Push a `main` → Cloudflare Pages detecta commit → build automático → publica `dist/`
+- PRs → Cloudflare Pages genera preview automático
+- Configuración de build en Cloudflare: `npm run build` / output `dist/` / Node 22.x
+
+### Variables de Build en Cloudflare Pages
+
+| Variable           | Valor                                     |
+| ------------------ | ----------------------------------------- |
+| `PUBLIC_SITE_URL`  | `https://senior-living-options.pages.dev` |
+| `PUBLIC_SITE_NAME` | `Senior Living Options`                   |
+| `ANALYTICS_ID`     | (opcional)                                |
 
 ## Próximos Pasos
 
 1. ✅ Definir arquitectura (este documento)
-2. ⬜ Crear `package.json` + configs (TS, ESLint, Prettier)
-3. ⬜ Estructura de carpetas + `astro.config.mjs`
-4. ⬜ Collection schema (`src/content/config.ts`)
-5. ⬜ Layouts base + design tokens CSS
-6. ⬜ Páginas principales
-7. ⬜ SEO + sitemap + robots
-8. ⬜ GitHub repo + GitHub Actions deploy
-9. ⬜ Documentación `DEVELOPMENT.md` + `DEPLOYMENT.md`
+2. ✅ Crear `package.json` + configs (TS, ESLint, Prettier)
+3. ✅ Estructura de carpetas + `astro.config.mjs`
+4. ✅ Collection schema (`src/content/config.ts`) con Zod 4 + glob loader
+5. ✅ Layouts base + design tokens CSS
+6. ✅ Páginas principales
+7. ✅ SEO + robots.txt
+8. ✅ GitHub repo + CI pipeline
+9. ✅ Documentación `DEVELOPMENT.md` + `DEPLOYMENT.md`
+10. ⬜ Configurar Cloudflare Pages nativo en dashboard
+11. ⬜ Configurar variables de entorno en Cloudflare Pages
+12. ⬜ Configurar dominio personalizado (cuando esté disponible)

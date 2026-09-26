@@ -156,7 +156,7 @@ src/content/entries/
 
 ### Validaciones en Build
 
-El script `scripts/validate-content.mjs` verifica:
+El script `scripts/validate-content.ts` (ejecutado con `tsx`) verifica:
 
 1. **Schema Zod** - Frontmatter válido
 2. **Fechas** - `publishDate` ≤ `lastReviewed` ≤ hoy

@@ -3,8 +3,8 @@
 ## Arquitectura de Despliegue
 
 ```
-GitHub (main) → GitHub Actions → Cloudflare Pages → CDN Global
-                    ↓
+GitHub (main) → Cloudflare Pages (native) → CDN Global
+                     ↓
               Preview Deployments (PRs)
 ```
 
@@ -30,7 +30,7 @@ git commit -m "chore: initial project setup"
 git push -u origin main
 ```
 
-### 3. Configurar Cloudflare Pages
+### 3. Configurar Cloudflare Pages (Integración Nativa)
 
 1. Ir a [Cloudflare Pages](https://dash.cloudflare.com/pages)
 2. "Create a project" → "Connect to Git"
@@ -41,6 +41,7 @@ git push -u origin main
    - **Build command**: `npm run build`
    - **Build output directory**: `dist`
    - **Root directory**: `/` (raíz)
+   - **Node version**: `22.x` (o `22.12.0`)
 
 ### 4. Variables de Entorno en Cloudflare Pages
 
@@ -48,11 +49,11 @@ En Settings → Environment variables:
 
 **Production:**
 
-| Variable           | Valor                              |
-| ------------------ | ---------------------------------- |
-| `PUBLIC_SITE_URL`  | `https://seniorlivingoptions.com`  |
-| `PUBLIC_SITE_NAME` | `Senior Living Options`            |
-| `ANALYTICS_ID`     | `TU_ID_PLAUSIBLE_O_GA4` (opcional) |
+| Variable           | Valor                                     |
+| ------------------ | ----------------------------------------- |
+| `PUBLIC_SITE_URL`  | `https://senior-living-options.pages.dev` |
+| `PUBLIC_SITE_NAME` | `Senior Living Options`                   |
+| `ANALYTICS_ID`     | `TU_ID_PLAUSIBLE_O_GA4` (opcional)        |
 
 **Preview (opcional, hereda de production):**
 
@@ -60,7 +61,7 @@ En Settings → Environment variables:
 | ----------------- | ------------------------------------------------- |
 | `PUBLIC_SITE_URL` | `https://preview-senior-living-options.pages.dev` |
 
-### 5. Secrets en GitHub Actions
+### 5. Secrets en GitHub Actions (SOLO CI, no despliegue)
 
 En Settings → Secrets and variables → Actions → New repository secret:
 
@@ -68,40 +69,45 @@ En Settings → Secrets and variables → Actions → New repository secret:
 | ----------------------- | ---------------------------------------------------------------------------------- |
 | `CLOUDFLARE_API_TOKEN`  | Token API Cloudflare (Account > API Tokens > Create Token > Edit Cloudflare Pages) |
 | `CLOUDFLARE_ACCOUNT_ID` | Account ID (en dashboard Cloudflare, URL: `dash.cloudflare.com/ACCOUNT_ID`)        |
-| `PUBLIC_SITE_URL`       | `https://seniorlivingoptions.com`                                                  |
-| `PUBLIC_SITE_NAME`      | `Senior Living Options`                                                            |
-| `ANALYTICS_ID`          | ID analytics (opcional)                                                            |
+
+> **Nota**: Estos secrets solo son necesarios si en el futuro se quiere automatizar algo desde
+> GitHub Actions. Para el despliegue nativo de Cloudflare Pages **no son necesarios**.
 
 ## Pipeline CI/CD
 
 ### Flujo Principal (Push a main)
 
 ```
-1. Lint & Type Check (ubuntu-latest)
+1. CI (GitHub Actions) - ubuntu-latest
    ├── npm ci
    ├── npm run lint
    ├── npm run format:check
    ├── npm run check
-   └── npm run validate:content
+   ├── npm run validate:content
+   └── npm run build (verificación)
 
-2. Build (ubuntu-latest, needs: lint)
-   ├── npm ci
-   ├── npm run build
-   └── Upload artifacts (dist/)
+2. Deploy (Cloudflare Pages nativo)
+   ├── Detecta commit en main
+   ├── Ejecuta: npm run build
+   ├── Publica: dist/
+   └── CDN Global
+```
 
-3. Deploy Production (needs: build, if: push to main)
-   ├── Download artifacts
-   └── cloudflare/pages-action → main branch
+### Flujo Preview (Pull Requests)
 
-4. Deploy Preview (needs: build, if: pull_request)
-   ├── Download artifacts
-   └── cloudflare/pages-action → preview-{PR_NUMBER} branch
+```
+1. CI (GitHub Actions) - mismo pipeline
+2. Cloudflare Pages Preview
+   ├── Detecta PR
+   ├── Ejecuta: npm run build
+   ├── Publica: dist/
+   └── URL: https://preview-{PR_NUMBER}.senior-living-options.pages.dev
 ```
 
 ### Verificar Pipeline
 
-1. Crear PR → Ver "Deploy Preview" en checks
-2. Merge PR → Ver "Deploy Production" en checks
+1. Crear PR → Ver "Deploy Preview" en Cloudflare Pages dashboard
+2. Merge PR → Ver "Deploy Production" en Cloudflare Pages dashboard
 3. Verificar en Cloudflare Pages dashboard
 
 ## Dominio Personalizado
@@ -109,7 +115,7 @@ En Settings → Secrets and variables → Actions → New repository secret:
 ### 1. En Cloudflare Pages
 
 1. Settings → Custom domains → "Add custom domain"
-2. Ingresar: `seniorlivingoptions.com`
+2. Ingresar: `seniorlivingoptions.com` (cuando lo tengas)
 3. Seguir instrucciones DNS
 
 ### 2. Configuración DNS (en tu registrador o Cloudflare DNS)
@@ -117,7 +123,7 @@ En Settings → Secrets and variables → Actions → New repository secret:
 | Tipo  | Nombre | Contenido                         | Proxy      |
 | ----- | ------ | --------------------------------- | ---------- |
 | CNAME | @      | `senior-living-options.pages.dev` | ✅ Proxied |
-| CNAME | www    | `senior-livingoptions.pages.dev`  | ✅ Proxied |
+| CNAME | www    | `senior-living-options.pages.dev` | ✅ Proxied |
 
 ### 3. SSL/TLS
 
@@ -130,7 +136,7 @@ En Settings → Secrets and variables → Actions → New repository secret:
 ### Astro Config (`astro.config.mjs`)
 
 ```js
-const SITE_URL = 'https://seniorlivingoptions.com';
+const SITE_URL = 'https://senior-living-options.pages.dev';
 
 export default defineConfig({
   site: SITE_URL,
@@ -147,9 +153,24 @@ Las variables `PUBLIC_*` están disponibles en:
 - `import.meta.env.PUBLIC_SITE_URL` (cliente + servidor)
 - `Astro.url` (servidor)
 
+### Variables de Entorno Necesarias
+
+| Variable           | Dónde configurar | Requerida | Valor por defecto                         |
+| ------------------ | ---------------- | --------- | ----------------------------------------- |
+| `PUBLIC_SITE_URL`  | Cloudflare Pages | Sí        | `https://senior-living-options.pages.dev` |
+| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Living Options`                   |
+| `ANALYTICS_ID`     | Cloudflare Pages | No        | -                                         |
+
+### Desarrollo Local (`.env.local`)
+
+```env
+PUBLIC_SITE_URL=http://localhost:4321
+PUBLIC_SITE_NAME=Senior Living Options (Dev)
+```
+
 ## Monitoreo y Logs
 
-### GitHub Actions
+### GitHub Actions (CI)
 
 - Actions tab → Workflow runs
 - Logs detallados por job
@@ -160,11 +181,11 @@ Las variables `PUBLIC_*` están disponibles en:
 - Dashboard → Project → Deployments
 - Build logs
 - Preview URLs: `https://preview-{number}.senior-living-options.pages.dev`
-- Production: `https://seniorlivingoptions.com`
+- Production: `https://senior-living-options.pages.dev`
 
 ### Analytics
 
-- Plausible/GA4 configurado via `ANALYTICS_ID`
+- Plausible/GA4 configurado via `ANALYTICS_ID` (opcional)
 - Verificar en `/search/` que tracking funciona
 
 ## Rollback
@@ -196,13 +217,8 @@ git push --force-with-lease origin main
 
 ### Build falla: "Out of memory"
 
-- En Cloudflare Pages: Settings → Build → Node version → 20
+- En Cloudflare Pages: Settings → Build → Node version → 22
 - Agregar `NODE_OPTIONS=--max-old-space-size=4096` en env vars
-
-### Deploy falla: "Permission denied"
-
-- Verificar `CLOUDFLARE_API_TOKEN` permisos: `Account > Cloudflare Pages > Edit`
-- Verificar `CLOUDFLARE_ACCOUNT_ID` correcto
 
 ### Sitemap no genera
 
@@ -219,14 +235,12 @@ git push --force-with-lease origin main
 ## Checklist Pre-Producción
 
 - [ ] Repo GitHub creado y conectado
-- [ ] Cloudflare Pages project creado
-- [ ] Variables de entorno en Cloudflare (Production + Preview)
-- [ ] Secrets en GitHub Actions (5 secrets)
-- [ ] Dominio personalizado configurado (DNS + SSL)
+- [ ] Cloudflare Pages project creado con integración nativa
+- [ ] Variables de entorno en Cloudflare Pages (Production + Preview)
 - [ ] Primer push a main → Deploy success
 - [ ] Verificar producción: HTTPS, meta tags, sitemap, robots.txt
 - [ ] Verificar preview en PR
-- [ ] Analytics funcionando
+- [ ] Analytics funcionando (si configurado)
 - [ ] Lighthouse > 95 en producción
 
 ## Comandos Útiles
@@ -246,5 +260,25 @@ npm run check
 npm run validate:content
 
 # Generar search index manual
-node scripts/generate-search-index.mjs
+node scripts/generate-search-index.ts
+
+# Preview local del build
+npm run preview
 ```
+
+## Resumen de Cambios Recientes (vs versión anterior)
+
+| Antes (GitHub Actions deploy)            | Ahora (Cloudflare Pages nativo)                         |
+| ---------------------------------------- | ------------------------------------------------------- |
+| GitHub Actions hace build + deploy       | Cloudflare Pages hace build + deploy                    |
+| `cloudflare/wrangler-action` en workflow | Nativo (sin action)                                     |
+| Secrets necesarios: 5                    | Secrets necesarios: 0 (para deploy)                     |
+| Artifacts upload/download                | Nativo (sin artifacts)                                  |
+| Variables en GitHub Secrets              | Variables en Cloudflare Pages dashboard                 |
+| Preview: `preview-{PR}.pages.dev`        | Preview: `preview-{PR}.senior-living-options.pages.dev` |
+
+---
+
+> **Nota importante**: El workflow de GitHub Actions (`.github/workflows/deploy.yml`) ahora es
+> **solo CI** (validación y build). El despliegue real lo hace Cloudflare Pages automáticamente al
+> detectar commits en `main` o PRs. No se sube `dist/` desde GitHub Actions.

@@ -155,17 +155,17 @@ npm run check
 
 ### Build falla en Cloudflare
 
-- Revisar logs en GitHub Actions
+- Revisar logs en Cloudflare Pages dashboard (no GitHub Actions)
 - Común: `astro check` falla por tipos
 - `npm run validate:content` falla por frontmatter
 
 ## Variables de Entorno
 
-| Variable           | Descripción      | Requerida  |
-| ------------------ | ---------------- | ---------- |
-| `PUBLIC_SITE_URL`  | URL producción   | Sí (build) |
-| `PUBLIC_SITE_NAME` | Nombre sitio SEO | Sí (build) |
-| `ANALYTICS_ID`     | ID Plausible/GA4 | No         |
+| Variable           | Dónde configurar | Requerida | Valor por defecto                         |
+| ------------------ | ---------------- | --------- | ----------------------------------------- |
+| `PUBLIC_SITE_URL`  | Cloudflare Pages | Sí        | `https://senior-living-options.pages.dev` |
+| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Living Options`                   |
+| `ANALYTICS_ID`     | Cloudflare Pages | No        | -                                         |
 
 En `.env.local` para desarrollo:
 
