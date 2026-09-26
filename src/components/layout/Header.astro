@@ -57,7 +57,8 @@
     });
 
     document.addEventListener('click', (e) => {
-      if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+      const target = e.target as Node;
+      if (!toggle.contains(target) && !menu.contains(target)) {
         toggle.setAttribute('aria-expanded', 'false');
         menu.classList.add('u-hidden');
       }

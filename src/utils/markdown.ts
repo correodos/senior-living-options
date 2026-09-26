@@ -38,7 +38,7 @@ export function extractHeadings(content: string): Array<{ level: number; text: s
 }
 
 export function addHeadingAnchors(content: string): string {
-  return content.replace(/^(#{2,3})\s+(.+)$/gm, (match, hashes, text) => {
+  return content.replace(/^(#{2,3})\s+(.+)$/gm, (_match, hashes, text) => {
     const slug = slugify(text.trim());
     return `${hashes} ${text.trim()} <a class="heading-anchor" href="#${slug}" aria-label="Enlace a ${text.trim()}">#</a>`;
   });

@@ -53,9 +53,7 @@ const tocHeadings = getTableOfContents(content);
         </header>
 
         <div class="u-flex u-gap-8">
-          <div class="u-flex-1" style="min-width: 0;">
-            <set:html={content} />
-          </div>
+          <div class="u-flex-1" style="min-width: 0;" set:html={content} />
 
           {tocHeadings.length > 0 && (
             <aside class="u-hidden lg:u-block" style="width: 260px; flex-shrink: 0;">

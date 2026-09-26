@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 
 const SITE_URL = 'https://seniorlivingoptions.com';
 
@@ -17,16 +16,7 @@ export default defineConfig({
     defaultStrategy: 'viewport',
   },
   integrations: [
-    sitemap({
-      serialize(item) {
-        return {
-          ...item,
-          lastmod: new Date(),
-          changefreq: 'weekly',
-          priority: item.url === SITE_URL ? 1.0 : 0.8,
-        };
-      },
-    }),
+    // sitemap temporarily disabled due to bug with trailingSlash
   ],
   vite: {
     build: {

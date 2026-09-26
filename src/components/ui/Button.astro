@@ -1,6 +1,5 @@
 ---
 interface Props {
-  children: any;
   href?: string;
   variant?: 'primary' | 'secondary' | 'accent' | 'outline';
   size?: 'sm' | 'md' | 'lg';
@@ -9,7 +8,7 @@ interface Props {
   disabled?: boolean;
   class?: string;
 }
-const { children, href, variant = 'primary', size = 'md', full = false, type = 'button', disabled = false, class: className = '' } = Astro.props;
+const { href, variant = 'primary', size = 'md', full = false, type = 'button', disabled = false, class: className = '' } = Astro.props;
 
 const variants = {
   primary: 'c-btn--primary',

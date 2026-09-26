@@ -62,23 +62,23 @@ function parseFrontmatter(content: string): { data: Record<string, unknown>; bod
       const colonIndex = line.indexOf(':');
       if (colonIndex === -1) return;
       const key = line.slice(0, colonIndex).trim();
-      let value = line.slice(colonIndex + 1).trim();
+      let value: unknown = line.slice(colonIndex + 1).trim();
 
-      if (value.startsWith('[') && value.endsWith(']')) {
+      if (typeof value === 'string' && value.startsWith('[') && value.endsWith(']')) {
         try {
           value = JSON.parse(value.replace(/'/g, '"'));
         } catch {
-          value = value.slice(1, -1).split(',').map((v) => v.trim().replace(/['"]/g, ''));
+          value = (value as string).slice(1, -1).split(',').map((v: string) => v.trim().replace(/['"]/g, ''));
         }
       } else if (value === 'true') {
         value = true;
       } else if (value === 'false') {
         value = false;
-      } else if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+      } else if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)) {
         value = new Date(value);
-      } else if (/^\d+$/.test(value)) {
+      } else if (typeof value === 'string' && /^\d+$/.test(value)) {
         value = parseInt(value, 10);
-      } else {
+      } else if (typeof value === 'string') {
         value = value.replace(/^['"]|['"]$/g, '');
       }
 
@@ -113,7 +113,7 @@ function validateFile(filePath: string): { valid: boolean; errors: string[]; slu
     });
   }
 
-  const data = result.data || parsed.data;
+  const data = result.success ? result.data : (parsed.data as z.infer<typeof entrySchema>);
 
   if (data.publishDate && data.lastReviewed) {
     const pubDate = new Date(data.publishDate);

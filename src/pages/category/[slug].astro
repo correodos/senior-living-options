@@ -4,7 +4,7 @@ import CategoryLayout from '../../layouts/CategoryLayout.astro';
 import { buildCategorySEOMeta } from '../../utils/seo';
 import { getCategoryInfo, getAllCategories } from '../../utils/category';
 import Card from '../../components/content/Card.astro';
-import { slugify } from '../../utils/markdown';
+import Button from '../../components/ui/Button.astro';
 
 export async function getStaticPaths() {
   const categories = getAllCategories();

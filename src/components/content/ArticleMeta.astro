@@ -23,7 +23,7 @@ const cat = categoryInfo[data.category as keyof typeof categoryInfo] || { label:
       {cat.label}
     </span>
   </span>
-  <time class="c-article-meta__item" dateTime={data.publishDate.toISOString()}>
+  <time class="c-article-meta__item" datetime={data.publishDate.toISOString()}>
     <svg class="c-article-meta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
       <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
       <line x1="16" y1="2" x2="16" y2="6"/>
@@ -32,7 +32,7 @@ const cat = categoryInfo[data.category as keyof typeof categoryInfo] || { label:
     </svg>
     Publicado: {new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(data.publishDate))}
   </time>
-  <time class="c-article-meta__item" dateTime={data.lastReviewed.toISOString()}>
+  <time class="c-article-meta__item" datetime={data.lastReviewed.toISOString()}>
     <svg class="c-article-meta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
       <path d="M23 4v6h-6"/>
       <path d="M1 20v-6h6"/>

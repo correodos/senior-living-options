@@ -1,10 +1,9 @@
 ---
-import HomeLayout from '../../layouts/HomeLayout.astro';
-import { buildSearchSEOMeta } from '../../utils/seo';
-import Search from '../../components/ui/Search.astro';
+import HomeLayout from '../layouts/HomeLayout.astro';
+import { buildSearchSEOMeta } from '../utils/seo';
+import Search from '../components/ui/Search.astro';
 
-const { q } = Astro.url.searchParams;
-const query = q || '';
+const query = Astro.url.searchParams.get('q') || '';
 const seo = buildSearchSEOMeta(query);
 ---
 <HomeLayout {...seo}>
@@ -46,7 +45,6 @@ const seo = buildSearchSEOMeta(query);
     const terms = query.toLowerCase().split(' ').filter(Boolean);
     const results = searchIndex
       .map((item) => {
-        const haystack = `${item.title} ${item.description} ${item.category} ${item.content}`.toLowerCase();
         let score = 0;
         terms.forEach((term) => {
           const titleMatches = (item.title.toLowerCase().match(new RegExp(term, 'g')) || []).length;

@@ -3,7 +3,7 @@ interface Props {
   entry: any;
   featured?: boolean;
 }
-const { entry, featured = false } = Astro.props;
+const { entry } = Astro.props;
 const { data, slug } = entry;
 const imageUrl = data.image ? `/images/${data.image.replace(/^.*[\\\/]images[\\\/]/, '')}` : '/images/placeholder.webp';
 const imageAlt = data.imageAlt || data.title;
@@ -45,7 +45,7 @@ const cat = categoryInfo[data.category as keyof typeof categoryInfo] || { label:
     </h2>
     <p class="c-card__excerpt" itemprop="description">{data.description}</p>
     <div class="c-card__meta">
-      <time itemprop="datePublished" dateTime={data.publishDate.toISOString()}>
+      <time itemprop="datePublished" datetime={data.publishDate.toISOString()}>
         {new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(data.publishDate))}
       </time>
       {data.readingTime && (
