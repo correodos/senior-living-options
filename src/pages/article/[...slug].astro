@@ -7,14 +7,17 @@ import type { CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
   const entries = await getCollection('entries');
-  return entries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  return entries.map((entry) => {
+    const slug = entry.id.replace(/\\/g, '/');
+    return {
+      params: { slug },
+      props: { entry, slug },
+    };
+  });
 }
 
-const { entry } = Astro.props as { entry: CollectionEntry<'entries'> };
-const { data, body, slug } = entry;
+const { entry, slug } = Astro.props as { entry: CollectionEntry<'entries'>; slug: string };
+const { data, body } = entry;
 
 const processedContent = addHeadingAnchors(body);
 const tocHeadings = getTableOfContents(body);
