@@ -1,6 +1,5 @@
 export default {
   plugins: ['prettier-plugin-astro'],
-  parser: 'astro',
   printWidth: 100,
   tabWidth: 2,
   useTabs: false,
@@ -13,28 +12,23 @@ export default {
   overrides: [
     {
       files: ['*.astro'],
-      options: {
-        parser: 'astro',
-      },
+      options: { parser: 'astro' },
     },
     {
       files: ['*.md', '*.mdx'],
-      options: {
-        parser: 'markdown',
-        proseWrap: 'always',
-      },
+      options: { parser: 'markdown', proseWrap: 'always' },
     },
     {
       files: ['*.css'],
-      options: {
-        parser: 'css',
-      },
+      options: { parser: 'css' },
     },
     {
       files: ['*.json', '*.jsonc'],
-      options: {
-        parser: 'json',
-      },
+      options: { parser: 'json' },
+    },
+    {
+      files: ['*.yaml', '*.yml'],
+      options: { parser: 'yaml' },
     },
   ],
 };

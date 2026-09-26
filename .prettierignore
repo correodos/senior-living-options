@@ -1,0 +1,8 @@
+.github/workflows/**
+.husky/**
+scripts/**
+public/**
+*.lock
+package-lock.json
+dist/
+.node/

@@ -7,9 +7,16 @@ interface Props {
   ogType?: 'website' | 'article';
   jsonLd?: Record<string, unknown> | null;
   robots?: string;
-  noScript?: boolean;
 }
-const { title, description, canonical, ogImage, ogType = 'website', jsonLd, robots = 'index,follow', noScript = false } = Astro.props;
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  ogType = 'website',
+  jsonLd,
+  robots = 'index,follow',
+} = Astro.props;
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://seniorlivingoptions.com';
 const SITE_NAME = import.meta.env.PUBLIC_SITE_NAME || 'Senior Living Options';
@@ -18,6 +25,7 @@ const finalCanonical = canonical || Astro.url.href;
 const finalOgImage = ogImage || DEFAULT_OG_IMAGE;
 const finalTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
 ---
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -43,16 +51,12 @@ const finalTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={finalOgImage} />
 
-    {jsonLd && (
-      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    )}
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
-
-    {noScript && <noscript><style>{`body{visibility:hidden}`}</style></noscript>}
   </head>
   <body>
     <slot />

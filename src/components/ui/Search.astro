@@ -1,7 +1,14 @@
 <div class="c-search" role="search">
-  <svg class="c-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-    <circle cx="11" cy="11" r="8"/>
-    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  <svg
+    class="c-search__icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
   </svg>
   <input
     type="search"
@@ -11,14 +18,20 @@
     autocomplete="off"
     data-search-input
   />
-  <div class="c-search__results u-hidden" role="listbox" aria-label="Resultados de búsqueda" data-search-results></div>
+  <div
+    class="c-search__results u-hidden"
+    role="listbox"
+    aria-label="Resultados de búsqueda"
+    data-search-results
+  ></div>
 </div>
 
 <script>
   const input = document.querySelector<HTMLInputElement>('[data-search-input]');
   const resultsContainer = document.querySelector<HTMLDivElement>('[data-search-results]');
   let debounceTimer: number;
-  let searchIndex: Array<{ title: string; description: string; url: string; category: string }> = [];
+  let searchIndex: Array<{ title: string; description: string; url: string; category: string }> =
+    [];
 
   async function loadSearchIndex() {
     try {
@@ -60,7 +73,8 @@
   function renderResults(results: typeof searchIndex) {
     if (!resultsContainer) return;
     if (results.length === 0) {
-      resultsContainer.innerHTML = '<div class="u-p-4 u-text-center u-text-muted">Sin resultados</div>';
+      resultsContainer.innerHTML =
+        '<div class="u-p-4 u-text-center u-text-muted">Sin resultados</div>';
       resultsContainer.classList.remove('u-hidden');
       return;
     }

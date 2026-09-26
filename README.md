@@ -3,6 +3,7 @@
 Guías completas para opciones de vivienda y cuidado de adultos mayores.
 
 ## Stack Tecnológico
+
 - **Framework**: Astro 4.x (SSG puro, 0-JS por defecto)
 - **Lenguaje**: TypeScript 5.x
 - **Estilos**: CSS Vanilla con Design Tokens (Custom Properties)
@@ -50,14 +51,14 @@ src/
 
 ## Categorías de Contenido
 
-| Categoría | Slug | Descripción |
-|-----------|------|-------------|
-| Assisted Living | `assisted-living` | Comunidades residenciales con apoyo |
-| Memory Care | `memory-care` | Unidades especializadas Alzheimer/demencia |
-| Nursing Homes | `nursing-homes` | Atención enfermería 24/7 |
-| In-Home Care | `in-home-care` | Cuidado en el hogar |
-| Costs & Finance | `senior-care-costs` | Costos, Medicare, Medicaid, seguros |
-| Caregiver Help | `caregiver-resources` | Recursos para cuidadores familiares |
+| Categoría       | Slug                  | Descripción                                |
+| --------------- | --------------------- | ------------------------------------------ |
+| Assisted Living | `assisted-living`     | Comunidades residenciales con apoyo        |
+| Memory Care     | `memory-care`         | Unidades especializadas Alzheimer/demencia |
+| Nursing Homes   | `nursing-homes`       | Atención enfermería 24/7                   |
+| In-Home Care    | `in-home-care`        | Cuidado en el hogar                        |
+| Costs & Finance | `senior-care-costs`   | Costos, Medicare, Medicaid, seguros        |
+| Caregiver Help  | `caregiver-resources` | Recursos para cuidadores familiares        |
 
 ## Documentación
 

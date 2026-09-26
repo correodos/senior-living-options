@@ -5,7 +5,9 @@ interface Props {
 }
 const { entry } = Astro.props;
 const { data, slug } = entry;
-const imageUrl = data.image ? `/images/${data.image.replace(/^.*[\\\/]images[\\\/]/, '')}` : '/images/placeholder.webp';
+const imageUrl = data.image
+  ? `/images/${data.image.replace(/^.*[\\\/]images[\\\/]/, '')}`
+  : '/images/placeholder.webp';
 const imageAlt = data.imageAlt || data.title;
 const categoryInfo = {
   'assisted-living': { label: 'Assisted Living', color: 'var(--sl-color-al)' },
@@ -15,8 +17,12 @@ const categoryInfo = {
   'senior-care-costs': { label: 'Costs & Finance', color: 'var(--sl-color-cf)' },
   'caregiver-resources': { label: 'Caregiver Help', color: 'var(--sl-color-cr)' },
 };
-const cat = categoryInfo[data.category as keyof typeof categoryInfo] || { label: data.category, color: 'var(--sl-color-primary)' };
+const cat = categoryInfo[data.category as keyof typeof categoryInfo] || {
+  label: data.category,
+  color: 'var(--sl-color-primary)',
+};
 ---
+
 <article class="c-card" itemscope itemtype="https://schema.org/Article">
   <a href={`/article/${slug}/`} class="c-card__link" aria-label={`Leer: ${data.title}`}>
     <img
@@ -30,27 +36,26 @@ const cat = categoryInfo[data.category as keyof typeof categoryInfo] || { label:
   </a>
   <div class="c-card__content">
     <div class="u-flex u-items-center u-gap-2 u-mb-2">
-      <span
-        class="c-badge"
-        style={{ backgroundColor: `${cat.color}15`, color: cat.color }}
-      >
+      <span class="c-badge" style={{ backgroundColor: `${cat.color}15`, color: cat.color }}>
         {cat.label}
       </span>
-      {data.isPillar && (
-        <span class="c-badge c-badge--pillar">Pilar</span>
-      )}
+      {data.isPillar && <span class="c-badge c-badge--pillar">Pilar</span>}
     </div>
     <h2 class="c-card__title" itemprop="headline">
       <a href={`/article/${slug}/`}>{data.title}</a>
     </h2>
-    <p class="c-card__excerpt" itemprop="description">{data.description}</p>
+    <p class="c-card__excerpt" itemprop="description">
+      {data.description}
+    </p>
     <div class="c-card__meta">
       <time itemprop="datePublished" datetime={data.publishDate.toISOString()}>
-        {new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(data.publishDate))}
+        {new Intl.DateTimeFormat('es-ES', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }).format(new Date(data.publishDate))}
       </time>
-      {data.readingTime && (
-        <span>{data.readingTime} min lectura</span>
-      )}
+      {data.readingTime && <span>{data.readingTime} min lectura</span>}
     </div>
   </div>
 </article>

@@ -1,5 +1,7 @@
 @layer base {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 
@@ -13,7 +15,9 @@
     html {
       scroll-behavior: auto;
     }
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -31,24 +35,47 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin: 0 0 var(--sl-space-4);
     font-weight: 700;
     line-height: var(--sl-lh-tight);
     color: var(--sl-color-text);
   }
 
-  h1 { font-size: var(--sl-fs-4xl); }
-  h2 { font-size: var(--sl-fs-3xl); }
-  h3 { font-size: var(--sl-fs-2xl); }
-  h4 { font-size: var(--sl-fs-xl); }
-  h5 { font-size: var(--sl-fs-lg); }
-  h6 { font-size: var(--sl-fs-base); }
+  h1 {
+    font-size: var(--sl-fs-4xl);
+  }
+  h2 {
+    font-size: var(--sl-fs-3xl);
+  }
+  h3 {
+    font-size: var(--sl-fs-2xl);
+  }
+  h4 {
+    font-size: var(--sl-fs-xl);
+  }
+  h5 {
+    font-size: var(--sl-fs-lg);
+  }
+  h6 {
+    font-size: var(--sl-fs-base);
+  }
 
   @media (min-width: 640px) {
-    h1 { font-size: var(--sl-fs-5xl); }
-    h2 { font-size: var(--sl-fs-4xl); }
-    h3 { font-size: var(--sl-fs-3xl); }
+    h1 {
+      font-size: var(--sl-fs-5xl);
+    }
+    h2 {
+      font-size: var(--sl-fs-4xl);
+    }
+    h3 {
+      font-size: var(--sl-fs-3xl);
+    }
   }
 
   p {
@@ -83,7 +110,8 @@
     display: block;
   }
 
-  ul, ol {
+  ul,
+  ol {
     margin: 0 0 var(--sl-space-4);
     padding-left: var(--sl-space-6);
   }
@@ -133,7 +161,8 @@
     font-size: var(--sl-fs-sm);
   }
 
-  th, td {
+  th,
+  td {
     padding: var(--sl-space-3) var(--sl-space-4);
     text-align: left;
     border-bottom: 1px solid var(--sl-color-border);

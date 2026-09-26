@@ -30,11 +30,16 @@ const breadcrumbs = [
 
 const tocHeadings = getTableOfContents(content);
 ---
+
 <BaseLayout title={title} description={description} {...rest}>
   <SkipLink />
   <Header />
   <main id="main-content" role="main" class="u-container u-py-8 u-flex u-gap-8">
-    <nav class="u-w-full u-hidden lg:u-block" style="width: 280px; flex-shrink: 0;" aria-label="Ruta de navegación">
+    <nav
+      class="u-w-full u-hidden lg:u-block"
+      style="width: 280px; flex-shrink: 0;"
+      aria-label="Ruta de navegación"
+    >
       <Breadcrumbs items={breadcrumbs} />
     </nav>
 

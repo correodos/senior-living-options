@@ -17,9 +17,13 @@ const { title, description, category, ...rest } = Astro.props;
 
 const breadcrumbs = [
   { label: 'Inicio', href: '/' },
-  { label: title.replace(' - Guías y Artículos | Senior Living Options', ''), href: `/category/${category}/` },
+  {
+    label: title.replace(' - Guías y Artículos | Senior Living Options', ''),
+    href: `/category/${category}/`,
+  },
 ];
 ---
+
 <BaseLayout title={title} description={description} {...rest}>
   <SkipLink />
   <Header />

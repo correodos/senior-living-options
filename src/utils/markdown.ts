@@ -23,7 +23,9 @@ export function excerpt(content: string, maxLength = 160): string {
   return plainText.slice(0, maxLength).replace(/\s+\S*$/, '') + '…';
 }
 
-export function extractHeadings(content: string): Array<{ level: number; text: string; slug: string }> {
+export function extractHeadings(
+  content: string
+): Array<{ level: number; text: string; slug: string }> {
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
   const headings: Array<{ level: number; text: string; slug: string }> = [];
   let match;
@@ -44,6 +46,8 @@ export function addHeadingAnchors(content: string): string {
   });
 }
 
-export function getTableOfContents(content: string): Array<{ level: number; text: string; slug: string }> {
+export function getTableOfContents(
+  content: string
+): Array<{ level: number; text: string; slug: string }> {
   return extractHeadings(content);
 }

@@ -53,7 +53,9 @@ export function generateArticleJsonLd(entry: CollectionEntry<'entries'>): Record
   };
 }
 
-export function generateBreadcrumbJsonLd(items: Array<{ name: string; url: string }>): Record<string, unknown> {
+export function generateBreadcrumbJsonLd(
+  items: Array<{ name: string; url: string }>
+): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -83,7 +85,10 @@ export function generateWebSiteJsonLd(): Record<string, unknown> {
   };
 }
 
-export function generateCategoryJsonLd(category: string, categoryLabel: string): Record<string, unknown> {
+export function generateCategoryJsonLd(
+  category: string,
+  categoryLabel: string
+): Record<string, unknown> {
   const url = `${SITE_URL}/category/${category}/`;
   return {
     '@context': 'https://schema.org',
@@ -121,7 +126,11 @@ export function buildSEOMeta(entry: CollectionEntry<'entries'>, customOgImage?: 
   };
 }
 
-export function buildCategorySEOMeta(category: string, categoryLabel: string, description: string): SEOMeta {
+export function buildCategorySEOMeta(
+  category: string,
+  categoryLabel: string,
+  description: string
+): SEOMeta {
   const url = `${SITE_URL}/category/${category}/`;
   return {
     title: `${categoryLabel} - Guías y Artículos | ${SITE_NAME}`,
@@ -144,11 +153,13 @@ export function buildCategorySEOMeta(category: string, categoryLabel: string, de
 export function buildHomeSEOMeta(): SEOMeta {
   return {
     title: `${SITE_NAME} - Guías Completas para Opciones de Vivienda y Cuidado de Adultos Mayores`,
-    description: 'Encuentra la mejor opción de vivienda y cuidado para tu ser querido. Guías expertas sobre Assisted Living, Memory Care, Nursing Homes, In-Home Care, costos y recursos para cuidadores.',
+    description:
+      'Encuentra la mejor opción de vivienda y cuidado para tu ser querido. Guías expertas sobre Assisted Living, Memory Care, Nursing Homes, In-Home Care, costos y recursos para cuidadores.',
     canonical: SITE_URL,
     ogType: 'website',
     ogTitle: SITE_NAME,
-    ogDescription: 'Guías completas para opciones de vivienda y cuidado de adultos mayores. Assisted Living, Memory Care, Nursing Homes, In-Home Care, costos y recursos para cuidadores.',
+    ogDescription:
+      'Guías completas para opciones de vivienda y cuidado de adultos mayores. Assisted Living, Memory Care, Nursing Homes, In-Home Care, costos y recursos para cuidadores.',
     ogImage: DEFAULT_OG_IMAGE,
     ogUrl: SITE_URL,
     twitterCard: 'summary_large_image',

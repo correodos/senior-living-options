@@ -8,7 +8,15 @@ interface Props {
   disabled?: boolean;
   class?: string;
 }
-const { href, variant = 'primary', size = 'md', full = false, type = 'button', disabled = false, class: className = '' } = Astro.props;
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  full = false,
+  type = 'button',
+  disabled = false,
+  class: className = '',
+} = Astro.props;
 
 const variants = {
   primary: 'c-btn--primary',
@@ -23,8 +31,10 @@ const sizes = {
   lg: 'c-btn--lg',
 };
 
-const classes = `c-btn ${variants[variant]} ${sizes[size]} ${full ? 'c-btn--full' : ''} ${className}`.trim();
+const classes =
+  `c-btn ${variants[variant]} ${sizes[size]} ${full ? 'c-btn--full' : ''} ${className}`.trim();
 ---
+
 {href ? (
   <a href={href} class={classes} aria-disabled={disabled} tabindex={disabled ? -1 : undefined}>
     <slot />

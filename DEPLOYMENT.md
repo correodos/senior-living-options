@@ -11,6 +11,7 @@ GitHub (main) → GitHub Actions → Cloudflare Pages → CDN Global
 ## Configuración Inicial (Una sola vez)
 
 ### 1. Crear Repositorio GitHub
+
 ```bash
 # En GitHub web: New repository
 # Name: senior-living-options
@@ -19,6 +20,7 @@ GitHub (main) → GitHub Actions → Cloudflare Pages → CDN Global
 ```
 
 ### 2. Conectar Local
+
 ```bash
 git init
 git remote add origin https://github.com/TU_USUARIO/senior-living-options.git
@@ -29,6 +31,7 @@ git push -u origin main
 ```
 
 ### 3. Configurar Cloudflare Pages
+
 1. Ir a [Cloudflare Pages](https://dash.cloudflare.com/pages)
 2. "Create a project" → "Connect to Git"
 3. Seleccionar repositorio `senior-living-options`
@@ -40,34 +43,39 @@ git push -u origin main
    - **Root directory**: `/` (raíz)
 
 ### 4. Variables de Entorno en Cloudflare Pages
+
 En Settings → Environment variables:
 
 **Production:**
-| Variable | Valor |
-|----------|-------|
-| `PUBLIC_SITE_URL` | `https://seniorlivingoptions.com` |
-| `PUBLIC_SITE_NAME` | `Senior Living Options` |
-| `ANALYTICS_ID` | `TU_ID_PLAUSIBLE_O_GA4` (opcional) |
+
+| Variable           | Valor                              |
+| ------------------ | ---------------------------------- |
+| `PUBLIC_SITE_URL`  | `https://seniorlivingoptions.com`  |
+| `PUBLIC_SITE_NAME` | `Senior Living Options`            |
+| `ANALYTICS_ID`     | `TU_ID_PLAUSIBLE_O_GA4` (opcional) |
 
 **Preview (opcional, hereda de production):**
-| Variable | Valor |
-|----------|-------|
+
+| Variable          | Valor                                             |
+| ----------------- | ------------------------------------------------- |
 | `PUBLIC_SITE_URL` | `https://preview-senior-living-options.pages.dev` |
 
 ### 5. Secrets en GitHub Actions
+
 En Settings → Secrets and variables → Actions → New repository secret:
 
-| Secret | Descripción |
-|--------|-------------|
-| `CLOUDFLARE_API_TOKEN` | Token API Cloudflare (Account > API Tokens > Create Token > Edit Cloudflare Pages) |
-| `CLOUDFLARE_ACCOUNT_ID` | Account ID (en dashboard Cloudflare, URL: `dash.cloudflare.com/ACCOUNT_ID`) |
-| `PUBLIC_SITE_URL` | `https://seniorlivingoptions.com` |
-| `PUBLIC_SITE_NAME` | `Senior Living Options` |
-| `ANALYTICS_ID` | ID analytics (opcional) |
+| Secret                  | Descripción                                                                        |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | Token API Cloudflare (Account > API Tokens > Create Token > Edit Cloudflare Pages) |
+| `CLOUDFLARE_ACCOUNT_ID` | Account ID (en dashboard Cloudflare, URL: `dash.cloudflare.com/ACCOUNT_ID`)        |
+| `PUBLIC_SITE_URL`       | `https://seniorlivingoptions.com`                                                  |
+| `PUBLIC_SITE_NAME`      | `Senior Living Options`                                                            |
+| `ANALYTICS_ID`          | ID analytics (opcional)                                                            |
 
 ## Pipeline CI/CD
 
 ### Flujo Principal (Push a main)
+
 ```
 1. Lint & Type Check (ubuntu-latest)
    ├── npm ci
@@ -91,6 +99,7 @@ En Settings → Secrets and variables → Actions → New repository secret:
 ```
 
 ### Verificar Pipeline
+
 1. Crear PR → Ver "Deploy Preview" en checks
 2. Merge PR → Ver "Deploy Production" en checks
 3. Verificar en Cloudflare Pages dashboard
@@ -98,17 +107,20 @@ En Settings → Secrets and variables → Actions → New repository secret:
 ## Dominio Personalizado
 
 ### 1. En Cloudflare Pages
+
 1. Settings → Custom domains → "Add custom domain"
 2. Ingresar: `seniorlivingoptions.com`
 3. Seguir instrucciones DNS
 
 ### 2. Configuración DNS (en tu registrador o Cloudflare DNS)
-| Tipo | Nombre | Contenido | Proxy |
-|------|--------|-----------|-------|
-| CNAME | @ | `senior-living-options.pages.dev` | ✅ Proxied |
-| CNAME | www | `senior-livingoptions.pages.dev` | ✅ Proxied |
+
+| Tipo  | Nombre | Contenido                         | Proxy      |
+| ----- | ------ | --------------------------------- | ---------- |
+| CNAME | @      | `senior-living-options.pages.dev` | ✅ Proxied |
+| CNAME | www    | `senior-livingoptions.pages.dev`  | ✅ Proxied |
 
 ### 3. SSL/TLS
+
 - En Cloudflare: SSL/TLS → Full (strict)
 - Edge Certificates → Always Use HTTPS: On
 - Automatic HTTPS Rewrites: On
@@ -116,6 +128,7 @@ En Settings → Secrets and variables → Actions → New repository secret:
 ## Variables de Build
 
 ### Astro Config (`astro.config.mjs`)
+
 ```js
 const SITE_URL = 'https://seniorlivingoptions.com';
 
@@ -128,35 +141,42 @@ export default defineConfig({
 ```
 
 ### Variables en Build Time
+
 Las variables `PUBLIC_*` están disponibles en:
+
 - `import.meta.env.PUBLIC_SITE_URL` (cliente + servidor)
 - `Astro.url` (servidor)
 
 ## Monitoreo y Logs
 
 ### GitHub Actions
+
 - Actions tab → Workflow runs
 - Logs detallados por job
 - Re-run failed jobs
 
 ### Cloudflare Pages
+
 - Dashboard → Project → Deployments
 - Build logs
 - Preview URLs: `https://preview-{number}.senior-living-options.pages.dev`
 - Production: `https://seniorlivingoptions.com`
 
 ### Analytics
+
 - Plausible/GA4 configurado via `ANALYTICS_ID`
 - Verificar en `/search/` que tracking funciona
 
 ## Rollback
 
 ### Cloudflare Pages
+
 1. Dashboard → Deployments
 2. Encontrar deployment anterior estable
 3. "Promote to production" / "Rollback to this deployment"
 
 ### Git
+
 ```bash
 # Revertir commit específico
 git revert COMMIT_HASH
@@ -170,23 +190,28 @@ git push --force-with-lease origin main
 ## Troubleshooting
 
 ### Build falla: "Module not found"
+
 - Verificar imports: `@/` alias en `tsconfig.json`
 - Case sensitivity: Linux vs Windows/Mac
 
 ### Build falla: "Out of memory"
+
 - En Cloudflare Pages: Settings → Build → Node version → 20
 - Agregar `NODE_OPTIONS=--max-old-space-size=4096` en env vars
 
 ### Deploy falla: "Permission denied"
+
 - Verificar `CLOUDFLARE_API_TOKEN` permisos: `Account > Cloudflare Pages > Edit`
 - Verificar `CLOUDFLARE_ACCOUNT_ID` correcto
 
 ### Sitemap no genera
+
 - Verificar `site` en `astro.config.mjs`
 - Verificar `@astrojs/sitemap` en integraciones
 - Build local: `npm run build && ls dist/sitemap*`
 
 ### Imágenes no cargan en producción
+
 - Verificar `public/images/` en repo
 - Rutas en frontmatter: `/images/archivo.webp`
 - Cloudflare Pages sirve `public/` en root

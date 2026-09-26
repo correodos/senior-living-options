@@ -6,11 +6,16 @@ import Search from '../components/ui/Search.astro';
 const query = Astro.url.searchParams.get('q') || '';
 const seo = buildSearchSEOMeta(query);
 ---
+
 <HomeLayout {...seo}>
   <section class="u-container u-py-16">
     <header class="u-mb-12">
       <h1 class="u-mb-4">Buscar en Senior Living Options</h1>
-      {query && <p class="u-text-muted">Resultados para: <strong>"{query}"</strong></p>}
+      {query && (
+        <p class="u-text-muted">
+          Resultados para: <strong>"{query}"</strong>
+        </p>
+      )}
     </header>
 
     <div style="max-width: 700px; margin: 0 auto;">
@@ -22,7 +27,13 @@ const seo = buildSearchSEOMeta(query);
 
 <script>
   const container = document.getElementById('search-results-container');
-  let searchIndex: Array<{ title: string; description: string; url: string; category: string; content: string }> = [];
+  let searchIndex: Array<{
+    title: string;
+    description: string;
+    url: string;
+    category: string;
+    content: string;
+  }> = [];
 
   async function loadSearchIndex() {
     try {
@@ -48,7 +59,8 @@ const seo = buildSearchSEOMeta(query);
         let score = 0;
         terms.forEach((term) => {
           const titleMatches = (item.title.toLowerCase().match(new RegExp(term, 'g')) || []).length;
-          const contentMatches = (item.content.toLowerCase().match(new RegExp(term, 'g')) || []).length;
+          const contentMatches = (item.content.toLowerCase().match(new RegExp(term, 'g')) || [])
+            .length;
           score += titleMatches * 5 + contentMatches * 1;
           if (item.category.toLowerCase().includes(term)) score += 3;
         });
@@ -88,7 +100,10 @@ const seo = buildSearchSEOMeta(query);
       <div class="c-grid c-grid--2" style="gap: var(--sl-space-4);">
         ${results
           .map((item) => {
-            const cat = categoryInfo[item.category] || { label: item.category, color: 'var(--sl-color-primary)' };
+            const cat = categoryInfo[item.category] || {
+              label: item.category,
+              color: 'var(--sl-color-primary)',
+            };
             const excerpt = item.content.slice(0, 200).replace(/\s+\S*$/, '') + '…';
             return `
               <article class="c-card">
