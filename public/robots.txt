@@ -3,4 +3,4 @@ Allow: /
 Disallow: /search/
 Disallow: /api/
 
-Sitemap: https://seniorlivingoptions.com/sitemap-index.xml
+Sitemap: https://senior-living-options.pages.dev/sitemap-index.xml

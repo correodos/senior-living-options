@@ -8,10 +8,9 @@ import type { CollectionEntry } from 'astro:content';
 export async function getStaticPaths() {
   const entries = await getCollection('entries');
   return entries.map((entry) => {
-    const slug = entry.id.replace(/\\/g, '/');
     return {
-      params: { slug },
-      props: { entry, slug },
+      params: { slug: entry.id },
+      props: { entry, slug: entry.id },
     };
   });
 }

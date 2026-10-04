@@ -1,5 +1,6 @@
 @layer base {
   :root {
+    --sl-font-serif: 'Lora', Georgia, serif;
     --sl-color-bg: #f8f7f4;
     --sl-color-bg-alt: #ffffff;
     --sl-color-text: #1a1a1a;

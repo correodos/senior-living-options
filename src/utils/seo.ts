@@ -94,7 +94,7 @@ export function generateCategoryJsonLd(
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: `${categoryLabel} - ${SITE_NAME}`,
-    description: `Guías y artículos sobre ${categoryLabel.toLowerCase()} para adultos mayores y sus familias.`,
+    description: `Articles and guides about ${categoryLabel.toLowerCase()} for older adults and their families.`,
     url,
     mainEntity: {
       '@type': 'ItemList',
@@ -133,7 +133,7 @@ export function buildCategorySEOMeta(
 ): SEOMeta {
   const url = `${SITE_URL}/category/${category}/`;
   return {
-    title: `${categoryLabel} - Guías y Artículos | ${SITE_NAME}`,
+    title: `${categoryLabel} - Guides & Articles | ${SITE_NAME}`,
     description,
     canonical: url,
     ogType: 'website',
@@ -152,19 +152,19 @@ export function buildCategorySEOMeta(
 
 export function buildHomeSEOMeta(): SEOMeta {
   return {
-    title: `${SITE_NAME} - Guías Completas para Opciones de Vivienda y Cuidado de Adultos Mayores`,
+    title: `${SITE_NAME} - Complete Guides for Senior Living and Care Options`,
     description:
-      'Encuentra la mejor opción de vivienda y cuidado para tu ser querido. Guías expertas sobre Assisted Living, Memory Care, Nursing Homes, In-Home Care, costos y recursos para cuidadores.',
+      'Find the best care option for your loved one. Expert guides on Assisted Living, Memory Care, Nursing Homes, In-Home Care, costs, and caregiver resources.',
     canonical: SITE_URL,
     ogType: 'website',
     ogTitle: SITE_NAME,
     ogDescription:
-      'Guías completas para opciones de vivienda y cuidado de adultos mayores. Assisted Living, Memory Care, Nursing Homes, In-Home Care, costos y recursos para cuidadores.',
+      'Complete guides for senior living and care options. Assisted Living, Memory Care, Nursing Homes, In-Home Care, costs, and caregiver resources.',
     ogImage: DEFAULT_OG_IMAGE,
     ogUrl: SITE_URL,
     twitterCard: 'summary_large_image',
     twitterTitle: SITE_NAME,
-    twitterDescription: 'Guías completas para opciones de vivienda y cuidado de adultos mayores.',
+    twitterDescription: 'Complete guides for senior living and care options.',
     twitterImage: DEFAULT_OG_IMAGE,
     jsonLd: generateWebSiteJsonLd(),
     robots: 'index,follow',
@@ -174,17 +174,17 @@ export function buildHomeSEOMeta(): SEOMeta {
 export function buildSearchSEOMeta(query: string): SEOMeta {
   const url = `${SITE_URL}/search/?q=${encodeURIComponent(query)}`;
   return {
-    title: `Buscar: "${query}" | ${SITE_NAME}`,
-    description: `Resultados de búsqueda para "${query}" en ${SITE_NAME}. Encuentra artículos sobre opciones de vivienda y cuidado para adultos mayores.`,
+    title: `Search: "${query}" | ${SITE_NAME}`,
+    description: `Search results for "${query}" on ${SITE_NAME}. Find articles about senior living and care options.`,
     canonical: url,
     ogType: 'website',
-    ogTitle: `Buscar: "${query}" | ${SITE_NAME}`,
-    ogDescription: `Resultados de búsqueda para "${query}"`,
+    ogTitle: `Search: "${query}" | ${SITE_NAME}`,
+    ogDescription: `Search results for "${query}"`,
     ogImage: DEFAULT_OG_IMAGE,
     ogUrl: url,
     twitterCard: 'summary_large_image',
-    twitterTitle: `Buscar: "${query}" | ${SITE_NAME}`,
-    twitterDescription: `Resultados de búsqueda para "${query}"`,
+    twitterTitle: `Search: "${query}" | ${SITE_NAME}`,
+    twitterDescription: `Search results for "${query}"`,
     twitterImage: DEFAULT_OG_IMAGE,
     jsonLd: null,
     robots: 'noindex,follow',

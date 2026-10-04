@@ -1,3 +1,8 @@
+---
+import { getAllCategories } from '../../utils/category';
+const categories = getAllCategories();
+---
+
 <header class="c-header" role="banner">
   <div class="c-header__inner u-container u-flex u-items-center u-justify-between">
     <a href="/" class="c-header__logo" aria-label="Senior Living Options - Home">
@@ -18,24 +23,11 @@
     </a>
 
     <nav class="c-header__nav" role="navigation" aria-label="Main navigation">
-      <a href="/category/assisted-living/" class="c-header__nav-link">
-        Assisted Living
-      </a>
-      <a href="/category/memory-care/" class="c-header__nav-link">
-        Memory Care
-      </a>
-      <a href="/category/nursing-homes/" class="c-header__nav-link">
-        Nursing Homes
-      </a>
-      <a href="/category/in-home-care/" class="c-header__nav-link">
-        In-Home Care
-      </a>
-      <a href="/category/senior-care-costs/" class="c-header__nav-link">
-        Costs & Finance
-      </a>
-      <a href="/category/caregiver-resources/" class="c-header__nav-link">
-        Caregiver Help
-      </a>
+      {categories.map((cat) => (
+        <a href={`/category/${cat.slug}/`} class="c-header__nav-link">
+          {cat.label}
+        </a>
+      ))}
     </nav>
 
     <button
@@ -108,24 +100,11 @@
     aria-label="Mobile menu"
   >
     <nav class="u-p-4 u-flex u-flex-col u-gap-2">
-      <a href="/category/assisted-living/" class="c-header__nav-link u-py-2">
-        Assisted Living
-      </a>
-      <a href="/category/memory-care/" class="c-header__nav-link u-py-2">
-        Memory Care
-      </a>
-      <a href="/category/nursing-homes/" class="c-header__nav-link u-py-2">
-        Nursing Homes
-      </a>
-      <a href="/category/in-home-care/" class="c-header__nav-link u-py-2">
-        In-Home Care
-      </a>
-      <a href="/category/senior-care-costs/" class="c-header__nav-link u-py-2">
-        Costs & Finance
-      </a>
-      <a href="/category/caregiver-resources/" class="c-header__nav-link u-py-2">
-        Caregiver Help
-      </a>
+      {categories.map((cat) => (
+        <a href={`/category/${cat.slug}/`} class="c-header__nav-link u-py-2">
+          {cat.label}
+        </a>
+      ))}
       <a href="/search/" class="c-btn c-btn--primary u-mt-4">
         Search
       </a>

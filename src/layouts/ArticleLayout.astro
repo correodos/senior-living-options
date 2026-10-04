@@ -7,11 +7,12 @@ import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 import ArticleMeta from '../components/content/ArticleMeta.astro';
 import TableOfContents from '../components/content/TableOfContents.astro';
 import { getCategoryInfo } from '../utils/category';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   title: string;
   description: string;
-  data: any;
+  data: CollectionEntry<'entries'>['data'];
   slug: string;
   content: string;
   tocHeadings: Array<{ level: number; text: string; slug: string }>;

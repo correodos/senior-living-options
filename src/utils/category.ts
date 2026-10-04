@@ -22,7 +22,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     color: 'var(--sl-color-al-text)',
     bgColor: 'var(--sl-color-al-bg)',
     icon: '🏠',
-    pillarSlug: 'assisted-living-complete-guide', // ACTUAL
+    pillarSlug: 'assisted-living/assisted-living-complete-guide',
   },
   'memory-care': {
     slug: 'memory-care',
@@ -34,7 +34,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     color: 'var(--sl-color-mc-text)',
     bgColor: 'var(--sl-color-mc-bg)',
     icon: '🧠',
-    pillarSlug: 'complete-guide-memory-care', // PENDIENTE: definir slug real
+    pillarSlug: 'memory-care/memory-care-complete-guide',
   },
   'nursing-homes': {
     slug: 'nursing-homes',
@@ -46,7 +46,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     color: 'var(--sl-color-nh-text)',
     bgColor: 'var(--sl-color-nh-bg)',
     icon: '🏥',
-    pillarSlug: 'complete-guide-nursing-homes', // PENDIENTE: definir slug real
+    pillarSlug: 'nursing-homes/nursing-homes-complete-guide',
   },
   'in-home-care': {
     slug: 'in-home-care',
@@ -58,7 +58,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     color: 'var(--sl-color-ihc-text)',
     bgColor: 'var(--sl-color-ihc-bg)',
     icon: '🏡',
-    pillarSlug: 'complete-guide-in-home-care', // PENDIENTE: definir slug real
+    pillarSlug: 'in-home-care/in-home-care-complete-guide',
   },
   'senior-care-costs': {
     slug: 'senior-care-costs',
@@ -70,7 +70,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     color: 'var(--sl-color-cf-text)',
     bgColor: 'var(--sl-color-cf-bg)',
     icon: '💰',
-    pillarSlug: 'complete-guide-senior-care-costs', // PENDIENTE: definir slug real
+    pillarSlug: 'senior-care-costs/senior-care-costs-complete-guide',
   },
   'caregiver-resources': {
     slug: 'caregiver-resources',
@@ -83,7 +83,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     color: 'var(--sl-color-cr-text)',
     bgColor: 'var(--sl-color-cr-bg)',
     icon: '🤝',
-    pillarSlug: 'complete-guide-caregiver-resources', // PENDIENTE: definir slug real
+    pillarSlug: 'caregiver-resources/caregiver-resources-complete-guide',
   },
 } as const;
 
