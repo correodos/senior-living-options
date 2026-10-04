@@ -869,14 +869,18 @@ const combinedJsonLd = faqJsonLd
     if (!table.closest('.table-wrapper')) {
       const wrapper = document.createElement('div');
       wrapper.className = 'table-wrapper';
-      table.parentNode.insertBefore(wrapper, table);
-      wrapper.appendChild(table);
+      const parent = table.parentNode;
+      if (parent) {
+        parent.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+      }
     }
   });
 
   // Add scroll hint and shadow indicator for scrollable tables
   function enhanceTableScroll() {
-    document.querySelectorAll('.table-wrapper').forEach((wrapper) => {
+    const wrappers = document.querySelectorAll('.table-wrapper') as NodeListOf<HTMLElement>;
+    wrappers.forEach((wrapper) => {
       const table = wrapper.querySelector('table');
       if (!table) return;
 
@@ -975,7 +979,10 @@ const combinedJsonLd = faqJsonLd
           cardContainer.appendChild(card);
         });
 
-        table.parentNode.insertBefore(cardContainer, table.nextSibling);
+        const parent = table.parentNode;
+        if (parent) {
+          parent.insertBefore(cardContainer, table.nextSibling);
+        }
       }
     });
   }

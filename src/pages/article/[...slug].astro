@@ -24,7 +24,10 @@ let tocHeadings: Array<{ level: number; text: string; slug: string }> = [];
 
 if (entry.rendered?.html) {
   content = entry.rendered.html;
-  tocHeadings = (entry.rendered.metadata?.headings || []).map((h: any) => ({
+  const headings =
+    (entry.rendered.metadata?.headings as Array<{ depth: number; text: string; slug: string }>) ||
+    [];
+  tocHeadings = headings.map((h) => ({
     level: h.depth,
     text: h.text,
     slug: h.slug,
