@@ -4,7 +4,8 @@ interface Props {
   featured?: boolean;
 }
 const { entry } = Astro.props;
-const { data, slug } = entry;
+const { data, id } = entry;
+const slug = id.replace(/\\/g, '/');
 const imageUrl = data.image
   ? `/images/${data.image.replace(/^.*[\\\/]images[\\\/]/, '')}`
   : '/images/placeholder.webp';

@@ -1,0 +1,907 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import SkipLink from '../components/layout/SkipLink.astro';
+import ArticleMeta from '../components/content/ArticleMeta.astro';
+import TableOfContents from '../components/content/TableOfContents.astro';
+import { getCategoryInfo } from '../utils/category';
+import { generateFAQPageJsonLd } from '../utils/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  data: any;
+  slug: string;
+  content: string;
+  tocHeadings: Array<{ level: number; text: string; slug: string }>;
+  canonical?: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown> | null;
+}
+const { title, description, data, content, tocHeadings, canonical, jsonLd, ...rest } = Astro.props;
+
+const categoryInfo = getCategoryInfo(data.category);
+const categoryColors = {
+  'assisted-living':    { bg: 'var(--sl-color-al-bg)',  text: 'var(--sl-color-al-text)',  icon: '🏠' },
+  'memory-care':        { bg: 'var(--sl-color-mc-bg)',  text: 'var(--sl-color-mc-text)',  icon: '🧠' },
+  'nursing-homes':      { bg: 'var(--sl-color-nh-bg)',  text: 'var(--sl-color-nh-text)',  icon: '🏥' },
+  'in-home-care':       { bg: 'var(--sl-color-ihc-bg)', text: 'var(--sl-color-ihc-text)', icon: '🏡' },
+  'senior-care-costs':  { bg: 'var(--sl-color-cf-bg)',  text: 'var(--sl-color-cf-text)',  icon: '💰' },
+  'caregiver-resources':{ bg: 'var(--sl-color-cr-bg)',  text: 'var(--sl-color-cr-text)',  icon: '🤝' },
+};
+const catColors = categoryColors[data.category as keyof typeof categoryColors]
+  || { bg: 'var(--sl-color-primary-light)', text: 'var(--sl-color-primary)', icon: '📄' };
+
+const heroImage = data.image
+  ? `/images/${data.image.replace(/^.*[\\/]images[\\/]/, '')}`
+  : null;
+const heroAlt = data.imageAlt || data.title;
+
+// Extract FAQs from content for FAQPage schema
+function extractFAQs(content: string): Array<{ question: string; answer: string }> {
+  const faqs: Array<{ question: string; answer: string }> = [];
+  // Match H3 headings under "Frequently Asked Questions" section
+  const faqSectionRegex = /## Frequently Asked Questions[\s\S]*?(?=## |\z)/i;
+  const faqSectionMatch = content.match(faqSectionRegex);
+  if (faqSectionMatch) {
+    const faqContent = faqSectionMatch[0];
+    const faqRegex = /### ([^#\n]+)\n([\s\S]*?)(?=### |\z)/g;
+    let match;
+    while ((match = faqRegex.exec(faqContent)) !== null) {
+      const question = match[1].trim().replace(/<a class="heading-anchor".*$/, '').trim();
+      const answer = match[2].trim()
+        .replace(/<[^>]+>/g, '') // strip HTML tags
+        .replace(/\n+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .slice(0, 500); // limit length
+      if (question && answer) {
+        faqs.push({ question, answer });
+      }
+    }
+  }
+  return faqs;
+}
+
+const faqs = extractFAQs(content);
+const faqJsonLd = faqs.length > 0 ? generateFAQPageJsonLd(faqs) : null;
+
+// Combine Article JSON-LD with FAQ JSON-LD
+const combinedJsonLd = faqJsonLd
+  ? {
+      '@context': 'https://schema.org',
+      '@graph': [
+        jsonLd,
+        faqJsonLd
+      ]
+    }
+  : jsonLd;
+---
+
+<BaseLayout title={title} description={description} jsonLd={combinedJsonLd} {...rest}>
+  <SkipLink />
+  <Header />
+  <main id="main-content" role="main">
+
+    <!-- Hero -->
+    <header class="c-pillar-hero" role="banner">
+      {heroImage && (
+        <img 
+          src={heroImage} 
+          alt={heroAlt}
+          class="c-pillar-hero__image"
+          loading="eager"
+        />
+      )}
+      <div class="c-pillar-hero__overlay">
+        <div class="u-container c-pillar-hero__content">
+          <nav class="c-breadcrumbs u-mb-4" aria-label="Breadcrumb">
+            <ol class="u-flex u-flex-wrap u-gap-2 u-items-center" style="list-style: none; margin: 0; padding: 0;">
+              <li class="c-breadcrumbs__item">
+                <a href="/" class="c-breadcrumbs__link">Home</a>
+                <span class="c-breadcrumbs__separator" aria-hidden="true">/</span>
+              </li>
+              <li class="c-breadcrumbs__item">
+                <a href={`/category/${data.category}/`} class="c-breadcrumbs__link">
+                  {categoryInfo?.label || data.category}
+                </a>
+                <span class="c-breadcrumbs__separator" aria-hidden="true">/</span>
+              </li>
+              <li class="c-breadcrumbs__item" aria-current="page">
+                <span class="c-breadcrumbs__current">{data.title}</span>
+              </li>
+            </ol>
+          </nav>
+
+<div class="c-pillar-hero__meta u-mb-4 u-flex u-flex-wrap u-items-center u-gap-4">
+            <span class="c-badge c-badge--category"
+              style={`background-color: ${catColors.bg}; color: ${catColors.text};`}>
+              {catColors.icon} {categoryInfo?.label || data.category}
+            </span>
+            <span class="c-badge c-badge--pillar">Pillar Guide</span>
+          </div>
+
+          <h1 class="c-pillar-hero__title">{data.title}</h1>
+          <p class="c-pillar-hero__description">{data.description}</p>
+          <ArticleMeta data={data} />
+        </div>
+      </div>
+    </header>
+
+    <!-- Table of Contents - Inline at top of article -->
+    {tocHeadings.length > 0 && (
+      <nav class="c-pillar-toc u-container u-mb-12" aria-label="Table of contents">
+        <h3 class="c-pillar-toc__title">In this guide</h3>
+        <ul class="c-pillar-toc__list">
+          {tocHeadings
+            .filter(h => h.level === 2)
+            .map(h => (
+              <li class="c-pillar-toc__item">
+                <a href={`#${h.slug}`} class="c-pillar-toc__link">
+                  <span class="c-pillar-toc__icon" aria-hidden="true">▸</span>
+                  {h.text}
+                </a>
+              </li>
+            ))}
+        </ul>
+      </nav>
+    )}
+
+    <!-- Body -->
+    <div class="u-container u-py-12">
+      <article class="c-pillar-article">
+        <div class="c-pillar-content" set:html={content} />
+      </article>
+
+      <!-- CTA -->
+      <section class="c-pillar-cta u-bg-primary-light u-rounded-xl u-p-8 u-mt-8"
+        aria-labelledby="cta-heading">
+        <h2 id="cta-heading" class="u-text-center u-mb-4">Next Steps</h2>
+        <div class="c-grid c-grid--2 u-gap-4 u-mb-6">
+          <a href="/category/senior-care-costs/"
+            class="c-btn c-btn--primary c-btn--full c-btn--lg">
+            Compare Costs by State
+          </a>
+          <a href="/category/memory-care/"
+            class="c-btn c-btn--outline c-btn--full c-btn--lg">
+            Explore Memory Care
+          </a>
+        </div>
+        <p class="u-text-center u-text-muted u-fs-sm">
+          All data from government and nonprofit sources. Updated 2026.
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* ── Layout ── */
+  .c-pillar-layout {
+    display: flex;
+    gap: var(--sl-space-12);
+    align-items: flex-start;
+  }
+
+  .c-pillar-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .c-pillar-sidebar-col {
+    width: 280px;
+    flex-shrink: 0;
+  }
+
+  /* ── Hero ── */
+  .c-pillar-hero {
+    position: relative;
+    z-index: 0; /* establece stacking context por debajo del header (z-index: 200) */
+    min-height: 40vh;
+    max-height: 500px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: var(--sl-space-12);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  @media (min-width: 768px) {
+    .c-pillar-hero { min-height: 50vh; max-height: 600px; }
+  }
+
+  .c-pillar-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .c-pillar-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(26,26,26,0.3) 0%,
+      rgba(26,26,26,0.7) 50%,
+      var(--sl-color-bg) 100%
+    );
+    padding: var(--sl-space-8) 0;
+    z-index: 1;
+  }
+
+  .c-pillar-hero__content {
+    color: var(--sl-color-primary-text);
+    max-width: 800px;
+  }
+
+  .c-pillar-hero__title {
+    font-family: var(--sl-font-serif);
+    font-size: var(--sl-fs-4xl);
+    line-height: var(--sl-lh-tight);
+    margin-bottom: var(--sl-space-4);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    color: #ffffff;
+  }
+
+  @media (min-width: 768px) {
+    .c-pillar-hero__title { font-size: var(--sl-fs-5xl); }
+  }
+
+  .c-pillar-hero__description {
+    font-size: var(--sl-fs-lg);
+    line-height: var(--sl-lh-relaxed);
+    opacity: 1;
+    max-width: 65ch;
+    margin-bottom: var(--sl-space-6);
+    text-shadow: none;
+    color: var(--sl-color-text-muted);
+  }
+
+  .c-pillar-hero .c-article-meta {
+    border-bottom-color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.9);
+  }
+  .c-pillar-hero .c-article-meta__item time,
+  .c-pillar-hero .c-article-meta__item span { color: inherit; }
+  .c-pillar-hero .c-badge {
+    background-color: rgba(255,255,255,0.2);
+    color: var(--sl-color-primary-text);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .c-pillar-hero .c-badge--pillar {
+    background-color: var(--sl-color-primary);
+    color: var(--sl-color-primary-text);
+  }
+
+  /* ── Article content ── */
+  .c-pillar-article {
+    font-size: var(--sl-fs-base);
+    line-height: var(--sl-lh-relaxed);
+  }
+
+  .c-pillar-content :global(h2) {
+    font-family: var(--sl-font-serif);
+    font-size: var(--sl-fs-3xl);
+    margin: var(--sl-space-12) 0 var(--sl-space-6);
+    padding-bottom: var(--sl-space-3);
+    border-bottom: 2px solid var(--sl-color-border);
+    position: relative;
+    scroll-margin-top: 72px;
+  }
+  .c-pillar-content :global(h2)::before {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 60px; height: 2px;
+    background-color: var(--sl-color-primary);
+  }
+
+  .c-pillar-content :global(h3) {
+    font-family: var(--sl-font-serif);
+    font-size: var(--sl-fs-2xl);
+    margin: var(--sl-space-10) 0 var(--sl-space-4);
+    color: var(--sl-color-text);
+    scroll-margin-top: 72px;
+  }
+
+  .c-pillar-content :global(p) {
+    margin-bottom: var(--sl-space-5);
+    max-width: none;
+  }
+
+  .c-pillar-content :global(ul),
+  .c-pillar-content :global(ol) {
+    margin: var(--sl-space-4) 0 var(--sl-space-6);
+    padding-left: var(--sl-space-6);
+  }
+
+  .c-pillar-content :global(li) {
+    margin-bottom: var(--sl-space-3);
+    line-height: var(--sl-lh-relaxed);
+  }
+  .c-pillar-content :global(li::marker) { color: var(--sl-color-primary); }
+
+  .c-pillar-content :global(blockquote) {
+    margin: var(--sl-space-10) 0;
+    padding: var(--sl-space-8);
+    border-left: 4px solid var(--sl-color-primary);
+    background: linear-gradient(90deg, var(--sl-color-primary-light) 0%, transparent 100%);
+    border-radius: 0 var(--sl-radius-xl) var(--sl-radius-xl) 0;
+    font-style: italic;
+    font-size: var(--sl-fs-lg);
+    color: var(--sl-color-text);
+    position: relative;
+  }
+  .c-pillar-content :global(blockquote)::before {
+    content: '"';
+    font-family: var(--sl-font-serif);
+    font-size: 4rem;
+    color: var(--sl-color-primary);
+    opacity: 0.2;
+    position: absolute;
+    top: -0.5rem; left: 1.5rem;
+    line-height: 1;
+  }
+  .c-pillar-content :global(blockquote p:last-child) { margin-bottom: 0; }
+
+  /* Tablas con scroll horizontal en mobile */
+.c-pillar-content :global(table) {
+    width: 100%;
+    margin: var(--sl-space-8) 0;
+    border-collapse: collapse;
+    font-size: var(--sl-fs-sm);
+    box-shadow: var(--sl-shadow-md);
+    border-radius: var(--sl-radius-lg);
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Scrollbar styling */
+  .c-pillar-content :global(table)::-webkit-scrollbar {
+    height: 8px;
+  }
+  .c-pillar-content :global(table)::-webkit-scrollbar-track {
+    background: var(--sl-color-bg);
+    border-radius: 4px;
+  }
+  .c-pillar-content :global(table)::-webkit-scrollbar-thumb {
+    background: var(--sl-color-primary);
+    border-radius: 4px;
+  }
+  .c-pillar-content :global(table)::-webkit-scrollbar-thumb:hover {
+    background: var(--sl-color-primary-hover);
+  }
+
+  /* Scroll hint text on mobile */
+  .table-scroll-hint {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: var(--sl-space-2) var(--sl-space-4);
+    background: linear-gradient(to right, transparent, var(--sl-color-bg-alt) 50%);
+    font-size: var(--sl-fs-xs);
+    color: var(--sl-color-primary);
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity var(--sl-transition-normal);
+    z-index: 10;
+  }
+
+  /* Scroll shadow using CSS variables (set by JS) */
+  .table-wrapper {
+    position: relative;
+  }
+  .table-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to left, var(--sl-color-bg-alt), transparent);
+    pointer-events: none;
+    opacity: var(--scroll-shadow-end, 1);
+    transition: opacity var(--sl-transition-fast);
+    border-radius: 0 var(--sl-radius-lg) var(--sl-radius-lg) 0;
+  }
+  .table-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, var(--sl-color-bg-alt), transparent);
+    pointer-events: none;
+    opacity: var(--scroll-shadow-start, 0);
+    transition: opacity var(--sl-transition-fast);
+    border-radius: var(--sl-radius-lg) 0 0 var(--sl-radius-lg);
+  }
+
+  .c-pillar-content :global(th),
+  .c-pillar-content :global(td) {
+    padding: var(--sl-space-4) var(--sl-space-5);
+    text-align: left;
+    border-bottom: 1px solid var(--sl-color-border);
+    white-space: nowrap;
+  }
+
+  .c-pillar-content :global(th) {
+    font-weight: 700;
+    background-color: var(--sl-color-primary);
+    color: var(--sl-color-primary-text);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: var(--sl-fs-xs);
+  }
+  .c-pillar-content :global(tr:last-child td) { border-bottom: none; }
+  .c-pillar-content :global(tr:nth-child(even) td) { background-color: var(--sl-color-bg); }
+  .c-pillar-content :global(tr:hover td) { background-color: var(--sl-color-primary-light); }
+
+  .c-pillar-content :global(strong) { color: var(--sl-color-text); font-weight: 700; }
+
+  .c-pillar-content :global(a) {
+    color: var(--sl-color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .c-pillar-content :global(a:hover) { color: var(--sl-color-primary-hover); }
+
+  .c-pillar-content :global(hr) {
+    margin: var(--sl-space-16) 0;
+    border-top: 2px solid var(--sl-color-border);
+    border-bottom: none;
+  }
+
+  .c-pillar-content :global(code) {
+    background-color: var(--sl-color-primary-light);
+    color: var(--sl-color-primary);
+    padding: 0.15em 0.4em;
+    border-radius: var(--sl-radius-sm);
+    font-size: 0.9em;
+  }
+
+  .c-pillar-content :global(pre) {
+    background-color: #1a1a2e;
+    color: #f1f1f5;
+    padding: var(--sl-space-6);
+    border-radius: var(--sl-radius-lg);
+    overflow-x: auto;
+    margin: var(--sl-space-8) 0;
+  }
+  .c-pillar-content :global(pre code) { background: none; color: inherit; padding: 0; }
+
+  .c-pillar-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--sl-radius-lg);
+    margin: var(--sl-space-8) 0;
+    box-shadow: var(--sl-shadow-lg);
+  }
+
+  /* Key Takeaways — ul after h2#key-takeaways */
+  .c-pillar-content :global(h2#key-takeaways + ul) {
+    background: var(--sl-color-primary-light);
+    border: 1px solid var(--sl-color-primary);
+    border-radius: var(--sl-radius-xl);
+    padding: var(--sl-space-8);
+    list-style: none;
+    padding-left: 0;
+  }
+  .c-pillar-content :global(ul:first-of-type li) {
+    position: relative;
+    padding-left: var(--sl-space-10);
+    margin-bottom: var(--sl-space-4);
+  }
+  .c-pillar-content :global(ul:first-of-type li)::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--sl-color-primary);
+    font-weight: 700;
+    font-size: var(--sl-fs-lg);
+  }
+  .c-pillar-content :global(ul:first-of-type li:last-child) { margin-bottom: 0; }
+  .c-pillar-content :global(ul:first-of-type strong) { color: var(--sl-color-primary); }
+
+  /* Heading anchors */
+  .c-pillar-content :global(.heading-anchor) {
+    opacity: 0;
+    font-size: 0.75em;
+    margin-left: var(--sl-space-2);
+    text-decoration: none;
+    color: var(--sl-color-text-light);
+    transition: opacity var(--sl-transition-fast);
+  }
+  .c-pillar-content :global(h2:hover .heading-anchor),
+  .c-pillar-content :global(h3:hover .heading-anchor) { opacity: 1; }
+
+  /* CTA */
+  .c-pillar-cta :global(h2) {
+    font-family: var(--sl-font-serif);
+    font-size: var(--sl-fs-2xl);
+  }
+
+/* ── Mobile responsive ── */
+  @media (max-width: 1023px) {
+    .c-pillar-hero {
+      min-height: auto;
+      max-height: none;
+      align-items: stretch;
+      padding-bottom: 0;
+      display: block; /* salimos del flex para que el overlay fluya normalmente */
+    }
+    .c-pillar-hero__image {
+      position: absolute; /* la imagen sigue siendo fondo */
+    }
+    .c-pillar-hero__overlay {
+      position: relative; /* ahora ocupa espacio en el flujo, empuja la altura del hero */
+      inset: auto;
+      background: linear-gradient(180deg, rgba(26,26,26,0.55) 0%, rgba(26,26,26,0.85) 100%);
+      padding: calc(52px + var(--sl-space-8)) 0 var(--sl-space-10); /* 52px = header height */
+    }
+    .c-pillar-hero__title { font-size: var(--sl-fs-3xl); }
+    .c-pillar-hero__description { font-size: var(--sl-fs-base); }
+    .c-pillar-content :global(h2) { font-size: var(--sl-fs-2xl); margin-top: var(--sl-space-10); }
+    .c-pillar-content :global(h3) { font-size: var(--sl-fs-xl); margin-top: var(--sl-space-8); }
+    .c-pillar-content :global(ul),
+    .c-pillar-content :global(ol) { padding-left: var(--sl-space-4); }
+
+    /* Breadcrumbs: truncate current page on mobile */
+    .c-breadcrumbs__current {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .c-pillar-hero__overlay {
+      padding: calc(52px + var(--sl-space-6)) 0 var(--sl-space-8);
+    }
+    .c-pillar-hero__title { font-size: var(--sl-fs-2xl); }
+    .c-pillar-hero__description { font-size: var(--sl-fs-sm); }
+    .c-pillar-content :global(blockquote) {
+      padding: var(--sl-space-6) var(--sl-space-4);
+      font-size: var(--sl-fs-base);
+    }
+    .c-pillar-content :global(ul:first-of-type) {
+      padding: var(--sl-space-6);
+      margin: var(--sl-space-6) 0;
+    }
+    .c-pillar-content :global(ul:first-of-type li) {
+      padding-left: var(--sl-space-8);
+      font-size: var(--sl-fs-sm);
+    }
+    .c-pillar-cta { padding: var(--sl-space-6); }
+    .c-pillar-cta :global(.c-grid) { grid-template-columns: 1fr; }
+  }
+
+  /* Hide state table cards by default (desktop) */
+  .c-pillar-content :global(.state-table-cards) { display: none; }
+
+  /* ── State table mobile cards (for tables with >5 columns) ── */
+  @media (max-width: 639px) {
+    .c-pillar-content :global(.state-table) {
+      display: none;
+    }
+    .c-pillar-content :global(.state-table-cards) {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sl-space-4);
+    }
+    .c-pillar-content :global(.state-card) {
+      background: var(--sl-color-bg-alt);
+      border: 1px solid var(--sl-color-border);
+      border-radius: var(--sl-radius-lg);
+      padding: var(--sl-space-4);
+    }
+    .c-pillar-content :global(.state-card__name) {
+      font-weight: 700;
+      font-size: var(--sl-fs-base);
+      color: var(--sl-color-text);
+      margin-bottom: var(--sl-space-2);
+    }
+    .c-pillar-content :global(.state-card__row) {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--sl-space-1) 0;
+      font-size: var(--sl-fs-sm);
+      border-bottom: 1px solid var(--sl-color-border);
+    }
+    .c-pillar-content :global(.state-card__row:last-child) {
+      border-bottom: none;
+    }
+    .c-pillar-content :global(.state-card__label) {
+      color: var(--sl-color-text-muted);
+    }
+    .c-pillar-content :global(.state-card__value) {
+      font-weight: 600;
+      color: var(--sl-color-text);
+    }
+    .c-pillar-content :global(.state-card__value--highlight) {
+      color: var(--sl-color-primary);
+    }
+  }
+
+  /* ── Table of Contents ── */
+  .c-pillar-toc {
+    background: var(--sl-color-bg-alt);
+    border: 1px solid var(--sl-color-border);
+    border-radius: var(--sl-radius-lg);
+    padding: var(--sl-space-6);
+    margin-bottom: var(--sl-space-10);
+  }
+
+  .c-pillar-toc__title {
+    margin: 0 0 var(--sl-space-4);
+    font-size: var(--sl-fs-base);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--sl-color-text);
+  }
+
+  .c-pillar-toc__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sl-space-2);
+  }
+
+  .c-pillar-toc__item {
+    margin: 0;
+  }
+
+  .c-pillar-toc__link {
+    display: flex;
+    align-items: center;
+    gap: var(--sl-space-3);
+    padding: var(--sl-space-2) var(--sl-space-3);
+    color: var(--sl-color-text);
+    text-decoration: none;
+    border-radius: var(--sl-radius-md);
+    transition: all var(--sl-transition-fast);
+    font-size: var(--sl-fs-base);
+    line-height: var(--sl-lh-relaxed);
+  }
+
+  .c-pillar-toc__link:hover {
+    background: var(--sl-color-primary-light);
+    color: var(--sl-color-primary);
+    text-decoration: none;
+  }
+
+  .c-pillar-toc__link:focus-visible {
+    outline: 2px solid var(--sl-color-border-focus);
+    outline-offset: 2px;
+  }
+
+  .c-pillar-toc__icon {
+    flex-shrink: 0;
+    color: var(--sl-color-primary);
+    font-size: var(--sl-fs-lg);
+    line-height: 1;
+  }
+
+  @media (max-width: 639px) {
+    .c-pillar-toc {
+      padding: var(--sl-space-4);
+      margin-bottom: var(--sl-space-8);
+    }
+
+    .c-pillar-toc__link {
+      padding: var(--sl-space-2) var(--sl-space-2);
+      font-size: var(--sl-fs-sm);
+    }
+  }
+
+  /* Reading progress bar */
+  .c-reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--sl-color-primary);
+    width: 0%;
+    z-index: 199; /* por debajo del header sticky (z-index: 200) */
+    transition: width 0.1s linear;
+  }
+
+  /* Back to top button */
+  .c-back-to-top {
+    position: fixed;
+    bottom: var(--sl-space-6);
+    right: var(--sl-space-6);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--sl-color-primary);
+    color: var(--sl-color-primary-text);
+    border: none;
+    font-size: var(--sl-fs-xl);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all var(--sl-transition-normal);
+    box-shadow: var(--sl-shadow-lg);
+    z-index: 999;
+  }
+  .c-back-to-top--visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .c-back-to-top:hover {
+    background: var(--sl-color-primary-hover);
+    transform: translateY(-2px);
+  }
+  .c-back-to-top:focus-visible {
+    outline: 2px solid var(--sl-color-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* Copy section link */
+  .c-copy-section-link {
+    position: absolute;
+    left: -2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    font-size: var(--sl-fs-lg);
+    text-decoration: none;
+    transition: opacity var(--sl-transition-fast);
+  }
+  .c-pillar-content h2:hover .c-copy-section-link,
+  .c-pillar-content h3:hover .c-copy-section-link,
+  .c-pillar-content h2:focus-within .c-copy-section-link,
+  .c-pillar-content h3:focus-within .c-copy-section-link {
+    opacity: 1;
+  }
+  .c-copy-section-link:focus-visible {
+    outline: 2px solid var(--sl-color-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--sl-radius-sm);
+  }
+
+  @media print {
+    .c-pillar-hero,
+    .c-pillar-cta,
+    .c-pillar-toc { display: none !important; }
+    .c-pillar-content :global(table) { display: table; overflow: visible; }
+  }
+</style>
+
+<script>
+  // Enhance tables: wrap in .table-wrapper for scroll shadows
+  document.querySelectorAll('.c-pillar-content table').forEach(table => {
+    if (!table.closest('.table-wrapper')) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'table-wrapper';
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    }
+  });
+
+  // Add scroll hint and shadow indicator for scrollable tables
+  function enhanceTableScroll() {
+    document.querySelectorAll('.table-wrapper').forEach(wrapper => {
+      const table = wrapper.querySelector('table');
+      if (!table) return;
+      
+      // Add scroll hint text on mobile
+      if (window.innerWidth < 640) {
+        const hint = document.createElement('div');
+        hint.className = 'table-scroll-hint';
+        hint.textContent = '← Desliza para ver más →';
+        hint.setAttribute('aria-hidden', 'true');
+        wrapper.appendChild(hint);
+        
+        // Hide hint when user scrolls
+        table.addEventListener('scroll', () => {
+          if (table.scrollLeft > 20) {
+            hint.style.opacity = '0';
+          }
+        }, { passive: true });
+      }
+      
+      // Add scroll shadow indicator via JS (replaces :has() CSS)
+      const updateShadow = () => {
+        const scrollLeft = table.scrollLeft;
+        const maxScroll = table.scrollWidth - table.clientWidth;
+        const atStart = scrollLeft <= 5;
+        const atEnd = maxScroll - scrollLeft <= 5;
+        
+        wrapper.style.setProperty('--scroll-shadow-start', atStart ? '0' : '1');
+        wrapper.style.setProperty('--scroll-shadow-end', atEnd ? '0' : '1');
+      };
+      
+      table.addEventListener('scroll', updateShadow, { passive: true });
+      // Initial check
+      setTimeout(updateShadow, 0);
+      
+      // Re-check on resize
+      window.addEventListener('resize', () => {
+        setTimeout(updateShadow, 100);
+      });
+    });
+  }
+
+  // Convert tables to card layout on mobile (3+ cols AND >5 rows = data tables)
+  function enhanceStateTables() {
+    document.querySelectorAll('.c-pillar-content table').forEach(table => {
+      const headerCells = table.querySelectorAll('thead th');
+      const rows = table.querySelectorAll('tbody tr');
+      const colCount = headerCells.length;
+      const rowCount = rows.length;
+      
+      // Convert to cards if: 3+ columns AND more than 5 data rows
+      if (colCount >= 3 && rowCount > 5) {
+        table.classList.add('state-table');
+        
+        // Create card version
+        const cardContainer = document.createElement('div');
+        cardContainer.className = 'state-table-cards';
+        
+        const headers = Array.from(headerCells).map(th => th.textContent.trim());
+        
+        rows.forEach(row => {
+          const cells = row.querySelectorAll('td');
+          if (cells.length !== colCount) return;
+          
+          const card = document.createElement('div');
+          card.className = 'state-card';
+          
+          const nameCell = cells[0];
+          const name = document.createElement('div');
+          name.className = 'state-card__name';
+          name.textContent = nameCell.textContent.trim();
+          card.appendChild(name);
+          
+          headers.slice(1).forEach((header, i) => {
+            const cell = cells[i + 1];
+            if (!cell) return;
+            const rowDiv = document.createElement('div');
+            rowDiv.className = 'state-card__row';
+            const label = document.createElement('span');
+            label.className = 'state-card__label';
+            label.textContent = header;
+            const value = document.createElement('span');
+            value.className = 'state-card__value';
+            value.textContent = cell.textContent.trim();
+            // Highlight national median row
+            if (nameCell.textContent.trim().toLowerCase().includes('national')) {
+              value.classList.add('state-card__value--highlight');
+            }
+            rowDiv.append(label, value);
+            card.appendChild(rowDiv);
+          });
+          
+          cardContainer.appendChild(card);
+        });
+        
+        table.parentNode.insertBefore(cardContainer, table.nextSibling);
+      }
+    });
+  }
+
+  // Initialize all enhancements
+  document.addEventListener('DOMContentLoaded', () => {
+    enhanceStateTables();
+    enhanceTableScroll();
+  });
+</script>

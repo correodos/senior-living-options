@@ -2,8 +2,7 @@
 import { getCollection } from 'astro:content';
 import HomeLayout from '../layouts/HomeLayout.astro';
 import { buildHomeSEOMeta } from '../utils/seo';
-import { getAllCategories } from '../utils/category';
-import Card from '../components/content/Card.astro';
+import { getAllCategories, getCategoryDescriptionShort } from '../utils/category';
 import Button from '../components/ui/Button.astro';
 
 const allEntries = await getCollection('entries');
@@ -17,126 +16,249 @@ const latest = allEntries
 
 const categories = getAllCategories();
 const seo = buildHomeSEOMeta();
+
+const mostRead = [...pillars, ...latest].slice(0, 6);
+
+const faqs = [
+  {
+    q: 'How much does assisted living cost per month?',
+    a: '--------------',
+    link: '/article/assisted-living-costs/',
+  },
+  {
+    q: 'Does Medicare cover assisted living?',
+    a: '--------------',
+    link: '/article/medicare-assisted-living/',
+  },
+  {
+    q: "What's the difference between memory care and assisted living?",
+    a: '--------------',
+    link: '/article/memory-care-vs-assisted-living/',
+  },
+  {
+    q: "How do I know when it's time for a nursing home?",
+    a: '--------------',
+    link: '/article/when-nursing-home/',
+  },
+];
+
+const states = [
+  { code: 'AL', name: 'Alabama' },
+  { code: 'AK', name: 'Alaska' },
+  { code: 'AZ', name: 'Arizona' },
+  { code: 'AR', name: 'Arkansas' },
+  { code: 'CA', name: 'California' },
+  { code: 'CO', name: 'Colorado' },
+  { code: 'CT', name: 'Connecticut' },
+  { code: 'DE', name: 'Delaware' },
+  { code: 'FL', name: 'Florida' },
+  { code: 'GA', name: 'Georgia' },
+  { code: 'HI', name: 'Hawaii' },
+  { code: 'ID', name: 'Idaho' },
+  { code: 'IL', name: 'Illinois' },
+  { code: 'IN', name: 'Indiana' },
+  { code: 'IA', name: 'Iowa' },
+  { code: 'KS', name: 'Kansas' },
+  { code: 'KY', name: 'Kentucky' },
+  { code: 'LA', name: 'Louisiana' },
+  { code: 'ME', name: 'Maine' },
+  { code: 'MD', name: 'Maryland' },
+  { code: 'MA', name: 'Massachusetts' },
+  { code: 'MI', name: 'Michigan' },
+  { code: 'MN', name: 'Minnesota' },
+  { code: 'MS', name: 'Mississippi' },
+  { code: 'MO', name: 'Missouri' },
+  { code: 'MT', name: 'Montana' },
+  { code: 'NE', name: 'Nebraska' },
+  { code: 'NV', name: 'Nevada' },
+  { code: 'NH', name: 'New Hampshire' },
+  { code: 'NJ', name: 'New Jersey' },
+  { code: 'NM', name: 'New Mexico' },
+  { code: 'NY', name: 'New York' },
+  { code: 'NC', name: 'North Carolina' },
+  { code: 'ND', name: 'North Dakota' },
+  { code: 'OH', name: 'Ohio' },
+  { code: 'OK', name: 'Oklahoma' },
+  { code: 'OR', name: 'Oregon' },
+  { code: 'PA', name: 'Pennsylvania' },
+  { code: 'RI', name: 'Rhode Island' },
+  { code: 'SC', name: 'South Carolina' },
+  { code: 'SD', name: 'South Dakota' },
+  { code: 'TN', name: 'Tennessee' },
+  { code: 'TX', name: 'Texas' },
+  { code: 'UT', name: 'Utah' },
+  { code: 'VT', name: 'Vermont' },
+  { code: 'VA', name: 'Virginia' },
+  { code: 'WA', name: 'Washington' },
+  { code: 'WV', name: 'West Virginia' },
+  { code: 'WI', name: 'Wisconsin' },
+  { code: 'WY', name: 'Wyoming' },
+  { code: 'DC', name: 'Washington D.C.' },
+];
 ---
 
 <HomeLayout {...seo}>
   <section class="c-hero" aria-labelledby="hero-title">
     <div class="u-container">
       <h1 id="hero-title" class="c-hero__title">
-        Guías Completas para Opciones de Vivienda y Cuidado de Adultos Mayores
+        Understanding your senior care<br>options — <span style="color: var(--sl-color-primary);">without the overwhelm</span>
       </h1>
-      <p class="c-hero__description">
-        Encuentra la mejor opción para tu ser querido. Investigamos, comparamos y explicamos todo
-        sobre Assisted Living, Memory Care, Nursing Homes, In-Home Care, costos y recursos para
-        cuidadores.
-      </p>
+      <p class="c-hero__description">Clear, researched guides to help you choose the right care for your loved one.</p>
       <div class="c-hero__actions">
-        <Button href="/search/" variant="primary" size="lg">
-          Buscar guías
+        <Button href="/category/senior-care-costs/" variant="primary" size="lg">
+          Find the right care type →
         </Button>
         <Button href="/category/senior-care-costs/" variant="outline" size="lg">
-          Ver costos por estado
+          Compare costs by state
         </Button>
       </div>
+    </div>
+  </section>
+
+  <section class="c-trust-bar" aria-label="Trust indicators">
+    <div class="u-container">
+      <div class="c-trust-bar__marquee-wrapper" aria-hidden="true">
+        <ul class="c-trust-bar__marquee u-flex u-items-center u-gap-8">
+          <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">✓</span> Researched from government and nonprofit sources</li>
+          <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">↻</span> Updated 2026</li>
+          <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">✓</span> Researched from government and nonprofit sources</li>
+          <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">↻</span> Updated 2026</li>
+        </ul>
+      </div>
+      <ul class="c-trust-bar__list u-flex-wrap u-justify-center u-hidden sm:u-flex" aria-hidden="false">
+        <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">✓</span> Researched from government and nonprofit sources</li>
+        <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">↻</span> Updated 2026</li>
+      </ul>
     </div>
   </section>
 
   <section class="u-container u-py-16" aria-labelledby="categories-title">
     <header class="u-text-center u-mb-12">
-      <h2 id="categories-title" class="u-mb-4">
-        Explorar por Categoría
-      </h2>
-      <p class="u-text-muted u-fs-lg u-mx-auto" style="max-width: 600px;">
-        Seis áreas clave para tomar decisiones informadas sobre el cuidado de adultos mayores
-      </p>
+      <p class="c-eyebrow">What type of care do you need?</p>
+      <h2 id="categories-title" class="u-mb-4">Explore care options by category</h2>
+      <p class="u-text-muted u-fs-lg u-mx-auto" style="max-width: 600px;">Six key areas to help you make informed decisions about senior care</p>
     </header>
     <div class="c-grid c-grid--2 c-grid--3">
       {categories.map((cat) => (
         <a
           href={`/category/${cat.slug}/`}
-          class="c-card u-transition"
-          style={{ borderColor: `${cat.color}40` }}
+          class="c-category-card u-transition"
         >
-          <div class="c-card__content u-text-center">
-            <span
-              class="u-inline-flex u-items-center u-justify-center u-mb-4"
-              style="width: 64px; height: 64px; border-radius: var(--sl-radius-xl); background-color: `${cat.color}15`; color: {cat.color}; font-size: 2rem;"
-            >
-              {cat.icon}
-            </span>
-            <h3 class="c-card__title u-mb-2">{cat.label}</h3>
-            <p class="c-card__excerpt u-mb-4">{cat.description}</p>
-            <Button variant="outline" size="sm">
-              Ver guías →
-            </Button>
-          </div>
+          <span class="c-category-card__icon" style={{ backgroundColor: cat.bgColor }}>
+            {cat.icon}
+          </span>
+          <h3 class="c-category-card__title">{cat.label}</h3>
+          <p class="c-category-card__desc">{getCategoryDescriptionShort(cat.slug)}</p>
         </a>
       ))}
     </div>
   </section>
 
-  {pillars.length > 0 && (
-    <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="pillars-title">
-      <header class="u-text-center u-mb-12">
-        <h2 id="pillars-title" class="u-mb-4">
-          Guías Fundamentales (Artículos Pilar)
-        </h2>
-        <p class="u-text-muted u-fs-lg u-mx-auto" style="max-width: 600px;">
-          Nuestros artículos más completos y actualizados, revisados por expertos cada 6 meses
-        </p>
-      </header>
-      <div class="c-grid c-grid--2 c-grid--3">
-        {pillars.slice(0, 6).map((entry) => (
-          <Card entry={entry} />
+  <section class="u-container u-py-16" aria-labelledby="most-read-title">
+    <header class="u-flex u-items-center u-justify-between u-mb-8">
+      <h2 id="most-read-title" class="u-mb-0">Most read guides</h2>
+      <a href="/search/" class="c-btn c-btn--secondary c-btn--sm">See all →</a>
+    </header>
+    <div class="c-most-read">
+      <ul class="c-most-read__list">
+        {mostRead.map((entry) => {
+          const cat = categories.find((c) => c.slug === entry.data.category);
+          const readingTime = entry.data.readingTime || Math.ceil(entry.data.description.length / 200);
+          return (
+            <li class="c-most-read__item">
+              <span
+                class="c-badge c-badge--small c-most-read__badge"
+                style={{
+                  backgroundColor: `${cat?.bgColor}33`,
+                  color: cat?.color,
+                }}
+              >
+                {cat?.label}
+              </span>
+              <div class="c-most-read__content">
+                <h3 class="c-most-read__title">
+                  <a href={`/article/${entry.id}/`}>{entry.data.title}</a>
+                </h3>
+                <p class="c-most-read__meta">
+                  {readingTime} min read · {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(entry.data.publishDate))}
+                </p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="state-selector-title">
+    <div class="u-flex u-flex-col u-items-center u-gap-6" style="max-width: 600px; margin-left: auto; margin-right: auto;">
+      <div class="u-text-center">
+        <h2 id="state-selector-title" class="u-mb-4">Senior care costs vary widely by state</h2>
+        <p class="u-text-muted u-mb-6">Find out what you'd pay in your state</p>
+      </div>
+      <form class="c-state-selector u-flex u-flex-col sm:u-flex-row sm:u-justify-center u-gap-3" style="max-width: 400px; width: 100%;" action="/category/senior-care-costs/" method="GET">
+        <select name="state" class="c-state-selector__select" aria-label="Select state" required>
+          <option value="">Select a state</option>
+          {states.map((s) => (
+            <option value={s.code}>{s.name}</option>
+          ))}
+        </select>
+        <Button type="submit" variant="primary" size="lg">
+          View costs →
+        </Button>
+      </form>
+    </div>
+  </section>
+
+  <section class="u-container u-py-16" aria-labelledby="faq-title">
+    <h2 id="faq-title" class="u-text-center u-mb-10">Quick answers</h2>
+    <div class="c-faq">
+      <div class="c-faq__list">
+        {faqs.map((faq) => (
+          <details class="c-faq__item">
+            <summary class="c-faq__question">{faq.q}</summary>
+            <div class="c-faq__answer">
+              {faq.a} <a href={faq.link} class="c-faq__link">Read more →</a>
+            </div>
+          </details>
         ))}
       </div>
-      <div class="u-text-center u-mt-10">
-        <Button href="/search/" variant="secondary" size="lg">
-          Ver todas las guías →
-        </Button>
-      </div>
-    </section>
-  )}
+    </div>
+  </section>
 
-  <section class="u-container u-py-16" aria-labelledby="latest-title">
-    <header class="u-flex u-items-center u-justify-between u-mb-8">
-      <h2 id="latest-title" class="u-mb-0">
-        Artículos Recientes
-      </h2>
-      <a href="/search/" class="c-btn c-btn--secondary c-btn--sm">
-        Ver todos
-      </a>
-    </header>
-    <div class="c-grid c-grid--2 c-grid--3">
-      {latest.map((entry) => (
-        <Card entry={entry} />
-      ))}
+  <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="checklist-title">
+    <div class="u-text-center u-mx-auto" style="max-width: 600px;">
+      <h2 id="checklist-title" class="u-mb-4">Not sure where to start?</h2>
+      <ol class="c-checklist">
+        <li class="c-checklist__item"><span class="c-checklist__number">1</span>Evaluate the level of care needed</li>
+        <li class="c-checklist__item"><span class="c-checklist__number">2</span>Understand your budget and payment options</li>
+        <li class="c-checklist__item"><span class="c-checklist__number">3</span>Research facilities in your area</li>
+        <li class="c-checklist__item"><span class="c-checklist__number">4</span>Visit and ask the right questions</li>
+      </ol>
+      <Button href="#" variant="primary" size="lg" class="u-mt-8">
+        Read the complete guide →
+      </Button>
     </div>
   </section>
 
   <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="newsletter-title">
     <div class="u-text-center u-mx-auto" style="max-width: 600px;">
-      <h2 id="newsletter-title" class="u-mb-4">
-        Mantente Informado
-      </h2>
-      <p class="u-text-muted u-mb-6">
-        Recibe las últimas guías, actualizaciones de costos y recursos para cuidadores directamente
-        en tu correo.
-      </p>
-      <form class="u-flex u-flex-col sm:u-flex-row u-gap-3 u-mx-auto" style="max-width: 400px;">
+      <h2 id="newsletter-title" class="u-mb-4">Stay informed</h2>
+      <p class="u-text-muted u-mb-6">No spam. Unsubscribe anytime.</p>
+      <form class="c-newsletter__form u-flex u-flex-col sm:u-flex-row u-gap-3 u-mx-auto" style="max-width: 400px;">
         <input
           type="email"
-          placeholder="tu@email.com"
-          class="c-search__input u-flex-1"
+          placeholder="you@email.com"
+          class="c-newsletter__input u-flex-1"
           aria-label="Email"
           required
         />
         <Button type="submit" variant="primary" size="lg">
-          Suscribirse
+          Subscribe
         </Button>
       </form>
-      <p class="u-fs-xs u-text-light u-mt-4">
-        Sin spam. Cancelar en cualquier momento. <a href="/privacy/">Política de privacidad</a>
+      <p class="c-newsletter__note u-fs-xs u-text-light u-mt-4">
+        <a href="/privacy/">Privacy policy</a>
       </p>
     </div>
   </section>

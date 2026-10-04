@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import PillarArticleLayout from '../../layouts/PillarArticleLayout.astro';
 import { buildSEOMeta, generateArticleJsonLd } from '../../utils/seo';
-import { getTableOfContents, addHeadingAnchors } from '../../utils/markdown';
 import type { CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -17,22 +17,33 @@ export async function getStaticPaths() {
 }
 
 const { entry, slug } = Astro.props as { entry: CollectionEntry<'entries'>; slug: string };
-const { data, body } = entry;
+const { data } = entry;
 
-const processedContent = addHeadingAnchors(body ?? '');
-const tocHeadings = getTableOfContents(body ?? '');
+let content: string = '';
+let tocHeadings: Array<{ level: number; text: string; slug: string }> = [];
+
+if (entry.rendered?.html) {
+  content = entry.rendered.html;
+  tocHeadings = (entry.rendered.metadata?.headings || []).map((h: any) => ({
+    level: h.depth,
+    text: h.text,
+    slug: h.slug,
+  }));
+}
 
 const seoMeta = buildSEOMeta(entry);
 const jsonLd = generateArticleJsonLd(entry);
+const Layout = data.isPillar ? PillarArticleLayout : ArticleLayout;
 ---
 
-<ArticleLayout
+<Layout
   title={seoMeta.title}
   description={seoMeta.description}
   data={data}
   slug={slug}
-  content={processedContent}
+  content={content}
+  tocHeadings={tocHeadings}
   canonical={seoMeta.canonical}
   ogImage={seoMeta.ogImage}
   jsonLd={jsonLd}
-/>
+ />

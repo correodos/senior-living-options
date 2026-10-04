@@ -37,6 +37,12 @@
 
   h1,
   h2,
+  .c-header__logo {
+    font-family: var(--sl-font-serif);
+  }
+
+  h1,
+  h2,
   h3,
   h4,
   h5,
@@ -48,10 +54,10 @@
   }
 
   h1 {
-    font-size: var(--sl-fs-4xl);
+    font-size: var(--sl-fs-3xl);
   }
   h2 {
-    font-size: var(--sl-fs-3xl);
+    font-size: var(--sl-fs-h2);
   }
   h3 {
     font-size: var(--sl-fs-2xl);

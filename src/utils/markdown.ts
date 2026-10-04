@@ -49,5 +49,17 @@ export function addHeadingAnchors(content: string): string {
 export function getTableOfContents(
   content: string
 ): Array<{ level: number; text: string; slug: string }> {
-  return extractHeadings(content);
+  // Run on content BEFORE heading anchors are added to avoid capturing anchor HTML
+  const headingRegex = /^(#{2,3})\s+(.+)$/gm;
+  const headings: Array<{ level: number; text: string; slug: string }> = [];
+  let match;
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length;
+    // Strip any existing heading anchor links from text
+    const text = match[2].trim().replace(/\s*<a class="heading-anchor".*$/, '');
+    headings.push({ level, text, slug: slugify(text) });
+  }
+
+  return headings;
 }

@@ -122,7 +122,7 @@ export function buildSEOMeta(entry: CollectionEntry<'entries'>, customOgImage?: 
     twitterDescription: data.seoDescription || data.description,
     twitterImage: ogImage,
     jsonLd: generateArticleJsonLd(entry),
-    robots: data.noIndex ? 'noindex,nofollow' : 'index,follow',
+    robots: data.noIndex ? 'noindex,nofollow' : data.noFollow ? 'index,nofollow' : 'index,follow',
   };
 }
 
@@ -188,5 +188,22 @@ export function buildSearchSEOMeta(query: string): SEOMeta {
     twitterImage: DEFAULT_OG_IMAGE,
     jsonLd: null,
     robots: 'noindex,follow',
+  };
+}
+
+export function generateFAQPageJsonLd(
+  faqs: Array<{ question: string; answer: string }>
+): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
   };
 }

@@ -51,7 +51,42 @@ touch src/content/entries/assisted-living/nuevo-articulo.md
 npm run validate:content
 ```
 
+### Checklist Visual — Pillar Page (copiar al crear nueva)
+
+**Frontmatter**
+- [ ] `title` ≤ 120 chars, descriptivo + año
+- [ ] `description` 50-300 chars, incluye patrón "Everything families need to know about [topic]: what it is, what it costs in [year], how Medicaid and VA benefits help, and how to choose the right facility."
+- [ ] `publishDate` = `lastReviewed` = hoy (YYYY-MM-DD)
+- [ ] `category`: uno de 6 enum
+- [ ] `isPillar: true`
+- [ ] `sources`: MÍN 7 URLs .gov/.org verificables
+- [ ] `readingTime`: estimado (palabras totales / 200)
+- [ ] `image`: `/images/[category]-complete-guide.png` (subir a `public/images/`)
+- [ ] `imageAlt`: descriptivo, incluye contexto
+- [ ] `tags`: 5-6 tags relevantes
+- [ ] `states`: códigos 2 letras estados cubiertos
+- [ ] `showTableOfContents: true`
+- [ ] `relatedArticles`: 3 slugs existentes misma/otra categoría
+
+**Estructura Markdown**
+- [ ] `## Key Takeaways` (5-6 bullets, **negrita inicial**, `---` abajo)
+- [ ] Intro empático 2-3 párrafos (`---` abajo)
+- [ ] 6-8 secciones `## H2` principales
+- [ ] Subsecciones `### H3` donde aplique
+- [ ] Mín 2 tablas comparativas (`| Header | Header |` + `|---|---|`)
+- [ ] Mín 2 blockquotes `>` con cita + fuente .gov + enlace
+- [ ] Enlaces internos a categorías relacionadas (`→ [Texto](/category/x/)`)
+- [ ] `## Frequently Asked Questions` (5-6 preguntas `###`)
+- [ ] `## Sources` numeradas (mín 7, formato: `1. **Fuente.** "Título." URL. Acceso: fecha.`)
+
+**Validación**
+- [ ] `npm run validate:content` pasa (warnings OK para pillar)
+- [ ] `npm run check` pasa (tipos)
+- [ ] Preview local: hero se ve, TOC funciona, tablas scroll mobile, CTA visible
+
 ### 3. Plantilla de Frontmatter
+
+#### Artículo Normal (`isPillar: false`)
 
 ```yaml
 ---
@@ -60,8 +95,8 @@ description: 'Descripción para SEO y social (50-300 chars)'
 publishDate: 2024-01-15
 lastReviewed: 2024-11-20
 category: assisted-living # assisted-living | memory-care | nursing-homes | in-home-care | senior-care-costs | caregiver-resources
-isPillar: false # true solo para guías fundamentales
-sources: # Obligatorio para pilares (mín 3 URLs .gov/.org)
+isPillar: false
+sources: # Opcional para artículos normales (1-2 URLs .gov/.org)
   - 'https://www.medicare.gov/...'
   - 'https://www.nia.nih.gov/...'
 readingTime: 8 # Calculado en build, opcional manual
@@ -72,6 +107,52 @@ states: ['CA', 'TX', 'FL']
 showTableOfContents: true
 relatedArticles:
   - 'otro-articulo-relacionado'
+---
+```
+
+#### Pillar Page (`isPillar: true`) — Plantilla Completa
+
+Basada en `assisted-living-complete-guide.md` (referencia):
+
+```yaml
+---
+title: 'The Complete Guide to [Topic]: Costs, Services, and How to Choose'
+description: 'Everything families need to know about [topic]: what it is, what it costs in [year], how Medicaid and VA benefits help, and how to choose the right facility.'
+publishDate: 2026-09-27
+lastReviewed: 2026-09-27
+category: assisted-living # assisted-living | memory-care | nursing-homes | in-home-care | senior-care-costs | caregiver-resources
+isPillar: true
+sources: # OBLIGATORIO: MÍN 7 URLs .gov/.org
+  - 'https://www.nia.nih.gov/health/...'
+  - 'https://www.nia.nih.gov/health/...'
+  - 'https://www.nia.nih.gov/health/...'
+  - 'https://www.ahcancal.org/...'
+  - 'https://investor.genworth.com/...'
+  - 'https://www.aarp.org/...'
+  - 'https://www.benefits.va.gov/...'
+readingTime: 14 # Estimado: palabras totales / 200
+image: /images/[category]-complete-guide.png
+imageAlt: 'Senior smiling in [topic] community common area'
+tags:
+  - '[topic]'
+  - 'senior care'
+  - 'long-term care'
+  - 'memory care'
+  - 'aging parents'
+states:
+  - 'CA'
+  - 'TX'
+  - 'FL'
+  - 'NY'
+  - 'MA'
+  - 'NJ'
+  - 'HI'
+  - 'CT'
+showTableOfContents: true
+relatedArticles:
+  - '[topic]-vs-memory-care'
+  - 'medicare-[topic]'
+  - 'when-nursing-home'
 ---
 ```
 
@@ -129,6 +210,16 @@ git push origin feature/nueva-guia
 - Capas: `@layer base, components, utilities`
 - Mobile-first, breakpoints en tokens
 - BEM simplificado: `.c-componente`, `.c-componente--variante`
+
+**Pillar Page Styles** (`src/layouts/PillarArticleLayout.astro`, líneas ~189-750):
+- Hero: `.c-pillar-hero`, `.c-pillar-hero__overlay`, `.c-pillar-hero__content`, `.c-pillar-hero__title`, `.c-pillar-hero__description`
+- TOC Inline: `.c-pillar-toc`, `.c-pillar-toc__list`, `.c-pillar-toc__link`
+- Key Takeaways: `h2#key-takeaways + ul` (checks ✓ verdes, fondo primary-light)
+- Tablas responsive: `.c-pillar-content table`, `.table-wrapper` (JS enhanced: scroll shadows, mobile card layout)
+- Reading Progress: `.c-reading-progress` (top bar), `.c-back-to-top` (fixed button)
+- CTA Final: `.c-pillar-cta` (2 botones, fondo primary-light)
+- FAQ Schema: auto-extraído de H3 bajo "Frequently Asked Questions"
+- Theme Toggle: solo en Header global (`Header.astro`), NO en hero
 
 ### Git
 

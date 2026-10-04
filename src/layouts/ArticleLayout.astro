@@ -7,7 +7,6 @@ import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 import ArticleMeta from '../components/content/ArticleMeta.astro';
 import TableOfContents from '../components/content/TableOfContents.astro';
 import { getCategoryInfo } from '../utils/category';
-import { getTableOfContents } from '../utils/markdown';
 
 interface Props {
   title: string;
@@ -15,59 +14,215 @@ interface Props {
   data: any;
   slug: string;
   content: string;
+  tocHeadings: Array<{ level: number; text: string; slug: string }>;
   canonical?: string;
   ogImage?: string;
   jsonLd?: Record<string, unknown> | null;
 }
-const { title, description, data, slug, content, ...rest } = Astro.props;
+const { title, description, data, content, tocHeadings, ...rest } = Astro.props;
 
 const categoryInfo = getCategoryInfo(data.category);
 const breadcrumbs = [
-  { label: 'Inicio', href: '/' },
+  { label: 'Home', href: '/' },
   { label: categoryInfo?.label || data.category, href: `/category/${data.category}/` },
   { label: data.title },
 ];
-
-const tocHeadings = getTableOfContents(content);
 ---
 
 <BaseLayout title={title} description={description} {...rest}>
   <SkipLink />
   <Header />
-  <main id="main-content" role="main" class="u-container u-py-8 u-flex u-gap-8">
-    <nav
-      class="u-w-full u-hidden lg:u-block"
-      style="width: 280px; flex-shrink: 0;"
-      aria-label="Ruta de navegación"
-    >
+  <main id="main-content" role="main">
+    <div class="u-container u-py-6">
       <Breadcrumbs items={breadcrumbs} />
-    </nav>
+    </div>
 
-    <div class="u-flex-1 u-flex u-flex-col u-gap-8" style="min-width: 0;">
-      <nav class="u-hidden lg:u-block" aria-label="Ruta de navegación">
-        <Breadcrumbs items={breadcrumbs} />
-      </nav>
-
-      <article>
+    <div class="u-container c-article-layout u-pb-16">
+      <article class="c-article-body">
         <header class="u-mb-8">
           {data.isPillar && (
-            <span class="c-badge c-badge--pillar u-mb-4 u-inline-block">Artículo Pilar</span>
+            <span class="c-badge c-badge--pillar u-mb-4 u-inline-block">Pillar Article</span>
           )}
           <h1 class="u-mb-4">{data.title}</h1>
           <ArticleMeta data={data} />
         </header>
 
-        <div class="u-flex u-gap-8">
-          <div class="u-flex-1" style="min-width: 0;" set:html={content} />
-
-          {tocHeadings.length > 0 && (
-            <aside class="u-hidden lg:u-block" style="width: 260px; flex-shrink: 0;">
-              <TableOfContents headings={tocHeadings} />
-            </aside>
-          )}
-        </div>
+        <div class="c-article-content" set:html={content} />
       </article>
+
+      {tocHeadings.length > 0 && (
+        <aside class="c-article-toc u-hidden lg:u-block" aria-label="Table of contents">
+          <TableOfContents headings={tocHeadings} />
+        </aside>
+      )}
     </div>
   </main>
   <Footer />
 </BaseLayout>
+
+<style>
+  .c-article-layout {
+    display: flex;
+    gap: var(--sl-space-12);
+    align-items: flex-start;
+  }
+
+  .c-article-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .c-article-toc {
+    width: 260px;
+    flex-shrink: 0;
+    position: sticky;
+    top: calc(64px + var(--sl-space-8));
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+  }
+
+  /* ── Contenido Markdown renderizado ── */
+  .c-article-content :global(h2) {
+    font-size: var(--sl-fs-3xl);
+    margin-top: var(--sl-space-12);
+    margin-bottom: var(--sl-space-4);
+    padding-bottom: var(--sl-space-3);
+    border-bottom: 1px solid var(--sl-color-border);
+  }
+
+  .c-article-content :global(h3) {
+    font-size: var(--sl-fs-xl);
+    margin-top: var(--sl-space-8);
+    margin-bottom: var(--sl-space-3);
+  }
+
+  .c-article-content :global(p) {
+    margin-bottom: var(--sl-space-4);
+    line-height: var(--sl-lh-relaxed);
+    max-width: none;
+  }
+
+  .c-article-content :global(ul),
+  .c-article-content :global(ol) {
+    margin-bottom: var(--sl-space-4);
+    padding-left: var(--sl-space-6);
+  }
+
+  .c-article-content :global(li) {
+    margin-bottom: var(--sl-space-2);
+    line-height: var(--sl-lh-relaxed);
+  }
+
+  .c-article-content :global(strong) {
+    font-weight: 700;
+    color: var(--sl-color-text);
+  }
+
+  .c-article-content :global(a) {
+    color: var(--sl-color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .c-article-content :global(a:hover) {
+    color: var(--sl-color-primary-hover);
+  }
+
+  .c-article-content :global(blockquote) {
+    margin: var(--sl-space-8) 0;
+    padding: var(--sl-space-4) var(--sl-space-6);
+    border-left: 4px solid var(--sl-color-primary);
+    background-color: var(--sl-color-primary-light);
+    border-radius: 0 var(--sl-radius-lg) var(--sl-radius-lg) 0;
+    font-style: italic;
+    color: var(--sl-color-text-muted);
+  }
+
+  .c-article-content :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Tablas con scroll horizontal en mobile */
+  .c-article-content :global(table) {
+    width: 100%;
+    margin: var(--sl-space-6) 0;
+    border-collapse: collapse;
+    font-size: var(--sl-fs-sm);
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .c-article-content :global(th),
+  .c-article-content :global(td) {
+    padding: var(--sl-space-3) var(--sl-space-4);
+    text-align: left;
+    border: 1px solid var(--sl-color-border);
+    white-space: nowrap;
+  }
+
+  .c-article-content :global(th) {
+    background-color: var(--sl-color-primary);
+    color: var(--sl-color-primary-text);
+    font-weight: 600;
+  }
+
+  .c-article-content :global(tr:nth-child(even) td) {
+    background-color: var(--sl-color-bg-alt);
+  }
+
+  .c-article-content :global(hr) {
+    margin: var(--sl-space-10) 0;
+    border: none;
+    border-top: 1px solid var(--sl-color-border);
+  }
+
+  /* Anchor links de headings */
+  .c-article-content :global(.heading-anchor) {
+    opacity: 0;
+    font-size: 0.75em;
+    margin-left: var(--sl-space-2);
+    text-decoration: none;
+    color: var(--sl-color-text-light);
+    transition: opacity var(--sl-transition-fast);
+  }
+
+  .c-article-content :global(h2:hover .heading-anchor),
+  .c-article-content :global(h3:hover .heading-anchor) {
+    opacity: 1;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 1023px) {
+    .c-article-layout {
+      flex-direction: column;
+    }
+
+    .c-article-toc {
+      display: none;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .c-article-content :global(th),
+    .c-article-content :global(td) {
+      padding: var(--sl-space-2) var(--sl-space-3);
+      font-size: var(--sl-fs-xs);
+    }
+
+    .c-article-content :global(blockquote) {
+      padding: var(--sl-space-4);
+      margin: var(--sl-space-6) 0;
+    }
+
+    .c-article-content :global(h2) {
+      font-size: var(--sl-fs-2xl);
+      margin-top: var(--sl-space-10);
+    }
+
+    .c-article-content :global(h3) {
+      font-size: var(--sl-fs-lg);
+      margin-top: var(--sl-space-6);
+    }
+  }
+</style>

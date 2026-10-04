@@ -58,11 +58,46 @@ function parseFrontmatter(content: string): { data: Record<string, unknown>; bod
     const yaml = match[1];
     const data: Record<string, unknown> = {};
 
+    let currentKey: string | null = null;
+    let currentArray: string[] | null = null;
+
     yaml.split('\n').forEach((line) => {
-      const colonIndex = line.indexOf(':');
+      const trimmedLine = line.trim();
+      
+      if (!trimmedLine || trimmedLine.startsWith('#')) return;
+
+      // Check if line starts an array item
+      const arrayMatch = trimmedLine.match(/^-\s+(.+)$/);
+      if (arrayMatch && currentKey !== null) {
+        let itemValue = arrayMatch[1].trim();
+        // Remove surrounding quotes
+        itemValue = itemValue.replace(/^['"]|['"]$/g, '');
+        if (currentArray !== null) {
+          currentArray.push(itemValue);
+        }
+        return;
+      }
+
+      // If we were building an array and this line doesn't continue it, save the array
+      if (currentArray !== null && !arrayMatch && currentKey !== null) {
+        data[currentKey] = currentArray;
+        currentArray = null;
+        currentKey = null;
+      }
+
+      // Parse key-value pair
+      const colonIndex = trimmedLine.indexOf(':');
       if (colonIndex === -1) return;
-      const key = line.slice(0, colonIndex).trim();
-      let value: unknown = line.slice(colonIndex + 1).trim();
+      
+      const key = trimmedLine.slice(0, colonIndex).trim();
+      let value: unknown = trimmedLine.slice(colonIndex + 1).trim();
+
+      if (!value) {
+        // Key with no value on same line - could be start of array
+        currentKey = key;
+        currentArray = [];
+        return;
+      }
 
       if (typeof value === 'string' && value.startsWith('[') && value.endsWith(']')) {
         try {
@@ -85,6 +120,11 @@ function parseFrontmatter(content: string): { data: Record<string, unknown>; bod
       data[key] = value;
     });
 
+    // Save any pending array at end
+    if (currentArray !== null && currentKey !== null) {
+      data[currentKey] = currentArray;
+    }
+
     const body = content.slice(match[0].length).trim();
     return { data, body };
   } catch (e) {
@@ -93,8 +133,9 @@ function parseFrontmatter(content: string): { data: Record<string, unknown>; bod
   }
 }
 
-function validateFile(filePath: string): { valid: boolean; errors: string[]; slug: string } {
+function validateFile(filePath: string): { valid: boolean; errors: string[]; warnings: string[]; slug: string } {
   const errors: string[] = [];
+  const warnings: string[] = [];
   const relativePath = path.relative(CONTENT_DIR, filePath);
   const slug = relativePath.replace(/\.(md|mdx)$/, '').replace(/\\/g, '/');
 
@@ -103,7 +144,7 @@ function validateFile(filePath: string): { valid: boolean; errors: string[]; slu
 
   if (!parsed) {
     errors.push('Frontmatter inválido o ausente');
-    return { valid: false, errors, slug };
+    return { valid: false, errors, warnings, slug };
   }
 
   const result = entrySchema.safeParse(parsed.data);
@@ -129,15 +170,67 @@ function validateFile(filePath: string): { valid: boolean; errors: string[]; slu
   }
 
   if (data.isPillar) {
+    // ERRORS (fallan build)
     if (!data.readingTime) errors.push('Artículos pilar requieren readingTime');
     if (!data.image) errors.push('Artículos pilar requieren image');
     if (!data.sources || data.sources.length < 3) errors.push('Artículos pilar requieren al menos 3 sources');
+
+    // WARNINGS (no fallan build, solo avisan)
+    if (data.sources && data.sources.length < 7) {
+      warnings.push(`Pillar: se recomiendan 7+ sources (.gov/.org), hay ${data.sources.length}`);
+    }
+    if (data.sources) {
+      const nonGovOrg = data.sources.filter((s: string) => !s.includes('.gov') && !s.includes('.org'));
+      if (nonGovOrg.length > 0) {
+        warnings.push(`Pillar: ${nonGovOrg.length} sources no son .gov/.org`);
+      }
+    }
+
+    // Validaciones de estructura markdown (warnings)
+    const wordCount = content.split(/\s+/).length;
+    if (wordCount < 2500) {
+      warnings.push(`Pillar: word count ${wordCount} < 2500 recomendadas`);
+    }
+
+    const hasKeyTakeaways = /^## Key Takeaways/m.test(content);
+    if (!hasKeyTakeaways) {
+      warnings.push('Pillar: falta sección "## Key Takeaways"');
+    }
+
+    const hasFAQ = /^## Frequently Asked Questions/m.test(content);
+    if (!hasFAQ) {
+      warnings.push('Pillar: falta sección "## Frequently Asked Questions"');
+    }
+
+    const hasSources = /^## Sources/m.test(content);
+    if (!hasSources) {
+      warnings.push('Pillar: falta sección "## Sources"');
+    }
+
+    const tableCount = (content.match(/\|[\s\S]*?\n\|[-|:\s]+\|/g) || []).length;
+    if (tableCount < 2) {
+      warnings.push(`Pillar: se recomiendan 2+ tablas comparativas, detectadas ${tableCount}`);
+    }
+
+    const blockquoteCount = (content.match(/^> .*(?:https?:\/\/[^\s]+)/gm) || []).length;
+    if (blockquoteCount < 2) {
+      warnings.push(`Pillar: se recomiendan 2+ blockquotes con fuentes .gov/.org, detectados ${blockquoteCount}`);
+    }
+
+    const internalLinkCount = (content.match(/\]\(\/category\/[^)]+\)/g) || []).length;
+    if (internalLinkCount < 1) {
+      warnings.push('Pillar: se recomienda al menos 1 enlace interno a /category/');
+    }
   }
 
   if (data.image) {
     const imagePath = path.join(__dirname, '..', 'public', data.image.replace(/^\//, ''));
     if (!fs.existsSync(imagePath)) {
-      errors.push(`Imagen no encontrada: ${data.image}`);
+      if (data.isPillar) {
+        warnings.push(`Pillar: imagen hero no encontrada en public/: ${data.image}`);
+      } else {
+        errors.push(`Imagen no encontrada: ${data.image}`);
+      }
     }
   }
 
@@ -159,7 +252,7 @@ function validateFile(filePath: string): { valid: boolean; errors: string[]; slu
     errors.push('seoDescription debe tener entre 50 y 160 caracteres');
   }
 
-  return { valid: errors.length === 0, errors, slug };
+  return { valid: errors.length === 0, errors, warnings, slug };
 }
 
 function main() {
@@ -172,7 +265,7 @@ function main() {
   const slugs = new Set<string>();
 
   for (const file of files) {
-    const { valid, errors, slug } = validateFile(file);
+    const { valid, errors, warnings, slug } = validateFile(file);
 
     if (slugs.has(slug)) {
       allErrors.push({ slug, errors: [`Slug duplicado: ${slug}`] });
@@ -184,11 +277,17 @@ function main() {
     if (valid) {
       validCount++;
       console.log(`✅ ${slug}`);
+      if (warnings.length > 0) {
+        warnings.forEach((w) => console.log(`   ⚠️  ${w}`));
+      }
     } else {
       invalidCount++;
       allErrors.push({ slug, errors });
       console.log(`❌ ${slug}`);
       errors.forEach((e) => console.log(`   - ${e}`));
+      if (warnings.length > 0) {
+        warnings.forEach((w) => console.log(`   ⚠️  ${w}`));
+      }
     }
   }
 
