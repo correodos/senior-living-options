@@ -54,8 +54,11 @@ npm run validate:content
 ### Checklist Visual — Pillar Page (copiar al crear nueva)
 
 **Frontmatter**
+
 - [ ] `title` ≤ 120 chars, descriptivo + año
-- [ ] `description` 50-300 chars, incluye patrón "Everything families need to know about [topic]: what it is, what it costs in [year], how Medicaid and VA benefits help, and how to choose the right facility."
+- [ ] `description` 50-300 chars, incluye patrón "Everything families need to know about [topic]:
+      what it is, what it costs in [year], how Medicaid and VA benefits help, and how to choose the
+      right facility."
 - [ ] `publishDate` = `lastReviewed` = hoy (YYYY-MM-DD)
 - [ ] `category`: uno de 6 enum
 - [ ] `isPillar: true`
@@ -69,6 +72,7 @@ npm run validate:content
 - [ ] `relatedArticles`: 3 slugs existentes misma/otra categoría
 
 **Estructura Markdown**
+
 - [ ] `## Key Takeaways` (5-6 bullets, **negrita inicial**, `---` abajo)
 - [ ] Intro empático 2-3 párrafos (`---` abajo)
 - [ ] 6-8 secciones `## H2` principales
@@ -80,6 +84,7 @@ npm run validate:content
 - [ ] `## Sources` numeradas (mín 7, formato: `1. **Fuente.** "Título." URL. Acceso: fecha.`)
 
 **Validación**
+
 - [ ] `npm run validate:content` pasa (warnings OK para pillar)
 - [ ] `npm run check` pasa (tipos)
 - [ ] Preview local: hero se ve, TOC funciona, tablas scroll mobile, CTA visible
@@ -117,7 +122,9 @@ Basada en `assisted-living-complete-guide.md` (referencia):
 ```yaml
 ---
 title: 'The Complete Guide to [Topic]: Costs, Services, and How to Choose'
-description: 'Everything families need to know about [topic]: what it is, what it costs in [year], how Medicaid and VA benefits help, and how to choose the right facility.'
+description:
+  'Everything families need to know about [topic]: what it is, what it costs in [year], how Medicaid
+  and VA benefits help, and how to choose the right facility.'
 publishDate: 2026-09-27
 lastReviewed: 2026-09-27
 category: assisted-living # assisted-living | memory-care | nursing-homes | in-home-care | senior-care-costs | caregiver-resources
@@ -212,10 +219,13 @@ git push origin feature/nueva-guia
 - BEM simplificado: `.c-componente`, `.c-componente--variante`
 
 **Pillar Page Styles** (`src/layouts/PillarArticleLayout.astro`, líneas ~189-750):
-- Hero: `.c-pillar-hero`, `.c-pillar-hero__overlay`, `.c-pillar-hero__content`, `.c-pillar-hero__title`, `.c-pillar-hero__description`
+
+- Hero: `.c-pillar-hero`, `.c-pillar-hero__overlay`, `.c-pillar-hero__content`,
+  `.c-pillar-hero__title`, `.c-pillar-hero__description`
 - TOC Inline: `.c-pillar-toc`, `.c-pillar-toc__list`, `.c-pillar-toc__link`
 - Key Takeaways: `h2#key-takeaways + ul` (checks ✓ verdes, fondo primary-light)
-- Tablas responsive: `.c-pillar-content table`, `.table-wrapper` (JS enhanced: scroll shadows, mobile card layout)
+- Tablas responsive: `.c-pillar-content table`, `.table-wrapper` (JS enhanced: scroll shadows,
+  mobile card layout)
 - Reading Progress: `.c-reading-progress` (top bar), `.c-back-to-top` (fixed button)
 - CTA Final: `.c-pillar-cta` (2 botones, fondo primary-light)
 - FAQ Schema: auto-extraído de H3 bajo "Frequently Asked Questions"

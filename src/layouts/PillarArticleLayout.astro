@@ -23,19 +23,24 @@ const { title, description, data, content, tocHeadings, canonical, jsonLd, ...re
 
 const categoryInfo = getCategoryInfo(data.category);
 const categoryColors = {
-  'assisted-living':    { bg: 'var(--sl-color-al-bg)',  text: 'var(--sl-color-al-text)',  icon: '🏠' },
-  'memory-care':        { bg: 'var(--sl-color-mc-bg)',  text: 'var(--sl-color-mc-text)',  icon: '🧠' },
-  'nursing-homes':      { bg: 'var(--sl-color-nh-bg)',  text: 'var(--sl-color-nh-text)',  icon: '🏥' },
-  'in-home-care':       { bg: 'var(--sl-color-ihc-bg)', text: 'var(--sl-color-ihc-text)', icon: '🏡' },
-  'senior-care-costs':  { bg: 'var(--sl-color-cf-bg)',  text: 'var(--sl-color-cf-text)',  icon: '💰' },
-  'caregiver-resources':{ bg: 'var(--sl-color-cr-bg)',  text: 'var(--sl-color-cr-text)',  icon: '🤝' },
+  'assisted-living': { bg: 'var(--sl-color-al-bg)', text: 'var(--sl-color-al-text)', icon: '🏠' },
+  'memory-care': { bg: 'var(--sl-color-mc-bg)', text: 'var(--sl-color-mc-text)', icon: '🧠' },
+  'nursing-homes': { bg: 'var(--sl-color-nh-bg)', text: 'var(--sl-color-nh-text)', icon: '🏥' },
+  'in-home-care': { bg: 'var(--sl-color-ihc-bg)', text: 'var(--sl-color-ihc-text)', icon: '🏡' },
+  'senior-care-costs': { bg: 'var(--sl-color-cf-bg)', text: 'var(--sl-color-cf-text)', icon: '💰' },
+  'caregiver-resources': {
+    bg: 'var(--sl-color-cr-bg)',
+    text: 'var(--sl-color-cr-text)',
+    icon: '🤝',
+  },
 };
-const catColors = categoryColors[data.category as keyof typeof categoryColors]
-  || { bg: 'var(--sl-color-primary-light)', text: 'var(--sl-color-primary)', icon: '📄' };
+const catColors = categoryColors[data.category as keyof typeof categoryColors] || {
+  bg: 'var(--sl-color-primary-light)',
+  text: 'var(--sl-color-primary)',
+  icon: '📄',
+};
 
-const heroImage = data.image
-  ? `/images/${data.image.replace(/^.*[\\/]images[\\/]/, '')}`
-  : null;
+const heroImage = data.image ? `/images/${data.image.replace(/^.*[\\/]images[\\/]/, '')}` : null;
 const heroAlt = data.imageAlt || data.title;
 
 // Extract FAQs from content for FAQPage schema
@@ -49,8 +54,12 @@ function extractFAQs(content: string): Array<{ question: string; answer: string 
     const faqRegex = /### ([^#\n]+)\n([\s\S]*?)(?=### |\z)/g;
     let match;
     while ((match = faqRegex.exec(faqContent)) !== null) {
-      const question = match[1].trim().replace(/<a class="heading-anchor".*$/, '').trim();
-      const answer = match[2].trim()
+      const question = match[1]
+        .trim()
+        .replace(/<a class="heading-anchor".*$/, '')
+        .trim();
+      const answer = match[2]
+        .trim()
         .replace(/<[^>]+>/g, '') // strip HTML tags
         .replace(/\n+/g, ' ')
         .replace(/\s+/g, ' ')
@@ -70,10 +79,7 @@ const faqJsonLd = faqs.length > 0 ? generateFAQPageJsonLd(faqs) : null;
 const combinedJsonLd = faqJsonLd
   ? {
       '@context': 'https://schema.org',
-      '@graph': [
-        jsonLd,
-        faqJsonLd
-      ]
+      '@graph': [jsonLd, faqJsonLd],
     }
   : jsonLd;
 ---
@@ -82,30 +88,33 @@ const combinedJsonLd = faqJsonLd
   <SkipLink />
   <Header />
   <main id="main-content" role="main">
-
     <!-- Hero -->
     <header class="c-pillar-hero" role="banner">
       {heroImage && (
-        <img 
-          src={heroImage} 
-          alt={heroAlt}
-          class="c-pillar-hero__image"
-          loading="eager"
-        />
+        <img src={heroImage} alt={heroAlt} class="c-pillar-hero__image" loading="eager" />
       )}
       <div class="c-pillar-hero__overlay">
         <div class="u-container c-pillar-hero__content">
           <nav class="c-breadcrumbs u-mb-4" aria-label="Breadcrumb">
-            <ol class="u-flex u-flex-wrap u-gap-2 u-items-center" style="list-style: none; margin: 0; padding: 0;">
+            <ol
+              class="u-flex u-flex-wrap u-gap-2 u-items-center"
+              style="list-style: none; margin: 0; padding: 0;"
+            >
               <li class="c-breadcrumbs__item">
-                <a href="/" class="c-breadcrumbs__link">Home</a>
-                <span class="c-breadcrumbs__separator" aria-hidden="true">/</span>
+                <a href="/" class="c-breadcrumbs__link">
+                  Home
+                </a>
+                <span class="c-breadcrumbs__separator" aria-hidden="true">
+                  /
+                </span>
               </li>
               <li class="c-breadcrumbs__item">
                 <a href={`/category/${data.category}/`} class="c-breadcrumbs__link">
                   {categoryInfo?.label || data.category}
                 </a>
-                <span class="c-breadcrumbs__separator" aria-hidden="true">/</span>
+                <span class="c-breadcrumbs__separator" aria-hidden="true">
+                  /
+                </span>
               </li>
               <li class="c-breadcrumbs__item" aria-current="page">
                 <span class="c-breadcrumbs__current">{data.title}</span>
@@ -113,9 +122,11 @@ const combinedJsonLd = faqJsonLd
             </ol>
           </nav>
 
-<div class="c-pillar-hero__meta u-mb-4 u-flex u-flex-wrap u-items-center u-gap-4">
-            <span class="c-badge c-badge--category"
-              style={`background-color: ${catColors.bg}; color: ${catColors.text};`}>
+          <div class="c-pillar-hero__meta u-mb-4 u-flex u-flex-wrap u-items-center u-gap-4">
+            <span
+              class="c-badge c-badge--category"
+              style={`background-color: ${catColors.bg}; color: ${catColors.text};`}
+            >
               {catColors.icon} {categoryInfo?.label || data.category}
             </span>
             <span class="c-badge c-badge--pillar">Pillar Guide</span>
@@ -134,11 +145,13 @@ const combinedJsonLd = faqJsonLd
         <h3 class="c-pillar-toc__title">In this guide</h3>
         <ul class="c-pillar-toc__list">
           {tocHeadings
-            .filter(h => h.level === 2)
-            .map(h => (
+            .filter((h) => h.level === 2)
+            .map((h) => (
               <li class="c-pillar-toc__item">
                 <a href={`#${h.slug}`} class="c-pillar-toc__link">
-                  <span class="c-pillar-toc__icon" aria-hidden="true">▸</span>
+                  <span class="c-pillar-toc__icon" aria-hidden="true">
+                    ▸
+                  </span>
                   {h.text}
                 </a>
               </li>
@@ -154,16 +167,18 @@ const combinedJsonLd = faqJsonLd
       </article>
 
       <!-- CTA -->
-      <section class="c-pillar-cta u-bg-primary-light u-rounded-xl u-p-8 u-mt-8"
-        aria-labelledby="cta-heading">
-        <h2 id="cta-heading" class="u-text-center u-mb-4">Next Steps</h2>
+      <section
+        class="c-pillar-cta u-bg-primary-light u-rounded-xl u-p-8 u-mt-8"
+        aria-labelledby="cta-heading"
+      >
+        <h2 id="cta-heading" class="u-text-center u-mb-4">
+          Next Steps
+        </h2>
         <div class="c-grid c-grid--2 u-gap-4 u-mb-6">
-          <a href="/category/senior-care-costs/"
-            class="c-btn c-btn--primary c-btn--full c-btn--lg">
+          <a href="/category/senior-care-costs/" class="c-btn c-btn--primary c-btn--full c-btn--lg">
             Compare Costs by State
           </a>
-          <a href="/category/memory-care/"
-            class="c-btn c-btn--outline c-btn--full c-btn--lg">
+          <a href="/category/memory-care/" class="c-btn c-btn--outline c-btn--full c-btn--lg">
             Explore Memory Care
           </a>
         </div>
@@ -209,7 +224,10 @@ const combinedJsonLd = faqJsonLd
   }
 
   @media (min-width: 768px) {
-    .c-pillar-hero { min-height: 50vh; max-height: 600px; }
+    .c-pillar-hero {
+      min-height: 50vh;
+      max-height: 600px;
+    }
   }
 
   .c-pillar-hero__image {
@@ -226,8 +244,8 @@ const combinedJsonLd = faqJsonLd
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(26,26,26,0.3) 0%,
-      rgba(26,26,26,0.7) 50%,
+      rgba(26, 26, 26, 0.3) 0%,
+      rgba(26, 26, 26, 0.7) 50%,
       var(--sl-color-bg) 100%
     );
     padding: var(--sl-space-8) 0;
@@ -244,12 +262,14 @@ const combinedJsonLd = faqJsonLd
     font-size: var(--sl-fs-4xl);
     line-height: var(--sl-lh-tight);
     margin-bottom: var(--sl-space-4);
-    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     color: #ffffff;
   }
 
   @media (min-width: 768px) {
-    .c-pillar-hero__title { font-size: var(--sl-fs-5xl); }
+    .c-pillar-hero__title {
+      font-size: var(--sl-fs-5xl);
+    }
   }
 
   .c-pillar-hero__description {
@@ -263,15 +283,17 @@ const combinedJsonLd = faqJsonLd
   }
 
   .c-pillar-hero .c-article-meta {
-    border-bottom-color: rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.9);
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
   }
   .c-pillar-hero .c-article-meta__item time,
-  .c-pillar-hero .c-article-meta__item span { color: inherit; }
+  .c-pillar-hero .c-article-meta__item span {
+    color: inherit;
+  }
   .c-pillar-hero .c-badge {
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     color: var(--sl-color-primary-text);
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
   .c-pillar-hero .c-badge--pillar {
     background-color: var(--sl-color-primary);
@@ -296,8 +318,10 @@ const combinedJsonLd = faqJsonLd
   .c-pillar-content :global(h2)::before {
     content: '';
     position: absolute;
-    bottom: -2px; left: 0;
-    width: 60px; height: 2px;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
     background-color: var(--sl-color-primary);
   }
 
@@ -324,7 +348,9 @@ const combinedJsonLd = faqJsonLd
     margin-bottom: var(--sl-space-3);
     line-height: var(--sl-lh-relaxed);
   }
-  .c-pillar-content :global(li::marker) { color: var(--sl-color-primary); }
+  .c-pillar-content :global(li::marker) {
+    color: var(--sl-color-primary);
+  }
 
   .c-pillar-content :global(blockquote) {
     margin: var(--sl-space-10) 0;
@@ -344,13 +370,16 @@ const combinedJsonLd = faqJsonLd
     color: var(--sl-color-primary);
     opacity: 0.2;
     position: absolute;
-    top: -0.5rem; left: 1.5rem;
+    top: -0.5rem;
+    left: 1.5rem;
     line-height: 1;
   }
-  .c-pillar-content :global(blockquote p:last-child) { margin-bottom: 0; }
+  .c-pillar-content :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
 
   /* Tablas con scroll horizontal en mobile */
-.c-pillar-content :global(table) {
+  .c-pillar-content :global(table) {
     width: 100%;
     margin: var(--sl-space-8) 0;
     border-collapse: collapse;
@@ -442,18 +471,29 @@ const combinedJsonLd = faqJsonLd
     letter-spacing: 0.03em;
     font-size: var(--sl-fs-xs);
   }
-  .c-pillar-content :global(tr:last-child td) { border-bottom: none; }
-  .c-pillar-content :global(tr:nth-child(even) td) { background-color: var(--sl-color-bg); }
-  .c-pillar-content :global(tr:hover td) { background-color: var(--sl-color-primary-light); }
+  .c-pillar-content :global(tr:last-child td) {
+    border-bottom: none;
+  }
+  .c-pillar-content :global(tr:nth-child(even) td) {
+    background-color: var(--sl-color-bg);
+  }
+  .c-pillar-content :global(tr:hover td) {
+    background-color: var(--sl-color-primary-light);
+  }
 
-  .c-pillar-content :global(strong) { color: var(--sl-color-text); font-weight: 700; }
+  .c-pillar-content :global(strong) {
+    color: var(--sl-color-text);
+    font-weight: 700;
+  }
 
   .c-pillar-content :global(a) {
     color: var(--sl-color-primary);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
-  .c-pillar-content :global(a:hover) { color: var(--sl-color-primary-hover); }
+  .c-pillar-content :global(a:hover) {
+    color: var(--sl-color-primary-hover);
+  }
 
   .c-pillar-content :global(hr) {
     margin: var(--sl-space-16) 0;
@@ -477,7 +517,11 @@ const combinedJsonLd = faqJsonLd
     overflow-x: auto;
     margin: var(--sl-space-8) 0;
   }
-  .c-pillar-content :global(pre code) { background: none; color: inherit; padding: 0; }
+  .c-pillar-content :global(pre code) {
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
 
   .c-pillar-content :global(img) {
     max-width: 100%;
@@ -509,8 +553,12 @@ const combinedJsonLd = faqJsonLd
     font-weight: 700;
     font-size: var(--sl-fs-lg);
   }
-  .c-pillar-content :global(ul:first-of-type li:last-child) { margin-bottom: 0; }
-  .c-pillar-content :global(ul:first-of-type strong) { color: var(--sl-color-primary); }
+  .c-pillar-content :global(ul:first-of-type li:last-child) {
+    margin-bottom: 0;
+  }
+  .c-pillar-content :global(ul:first-of-type strong) {
+    color: var(--sl-color-primary);
+  }
 
   /* Heading anchors */
   .c-pillar-content :global(.heading-anchor) {
@@ -522,7 +570,9 @@ const combinedJsonLd = faqJsonLd
     transition: opacity var(--sl-transition-fast);
   }
   .c-pillar-content :global(h2:hover .heading-anchor),
-  .c-pillar-content :global(h3:hover .heading-anchor) { opacity: 1; }
+  .c-pillar-content :global(h3:hover .heading-anchor) {
+    opacity: 1;
+  }
 
   /* CTA */
   .c-pillar-cta :global(h2) {
@@ -530,7 +580,7 @@ const combinedJsonLd = faqJsonLd
     font-size: var(--sl-fs-2xl);
   }
 
-/* ── Mobile responsive ── */
+  /* ── Mobile responsive ── */
   @media (max-width: 1023px) {
     .c-pillar-hero {
       min-height: auto;
@@ -545,15 +595,27 @@ const combinedJsonLd = faqJsonLd
     .c-pillar-hero__overlay {
       position: relative; /* ahora ocupa espacio en el flujo, empuja la altura del hero */
       inset: auto;
-      background: linear-gradient(180deg, rgba(26,26,26,0.55) 0%, rgba(26,26,26,0.85) 100%);
+      background: linear-gradient(180deg, rgba(26, 26, 26, 0.55) 0%, rgba(26, 26, 26, 0.85) 100%);
       padding: calc(52px + var(--sl-space-8)) 0 var(--sl-space-10); /* 52px = header height */
     }
-    .c-pillar-hero__title { font-size: var(--sl-fs-3xl); }
-    .c-pillar-hero__description { font-size: var(--sl-fs-base); }
-    .c-pillar-content :global(h2) { font-size: var(--sl-fs-2xl); margin-top: var(--sl-space-10); }
-    .c-pillar-content :global(h3) { font-size: var(--sl-fs-xl); margin-top: var(--sl-space-8); }
+    .c-pillar-hero__title {
+      font-size: var(--sl-fs-3xl);
+    }
+    .c-pillar-hero__description {
+      font-size: var(--sl-fs-base);
+    }
+    .c-pillar-content :global(h2) {
+      font-size: var(--sl-fs-2xl);
+      margin-top: var(--sl-space-10);
+    }
+    .c-pillar-content :global(h3) {
+      font-size: var(--sl-fs-xl);
+      margin-top: var(--sl-space-8);
+    }
     .c-pillar-content :global(ul),
-    .c-pillar-content :global(ol) { padding-left: var(--sl-space-4); }
+    .c-pillar-content :global(ol) {
+      padding-left: var(--sl-space-4);
+    }
 
     /* Breadcrumbs: truncate current page on mobile */
     .c-breadcrumbs__current {
@@ -570,8 +632,12 @@ const combinedJsonLd = faqJsonLd
     .c-pillar-hero__overlay {
       padding: calc(52px + var(--sl-space-6)) 0 var(--sl-space-8);
     }
-    .c-pillar-hero__title { font-size: var(--sl-fs-2xl); }
-    .c-pillar-hero__description { font-size: var(--sl-fs-sm); }
+    .c-pillar-hero__title {
+      font-size: var(--sl-fs-2xl);
+    }
+    .c-pillar-hero__description {
+      font-size: var(--sl-fs-sm);
+    }
     .c-pillar-content :global(blockquote) {
       padding: var(--sl-space-6) var(--sl-space-4);
       font-size: var(--sl-fs-base);
@@ -584,12 +650,18 @@ const combinedJsonLd = faqJsonLd
       padding-left: var(--sl-space-8);
       font-size: var(--sl-fs-sm);
     }
-    .c-pillar-cta { padding: var(--sl-space-6); }
-    .c-pillar-cta :global(.c-grid) { grid-template-columns: 1fr; }
+    .c-pillar-cta {
+      padding: var(--sl-space-6);
+    }
+    .c-pillar-cta :global(.c-grid) {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* Hide state table cards by default (desktop) */
-  .c-pillar-content :global(.state-table-cards) { display: none; }
+  .c-pillar-content :global(.state-table-cards) {
+    display: none;
+  }
 
   /* ── State table mobile cards (for tables with >5 columns) ── */
   @media (max-width: 639px) {
@@ -781,14 +853,19 @@ const combinedJsonLd = faqJsonLd
   @media print {
     .c-pillar-hero,
     .c-pillar-cta,
-    .c-pillar-toc { display: none !important; }
-    .c-pillar-content :global(table) { display: table; overflow: visible; }
+    .c-pillar-toc {
+      display: none !important;
+    }
+    .c-pillar-content :global(table) {
+      display: table;
+      overflow: visible;
+    }
   }
 </style>
 
 <script>
   // Enhance tables: wrap in .table-wrapper for scroll shadows
-  document.querySelectorAll('.c-pillar-content table').forEach(table => {
+  document.querySelectorAll('.c-pillar-content table').forEach((table) => {
     if (!table.closest('.table-wrapper')) {
       const wrapper = document.createElement('div');
       wrapper.className = 'table-wrapper';
@@ -799,10 +876,10 @@ const combinedJsonLd = faqJsonLd
 
   // Add scroll hint and shadow indicator for scrollable tables
   function enhanceTableScroll() {
-    document.querySelectorAll('.table-wrapper').forEach(wrapper => {
+    document.querySelectorAll('.table-wrapper').forEach((wrapper) => {
       const table = wrapper.querySelector('table');
       if (!table) return;
-      
+
       // Add scroll hint text on mobile
       if (window.innerWidth < 640) {
         const hint = document.createElement('div');
@@ -810,30 +887,34 @@ const combinedJsonLd = faqJsonLd
         hint.textContent = '← Desliza para ver más →';
         hint.setAttribute('aria-hidden', 'true');
         wrapper.appendChild(hint);
-        
+
         // Hide hint when user scrolls
-        table.addEventListener('scroll', () => {
-          if (table.scrollLeft > 20) {
-            hint.style.opacity = '0';
-          }
-        }, { passive: true });
+        table.addEventListener(
+          'scroll',
+          () => {
+            if (table.scrollLeft > 20) {
+              hint.style.opacity = '0';
+            }
+          },
+          { passive: true }
+        );
       }
-      
+
       // Add scroll shadow indicator via JS (replaces :has() CSS)
       const updateShadow = () => {
         const scrollLeft = table.scrollLeft;
         const maxScroll = table.scrollWidth - table.clientWidth;
         const atStart = scrollLeft <= 5;
         const atEnd = maxScroll - scrollLeft <= 5;
-        
+
         wrapper.style.setProperty('--scroll-shadow-start', atStart ? '0' : '1');
         wrapper.style.setProperty('--scroll-shadow-end', atEnd ? '0' : '1');
       };
-      
+
       table.addEventListener('scroll', updateShadow, { passive: true });
       // Initial check
       setTimeout(updateShadow, 0);
-      
+
       // Re-check on resize
       window.addEventListener('resize', () => {
         setTimeout(updateShadow, 100);
@@ -843,35 +924,35 @@ const combinedJsonLd = faqJsonLd
 
   // Convert tables to card layout on mobile (3+ cols AND >5 rows = data tables)
   function enhanceStateTables() {
-    document.querySelectorAll('.c-pillar-content table').forEach(table => {
+    document.querySelectorAll('.c-pillar-content table').forEach((table) => {
       const headerCells = table.querySelectorAll('thead th');
       const rows = table.querySelectorAll('tbody tr');
       const colCount = headerCells.length;
       const rowCount = rows.length;
-      
+
       // Convert to cards if: 3+ columns AND more than 5 data rows
       if (colCount >= 3 && rowCount > 5) {
         table.classList.add('state-table');
-        
+
         // Create card version
         const cardContainer = document.createElement('div');
         cardContainer.className = 'state-table-cards';
-        
-        const headers = Array.from(headerCells).map(th => th.textContent.trim());
-        
-        rows.forEach(row => {
+
+        const headers = Array.from(headerCells).map((th) => th.textContent.trim());
+
+        rows.forEach((row) => {
           const cells = row.querySelectorAll('td');
           if (cells.length !== colCount) return;
-          
+
           const card = document.createElement('div');
           card.className = 'state-card';
-          
+
           const nameCell = cells[0];
           const name = document.createElement('div');
           name.className = 'state-card__name';
           name.textContent = nameCell.textContent.trim();
           card.appendChild(name);
-          
+
           headers.slice(1).forEach((header, i) => {
             const cell = cells[i + 1];
             if (!cell) return;
@@ -890,10 +971,10 @@ const combinedJsonLd = faqJsonLd
             rowDiv.append(label, value);
             card.appendChild(rowDiv);
           });
-          
+
           cardContainer.appendChild(card);
         });
-        
+
         table.parentNode.insertBefore(cardContainer, table.nextSibling);
       }
     });

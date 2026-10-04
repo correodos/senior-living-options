@@ -29,9 +29,8 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     label: 'Memory Care',
     labelEn: 'Memory Care',
     description:
-      'Specialized units within assisted living or nursing home communities, designed specifically for people with Alzheimer\'s, dementia, or other memory disorders.',
-    descriptionShort:
-      'Specialized care for Alzheimer\'s and dementia in secure environments.',
+      "Specialized units within assisted living or nursing home communities, designed specifically for people with Alzheimer's, dementia, or other memory disorders.",
+    descriptionShort: "Specialized care for Alzheimer's and dementia in secure environments.",
     color: 'var(--sl-color-mc-text)',
     bgColor: 'var(--sl-color-mc-bg)',
     icon: '🧠',
@@ -43,8 +42,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     labelEn: 'Nursing Homes',
     description:
       'Facilities providing 24/7 skilled nursing care, rehabilitation, and medical care for older adults with complex health conditions.',
-    descriptionShort:
-      '24/7 skilled nursing and medical care for complex health conditions.',
+    descriptionShort: '24/7 skilled nursing and medical care for complex health conditions.',
     color: 'var(--sl-color-nh-text)',
     bgColor: 'var(--sl-color-nh-bg)',
     icon: '🏥',
@@ -55,9 +53,8 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     label: 'In-Home Care',
     labelEn: 'In-Home Care',
     description:
-      'Personal care, companionship, and medical assistance services provided in the older adult\'s home, allowing them to age in place.',
-    descriptionShort:
-      'Care services at home so seniors can age in place comfortably.',
+      "Personal care, companionship, and medical assistance services provided in the older adult's home, allowing them to age in place.",
+    descriptionShort: 'Care services at home so seniors can age in place comfortably.',
     color: 'var(--sl-color-ihc-text)',
     bgColor: 'var(--sl-color-ihc-bg)',
     icon: '🏡',
@@ -69,8 +66,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     labelEn: 'Costs & Finance',
     description:
       'Detailed information on senior care costs by state, financing options, Medicare, Medicaid, long-term care insurance, and veterans benefits.',
-    descriptionShort:
-      'State-by-state costs, payment options, Medicare, Medicaid, VA benefits.',
+    descriptionShort: 'State-by-state costs, payment options, Medicare, Medicaid, VA benefits.',
     color: 'var(--sl-color-cf-text)',
     bgColor: 'var(--sl-color-cf-bg)',
     icon: '💰',

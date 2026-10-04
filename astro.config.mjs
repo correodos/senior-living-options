@@ -16,9 +16,7 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: 'viewport',
   },
-  integrations: [
-    sitemap(),
-  ],
+  integrations: [sitemap()],
   vite: {
     build: {
       cssCodeSplit: true,

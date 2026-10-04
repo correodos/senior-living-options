@@ -58,7 +58,9 @@ export const entrySchema = z.object({
 ```yaml
 ---
 title: 'The Complete Guide to Assisted Living: Costs, Services, and How to Choose'
-description: 'Everything families need to know about assisted living: what it is, what it costs in 2025, how Medicaid and VA benefits help, and how to choose the right facility.'
+description:
+  'Everything families need to know about assisted living: what it is, what it costs in 2025, how
+  Medicaid and VA benefits help, and how to choose the right facility.'
 publishDate: 2026-09-27
 lastReviewed: 2026-09-27
 category: assisted-living
@@ -99,7 +101,8 @@ relatedArticles:
 
 ### Estructura Estándar Pillar Page
 
-Todos los artículos pilar (`isPillar: true`) deben seguir esta estructura exacta basada en el artículo de referencia `assisted-living-complete-guide.md`:
+Todos los artículos pilar (`isPillar: true`) deben seguir esta estructura exacta basada en el
+artículo de referencia `assisted-living-complete-guide.md`:
 
 ```markdown
 ---
@@ -117,8 +120,9 @@ Todos los artículos pilar (`isPillar: true`) deben seguir esta estructura exact
 
 ---
 
-Párrafo de introducción empático (2-3 párrafos) que conecte con la situación del lector.
-Establece autoridad: "The information here comes from federal health agencies and independent research, not from facilities trying to fill beds."
+Párrafo de introducción empático (2-3 párrafos) que conecte con la situación del lector. Establece
+autoridad: "The information here comes from federal health agencies and independent research, not
+from facilities trying to fill beds."
 
 ---
 
@@ -130,13 +134,13 @@ Establece autoridad: "The information here comes from federal health agencies an
 
 [Tabla comparativa principal - MÍN 1 tabla por artículo pilar]
 
-| | [Opción A] | [Opción B] |
-|---|---|---|
-| **Care level** | ... | ... |
-| **Who it's for** | ... | ... |
-| **Median monthly cost** | $X,XXX | $X,XXX |
-| **Medicare coverage** | ... | ... |
-| **Medicaid coverage** | ... | ... |
+|                         | [Opción A] | [Opción B] |
+| ----------------------- | ---------- | ---------- |
+| **Care level**          | ...        | ...        |
+| **Who it's for**        | ...        | ...        |
+| **Median monthly cost** | $X,XXX     | $X,XXX     |
+| **Medicare coverage**   | ...        | ...        |
+| **Medicaid coverage**   | ...        | ...        |
 
 ---
 
@@ -148,8 +152,8 @@ Establece autoridad: "The information here comes from federal health agencies an
 
 [Detalles, listas, datos]
 
-> **Cita institucional** — Texto de fuente .gov/.org con autoridad.
-> → [Enlace a fuente](https://www.nia.nih.gov/...)
+> **Cita institucional** — Texto de fuente .gov/.org con autoridad. →
+> [Enlace a fuente](https://www.nia.nih.gov/...)
 
 ---
 
@@ -159,20 +163,20 @@ Establece autoridad: "The information here comes from federal health agencies an
 
 [Tabla de costos nacionales con fuente Genworth/CareScout]
 
-| Care Type | Monthly Median | Annual Median |
-|---|---|---|
-| **[Topic]** | $X,XXX | $XX,XXX |
-| [Comparable] | $X,XXX | $XX,XXX |
+| Care Type    | Monthly Median | Annual Median |
+| ------------ | -------------- | ------------- |
+| **[Topic]**  | $X,XXX         | $XX,XXX       |
+| [Comparable] | $X,XXX         | $XX,XXX       |
 
-*Source: [Fuente] ([año]). [Enlace].*
+_Source: [Fuente] ([año]). [Enlace]._
 
 ### Cost Variation by State
 
 [Tabla top 5-10 estados caros/baratos]
 
-| State | Monthly Median | Annual Median |
-|---|---|---|
-| [Estado] | $X,XXX | $XX,XXX |
+| State    | Monthly Median | Annual Median |
+| -------- | -------------- | ------------- |
+| [Estado] | $X,XXX         | $XX,XXX       |
 
 ---
 
@@ -192,11 +196,11 @@ Establece autoridad: "The information here comes from federal health agencies an
 
 [Tabla VA Aid & Attendance rates año actual]
 
-| Status | Monthly Maximum | Annual Maximum |
-|---|---|---|
-| Single veteran | $X,XXX | $XX,XXX |
-| Veteran with dependent | $X,XXX | $XX,XXX |
-| Surviving spouse | $X,XXX | $XX,XXX |
+| Status                 | Monthly Maximum | Annual Maximum |
+| ---------------------- | --------------- | -------------- |
+| Single veteran         | $X,XXX          | $XX,XXX        |
+| Veteran with dependent | $X,XXX          | $XX,XXX        |
+| Surviving spouse       | $X,XXX          | $XX,XXX        |
 
 ### Long-Term Care Insurance
 
@@ -230,18 +234,19 @@ Establece autoridad: "The information here comes from federal health agencies an
 
 [Tabla: Area | What to Look For]
 
-| Area | What to Look For |
-|---|---|
-| **Staff interactions** | ... |
-| **Residents' demeanor** | ... |
-| **Physical environment** | ... |
-| **Dining** | ... |
-| **Safety features** | ... |
-| **Activities** | ... |
+| Area                     | What to Look For |
+| ------------------------ | ---------------- |
+| **Staff interactions**   | ...              |
+| **Residents' demeanor**  | ...              |
+| **Physical environment** | ...              |
+| **Dining**               | ...              |
+| **Safety features**      | ...              |
+| **Activities**           | ...              |
 
 ### Step 4: Ask the Hard Questions
 
-[Lista preguntas esenciales: staff ratios, turnover, care plans, discharge, family notification, arbitration]
+[Lista preguntas esenciales: staff ratios, turnover, care plans, discharge, family notification,
+arbitration]
 
 ### Step 5: Review the Contract Carefully
 
@@ -292,36 +297,36 @@ Establece autoridad: "The information here comes from federal health agencies an
 
 ### Reglas de Estructura Pillar (Resumen)
 
-| Elemento | Requerido | Detalle |
-|---|---|---|
-| `## Key Takeaways` | Sí | 5-6 bullets, **negrita inicial**, `---` abajo |
-| Intro empático | Sí | 2-3 párrafos tras `---` |
-| Secciones `## H2` | Mín 6 | Principales temas del artículo |
-| Tablas comparativas | Mín 2-3 | Sintaxis pipe `|---|---|` |
-| Blockquotes `>` | Mín 2-3 | Con cita + fuente .gov/.org + enlace |
-| Enlaces internos | Mín 1 | A `/category/[slug]/` relacionadas |
-| `## Frequently Asked Questions` | Sí | 5-6 preguntas con `###` |
-| `## Sources` | Sí | Mín 7, numeradas, formato consistente |
-| Divisores `---` | Sí | Entre secciones mayores |
-| Longitud | ~2500+ palabras | Objetivo, no hard limit |
+| Elemento                        | Requerido       | Detalle                                       |
+| ------------------------------- | --------------- | --------------------------------------------- |
+| `## Key Takeaways`              | Sí              | 5-6 bullets, **negrita inicial**, `---` abajo |
+| Intro empático                  | Sí              | 2-3 párrafos tras `---`                       |
+| Secciones `## H2`               | Mín 6           | Principales temas del artículo                |
+| Tablas comparativas             | Mín 2-3         | Sintaxis pipe `                               | --- | --- | `   |
+| Blockquotes `>`                 | Mín 2-3         | Con cita + fuente .gov/.org + enlace          |
+| Enlaces internos                | Mín 1           | A `/category/[slug]/` relacionadas            |
+| `## Frequently Asked Questions` | Sí              | 5-6 preguntas con `###`                       |
+| `## Sources`                    | Sí              | Mín 7, numeradas, formato consistente         |
+| Divisores `---`                 | Sí              | Entre secciones mayores                       |
+| Longitud                        | ~2500+ palabras | Objetivo, no hard limit                       |
 
 ### Componentes Visuales Pillar (Renderizado)
 
 El layout `PillarArticleLayout.astro` aplica automáticamente:
 
-| Componente | Clase CSS | Comportamiento |
-|---|---|---|
-| **Hero** | `.c-pillar-hero` | Imagen full-width + overlay gradiente + breadcrumbs inline |
-| **Título** | `.c-pillar-hero__title` | Blanco fijo `#ffffff` ambos modos, serif, text-shadow |
-| **Descripción** | `.c-pillar-hero__description` | Gris `var(--sl-color-text-muted)` ambos modos |
-| **TOC Inline** | `.c-pillar-toc` | Solo H2, iconos ▸, sticky en desktop |
-| **Key Takeaways** | `h2#key-takeaways + ul` | Fondo `var(--sl-color-primary-light)`, checks ✓ verdes |
-| **Tablas** | `.c-pillar-content table` | Scroll horizontal mobile + card layout auto (>5 filas, ≥3 cols) |
-| **Reading Progress** | `.c-reading-progress` | Barra superior 3px, z-index 199 |
-| **Back to Top** | `.c-back-to-top` | Botón fijo esquina inf-dcha, aparece tras scroll |
-| **CTA Final** | `.c-pillar-cta` | 2 botones (primary + outline), fondo `var(--sl-color-primary-light)` |
-| **FAQ Schema** | Auto | JSON-LD FAQPage extraído de H3 bajo "Frequently Asked Questions" |
-| **Theme Toggle** | En Header | Solo en Header global, NO en hero del artículo |
+| Componente           | Clase CSS                     | Comportamiento                                                       |
+| -------------------- | ----------------------------- | -------------------------------------------------------------------- |
+| **Hero**             | `.c-pillar-hero`              | Imagen full-width + overlay gradiente + breadcrumbs inline           |
+| **Título**           | `.c-pillar-hero__title`       | Blanco fijo `#ffffff` ambos modos, serif, text-shadow                |
+| **Descripción**      | `.c-pillar-hero__description` | Gris `var(--sl-color-text-muted)` ambos modos                        |
+| **TOC Inline**       | `.c-pillar-toc`               | Solo H2, iconos ▸, sticky en desktop                                 |
+| **Key Takeaways**    | `h2#key-takeaways + ul`       | Fondo `var(--sl-color-primary-light)`, checks ✓ verdes               |
+| **Tablas**           | `.c-pillar-content table`     | Scroll horizontal mobile + card layout auto (>5 filas, ≥3 cols)      |
+| **Reading Progress** | `.c-reading-progress`         | Barra superior 3px, z-index 199                                      |
+| **Back to Top**      | `.c-back-to-top`              | Botón fijo esquina inf-dcha, aparece tras scroll                     |
+| **CTA Final**        | `.c-pillar-cta`               | 2 botones (primary + outline), fondo `var(--sl-color-primary-light)` |
+| **FAQ Schema**       | Auto                          | JSON-LD FAQPage extraído de H3 bajo "Frequently Asked Questions"     |
+| **Theme Toggle**     | En Header                     | Solo en Header global, NO en hero del artículo                       |
 
 ---
 
@@ -341,7 +346,8 @@ El layout `PillarArticleLayout.astro` aplica automáticamente:
 #### Pillar Pages (`isPillar: true`)
 
 - **Longitud**: 2,500+ palabras
-- **Estructura**: Ver [Estructura Estándar Pillar Page](#estructura-estandar-pillar-page) — TOC obligatorio, 6+ H2, 2+ tablas, 2+ blockquotes, FAQ, Sources
+- **Estructura**: Ver [Estructura Estándar Pillar Page](#estructura-estandar-pillar-page) — TOC
+  obligatorio, 6+ H2, 2+ tablas, 2+ blockquotes, FAQ, Sources
 - **Actualización**: `lastReviewed` cada 6 meses máximo
 - **Fuentes**: Mínimo 7 fuentes `.gov/.org` verificables
 - **SEO**: Target keyword principal + 5-10 long-tail
@@ -391,7 +397,8 @@ src/content/entries/
     - checklist-cuidado-diario.md
 ```
 
-> **Nota**: Los slugs de pillar pages pendientes (`complete-guide-*`) son placeholders. El slug real se definirá al crear cada artículo.
+> **Nota**: Los slugs de pillar pages pendientes (`complete-guide-*`) son placeholders. El slug real
+> se definirá al crear cada artículo.
 
 ### Validaciones en Build
 
@@ -399,7 +406,8 @@ El script `scripts/validate-content.ts` (ejecutado con `tsx`) verifica:
 
 1. **Schema Zod** - Frontmatter válido
 2. **Fechas** - `publishDate` ≤ `lastReviewed` ≤ hoy
-3. **Pillar pages** - Tienen `readingTime`, `image`, `sources` (mín 7, .gov/.org), estructura markdown completa
+3. **Pillar pages** - Tienen `readingTime`, `image`, `sources` (mín 7, .gov/.org), estructura
+   markdown completa
 4. **Imágenes** - Archivo existe en `public/images/`
 5. **Links internos** - `relatedArticles` slugs existen
 6. **Duplicados** - No hay slugs repetidos

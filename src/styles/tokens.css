@@ -32,7 +32,7 @@
     --sl-color-cf-bg: #f4eafb;
     --sl-color-cf-text: #7a1a9e;
     --sl-color-cr-bg: #fdf4ea;
---sl-color-cr-text: #9e6a1a;
+    --sl-color-cr-text: #9e6a1a;
 
     /* Dark mode colors */
     --sl-color-bg-dark: #121212;
@@ -51,7 +51,7 @@
 
 /* Dark mode via system preference (unless overridden) */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme='light']) {
     --sl-color-bg: var(--sl-color-bg-dark);
     --sl-color-bg-alt: var(--sl-color-bg-alt-dark);
     --sl-color-text: var(--sl-color-text-dark);
@@ -81,7 +81,7 @@
 }
 
 /* Dark mode via manual toggle (data-theme="dark") — highest priority */
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --sl-color-bg: var(--sl-color-bg-dark);
   --sl-color-bg-alt: var(--sl-color-bg-alt-dark);
   --sl-color-text: var(--sl-color-text-dark);
@@ -175,7 +175,7 @@
     --sl-z-tooltip: 700;
   }
 
-@media (min-width: 1024px) {
+  @media (min-width: 1024px) {
     :root {
       --sl-fs-5xl: 2.25rem;
     }

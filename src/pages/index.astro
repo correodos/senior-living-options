@@ -101,9 +101,13 @@ const states = [
   <section class="c-hero" aria-labelledby="hero-title">
     <div class="u-container">
       <h1 id="hero-title" class="c-hero__title">
-        Understanding your senior care<br>options — <span style="color: var(--sl-color-primary);">without the overwhelm</span>
+        Understanding your senior care
+        <br />
+        options — <span style="color: var(--sl-color-primary);">without the overwhelm</span>
       </h1>
-      <p class="c-hero__description">Clear, researched guides to help you choose the right care for your loved one.</p>
+      <p class="c-hero__description">
+        Clear, researched guides to help you choose the right care for your loved one.
+      </p>
       <div class="c-hero__actions">
         <Button href="/category/senior-care-costs/" variant="primary" size="lg">
           Find the right care type →
@@ -119,15 +123,48 @@ const states = [
     <div class="u-container">
       <div class="c-trust-bar__marquee-wrapper" aria-hidden="true">
         <ul class="c-trust-bar__marquee u-flex u-items-center u-gap-8">
-          <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">✓</span> Researched from government and nonprofit sources</li>
-          <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">↻</span> Updated 2026</li>
-          <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">✓</span> Researched from government and nonprofit sources</li>
-          <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">↻</span> Updated 2026</li>
+          <li class="c-trust-bar__item">
+            <span class="c-trust-bar__icon" aria-hidden="true">
+              ✓
+            </span>{' '}
+            Researched from government and nonprofit sources
+          </li>
+          <li class="c-trust-bar__item">
+            <span class="c-trust-bar__icon" aria-hidden="true">
+              ↻
+            </span>{' '}
+            Updated 2026
+          </li>
+          <li class="c-trust-bar__item">
+            <span class="c-trust-bar__icon" aria-hidden="true">
+              ✓
+            </span>{' '}
+            Researched from government and nonprofit sources
+          </li>
+          <li class="c-trust-bar__item">
+            <span class="c-trust-bar__icon" aria-hidden="true">
+              ↻
+            </span>{' '}
+            Updated 2026
+          </li>
         </ul>
       </div>
-      <ul class="c-trust-bar__list u-flex-wrap u-justify-center u-hidden sm:u-flex" aria-hidden="false">
-        <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">✓</span> Researched from government and nonprofit sources</li>
-        <li class="c-trust-bar__item"><span class="c-trust-bar__icon" aria-hidden="true">↻</span> Updated 2026</li>
+      <ul
+        class="c-trust-bar__list u-flex-wrap u-justify-center u-hidden sm:u-flex"
+        aria-hidden="false"
+      >
+        <li class="c-trust-bar__item">
+          <span class="c-trust-bar__icon" aria-hidden="true">
+            ✓
+          </span>{' '}
+          Researched from government and nonprofit sources
+        </li>
+        <li class="c-trust-bar__item">
+          <span class="c-trust-bar__icon" aria-hidden="true">
+            ↻
+          </span>{' '}
+          Updated 2026
+        </li>
       </ul>
     </div>
   </section>
@@ -135,15 +172,16 @@ const states = [
   <section class="u-container u-py-16" aria-labelledby="categories-title">
     <header class="u-text-center u-mb-12">
       <p class="c-eyebrow">What type of care do you need?</p>
-      <h2 id="categories-title" class="u-mb-4">Explore care options by category</h2>
-      <p class="u-text-muted u-fs-lg u-mx-auto" style="max-width: 600px;">Six key areas to help you make informed decisions about senior care</p>
+      <h2 id="categories-title" class="u-mb-4">
+        Explore care options by category
+      </h2>
+      <p class="u-text-muted u-fs-lg u-mx-auto" style="max-width: 600px;">
+        Six key areas to help you make informed decisions about senior care
+      </p>
     </header>
     <div class="c-grid c-grid--2 c-grid--3">
       {categories.map((cat) => (
-        <a
-          href={`/category/${cat.slug}/`}
-          class="c-category-card u-transition"
-        >
+        <a href={`/category/${cat.slug}/`} class="c-category-card u-transition">
           <span class="c-category-card__icon" style={{ backgroundColor: cat.bgColor }}>
             {cat.icon}
           </span>
@@ -156,14 +194,19 @@ const states = [
 
   <section class="u-container u-py-16" aria-labelledby="most-read-title">
     <header class="u-flex u-items-center u-justify-between u-mb-8">
-      <h2 id="most-read-title" class="u-mb-0">Most read guides</h2>
-      <a href="/search/" class="c-btn c-btn--secondary c-btn--sm">See all →</a>
+      <h2 id="most-read-title" class="u-mb-0">
+        Most read guides
+      </h2>
+      <a href="/search/" class="c-btn c-btn--secondary c-btn--sm">
+        See all →
+      </a>
     </header>
     <div class="c-most-read">
       <ul class="c-most-read__list">
         {mostRead.map((entry) => {
           const cat = categories.find((c) => c.slug === entry.data.category);
-          const readingTime = entry.data.readingTime || Math.ceil(entry.data.description.length / 200);
+          const readingTime =
+            entry.data.readingTime || Math.ceil(entry.data.description.length / 200);
           return (
             <li class="c-most-read__item">
               <span
@@ -180,7 +223,12 @@ const states = [
                   <a href={`/article/${entry.id}/`}>{entry.data.title}</a>
                 </h3>
                 <p class="c-most-read__meta">
-                  {readingTime} min read · {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(entry.data.publishDate))}
+                  {readingTime} min read ·{' '}
+                  {new Intl.DateTimeFormat('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  }).format(new Date(entry.data.publishDate))}
                 </p>
               </div>
             </li>
@@ -191,12 +239,22 @@ const states = [
   </section>
 
   <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="state-selector-title">
-    <div class="u-flex u-flex-col u-items-center u-gap-6" style="max-width: 600px; margin-left: auto; margin-right: auto;">
+    <div
+      class="u-flex u-flex-col u-items-center u-gap-6"
+      style="max-width: 600px; margin-left: auto; margin-right: auto;"
+    >
       <div class="u-text-center">
-        <h2 id="state-selector-title" class="u-mb-4">Senior care costs vary widely by state</h2>
+        <h2 id="state-selector-title" class="u-mb-4">
+          Senior care costs vary widely by state
+        </h2>
         <p class="u-text-muted u-mb-6">Find out what you'd pay in your state</p>
       </div>
-      <form class="c-state-selector u-flex u-flex-col sm:u-flex-row sm:u-justify-center u-gap-3" style="max-width: 400px; width: 100%;" action="/category/senior-care-costs/" method="GET">
+      <form
+        class="c-state-selector u-flex u-flex-col sm:u-flex-row sm:u-justify-center u-gap-3"
+        style="max-width: 400px; width: 100%;"
+        action="/category/senior-care-costs/"
+        method="GET"
+      >
         <select name="state" class="c-state-selector__select" aria-label="Select state" required>
           <option value="">Select a state</option>
           {states.map((s) => (
@@ -211,14 +269,19 @@ const states = [
   </section>
 
   <section class="u-container u-py-16" aria-labelledby="faq-title">
-    <h2 id="faq-title" class="u-text-center u-mb-10">Quick answers</h2>
+    <h2 id="faq-title" class="u-text-center u-mb-10">
+      Quick answers
+    </h2>
     <div class="c-faq">
       <div class="c-faq__list">
         {faqs.map((faq) => (
           <details class="c-faq__item">
             <summary class="c-faq__question">{faq.q}</summary>
             <div class="c-faq__answer">
-              {faq.a} <a href={faq.link} class="c-faq__link">Read more →</a>
+              {faq.a}{' '}
+              <a href={faq.link} class="c-faq__link">
+                Read more →
+              </a>
             </div>
           </details>
         ))}
@@ -228,12 +291,22 @@ const states = [
 
   <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="checklist-title">
     <div class="u-text-center u-mx-auto" style="max-width: 600px;">
-      <h2 id="checklist-title" class="u-mb-4">Not sure where to start?</h2>
+      <h2 id="checklist-title" class="u-mb-4">
+        Not sure where to start?
+      </h2>
       <ol class="c-checklist">
-        <li class="c-checklist__item"><span class="c-checklist__number">1</span>Evaluate the level of care needed</li>
-        <li class="c-checklist__item"><span class="c-checklist__number">2</span>Understand your budget and payment options</li>
-        <li class="c-checklist__item"><span class="c-checklist__number">3</span>Research facilities in your area</li>
-        <li class="c-checklist__item"><span class="c-checklist__number">4</span>Visit and ask the right questions</li>
+        <li class="c-checklist__item">
+          <span class="c-checklist__number">1</span>Evaluate the level of care needed
+        </li>
+        <li class="c-checklist__item">
+          <span class="c-checklist__number">2</span>Understand your budget and payment options
+        </li>
+        <li class="c-checklist__item">
+          <span class="c-checklist__number">3</span>Research facilities in your area
+        </li>
+        <li class="c-checklist__item">
+          <span class="c-checklist__number">4</span>Visit and ask the right questions
+        </li>
       </ol>
       <Button href="#" variant="primary" size="lg" class="u-mt-8">
         Read the complete guide →
@@ -243,9 +316,14 @@ const states = [
 
   <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="newsletter-title">
     <div class="u-text-center u-mx-auto" style="max-width: 600px;">
-      <h2 id="newsletter-title" class="u-mb-4">Stay informed</h2>
+      <h2 id="newsletter-title" class="u-mb-4">
+        Stay informed
+      </h2>
       <p class="u-text-muted u-mb-6">No spam. Unsubscribe anytime.</p>
-      <form class="c-newsletter__form u-flex u-flex-col sm:u-flex-row u-gap-3 u-mx-auto" style="max-width: 400px;">
+      <form
+        class="c-newsletter__form u-flex u-flex-col sm:u-flex-row u-gap-3 u-mx-auto"
+        style="max-width: 400px;"
+      >
         <input
           type="email"
           placeholder="you@email.com"
