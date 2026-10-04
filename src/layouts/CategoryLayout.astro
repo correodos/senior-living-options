@@ -16,9 +16,9 @@ interface Props {
 const { title, description, category, ...rest } = Astro.props;
 
 const breadcrumbs = [
-  { label: 'Inicio', href: '/' },
+  { label: 'Home', href: '/' },
   {
-    label: title.replace(' - Guías y Artículos | Senior Living Options', ''),
+    label: title.replace(' - Guides & Articles | Senior Living Options', ''),
     href: `/category/${category}/`,
   },
 ];
@@ -28,7 +28,7 @@ const breadcrumbs = [
   <SkipLink />
   <Header />
   <main id="main-content" role="main">
-    <nav class="u-container u-py-4" aria-label="Ruta de navegación">
+    <nav class="u-container u-py-4" aria-label="Breadcrumb navigation">
       <Breadcrumbs items={breadcrumbs} />
     </nav>
     <slot />

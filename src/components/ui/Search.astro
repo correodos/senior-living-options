@@ -13,15 +13,15 @@
   <input
     type="search"
     class="c-search__input"
-    placeholder="Buscar artículos..."
-    aria-label="Buscar artículos"
+    placeholder="Search articles..."
+    aria-label="Search articles"
     autocomplete="off"
     data-search-input
   />
   <div
     class="c-search__results u-hidden"
     role="listbox"
-    aria-label="Resultados de búsqueda"
+    aria-label="Search results"
     data-search-results
   ></div>
 </div>
@@ -73,8 +73,7 @@
   function renderResults(results: typeof searchIndex) {
     if (!resultsContainer) return;
     if (results.length === 0) {
-      resultsContainer.innerHTML =
-        '<div class="u-p-4 u-text-center u-text-muted">Sin resultados</div>';
+      resultsContainer.innerHTML = '<div class="u-p-4 u-text-center u-text-muted">No results</div>';
       resultsContainer.classList.remove('u-hidden');
       return;
     }

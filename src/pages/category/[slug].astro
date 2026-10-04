@@ -51,7 +51,7 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
   {pillarEntries.length > 0 && (
     <section class="u-container u-mb-16" aria-labelledby="pillars-heading">
       <h2 id="pillars-heading" class="u-sr-only">
-        Guías Fundamentales
+        Core Guides
       </h2>
       <div class="c-grid c-grid--2 c-grid--3">
         {pillarEntries.map((entry) => (
@@ -63,8 +63,8 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
 
   <section class="u-container u-mb-16" aria-labelledby="articles-heading">
     <div class="u-flex u-items-center u-justify-between u-mb-8">
-      <h2 id="articles-heading">Artículos y Guías</h2>
-      <span class="u-text-muted u-fs-sm">{articleEntries.length} artículos</span>
+      <h2 id="articles-heading">Articles & Guides</h2>
+      <span class="u-text-muted u-fs-sm">{articleEntries.length} articles</span>
     </div>
 
     {articleEntries.length > 0 ? (
@@ -77,14 +77,14 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
       </>
     ) : (
       <div class="u-text-center u-py-16 u-bg-primary-light u-rounded-lg">
-        <p class="u-text-muted">Próximamente más artículos sobre {catInfo.label.toLowerCase()}.</p>
+        <p class="u-text-muted">More articles coming soon on {catInfo.label.toLowerCase()}.</p>
       </div>
     )}
   </section>
 
   <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="related-heading">
     <h2 id="related-heading" class="u-text-center u-mb-8">
-      Explorar Otras Categorías
+      Explore Other Categories
     </h2>
     <div class="c-grid c-grid--2 c-grid--3">
       {getAllCategories()
@@ -105,7 +105,7 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
               <h3 class="c-card__title u-mb-2">{cat.label}</h3>
               <p class="c-card__excerpt u-mb-4">{cat.description}</p>
               <Button variant="outline" size="sm">
-                Ver guías →
+                View guides →
               </Button>
             </div>
           </a>

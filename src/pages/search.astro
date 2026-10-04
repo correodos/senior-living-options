@@ -10,7 +10,7 @@ const seo = buildSearchSEOMeta(query);
 <HomeLayout {...seo}>
   <section class="u-container u-py-16">
     <header class="u-mb-12">
-      <h1 class="u-mb-4">Buscar en Senior Living Options</h1>
+      <h1 class="u-mb-4">Search Senior Living Options</h1>
       {query && (
         <p class="u-text-muted">
           Resultados para: <strong>"{query}"</strong>
@@ -79,8 +79,8 @@ const seo = buildSearchSEOMeta(query);
     if (results.length === 0) {
       container.innerHTML = `
         <div class="u-text-center u-py-12 u-bg-primary-light u-rounded-lg">
-          <p class="u-text-muted u-mb-4">No se encontraron resultados para "<strong>${escapeHtml(query)}</strong>"</p>
-          <p class="u-fs-sm u-text-light">Prueba con términos más generales o revisa nuestras <a href="/category/" class="u-text-primary">categorías principales</a>.</p>
+          <p class="u-text-muted u-mb-4">No results found for "<strong>${escapeHtml(query)}</strong>"</p>
+          <p class="u-fs-sm u-text-light">Try more general terms or browse our <a href="/category/" class="u-text-primary">main categories</a>.</p>
         </div>
       `;
       return;
@@ -96,7 +96,7 @@ const seo = buildSearchSEOMeta(query);
     };
 
     container.innerHTML = `
-      <p class="u-text-muted u-mb-6">{results.length} resultado{s} encontrado{s}</p>
+      <p class="u-text-muted u-mb-6">{results.length} result{s} found</p>
       <div class="c-grid c-grid--2" style="gap: var(--sl-space-4);">
         ${results
           .map((item) => {
@@ -111,7 +111,7 @@ const seo = buildSearchSEOMeta(query);
                   <span class="c-badge" style="background-color: ${cat.color}15; color: ${cat.color}">${cat.label}</span>
                   <h3 class="c-card__title"><a href="${item.url}">${escapeHtml(item.title)}</a></h3>
                   <p class="c-card__excerpt">${escapeHtml(excerpt)}</p>
-                  <a href="${item.url}" class="c-btn c-btn--secondary c-btn--sm u-mt-4">Leer artículo</a>
+                  <a href="${item.url}" class="c-btn c-btn--secondary c-btn--sm u-mt-4">Read article</a>
                 </div>
               </article>
             `;
