@@ -6,18 +6,33 @@ import SkipLink from '../../components/layout/SkipLink.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
 import Button from '../../components/ui/Button.astro';
 import StateSelector from '../../components/ui/StateSelector.astro';
-import costsByState from '../../data/costs-by-state.json';
+import costsByStateRaw from '../../data/costs-by-state.json';
+
+interface StateCostData {
+  name: string;
+  assistedLiving: number | null;
+  nursingHomeSemi: number | null;
+  nursingHomePrivate: number | null;
+  inHomeCare: number | null;
+}
+
+type CostsByState = Record<
+  string,
+  | StateCostData
+  | { source: string; url: string; dataCollection: string; published: string; notes: string }
+>;
 
 export async function getStaticPaths() {
+  const costsByState = costsByStateRaw as CostsByState;
   return Object.entries(costsByState)
     .filter(([key]) => key !== '_meta')
     .map(([code, data]) => ({
       params: { state: code.toLowerCase() },
-      props: { code, data },
+      props: { code, data: data as StateCostData },
     }));
 }
 
-const { code, data } = Astro.props;
+const { code, data } = Astro.props as { code: string; data: StateCostData };
 
 const national = {
   assistedLiving: 6200,
