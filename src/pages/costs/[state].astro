@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import SkipLink from '../../components/layout/SkipLink.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import Button from '../../components/ui/Button.astro';
+import StateSelector from '../../components/ui/StateSelector.astro';
+import costsByState from '../../data/costs-by-state.json';
+
+export async function getStaticPaths() {
+  return Object.entries(costsByState)
+    .filter(([key]) => key !== '_meta')
+    .map(([code, data]) => ({
+      params: { state: code.toLowerCase() },
+      props: { code, data },
+    }));
+}
+
+const { code, data } = Astro.props;
+
+const national = {
+  assistedLiving: 6200,
+  nursingHomeSemi: 9277,
+  nursingHomePrivate: 10798,
+  inHomeCare: 6673,
+};
+
+function fmt(val: number | null) {
+  if (!val) return 'N/A';
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
+}
+
+function diff(val: number | null, national: number) {
+  if (!val) return null;
+  const pct = Math.round(((val - national) / national) * 100);
+  return pct > 0 ? `+${pct}% vs national` : `${pct}% vs national`;
+}
+
+function diffColor(val: number | null, national: number) {
+  if (!val) return 'var(--sl-color-text-muted)';
+  return val > national ? 'var(--sl-color-error, #c0392b)' : 'var(--sl-color-success, #1a7a4a)';
+}
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Costs & Finance', href: '/category/senior-care-costs/' },
+  { label: data.name },
+];
+
+const title = `Senior Care Costs in ${data.name} (2025) | Senior Living Options`;
+const description = `Median monthly costs for assisted living, nursing homes, and in-home care in ${data.name} in 2025, compared to national averages. Source: CareScout/Genworth Cost of Care Survey.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <SkipLink />
+  <Header />
+  <main id="main-content" role="main">
+    <nav class="u-container u-py-4" aria-label="Breadcrumb navigation">
+      <Breadcrumbs items={breadcrumbs} />
+    </nav>
+    <header class="u-container u-py-10">
+      <p class="c-eyebrow">Senior Care Costs 2025</p>
+      <h1 style="font-family: var(--sl-font-serif);">
+        Senior Care Costs in {data.name}
+      </h1>
+      <p class="u-text-muted u-fs-lg u-mt-2">
+        Median monthly costs compared to the national average.
+        Source: <a href="https://www.carescout.com/cost-of-care" target="_blank" rel="noopener">CareScout/Genworth Cost of Care Survey 2025</a>.
+      </p>
+    </header>
+    <section class="u-container u-pb-16">
+      <div class="c-grid c-grid--2" style="gap: var(--sl-space-6);">
+        <div class="c-card" style="border-top: 3px solid var(--sl-color-al-text);">
+          <div class="c-card__content">
+            <p class="c-eyebrow" style="color: var(--sl-color-al-text);">🏠 Assisted Living</p>
+            <p style="font-family: var(--sl-font-serif); font-size: var(--sl-fs-3xl); font-weight: 700; margin: var(--sl-space-2) 0;">
+              {fmt(data.assistedLiving)}
+              <span style="font-size: var(--sl-fs-base); font-weight: 400; color: var(--sl-color-text-muted);">/mo</span>
+            </p>
+            <p style="font-size: var(--sl-fs-sm); color: {diffColor(data.assistedLiving, national.assistedLiving)}; font-weight: 600;">
+              {diff(data.assistedLiving, national.assistedLiving)}
+            </p>
+            <p class="u-text-muted u-fs-sm u-mt-2">National median: {fmt(national.assistedLiving)}/mo</p>
+          </div>
+        </div>
+        <div class="c-card" style="border-top: 3px solid var(--sl-color-nh-text);">
+          <div class="c-card__content">
+            <p class="c-eyebrow" style="color: var(--sl-color-nh-text);">🏥 Nursing Home (semi-private)</p>
+            <p style="font-family: var(--sl-font-serif); font-size: var(--sl-fs-3xl); font-weight: 700; margin: var(--sl-space-2) 0;">
+              {fmt(data.nursingHomeSemi)}
+              <span style="font-size: var(--sl-fs-base); font-weight: 400; color: var(--sl-color-text-muted);">/mo</span>
+            </p>
+            <p style="font-size: var(--sl-fs-sm); color: {diffColor(data.nursingHomeSemi, national.nursingHomeSemi)}; font-weight: 600;">
+              {diff(data.nursingHomeSemi, national.nursingHomeSemi)}
+            </p>
+            <p class="u-text-muted u-fs-sm u-mt-2">National median: {fmt(national.nursingHomeSemi)}/mo</p>
+          </div>
+        </div>
+        <div class="c-card" style="border-top: 3px solid var(--sl-color-nh-text);">
+          <div class="c-card__content">
+            <p class="c-eyebrow" style="color: var(--sl-color-nh-text);">🏥 Nursing Home (private)</p>
+            <p style="font-family: var(--sl-font-serif); font-size: var(--sl-fs-3xl); font-weight: 700; margin: var(--sl-space-2) 0;">
+              {fmt(data.nursingHomePrivate)}
+              <span style="font-size: var(--sl-fs-base); font-weight: 400; color: var(--sl-color-text-muted);">/mo</span>
+            </p>
+            <p style="font-size: var(--sl-fs-sm); color: {diffColor(data.nursingHomePrivate, national.nursingHomePrivate)}; font-weight: 600;">
+              {diff(data.nursingHomePrivate, national.nursingHomePrivate)}
+            </p>
+            <p class="u-text-muted u-fs-sm u-mt-2">National median: {fmt(national.nursingHomePrivate)}/mo</p>
+          </div>
+        </div>
+        <div class="c-card" style="border-top: 3px solid var(--sl-color-ihc-text);">
+          <div class="c-card__content">
+            <p class="c-eyebrow" style="color: var(--sl-color-ihc-text);">🏡 In-Home Care</p>
+            <p style="font-family: var(--sl-font-serif); font-size: var(--sl-fs-3xl); font-weight: 700; margin: var(--sl-space-2) 0;">
+              {fmt(data.inHomeCare)}
+              <span style="font-size: var(--sl-fs-base); font-weight: 400; color: var(--sl-color-text-muted);">/mo</span>
+            </p>
+            <p style="font-size: var(--sl-fs-sm); color: {diffColor(data.inHomeCare, national.inHomeCare)}; font-weight: 600;">
+              {diff(data.inHomeCare, national.inHomeCare)}
+            </p>
+            <p class="u-text-muted u-fs-sm u-mt-2">National median: {fmt(national.inHomeCare)}/mo</p>
+          </div>
+        </div>
+      </div>
+      <div class="u-mt-10 u-p-6 u-bg-primary-light u-rounded-lg">
+        <p class="u-fs-sm u-text-muted">
+          All figures are monthly medians for {data.name} from the CareScout/Genworth Cost of Care Survey 2025
+          (data collected July–November 2025, published March 2026). Assisted living reflects a private
+          one-bedroom unit. In-home care reflects a non-medical caregiver at 44 hours/week.
+          Actual costs vary by city, facility, and level of care needed.
+        </p>
+      </div>
+      <div class="u-mt-10 u-flex u-gap-4 u-flex-wrap">
+        <Button href="/article/senior-care-costs/senior-care-costs-complete-guide/" variant="primary" size="lg">
+          How to pay for senior care →
+        </Button>
+        <Button href="/category/senior-care-costs/" variant="outline" size="lg">
+          More cost guides
+        </Button>
+      </div>
+    </section>
+    <section class="u-container u-py-16 u-bg-primary-light">
+      <StateSelector
+        label="Compare another state"
+        subtitle="Select a different state to see its costs"
+      />
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

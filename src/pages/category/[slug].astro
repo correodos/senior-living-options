@@ -5,6 +5,7 @@ import { buildCategorySEOMeta } from '../../utils/seo';
 import { getCategoryInfo, getAllCategories } from '../../utils/category';
 import Card from '../../components/content/Card.astro';
 import Button from '../../components/ui/Button.astro';
+import StateSelector from '../../components/ui/StateSelector.astro';
 
 export async function getStaticPaths() {
   const categories = getAllCategories();
@@ -81,6 +82,15 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
       </div>
     )}
   </section>
+
+  {category.slug === 'senior-care-costs' && (
+    <section class="u-container u-py-16 u-bg-primary-light u-mb-16">
+      <StateSelector
+        label="Find costs in your state"
+        subtitle="State-by-state data from the CareScout/Genworth 2025 survey"
+      />
+    </section>
+  )}
 
   <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="related-heading">
     <h2 id="related-heading" class="u-text-center u-mb-8">

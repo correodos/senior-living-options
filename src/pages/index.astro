@@ -4,6 +4,7 @@ import HomeLayout from '../layouts/HomeLayout.astro';
 import { buildHomeSEOMeta } from '../utils/seo';
 import { getAllCategories, getCategoryDescriptionShort } from '../utils/category';
 import Button from '../components/ui/Button.astro';
+import StateSelector from '../components/ui/StateSelector.astro';
 
 const allEntries = await getCollection('entries');
 const pillars = allEntries
@@ -22,79 +23,31 @@ const mostRead = [...pillars, ...latest].slice(0, 6);
 const faqs = [
   {
     q: 'How much does assisted living cost per month?',
-    a: '--------------',
-    link: '/article/assisted-living-costs/',
+    a: 'The national median is $6,200/month ($74,400/year) as of 2025, according to the CareScout/Genworth Cost of Care Survey. Costs vary significantly by state — from around $4,400/month in lower-cost states like Mississippi to over $9,600/month in Massachusetts or $12,000/month in Hawaii.',
+    link: '/article/assisted-living/assisted-living-complete-guide/',
   },
   {
-    q: 'Does Medicare cover assisted living?',
-    a: '--------------',
-    link: '/article/medicare-assisted-living/',
+    q: 'Does Medicare cover assisted living or nursing home care?',
+    a: 'Medicare does not cover assisted living at all. For nursing homes, Medicare only covers short-term skilled nursing care — up to 100 days per benefit period after a qualifying hospital stay of at least 3 days. After day 100, Medicare pays nothing. Long-term custodial care is not covered.',
+    link: '/article/nursing-homes/nursing-homes-complete-guide/',
   },
   {
     q: "What's the difference between memory care and assisted living?",
-    a: '--------------',
-    link: '/article/memory-care-vs-assisted-living/',
+    a: 'Memory care is a specialized form of assisted living for people with Alzheimer\'s or other dementias. Memory care facilities have secured environments to prevent wandering, staff with dementia-specific training, and adapted programming. Memory care typically costs 15–25% more than standard assisted living — national estimates for 2025–2026 range from $6,690 to $8,019/month.',
+    link: '/article/memory-care/memory-care-complete-guide/',
   },
   {
-    q: "How do I know when it's time for a nursing home?",
-    a: '--------------',
-    link: '/article/when-nursing-home/',
+    q: 'Will Medicaid pay for a nursing home or assisted living?',
+    a: 'Medicaid covers nursing home care in every state for eligible individuals. For assisted living, 46 states and D.C. offer some coverage through HCBS waiver programs — but this typically covers care services only, not room and board. Eligibility generally requires countable assets below $2,000 and income under ~$2,982/month. Waitlists are common.',
+    link: '/article/senior-care-costs/senior-care-costs-complete-guide/',
+  },
+  {
+    q: 'Can VA benefits help pay for senior care?',
+    a: 'Yes. The VA Aid & Attendance benefit provides monthly cash payments to eligible wartime veterans and surviving spouses. In 2026, the maximum is $2,424/month for a single veteran, $2,874/month for a veteran with one dependent, and $1,558/month for a surviving spouse. The benefit can be applied to assisted living, in-home care, or nursing home costs.',
+    link: '/article/senior-care-costs/senior-care-costs-complete-guide/',
   },
 ];
 
-const states = [
-  { code: 'AL', name: 'Alabama' },
-  { code: 'AK', name: 'Alaska' },
-  { code: 'AZ', name: 'Arizona' },
-  { code: 'AR', name: 'Arkansas' },
-  { code: 'CA', name: 'California' },
-  { code: 'CO', name: 'Colorado' },
-  { code: 'CT', name: 'Connecticut' },
-  { code: 'DE', name: 'Delaware' },
-  { code: 'FL', name: 'Florida' },
-  { code: 'GA', name: 'Georgia' },
-  { code: 'HI', name: 'Hawaii' },
-  { code: 'ID', name: 'Idaho' },
-  { code: 'IL', name: 'Illinois' },
-  { code: 'IN', name: 'Indiana' },
-  { code: 'IA', name: 'Iowa' },
-  { code: 'KS', name: 'Kansas' },
-  { code: 'KY', name: 'Kentucky' },
-  { code: 'LA', name: 'Louisiana' },
-  { code: 'ME', name: 'Maine' },
-  { code: 'MD', name: 'Maryland' },
-  { code: 'MA', name: 'Massachusetts' },
-  { code: 'MI', name: 'Michigan' },
-  { code: 'MN', name: 'Minnesota' },
-  { code: 'MS', name: 'Mississippi' },
-  { code: 'MO', name: 'Missouri' },
-  { code: 'MT', name: 'Montana' },
-  { code: 'NE', name: 'Nebraska' },
-  { code: 'NV', name: 'Nevada' },
-  { code: 'NH', name: 'New Hampshire' },
-  { code: 'NJ', name: 'New Jersey' },
-  { code: 'NM', name: 'New Mexico' },
-  { code: 'NY', name: 'New York' },
-  { code: 'NC', name: 'North Carolina' },
-  { code: 'ND', name: 'North Dakota' },
-  { code: 'OH', name: 'Ohio' },
-  { code: 'OK', name: 'Oklahoma' },
-  { code: 'OR', name: 'Oregon' },
-  { code: 'PA', name: 'Pennsylvania' },
-  { code: 'RI', name: 'Rhode Island' },
-  { code: 'SC', name: 'South Carolina' },
-  { code: 'SD', name: 'South Dakota' },
-  { code: 'TN', name: 'Tennessee' },
-  { code: 'TX', name: 'Texas' },
-  { code: 'UT', name: 'Utah' },
-  { code: 'VT', name: 'Vermont' },
-  { code: 'VA', name: 'Virginia' },
-  { code: 'WA', name: 'Washington' },
-  { code: 'WV', name: 'West Virginia' },
-  { code: 'WI', name: 'Wisconsin' },
-  { code: 'WY', name: 'Wyoming' },
-  { code: 'DC', name: 'Washington D.C.' },
-];
 ---
 
 <HomeLayout {...seo}>
@@ -109,7 +62,7 @@ const states = [
         Clear, researched guides to help you choose the right care for your loved one.
       </p>
       <div class="c-hero__actions">
-        <Button href="/category/senior-care-costs/" variant="primary" size="lg">
+        <Button href="#categories" variant="primary" size="lg">
           Find the right care type →
         </Button>
         <Button href="/category/senior-care-costs/" variant="outline" size="lg">
@@ -169,7 +122,7 @@ const states = [
     </div>
   </section>
 
-  <section class="u-container u-py-16" aria-labelledby="categories-title">
+  <section id="categories" class="u-container u-py-16" aria-labelledby="categories-title">
     <header class="u-text-center u-mb-12">
       <p class="c-eyebrow">What type of care do you need?</p>
       <h2 id="categories-title" class="u-mb-4">
@@ -239,33 +192,7 @@ const states = [
   </section>
 
   <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="state-selector-title">
-    <div
-      class="u-flex u-flex-col u-items-center u-gap-6"
-      style="max-width: 600px; margin-left: auto; margin-right: auto;"
-    >
-      <div class="u-text-center">
-        <h2 id="state-selector-title" class="u-mb-4">
-          Senior care costs vary widely by state
-        </h2>
-        <p class="u-text-muted u-mb-6">Find out what you'd pay in your state</p>
-      </div>
-      <form
-        class="c-state-selector u-flex u-flex-col sm:u-flex-row sm:u-justify-center u-gap-3"
-        style="max-width: 400px; width: 100%;"
-        action="/category/senior-care-costs/"
-        method="GET"
-      >
-        <select name="state" class="c-state-selector__select" aria-label="Select state" required>
-          <option value="">Select a state</option>
-          {states.map((s) => (
-            <option value={s.code}>{s.name}</option>
-          ))}
-        </select>
-        <Button type="submit" variant="primary" size="lg">
-          View costs →
-        </Button>
-      </form>
-    </div>
+    <StateSelector />
   </section>
 
   <section class="u-container u-py-16" aria-labelledby="faq-title">
@@ -308,9 +235,9 @@ const states = [
           <span class="c-checklist__number">4</span>Visit and ask the right questions
         </li>
       </ol>
-      <Button href="#" variant="primary" size="lg" class="u-mt-8">
-        Read the complete guide →
-      </Button>
+<Button href="/article/assisted-living/assisted-living-complete-guide/" variant="primary" size="lg" class="u-mt-8">
+          Read the complete guide →
+        </Button>
     </div>
   </section>
 

@@ -1,0 +1,182 @@
+---
+interface Props {
+  label?: string;
+  subtitle?: string;
+}
+const {
+  label = 'Senior care costs vary widely by state',
+  subtitle = 'Select your state to see 2025 median costs for assisted living, nursing homes, and in-home care.',
+} = Astro.props;
+
+const states = [
+  { code: 'AL', name: 'Alabama' }, { code: 'AK', name: 'Alaska' },
+  { code: 'AZ', name: 'Arizona' }, { code: 'AR', name: 'Arkansas' },
+  { code: 'CA', name: 'California' }, { code: 'CO', name: 'Colorado' },
+  { code: 'CT', name: 'Connecticut' }, { code: 'DE', name: 'Delaware' },
+  { code: 'FL', name: 'Florida' }, { code: 'GA', name: 'Georgia' },
+  { code: 'HI', name: 'Hawaii' }, { code: 'ID', name: 'Idaho' },
+  { code: 'IL', name: 'Illinois' }, { code: 'IN', name: 'Indiana' },
+  { code: 'IA', name: 'Iowa' }, { code: 'KS', name: 'Kansas' },
+  { code: 'KY', name: 'Kentucky' }, { code: 'LA', name: 'Louisiana' },
+  { code: 'ME', name: 'Maine' }, { code: 'MD', name: 'Maryland' },
+  { code: 'MA', name: 'Massachusetts' }, { code: 'MI', name: 'Michigan' },
+  { code: 'MN', name: 'Minnesota' }, { code: 'MS', name: 'Mississippi' },
+  { code: 'MO', name: 'Missouri' }, { code: 'MT', name: 'Montana' },
+  { code: 'NE', name: 'Nebraska' }, { code: 'NV', name: 'Nevada' },
+  { code: 'NH', name: 'New Hampshire' }, { code: 'NJ', name: 'New Jersey' },
+  { code: 'NM', name: 'New Mexico' }, { code: 'NY', name: 'New York' },
+  { code: 'NC', name: 'North Carolina' }, { code: 'ND', name: 'North Dakota' },
+  { code: 'OH', name: 'Ohio' }, { code: 'OK', name: 'Oklahoma' },
+  { code: 'OR', name: 'Oregon' }, { code: 'PA', name: 'Pennsylvania' },
+  { code: 'RI', name: 'Rhode Island' }, { code: 'SC', name: 'South Carolina' },
+  { code: 'SD', name: 'South Dakota' }, { code: 'TN', name: 'Tennessee' },
+  { code: 'TX', name: 'Texas' }, { code: 'UT', name: 'Utah' },
+  { code: 'VT', name: 'Vermont' }, { code: 'VA', name: 'Virginia' },
+  { code: 'WA', name: 'Washington' }, { code: 'WV', name: 'West Virginia' },
+  { code: 'WI', name: 'Wisconsin' }, { code: 'WY', name: 'Wyoming' },
+  { code: 'DC', name: 'Washington D.C.' },
+];
+---
+
+<div class="c-state-selector-widget">
+  <div class="c-state-selector-widget__header">
+    <h2 class="c-state-selector-widget__title">{label}</h2>
+    <p class="c-state-selector-widget__subtitle">{subtitle}</p>
+  </div>
+  <div class="c-state-selector-widget__stats">
+    <div class="c-state-selector-widget__stat">
+      <p class="c-state-selector-widget__stat-label">Assisted Living</p>
+      <p class="c-state-selector-widget__stat-value">$6,200<span>/mo</span></p>
+      <p class="c-state-selector-widget__stat-note">national median</p>
+    </div>
+    <div class="c-state-selector-widget__stat">
+      <p class="c-state-selector-widget__stat-label">Nursing Home</p>
+      <p class="c-state-selector-widget__stat-value">$9,277<span>/mo</span></p>
+      <p class="c-state-selector-widget__stat-note">national median</p>
+    </div>
+    <div class="c-state-selector-widget__stat">
+      <p class="c-state-selector-widget__stat-label">In-Home Care</p>
+      <p class="c-state-selector-widget__stat-value">$6,673<span>/mo</span></p>
+      <p class="c-state-selector-widget__stat-note">national median</p>
+    </div>
+  </div>
+  <form class="c-state-selector-widget__form" data-state-selector-form>
+    <select name="state" class="c-state-selector__select" aria-label="Select state" required>
+      <option value="">Select your state</option>
+      {states.map((s) => (
+        <option value={s.code}>{s.name}</option>
+      ))}
+    </select>
+    <button type="submit" class="c-btn c-btn--primary c-btn--lg">
+      View costs →
+    </button>
+  </form>
+  <p class="c-state-selector-widget__source">
+    Source: CareScout/Genworth Cost of Care Survey 2025
+  </p>
+</div>
+
+<style>
+  .c-state-selector-widget {
+    background-color: var(--sl-color-bg-alt);
+    border: 1px solid var(--sl-color-border);
+    border-radius: var(--sl-radius-xl);
+    padding: var(--sl-space-8);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .c-state-selector-widget__header {
+    text-align: center;
+    margin-bottom: var(--sl-space-6);
+  }
+  .c-state-selector-widget__title {
+    font-family: var(--sl-font-serif);
+    font-size: var(--sl-fs-2xl);
+    color: var(--sl-color-text);
+    margin: 0 0 var(--sl-space-2);
+    line-height: var(--sl-lh-snug);
+  }
+  .c-state-selector-widget__subtitle {
+    font-size: var(--sl-fs-sm);
+    color: var(--sl-color-text-muted);
+    margin: 0;
+    line-height: var(--sl-lh-normal);
+  }
+  .c-state-selector-widget__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sl-space-3);
+    margin-bottom: var(--sl-space-6);
+  }
+  .c-state-selector-widget__stat {
+    background-color: var(--sl-color-primary-light);
+    border: 1px solid var(--sl-color-border);
+    border-radius: var(--sl-radius-lg);
+    padding: var(--sl-space-4);
+    text-align: center;
+  }
+  .c-state-selector-widget__stat-label {
+    font-size: var(--sl-fs-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--sl-color-primary);
+    margin: 0 0 var(--sl-space-1);
+  }
+  .c-state-selector-widget__stat-value {
+    font-family: var(--sl-font-serif);
+    font-size: var(--sl-fs-xl);
+    font-weight: 700;
+    color: var(--sl-color-text);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .c-state-selector-widget__stat-value span {
+    font-family: var(--sl-font-sans);
+    font-size: var(--sl-fs-xs);
+    font-weight: 400;
+    color: var(--sl-color-text-muted);
+  }
+  .c-state-selector-widget__stat-note {
+    font-size: var(--sl-fs-xs);
+    color: var(--sl-color-text-muted);
+    margin: var(--sl-space-1) 0 0;
+  }
+  .c-state-selector-widget__form {
+    display: flex;
+    gap: var(--sl-space-3);
+    flex-direction: column;
+  }
+  @media (min-width: 480px) {
+    .c-state-selector-widget__form {
+      flex-direction: row;
+    }
+  }
+  .c-state-selector-widget__form .c-state-selector__select {
+    flex: 1;
+  }
+  .c-state-selector-widget__source {
+    font-size: var(--sl-fs-xs);
+    color: var(--sl-color-text-light);
+    text-align: center;
+    margin: var(--sl-space-4) 0 0;
+  }
+  @media (max-width: 480px) {
+    .c-state-selector-widget__stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-state-selector-form]').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const select = (form as HTMLFormElement).querySelector('select[name="state"]') as HTMLSelectElement;
+      const code = select?.value;
+      if (code) {
+        window.location.href = `/costs/${code.toLowerCase()}/`;
+      }
+    });
+  });
+</script>

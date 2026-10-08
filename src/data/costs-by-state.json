@@ -1,0 +1,366 @@
+{
+  "_meta": {
+    "source": "CareScout Cost of Care Survey 2025",
+    "url": "https://assets.carescout.com/x/5c90319b6a/298701.pdf",
+    "dataCollection": "July–November 2025",
+    "published": "March 2026",
+    "notes": "Assisted living: private one-bedroom unit. Nursing home: monthly median. In-home care: non-medical caregiver, 44hrs/week. All figures are monthly medians in USD."
+  },
+  "AL": {
+    "name": "Alabama",
+    "assistedLiving": 4425,
+    "nursingHomeSemi": 8334,
+    "nursingHomePrivate": 8787,
+    "inHomeCare": 5148
+  },
+  "AK": {
+    "name": "Alaska",
+    "assistedLiving": 9882,
+    "nursingHomeSemi": 27831,
+    "nursingHomePrivate": null,
+    "inHomeCare": 7245
+  },
+  "AZ": {
+    "name": "Arizona",
+    "assistedLiving": 6250,
+    "nursingHomeSemi": 8365,
+    "nursingHomePrivate": 11437,
+    "inHomeCare": 7245
+  },
+  "AR": {
+    "name": "Arkansas",
+    "assistedLiving": 4637,
+    "nursingHomeSemi": 7452,
+    "nursingHomePrivate": 8060,
+    "inHomeCare": 4767
+  },
+  "CA": {
+    "name": "California",
+    "assistedLiving": 7000,
+    "nursingHomeSemi": 12167,
+    "nursingHomePrivate": 15178,
+    "inHomeCare": 7627
+  },
+  "CO": {
+    "name": "Colorado",
+    "assistedLiving": 6584,
+    "nursingHomeSemi": 10159,
+    "nursingHomePrivate": 12182,
+    "inHomeCare": 7913
+  },
+  "CT": {
+    "name": "Connecticut",
+    "assistedLiving": 9118,
+    "nursingHomeSemi": 15208,
+    "nursingHomePrivate": 16729,
+    "inHomeCare": 6864
+  },
+  "DE": {
+    "name": "Delaware",
+    "assistedLiving": 7600,
+    "nursingHomeSemi": 14494,
+    "nursingHomePrivate": 15132,
+    "inHomeCare": 6673
+  },
+  "FL": {
+    "name": "Florida",
+    "assistedLiving": 5610,
+    "nursingHomeSemi": 10342,
+    "nursingHomePrivate": 12167,
+    "inHomeCare": 6101
+  },
+  "GA": {
+    "name": "Georgia",
+    "assistedLiving": 5300,
+    "nursingHomeSemi": 8821,
+    "nursingHomePrivate": 9429,
+    "inHomeCare": 6101
+  },
+  "HI": {
+    "name": "Hawaii",
+    "assistedLiving": 12096,
+    "nursingHomeSemi": 15473,
+    "nursingHomePrivate": 16395,
+    "inHomeCare": 7817
+  },
+  "ID": {
+    "name": "Idaho",
+    "assistedLiving": 5175,
+    "nursingHomeSemi": 10494,
+    "nursingHomePrivate": 12167,
+    "inHomeCare": 7341
+  },
+  "IL": {
+    "name": "Illinois",
+    "assistedLiving": 6219,
+    "nursingHomeSemi": 8304,
+    "nursingHomePrivate": 9216,
+    "inHomeCare": 6864
+  },
+  "IN": {
+    "name": "Indiana",
+    "assistedLiving": 5639,
+    "nursingHomeSemi": 8942,
+    "nursingHomePrivate": 10326,
+    "inHomeCare": 6673
+  },
+  "IA": {
+    "name": "Iowa",
+    "assistedLiving": 5380,
+    "nursingHomeSemi": 9277,
+    "nursingHomePrivate": 10038,
+    "inHomeCare": 7836
+  },
+  "KS": {
+    "name": "Kansas",
+    "assistedLiving": 5975,
+    "nursingHomeSemi": 8669,
+    "nursingHomePrivate": 9064,
+    "inHomeCare": 6435
+  },
+  "KY": {
+    "name": "Kentucky",
+    "assistedLiving": 5528,
+    "nursingHomeSemi": 9718,
+    "nursingHomePrivate": 11254,
+    "inHomeCare": 6197
+  },
+  "LA": {
+    "name": "Louisiana",
+    "assistedLiving": 5162,
+    "nursingHomeSemi": 7604,
+    "nursingHomePrivate": 8076,
+    "inHomeCare": 4957
+  },
+  "ME": {
+    "name": "Maine",
+    "assistedLiving": 8205,
+    "nursingHomeSemi": 13976,
+    "nursingHomePrivate": 14904,
+    "inHomeCare": 8485
+  },
+  "MD": {
+    "name": "Maryland",
+    "assistedLiving": 7172,
+    "nursingHomeSemi": 12927,
+    "nursingHomePrivate": 14448,
+    "inHomeCare": 6673
+  },
+  "MA": {
+    "name": "Massachusetts",
+    "assistedLiving": 9600,
+    "nursingHomeSemi": 14448,
+    "nursingHomePrivate": 15817,
+    "inHomeCare": 7627
+  },
+  "MI": {
+    "name": "Michigan",
+    "assistedLiving": 5818,
+    "nursingHomeSemi": 11254,
+    "nursingHomePrivate": 11969,
+    "inHomeCare": 6626
+  },
+  "MN": {
+    "name": "Minnesota",
+    "assistedLiving": 6572,
+    "nursingHomeSemi": 10646,
+    "nursingHomePrivate": 13870,
+    "inHomeCare": 8389
+  },
+  "MS": {
+    "name": "Mississippi",
+    "assistedLiving": 4369,
+    "nursingHomeSemi": 9581,
+    "nursingHomePrivate": 9885,
+    "inHomeCare": 4576
+  },
+  "MO": {
+    "name": "Missouri",
+    "assistedLiving": 5400,
+    "nursingHomeSemi": 6741,
+    "nursingHomePrivate": 7604,
+    "inHomeCare": 6292
+  },
+  "MT": {
+    "name": "Montana",
+    "assistedLiving": 6075,
+    "nursingHomeSemi": 8973,
+    "nursingHomePrivate": 9581,
+    "inHomeCare": 7245
+  },
+  "NE": {
+    "name": "Nebraska",
+    "assistedLiving": 6480,
+    "nursingHomeSemi": 8377,
+    "nursingHomePrivate": 9216,
+    "inHomeCare": 6864
+  },
+  "NV": {
+    "name": "Nevada",
+    "assistedLiving": 6241,
+    "nursingHomeSemi": 11786,
+    "nursingHomePrivate": 14463,
+    "inHomeCare": 7055
+  },
+  "NH": {
+    "name": "New Hampshire",
+    "assistedLiving": 8025,
+    "nursingHomeSemi": 12243,
+    "nursingHomePrivate": 13444,
+    "inHomeCare": 7627
+  },
+  "NJ": {
+    "name": "New Jersey",
+    "assistedLiving": 8710,
+    "nursingHomeSemi": 12775,
+    "nursingHomePrivate": 14448,
+    "inHomeCare": 7245
+  },
+  "NM": {
+    "name": "New Mexico",
+    "assistedLiving": 5950,
+    "nursingHomeSemi": 9125,
+    "nursingHomePrivate": 10633,
+    "inHomeCare": 5720
+  },
+  "NY": {
+    "name": "New York",
+    "assistedLiving": 7110,
+    "nursingHomeSemi": 15528,
+    "nursingHomePrivate": 16729,
+    "inHomeCare": 6673
+  },
+  "NC": {
+    "name": "North Carolina",
+    "assistedLiving": 6496,
+    "nursingHomeSemi": 9733,
+    "nursingHomePrivate": 10798,
+    "inHomeCare": 5720
+  },
+  "ND": {
+    "name": "North Dakota",
+    "assistedLiving": 4729,
+    "nursingHomeSemi": 11528,
+    "nursingHomePrivate": 12304,
+    "inHomeCare": 6483
+  },
+  "OH": {
+    "name": "Ohio",
+    "assistedLiving": 6102,
+    "nursingHomeSemi": 9186,
+    "nursingHomePrivate": 10389,
+    "inHomeCare": 6483
+  },
+  "OK": {
+    "name": "Oklahoma",
+    "assistedLiving": 6150,
+    "nursingHomeSemi": 7026,
+    "nursingHomePrivate": 7756,
+    "inHomeCare": 6292
+  },
+  "OR": {
+    "name": "Oregon",
+    "assistedLiving": 6874,
+    "nursingHomeSemi": 16760,
+    "nursingHomePrivate": 18448,
+    "inHomeCare": 7627
+  },
+  "PA": {
+    "name": "Pennsylvania",
+    "assistedLiving": 6350,
+    "nursingHomeSemi": 11954,
+    "nursingHomePrivate": 13688,
+    "inHomeCare": 6483
+  },
+  "RI": {
+    "name": "Rhode Island",
+    "assistedLiving": 7780,
+    "nursingHomeSemi": 12106,
+    "nursingHomePrivate": 13383,
+    "inHomeCare": 7627
+  },
+  "SC": {
+    "name": "South Carolina",
+    "assistedLiving": 5350,
+    "nursingHomeSemi": 9034,
+    "nursingHomePrivate": 9612,
+    "inHomeCare": 5982
+  },
+  "SD": {
+    "name": "South Dakota",
+    "assistedLiving": 4900,
+    "nursingHomeSemi": 9444,
+    "nursingHomePrivate": 10190,
+    "inHomeCare": 8437
+  },
+  "TN": {
+    "name": "Tennessee",
+    "assistedLiving": 5845,
+    "nursingHomeSemi": 9429,
+    "nursingHomePrivate": 10038,
+    "inHomeCare": 5911
+  },
+  "TX": {
+    "name": "Texas",
+    "assistedLiving": 5666,
+    "nursingHomeSemi": 5627,
+    "nursingHomePrivate": 7604,
+    "inHomeCare": 5720
+  },
+  "UT": {
+    "name": "Utah",
+    "assistedLiving": 5475,
+    "nursingHomeSemi": 8669,
+    "nursingHomePrivate": 10646,
+    "inHomeCare": 7484
+  },
+  "VT": {
+    "name": "Vermont",
+    "assistedLiving": 8597,
+    "nursingHomeSemi": 14113,
+    "nursingHomePrivate": 15528,
+    "inHomeCare": 8580
+  },
+  "VA": {
+    "name": "Virginia",
+    "assistedLiving": 6945,
+    "nursingHomeSemi": 10250,
+    "nursingHomePrivate": 11680,
+    "inHomeCare": 6673
+  },
+  "WA": {
+    "name": "Washington",
+    "assistedLiving": 7600,
+    "nursingHomeSemi": 13155,
+    "nursingHomePrivate": 15969,
+    "inHomeCare": 8580
+  },
+  "WV": {
+    "name": "West Virginia",
+    "assistedLiving": 6340,
+    "nursingHomeSemi": 12836,
+    "nursingHomePrivate": 13262,
+    "inHomeCare": 5720
+  },
+  "WI": {
+    "name": "Wisconsin",
+    "assistedLiving": 6540,
+    "nursingHomeSemi": 10646,
+    "nursingHomePrivate": 12319,
+    "inHomeCare": 6912
+  },
+  "WY": {
+    "name": "Wyoming",
+    "assistedLiving": 5325,
+    "nursingHomeSemi": 9916,
+    "nursingHomePrivate": 10923,
+    "inHomeCare": 8771
+  },
+  "DC": {
+    "name": "Washington D.C.",
+    "assistedLiving": null,
+    "nursingHomeSemi": null,
+    "nursingHomePrivate": null,
+    "inHomeCare": null
+  }
+}
