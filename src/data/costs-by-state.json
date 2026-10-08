@@ -355,12 +355,5 @@
     "nursingHomeSemi": 9916,
     "nursingHomePrivate": 10923,
     "inHomeCare": 8771
-  },
-  "DC": {
-    "name": "Washington D.C.",
-    "assistedLiving": null,
-    "nursingHomeSemi": null,
-    "nursingHomePrivate": null,
-    "inHomeCare": null
   }
 }

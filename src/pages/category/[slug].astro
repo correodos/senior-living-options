@@ -83,6 +83,8 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
     )}
   </section>
 
+  <div style="height: var(--sl-space-16); background-color: var(--sl-color-bg);"></div>
+
   {category.slug === 'senior-care-costs' && (
     <section class="u-container u-py-16 u-bg-primary-light u-mb-16">
       <StateSelector
@@ -92,34 +94,37 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
     </section>
   )}
 
-  <section class="u-container u-py-16 u-bg-primary-light" aria-labelledby="related-heading">
-    <h2 id="related-heading" class="u-text-center u-mb-8">
-      Explore Other Categories
-    </h2>
-    <div class="c-grid c-grid--2 c-grid--3">
-      {getAllCategories()
-        .filter((c) => c.slug !== category.slug)
-        .map((cat) => (
-          <a
-            href={`/category/${cat.slug}/`}
-            class="c-card u-transition"
-            style={{ borderColor: `${cat.color}40` }}
-          >
-            <div class="c-card__content u-text-center">
-              <span
-                class="u-inline-flex u-items-center u-justify-center u-mb-4"
-                style="width: 64px; height: 64px; border-radius: var(--sl-radius-xl); background-color: `${cat.color}15`; color: {cat.color}; font-size: 2rem;"
-              >
-                {cat.icon}
-              </span>
-              <h3 class="c-card__title u-mb-2">{cat.label}</h3>
-              <p class="c-card__excerpt u-mb-4">{cat.description}</p>
-              <Button variant="outline" size="sm">
-                View guides →
-              </Button>
-            </div>
-          </a>
-        ))}
+  <div style="height: var(--sl-space-16); background-color: var(--sl-color-bg);"></div>
+  <section class="u-py-16 u-bg-primary-light" aria-labelledby="related-heading">
+    <div class="u-container">
+      <h2 id="related-heading" class="u-text-center u-mb-8">
+        Explore Other Categories
+      </h2>
+      <div class="c-grid c-grid--2 c-grid--3">
+        {getAllCategories()
+          .filter((c) => c.slug !== category.slug)
+          .map((cat) => (
+            <a
+              href={`/category/${cat.slug}/`}
+              class="c-card u-transition"
+              style={{ borderColor: `${cat.color}40` }}
+            >
+              <div class="c-card__content u-text-center">
+                <span
+                  class="u-inline-flex u-items-center u-justify-center u-mb-4"
+                  style="width: 64px; height: 64px; border-radius: var(--sl-radius-xl); background-color: `${cat.color}15`; color: {cat.color}; font-size: 2rem;"
+                >
+                  {cat.icon}
+                </span>
+                <h3 class="c-card__title u-mb-2">{cat.label}</h3>
+                <p class="c-card__excerpt u-mb-4">{cat.description}</p>
+                <Button variant="outline" size="sm">
+                  View guides →
+                </Button>
+              </div>
+            </a>
+          ))}
+      </div>
     </div>
   </section>
 </CategoryLayout>

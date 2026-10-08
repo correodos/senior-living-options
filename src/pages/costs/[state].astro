@@ -61,17 +61,61 @@ function diffColor(val: number | null, national: number) {
   return val > national ? 'var(--sl-color-error, #c0392b)' : 'var(--sl-color-success, #1a7a4a)';
 }
 
+const surveyYear = (costsByStateRaw as any)._meta?.published?.split(' ')[1] ?? '2025';
+
+function buildCanonical(code: string) {
+  const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+  return `${SITE_URL}/costs/${code.toLowerCase()}/`;
+}
+
+function buildJsonLd(stateName: string, code: string) {
+  const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `Senior Care Costs in ${stateName} (2025)`,
+    description: `Median monthly costs for assisted living, nursing homes, and in-home care in ${stateName} in 2025.`,
+    url: `${SITE_URL}/costs/${code.toLowerCase()}/`,
+    datePublished: '2026-03-01',
+    dateModified: '2026-03-01',
+    author: {
+      '@type': 'Organization',
+      name: 'Senior Living Options',
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Senior Living Options',
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/images/logo.webp`,
+      },
+    },
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Senior Living Options',
+      url: SITE_URL,
+    },
+  };
+}
+
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'Costs & Finance', href: '/category/senior-care-costs/' },
   { label: data.name },
 ];
 
-const title = `Senior Care Costs in ${data.name} (2025) | Senior Living Options`;
-const description = `Median monthly costs for assisted living, nursing homes, and in-home care in ${data.name} in 2025, compared to national averages. Source: CareScout/Genworth Cost of Care Survey.`;
+const title = `Senior Care Costs in ${data.name} (${surveyYear}) | Senior Living Options`;
+const description = `Median monthly costs for assisted living, nursing homes, and in-home care in ${data.name} in ${surveyYear}, compared to national averages. Source: CareScout/Genworth Cost of Care Survey.`;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={buildCanonical(code)}
+  jsonLd={buildJsonLd(data.name, code)}
+>
   <SkipLink />
   <Header />
   <main id="main-content" role="main">
@@ -82,11 +126,7 @@ const description = `Median monthly costs for assisted living, nursing homes, an
       <p class="c-eyebrow">Senior Care Costs 2025</p>
       <h1 style="font-family: var(--sl-font-serif);">Senior Care Costs in {data.name}</h1>
       <p class="u-text-muted u-fs-lg u-mt-2">
-        Median monthly costs compared to the national average. Source:{' '}
-        <a href="https://www.carescout.com/cost-of-care" target="_blank" rel="noopener">
-          CareScout/Genworth Cost of Care Survey 2025
-        </a>
-        .
+        Median monthly costs compared to the national average.
       </p>
     </header>
     <section class="u-container u-pb-16">
@@ -168,15 +208,7 @@ const description = `Median monthly costs for assisted living, nursing homes, an
           </div>
         </div>
       </div>
-      <div class="u-mt-10 u-p-6 u-bg-primary-light u-rounded-lg">
-        <p class="u-fs-sm u-text-muted">
-          All figures are monthly medians for {data.name} from the CareScout/Genworth Cost of Care
-          Survey 2025 (data collected July–November 2025, published March 2026). Assisted living
-          reflects a private one-bedroom unit. In-home care reflects a non-medical caregiver at 44
-          hours/week. Actual costs vary by city, facility, and level of care needed.
-        </p>
-      </div>
-      <div class="u-mt-10 u-flex u-gap-4 u-flex-wrap">
+      <div class="u-mt-10 u-flex u-gap-4 u-flex-wrap" style="padding-top: var(--sl-space-8);">
         <Button
           href="/article/senior-care-costs/senior-care-costs-complete-guide/"
           variant="primary"
@@ -189,6 +221,30 @@ const description = `Median monthly costs for assisted living, nursing homes, an
         </Button>
       </div>
     </section>
+    <div style="height: var(--sl-space-8); background-color: var(--sl-color-bg);"></div>
+    <section
+      class="u-container u-py-10 u-bg-primary-light u-rounded-lg"
+      aria-labelledby="methodology-heading"
+    >
+      <h2 id="methodology-heading" class="u-sr-only">
+        Methodology & Sources
+      </h2>
+      <div class="u-flex u-flex-col u-gap-4 u-fs-sm u-text-muted">
+        <p>
+          <strong>Data source:</strong> CareScout/Genworth Cost of Care Survey 2025 (
+          <a href="https://www.carescout.com/cost-of-care" target="_blank" rel="noopener">
+            carescout.com/cost-of-care
+          </a>
+          )
+        </p>
+        <p>
+          <strong>Data collection:</strong> July–November 2025 | <strong>Published:</strong> March
+          2026
+        </p>
+      </div>
+    </section>
+    <div style="height: var(--sl-space-8); background-color: var(--sl-color-bg);"></div>
+    <div style="height: var(--sl-space-16); background-color: var(--sl-color-bg);"></div>
     <section class="u-container u-py-16 u-bg-primary-light">
       <StateSelector
         label="Compare another state"

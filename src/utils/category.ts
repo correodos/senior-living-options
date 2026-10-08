@@ -1,7 +1,6 @@
 export interface CategoryInfo {
   slug: string;
   label: string;
-  labelEn: string;
   description: string;
   descriptionShort: string;
   color: string;
@@ -14,7 +13,6 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
   'assisted-living': {
     slug: 'assisted-living',
     label: 'Assisted Living',
-    labelEn: 'Assisted Living',
     description:
       'Residential communities combining housing, support services, and personalized care for older adults who need help with daily activities but do not require constant medical attention.',
     descriptionShort:
@@ -27,7 +25,6 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
   'memory-care': {
     slug: 'memory-care',
     label: 'Memory Care',
-    labelEn: 'Memory Care',
     description:
       "Specialized units within assisted living or nursing home communities, designed specifically for people with Alzheimer's, dementia, or other memory disorders.",
     descriptionShort: "Specialized care for Alzheimer's and dementia in secure environments.",
@@ -39,7 +36,6 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
   'nursing-homes': {
     slug: 'nursing-homes',
     label: 'Nursing Homes',
-    labelEn: 'Nursing Homes',
     description:
       'Facilities providing 24/7 skilled nursing care, rehabilitation, and medical care for older adults with complex health conditions.',
     descriptionShort: '24/7 skilled nursing and medical care for complex health conditions.',
@@ -51,7 +47,6 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
   'in-home-care': {
     slug: 'in-home-care',
     label: 'In-Home Care',
-    labelEn: 'In-Home Care',
     description:
       "Personal care, companionship, and medical assistance services provided in the older adult's home, allowing them to age in place.",
     descriptionShort: 'Care services at home so seniors can age in place comfortably.',
@@ -63,7 +58,6 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
   'senior-care-costs': {
     slug: 'senior-care-costs',
     label: 'Costs & Finance',
-    labelEn: 'Costs & Finance',
     description:
       'Detailed information on senior care costs by state, financing options, Medicare, Medicaid, long-term care insurance, and veterans benefits.',
     descriptionShort: 'State-by-state costs, payment options, Medicare, Medicaid, VA benefits.',
@@ -75,7 +69,6 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
   'caregiver-resources': {
     slug: 'caregiver-resources',
     label: 'Caregiver Help',
-    labelEn: 'Caregiver Help',
     description:
       'Resources, guides, and support for family caregivers: burnout prevention, daily care checklists, respite resources, legal and financial aspects.',
     descriptionShort:
