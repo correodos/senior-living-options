@@ -90,24 +90,8 @@ export function getAllCategories(): CategoryInfo[] {
   return Object.values(CATEGORIES);
 }
 
-export function getCategoryColor(slug: string): string {
-  return CATEGORIES[slug as CategorySlug]?.color || 'var(--sl-color-primary)';
-}
-
-export function getCategoryLabel(slug: string): string {
-  return CATEGORIES[slug as CategorySlug]?.label || slug;
-}
-
 export function getCategoryPillarSlug(slug: string): string | undefined {
   return CATEGORIES[slug as CategorySlug]?.pillarSlug;
-}
-
-export function getCategoryIcon(slug: string): string {
-  return CATEGORIES[slug as CategorySlug]?.icon || '📄';
-}
-
-export function getCategoryBgColor(slug: string): string {
-  return CATEGORIES[slug as CategorySlug]?.bgColor || 'var(--sl-color-primary-light)';
 }
 
 export function getCategoryDescriptionShort(slug: string): string {

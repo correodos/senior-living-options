@@ -53,7 +53,11 @@ const seo = buildSearchSEOMeta(query);
       return;
     }
 
-    const terms = query.toLowerCase().split(' ').filter(Boolean);
+    const terms = query
+      .toLowerCase()
+      .split(' ')
+      .filter(Boolean)
+      .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
     const results = searchIndex
       .map((item) => {
         let score = 0;
@@ -80,7 +84,7 @@ const seo = buildSearchSEOMeta(query);
       container.innerHTML = `
         <div class="u-text-center u-py-12 u-bg-primary-light u-rounded-lg">
           <p class="u-text-muted u-mb-4">No results found for "<strong>${escapeHtml(query)}</strong>"</p>
-          <p class="u-fs-sm u-text-light">Try more general terms or browse our <a href="/category/" class="u-text-primary">main categories</a>.</p>
+          <p class="u-fs-sm u-text-light">Try more general terms or browse our <a href="/" class="u-text-primary">main categories</a> on the home page.</p>
         </div>
       `;
       return;
@@ -96,7 +100,7 @@ const seo = buildSearchSEOMeta(query);
     };
 
     container.innerHTML = `
-      <p class="u-text-muted u-mb-6">{results.length} result{s} found</p>
+      <p class="u-text-muted u-mb-6">${results.length} result${results.length === 1 ? '' : 's'} found</p>
       <div class="c-grid c-grid--2" style="gap: var(--sl-space-4);">
         ${results
           .map((item) => {

@@ -19,7 +19,7 @@ export interface SEOMeta {
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
 const SITE_NAME = import.meta.env.PUBLIC_SITE_NAME || 'Senior Living Options';
-const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.webp`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.jpg`;
 
 export function generateArticleJsonLd(entry: CollectionEntry<'entries'>): Record<string, unknown> {
   const { data } = entry;
@@ -189,6 +189,57 @@ export function buildSearchSEOMeta(query: string): SEOMeta {
     jsonLd: null,
     robots: 'noindex,follow',
   };
+}
+
+function htmlToText(html: string): string {
+  return html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#(?:39|x27);/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+export function extractFAQsFromHtml(html: string): Array<{ question: string; answer: string }> {
+  const section = html.match(
+    /<h2[^>]*>\s*Frequently Asked Questions\s*<\/h2>([\s\S]*?)(?=<h2[\s>]|$)/i
+  );
+  if (!section) return [];
+
+  const faqs: Array<{ question: string; answer: string }> = [];
+  const itemRegex = /<h3[^>]*>([\s\S]*?)<\/h3>([\s\S]*?)(?=<h3[\s>]|$)/g;
+  let match;
+  while ((match = itemRegex.exec(section[1])) !== null) {
+    const question = htmlToText(match[1]);
+    const answer = htmlToText(match[2]);
+    if (question && answer) faqs.push({ question, answer });
+  }
+  return faqs;
+}
+
+export function breadcrumbsToJsonLd(
+  crumbs: Array<{ label: string; href?: string }>,
+  pageUrl: string
+): Record<string, unknown> {
+  return generateBreadcrumbJsonLd(
+    crumbs.map((c) => ({ name: c.label, url: c.href ? `${SITE_URL}${c.href}` : pageUrl }))
+  );
+}
+
+export function combineJsonLd(
+  ...items: Array<Record<string, unknown> | null | undefined>
+): Record<string, unknown> {
+  const graph = items
+    .filter((item): item is Record<string, unknown> => Boolean(item))
+    .map((item) => {
+      const { '@context': _context, ...rest } = item;
+      return rest;
+    });
+  return { '@context': 'https://schema.org', '@graph': graph };
 }
 
 export function generateFAQPageJsonLd(

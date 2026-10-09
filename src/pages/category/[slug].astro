@@ -50,13 +50,13 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
   </header>
 
   {pillarEntries.length > 0 && (
-    <section class="u-container u-mb-16" aria-labelledby="pillars-heading">
+    <section class="u-container u-mb-24" aria-labelledby="pillars-heading">
       <h2 id="pillars-heading" class="u-sr-only">
         Core Guides
       </h2>
       <div class="c-grid c-grid--2 c-grid--3">
-        {pillarEntries.map((entry) => (
-          <Card entry={entry} featured />
+        {pillarEntries.map((entry, index) => (
+          <Card entry={entry} featured priority={index < 3} />
         ))}
       </div>
     </section>

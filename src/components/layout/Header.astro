@@ -157,14 +157,6 @@ const categories = getAllCategories();
 </style>
 
 <script>
-  // Global theme init — runs on every page before first paint
-  (function () {
-    const saved = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = saved || (prefersDark ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme);
-  })();
-
   const toggle = document.querySelector('[data-mobile-toggle]');
   const menu = document.getElementById('mobile-menu');
 

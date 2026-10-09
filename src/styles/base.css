@@ -86,7 +86,6 @@
 
   p {
     margin: 0 0 var(--sl-space-4);
-    max-width: 75ch;
   }
 
   a {

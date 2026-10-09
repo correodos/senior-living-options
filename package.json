@@ -12,25 +12,20 @@
     "lint:fix": "eslint src --ext .astro,.ts,.js --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "validate:content": "tsx scripts/validate-content.ts",
-    "prepare": "husky install"
+    "validate:content": "tsx scripts/validate-content.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.5",
-    "marked": "^18.0.14",
-    "typescript": "^6.0.3",
-    "zod": "^4.6.5"
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
     "@typescript-eslint/eslint-plugin": "^8.70.1",
     "@typescript-eslint/parser": "^8.70.1",
     "eslint": "^10.11.0",
-    "eslint-plugin-astro": "^1.2.0",
-    "husky": "^9.1.6",
-    "lint-staged": "^15.2.10",
+    "eslint-plugin-astro": "^1.7.0",
     "prettier": "^3.9.9",
     "prettier-plugin-astro": "^1.1.0",
     "terser": "^5.51.2",

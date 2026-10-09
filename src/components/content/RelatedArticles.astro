@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import Card from './Card.astro';
+
+interface Props {
+  currentId: string;
+  category: string;
+  relatedIds?: string[];
+  limit?: number;
+}
+
+const { currentId, category, relatedIds = [], limit = 3 } = Astro.props;
+
+const all = (await getCollection('entries', ({ data }) => !data.noIndex)).filter(
+  (entry) => entry.id !== currentId
+);
+
+const byId = new Map(all.map((entry) => [entry.id, entry]));
+const explicit = relatedIds.map((id) => byId.get(id)).filter((entry) => entry !== undefined);
+
+const newestFirst = (a: (typeof all)[number], b: (typeof all)[number]) =>
+  b.data.publishDate.getTime() - a.data.publishDate.getTime();
+
+const sameCategory = all
+  .filter((entry) => entry.data.category === category)
+  .sort((a, b) => Number(b.data.isPillar) - Number(a.data.isPillar) || newestFirst(a, b));
+
+const otherPillars = all
+  .filter((entry) => entry.data.category !== category && entry.data.isPillar)
+  .sort(newestFirst);
+
+const seen = new Set<string>();
+const related = [...explicit, ...sameCategory, ...otherPillars]
+  .filter((entry) => !seen.has(entry.id) && seen.add(entry.id))
+  .slice(0, limit);
+---
+
+{related.length > 0 && (
+  <section class="c-related" aria-labelledby="related-heading">
+    <h2 id="related-heading" class="c-related__title">
+      Related Guides
+    </h2>
+    <div class="c-related__grid">
+      {related.map((entry) => (
+        <Card entry={entry} />
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .c-related {
+    margin-top: var(--sl-space-16);
+  }
+  .c-related__title {
+    font-size: var(--sl-fs-2xl);
+    margin-bottom: var(--sl-space-6);
+  }
+  .c-related__grid {
+    display: grid;
+    gap: var(--sl-space-6);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+</style>

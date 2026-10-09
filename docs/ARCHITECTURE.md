@@ -155,13 +155,10 @@
 │   │       └── caregiver-resources/
 │   ├── utils/              # Helpers puros
 │   │   ├── seo.ts          # Meta tags, JSON-LD generators
-│   │   ├── date.ts         # Formateo fechas
-│   │   ├── markdown.ts     # Procesamiento contenido
 │   │   └── category.ts     # Helpers de categoría (labels, colors)
 │   └── types/              # Tipos globales (env.d.ts, content.d.ts)
 ├── scripts/                # Scripts de build/utilidades Node
-│   ├── validate-content.ts
-│   └── generate-search-index.ts
+│   └── validate-content.ts
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml      # CI pipeline (validación + build verification)
@@ -192,8 +189,7 @@
   "lint:fix": "eslint src --ext .astro,.ts,.js --fix",
   "format": "prettier --write .",
   "format:check": "prettier --check .",
-  "validate:content": "tsx scripts/validate-content.ts",
-  "prepare": "husky install"
+  "validate:content": "tsx scripts/validate-content.ts"
 }
 ```
 

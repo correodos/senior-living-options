@@ -6,7 +6,15 @@ import SkipLink from '../components/layout/SkipLink.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 import ArticleMeta from '../components/content/ArticleMeta.astro';
 import TableOfContents from '../components/content/TableOfContents.astro';
-import { getCategoryInfo } from '../utils/category';
+import RelatedArticles from '../components/content/RelatedArticles.astro';
+import { heroImageUrl, responsiveSrcset } from '../utils/images';
+import { getCategoryInfo, getCategoryPillarSlug } from '../utils/category';
+import {
+  breadcrumbsToJsonLd,
+  combineJsonLd,
+  extractFAQsFromHtml,
+  generateFAQPageJsonLd,
+} from '../utils/seo';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -20,18 +28,42 @@ interface Props {
   ogImage?: string;
   jsonLd?: Record<string, unknown> | null;
 }
-const { title, description, data, content, tocHeadings, ...rest } = Astro.props;
+const { title, description, data, content, tocHeadings, slug, canonical, jsonLd, ...rest } =
+  Astro.props;
 
 const categoryInfo = getCategoryInfo(data.category);
+const pillarSlug = getCategoryPillarSlug(data.category);
+const heroImage = heroImageUrl(data.image);
+const heroSrcset = heroImage ? responsiveSrcset(heroImage) : undefined;
+const heroAlt = data.imageAlt || data.title;
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: categoryInfo?.label || data.category, href: `/category/${data.category}/` },
   { label: data.title },
 ];
+
+const lastReviewedLabel = data.lastReviewed.toLocaleDateString('en-US', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+const faqs = extractFAQsFromHtml(content);
+const combinedJsonLd = combineJsonLd(
+  jsonLd,
+  breadcrumbsToJsonLd(breadcrumbs, canonical || Astro.url.href),
+  faqs.length > 0 ? generateFAQPageJsonLd(faqs) : null
+);
 ---
 
-<BaseLayout title={title} description={description} {...rest}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLd={combinedJsonLd}
+  {...rest}
+>
   <SkipLink />
+  <div class="c-reading-progress" id="reading-progress" aria-hidden="true"></div>
   <Header />
   <main id="main-content" role="main">
     <div class="u-container u-py-6">
@@ -39,17 +71,86 @@ const breadcrumbs = [
     </div>
 
     <div class="u-container c-article-layout u-pb-16">
-      <article class="c-article-body">
-        <header class="u-mb-8">
-          {data.isPillar && (
-            <span class="c-badge c-badge--pillar u-mb-4 u-inline-block">Pillar Article</span>
-          )}
-          <h1 class="u-mb-4">{data.title}</h1>
-          <ArticleMeta data={data} />
-        </header>
+      <div class="c-article-main">
+        <article class="c-article-body">
+          <header class="u-mb-8">
+            <h1 class="u-mb-4">{data.title}</h1>
+            <ArticleMeta data={data} />
+            {heroImage && (
+              <img
+                src={heroImage}
+                srcset={heroSrcset}
+                sizes={heroSrcset ? '(min-width: 1024px) 860px, 100vw' : undefined}
+                fetchpriority="high"
+                alt={heroAlt}
+                width="1200"
+                height="675"
+                class="c-article-hero-image"
+                loading="eager"
+              />
+            )}
+          </header>
 
-        <div class="c-article-content" set:html={content} />
-      </article>
+          {tocHeadings.length > 0 && (
+            <nav class="c-article-toc-mobile lg:u-hidden" aria-label="Table of contents">
+              <details>
+                <summary class="c-article-toc-mobile__summary">
+                  In this article
+                  <span class="c-article-toc-mobile__icon" aria-hidden="true">
+                    ▾
+                  </span>
+                </summary>
+                <ul class="c-article-toc-mobile__list">
+                  {tocHeadings
+                    .filter((h) => h.level === 2)
+                    .map((h) => (
+                      <li>
+                        <a href={`#${h.slug}`} class="c-article-toc-mobile__link">
+                          ▸ {h.text}
+                        </a>
+                      </li>
+                    ))}
+                </ul>
+              </details>
+            </nav>
+          )}
+
+          <div class="c-article-content" set:html={content} />
+        </article>
+
+        <RelatedArticles
+          currentId={slug}
+          category={data.category}
+          relatedIds={data.relatedArticles}
+        />
+
+        <!-- CTA -->
+        <section
+          class="c-article-cta u-bg-primary-light u-rounded-xl u-p-8 u-mt-8"
+          aria-labelledby="cta-heading"
+        >
+          <h2 id="cta-heading" class="u-text-center u-mb-2">
+            Next Steps
+          </h2>
+          <p class="u-text-center u-text-muted u-mb-6">
+            Keep exploring resources on {categoryInfo?.label || data.category}
+          </p>
+          <div class="c-article-cta__actions">
+            <a href={`/category/${data.category}/`} class="c-btn c-btn--primary c-btn--lg">
+              {categoryInfo?.icon} All {categoryInfo?.label || 'category'} articles
+            </a>
+            {pillarSlug && (
+              <a href={`/article/${pillarSlug}/`} class="c-btn c-btn--outline c-btn--lg">
+                Complete {categoryInfo?.label} guide →
+              </a>
+            )}
+          </div>
+          <p class="u-text-center u-text-muted u-fs-sm u-mt-6">
+            Information on this page is drawn from government agencies and established nonprofit
+            organizations. Last reviewed {lastReviewedLabel}.
+          </p>
+        </section>
+      </div>
 
       {tocHeadings.length > 0 && (
         <aside class="c-article-toc u-hidden lg:u-block" aria-label="Table of contents">
@@ -58,8 +159,59 @@ const breadcrumbs = [
       )}
     </div>
   </main>
+  <button
+    class="c-back-to-top"
+    id="back-to-top"
+    aria-label="Back to top"
+    onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+  >
+    ↑
+  </button>
   <Footer />
 </BaseLayout>
+
+<script>
+  function updateScrollableTables() {
+    document.querySelectorAll<HTMLElement>('.c-article-content table').forEach((table) => {
+      if (table.scrollWidth > table.clientWidth) {
+        table.setAttribute('tabindex', '0');
+      } else {
+        table.removeAttribute('tabindex');
+      }
+    });
+  }
+  updateScrollableTables();
+  window.addEventListener('resize', updateScrollableTables, { passive: true });
+
+  const bar = document.getElementById('reading-progress') as HTMLElement;
+  const article = document.querySelector('.c-article-body') as HTMLElement;
+  if (bar && article) {
+    const updateProgress = () => {
+      const articleTop = article.offsetTop;
+      const articleHeight = article.offsetHeight;
+      const scrolled = window.scrollY - articleTop;
+      const progress = Math.min(Math.max((scrolled / articleHeight) * 100, 0), 100);
+      bar.style.width = `${progress}%`;
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  const backToTop = document.getElementById('back-to-top') as HTMLElement;
+  if (backToTop) {
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (window.scrollY > 400) {
+          backToTop.classList.add('c-back-to-top--visible');
+        } else {
+          backToTop.classList.remove('c-back-to-top--visible');
+        }
+      },
+      { passive: true }
+    );
+  }
+</script>
 
 <style>
   .c-article-layout {
@@ -68,7 +220,7 @@ const breadcrumbs = [
     align-items: flex-start;
   }
 
-  .c-article-body {
+  .c-article-main {
     flex: 1;
     min-width: 0;
   }
@@ -120,6 +272,7 @@ const breadcrumbs = [
   }
 
   .c-article-content :global(a) {
+    overflow-wrap: anywhere;
     color: var(--sl-color-primary);
     text-decoration: underline;
     text-underline-offset: 2px;
@@ -152,6 +305,11 @@ const breadcrumbs = [
     display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .c-article-content :global(table:focus-visible) {
+    outline: 2px solid var(--sl-color-border-focus);
+    outline-offset: 2px;
   }
 
   .c-article-content :global(th),
@@ -197,6 +355,7 @@ const breadcrumbs = [
   @media (max-width: 1023px) {
     .c-article-layout {
       flex-direction: column;
+      align-items: stretch;
     }
 
     .c-article-toc {
@@ -224,6 +383,129 @@ const breadcrumbs = [
     .c-article-content :global(h3) {
       font-size: var(--sl-fs-lg);
       margin-top: var(--sl-space-6);
+    }
+  }
+
+  .c-reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--sl-color-primary);
+    width: 0%;
+    z-index: 201;
+    transition: width 0.1s linear;
+  }
+
+  .c-back-to-top {
+    position: fixed;
+    bottom: var(--sl-space-6);
+    right: var(--sl-space-6);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--sl-color-primary);
+    color: var(--sl-color-primary-text);
+    border: none;
+    font-size: var(--sl-fs-xl);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all var(--sl-transition-normal);
+    box-shadow: var(--sl-shadow-lg);
+    z-index: 999;
+  }
+  .c-back-to-top--visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .c-back-to-top:hover {
+    background: var(--sl-color-primary-hover);
+    transform: translateY(-2px);
+  }
+  .c-back-to-top:focus-visible {
+    outline: 2px solid var(--sl-color-border-focus);
+    outline-offset: 2px;
+  }
+
+  .c-article-cta__actions {
+    display: flex;
+    gap: var(--sl-space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 639px) {
+    .c-article-cta__actions {
+      flex-direction: column;
+    }
+    .c-article-cta__actions .c-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .c-article-hero-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: var(--sl-radius-lg);
+    margin-top: var(--sl-space-6);
+  }
+  @media (max-width: 639px) {
+    .c-article-hero-image {
+      max-height: 220px;
+      border-radius: var(--sl-radius-md);
+    }
+  }
+
+  .c-article-toc-mobile {
+    display: none;
+    margin-bottom: var(--sl-space-8);
+    border: 1px solid var(--sl-color-border);
+    border-radius: var(--sl-radius-lg);
+    overflow: hidden;
+  }
+  .c-article-toc-mobile__summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sl-space-4) var(--sl-space-5);
+    font-weight: 600;
+    cursor: pointer;
+    background-color: var(--sl-color-bg-alt);
+    list-style: none;
+  }
+  .c-article-toc-mobile__summary::-webkit-details-marker {
+    display: none;
+  }
+  .c-article-toc-mobile__icon {
+    font-size: var(--sl-fs-lg);
+    transition: transform var(--sl-transition-fast);
+  }
+  details[open] .c-article-toc-mobile__icon {
+    transform: rotate(180deg);
+  }
+  .c-article-toc-mobile__list {
+    padding: var(--sl-space-3) var(--sl-space-5) var(--sl-space-4);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sl-space-2);
+  }
+  .c-article-toc-mobile__link {
+    color: var(--sl-color-primary);
+    text-decoration: none;
+    font-size: var(--sl-fs-sm);
+    line-height: var(--sl-lh-relaxed);
+  }
+  .c-article-toc-mobile__link:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 1023px) {
+    .c-article-toc-mobile {
+      display: block;
     }
   }
 </style>

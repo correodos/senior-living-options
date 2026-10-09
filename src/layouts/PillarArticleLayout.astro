@@ -4,9 +4,15 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import SkipLink from '../components/layout/SkipLink.astro';
 import ArticleMeta from '../components/content/ArticleMeta.astro';
-import TableOfContents from '../components/content/TableOfContents.astro';
+import RelatedArticles from '../components/content/RelatedArticles.astro';
+import { heroImageUrl, responsiveSrcset } from '../utils/images';
 import { getCategoryInfo } from '../utils/category';
-import { generateFAQPageJsonLd } from '../utils/seo';
+import {
+  breadcrumbsToJsonLd,
+  combineJsonLd,
+  extractFAQsFromHtml,
+  generateFAQPageJsonLd,
+} from '../utils/seo';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -20,7 +26,8 @@ interface Props {
   ogImage?: string;
   jsonLd?: Record<string, unknown> | null;
 }
-const { title, description, data, content, tocHeadings, canonical, jsonLd, ...rest } = Astro.props;
+const { title, description, data, content, tocHeadings, slug, canonical, jsonLd, ...rest } =
+  Astro.props;
 
 const categoryInfo = getCategoryInfo(data.category);
 const categoryColors = {
@@ -41,58 +48,53 @@ const catColors = categoryColors[data.category as keyof typeof categoryColors] |
   icon: '📄',
 };
 
-const heroImage = data.image ? `/images/${data.image.replace(/^.*[\\/]images[\\/]/, '')}` : null;
+const heroImage = heroImageUrl(data.image);
+const heroSrcset = heroImage ? responsiveSrcset(heroImage) : undefined;
 const heroAlt = data.imageAlt || data.title;
 
-// Extract FAQs from content for FAQPage schema
-function extractFAQs(content: string): Array<{ question: string; answer: string }> {
-  const faqs: Array<{ question: string; answer: string }> = [];
-  // Match H3 headings under "Frequently Asked Questions" section
-  const faqSectionRegex = /## Frequently Asked Questions[\s\S]*?(?=## |\z)/i;
-  const faqSectionMatch = content.match(faqSectionRegex);
-  if (faqSectionMatch) {
-    const faqContent = faqSectionMatch[0];
-    const faqRegex = /### ([^#\n]+)\n([\s\S]*?)(?=### |\z)/g;
-    let match;
-    while ((match = faqRegex.exec(faqContent)) !== null) {
-      const question = match[1]
-        .trim()
-        .replace(/<a class="heading-anchor".*$/, '')
-        .trim();
-      const answer = match[2]
-        .trim()
-        .replace(/<[^>]+>/g, '') // strip HTML tags
-        .replace(/\n+/g, ' ')
-        .replace(/\s+/g, ' ')
-        .slice(0, 500); // limit length
-      if (question && answer) {
-        faqs.push({ question, answer });
-      }
-    }
-  }
-  return faqs;
-}
+const lastReviewedLabel = data.lastReviewed.toLocaleDateString('en-US', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
 
-const faqs = extractFAQs(content);
-const faqJsonLd = faqs.length > 0 ? generateFAQPageJsonLd(faqs) : null;
-
-// Combine Article JSON-LD with FAQ JSON-LD
-const combinedJsonLd = faqJsonLd
-  ? {
-      '@context': 'https://schema.org',
-      '@graph': [jsonLd, faqJsonLd],
-    }
-  : jsonLd;
+const crumbs = [
+  { label: 'Home', href: '/' },
+  { label: categoryInfo?.label || data.category, href: `/category/${data.category}/` },
+  { label: data.title },
+];
+const faqs = extractFAQsFromHtml(content);
+const combinedJsonLd = combineJsonLd(
+  jsonLd,
+  breadcrumbsToJsonLd(crumbs, canonical || Astro.url.href),
+  faqs.length > 0 ? generateFAQPageJsonLd(faqs) : null
+);
 ---
 
-<BaseLayout title={title} description={description} jsonLd={combinedJsonLd} {...rest}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  jsonLd={combinedJsonLd}
+  {...rest}
+>
   <SkipLink />
   <Header />
   <main id="main-content" role="main">
     <!-- Hero -->
-    <header class="c-pillar-hero" role="banner">
+    <header class="c-pillar-hero">
       {heroImage && (
-        <img src={heroImage} alt={heroAlt} class="c-pillar-hero__image" loading="eager" />
+        <img
+          src={heroImage}
+          srcset={heroSrcset}
+          sizes={heroSrcset ? '100vw' : undefined}
+          alt={heroAlt}
+          width="1200"
+          height="675"
+          class="c-pillar-hero__image"
+          loading="eager"
+          fetchpriority="high"
+        />
       )}
       <div class="c-pillar-hero__overlay">
         <div class="u-container c-pillar-hero__content">
@@ -130,7 +132,7 @@ const combinedJsonLd = faqJsonLd
             >
               {catColors.icon} {categoryInfo?.label || data.category}
             </span>
-            <span class="c-badge c-badge--pillar">Pillar Guide</span>
+            <span class="c-badge c-badge--pillar">Pillar Article</span>
           </div>
 
           <h1 class="c-pillar-hero__title">{data.title}</h1>
@@ -143,7 +145,7 @@ const combinedJsonLd = faqJsonLd
     <!-- Table of Contents - Inline at top of article -->
     {tocHeadings.length > 0 && (
       <nav class="c-pillar-toc u-container u-mb-12" aria-label="Table of contents">
-        <h3 class="c-pillar-toc__title">In this guide</h3>
+        <p class="c-pillar-toc__title">In this guide</p>
         <ul class="c-pillar-toc__list">
           {tocHeadings
             .filter((h) => h.level === 2)
@@ -167,6 +169,12 @@ const combinedJsonLd = faqJsonLd
         <div class="c-pillar-content" set:html={content} />
       </article>
 
+      <RelatedArticles
+        currentId={slug}
+        category={data.category}
+        relatedIds={data.relatedArticles}
+      />
+
       <!-- CTA -->
       <section
         class="c-pillar-cta u-bg-primary-light u-rounded-xl u-p-8 u-mt-8"
@@ -176,15 +184,28 @@ const combinedJsonLd = faqJsonLd
           Next Steps
         </h2>
         <div class="c-grid c-grid--2 u-gap-4 u-mb-6">
-          <a href="/category/senior-care-costs/" class="c-btn c-btn--primary c-btn--full c-btn--lg">
-            Compare Costs by State
+          <a
+            href={`/category/${data.category}/`}
+            class="c-btn c-btn--primary c-btn--full c-btn--lg"
+          >
+            All {categoryInfo?.label || 'category'} articles
           </a>
-          <a href="/category/memory-care/" class="c-btn c-btn--outline c-btn--full c-btn--lg">
-            Explore Memory Care
-          </a>
+          {data.category !== 'senior-care-costs' ? (
+            <a
+              href="/category/senior-care-costs/"
+              class="c-btn c-btn--outline c-btn--full c-btn--lg"
+            >
+              Compare Costs by State
+            </a>
+          ) : (
+            <a href="/search/" class="c-btn c-btn--outline c-btn--full c-btn--lg">
+              Search All Guides
+            </a>
+          )}
         </div>
         <p class="u-text-center u-text-muted u-fs-sm">
-          All data from government and nonprofit sources. Updated 2026.
+          Information on this page is drawn from government agencies and established nonprofit
+          organizations. Last reviewed {lastReviewedLabel}.
         </p>
       </section>
     </div>
@@ -214,11 +235,9 @@ const combinedJsonLd = faqJsonLd
   .c-pillar-hero {
     position: relative;
     z-index: 0; /* establece stacking context por debajo del header (z-index: 200) */
-    min-height: 40vh;
-    max-height: 500px;
+    min-height: min(40vh, 500px);
     display: flex;
-    align-items: flex-end;
-    padding-bottom: var(--sl-space-12);
+    align-items: stretch;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -226,8 +245,7 @@ const combinedJsonLd = faqJsonLd
 
   @media (min-width: 768px) {
     .c-pillar-hero {
-      min-height: 50vh;
-      max-height: 600px;
+      min-height: min(50vh, 600px);
     }
   }
 
@@ -241,21 +259,21 @@ const combinedJsonLd = faqJsonLd
   }
 
   .c-pillar-hero__overlay {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    flex: 1;
+    min-width: 0;
     background: linear-gradient(
       180deg,
       rgba(26, 26, 26, 0.3) 0%,
       rgba(26, 26, 26, 0.7) 50%,
       var(--sl-color-bg) 100%
     );
-    padding: var(--sl-space-8) 0;
+    padding: var(--sl-space-8) 0 var(--sl-space-12);
     z-index: 1;
   }
 
   .c-pillar-hero__content {
     color: var(--sl-color-primary-text);
-    max-width: 800px;
   }
 
   .c-pillar-hero__title {
@@ -277,7 +295,6 @@ const combinedJsonLd = faqJsonLd
     font-size: var(--sl-fs-lg);
     line-height: var(--sl-lh-relaxed);
     opacity: 1;
-    max-width: 65ch;
     margin-bottom: var(--sl-space-6);
     text-shadow: none;
     color: var(--sl-color-text-muted);
@@ -380,6 +397,10 @@ const combinedJsonLd = faqJsonLd
   }
 
   /* Tablas con scroll horizontal en mobile */
+  .c-pillar-content :global(a) {
+    overflow-wrap: anywhere;
+  }
+
   .c-pillar-content :global(table) {
     width: 100%;
     margin: var(--sl-space-8) 0;
@@ -393,6 +414,10 @@ const combinedJsonLd = faqJsonLd
   }
 
   /* Scrollbar styling */
+  .c-pillar-content :global(table:focus-visible) {
+    outline: 2px solid var(--sl-color-border-focus);
+    outline-offset: 2px;
+  }
   .c-pillar-content :global(table)::-webkit-scrollbar {
     height: 8px;
   }
@@ -790,7 +815,7 @@ const combinedJsonLd = faqJsonLd
     height: 3px;
     background: var(--sl-color-primary);
     width: 0%;
-    z-index: 199; /* por debajo del header sticky (z-index: 200) */
+    z-index: 201;
     transition: width 0.1s linear;
   }
 
@@ -877,6 +902,19 @@ const combinedJsonLd = faqJsonLd
       }
     }
   });
+
+  // Make scrollable tables reachable by keyboard
+  function updateScrollableTables() {
+    document.querySelectorAll<HTMLElement>('.c-pillar-content table').forEach((table) => {
+      if (table.scrollWidth > table.clientWidth) {
+        table.setAttribute('tabindex', '0');
+      } else {
+        table.removeAttribute('tabindex');
+      }
+    });
+  }
+  updateScrollableTables();
+  window.addEventListener('resize', updateScrollableTables, { passive: true });
 
   // Add scroll hint and shadow indicator for scrollable tables
   function enhanceTableScroll() {

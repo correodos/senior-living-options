@@ -24,7 +24,7 @@ const {
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
 const SITE_NAME = import.meta.env.PUBLIC_SITE_NAME || 'Senior Living Options';
-const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.webp`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.jpg`;
 const finalCanonical = canonical || Astro.url.href;
 const finalOgImage = ogImage || DEFAULT_OG_IMAGE;
 const finalTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
@@ -35,6 +35,18 @@ const finalTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.setAttribute(
+            'data-theme',
+            saved || (prefersDark ? 'dark' : 'light')
+          );
+        } catch (e) {}
+      })();
+    </script>
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={finalCanonical} />
     <meta name="robots" content={noFollow ? robots.replace('follow', 'nofollow') : robots} />
@@ -57,12 +69,6 @@ const finalTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />

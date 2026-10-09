@@ -16,7 +16,6 @@ const cat = categoryInfo[data.category as keyof typeof categoryInfo] || {
   label: data.category,
   color: 'var(--sl-color-primary)',
 };
-const locale = data.category === 'senior-care-costs' ? 'en-US' : 'en-US'; // all English
 ---
 
 <div class="c-article-meta">
@@ -24,6 +23,7 @@ const locale = data.category === 'senior-care-costs' ? 'en-US' : 'en-US'; // all
     <span class="c-badge" style={{ backgroundColor: `${cat.color}15`, color: cat.color }}>
       {cat.label}
     </span>
+    {data.isPillar && <span class="c-badge c-badge--pillar">Pillar Article</span>}
   </span>
   <time class="c-article-meta__item" datetime={data.publishDate.toISOString()}>
     <svg
@@ -78,5 +78,4 @@ const locale = data.category === 'senior-care-costs' ? 'en-US' : 'en-US'; // all
       {data.readingTime} min read
     </span>
   )}
-  {data.isPillar && <span class="c-badge c-badge--pillar">Pillar Article</span>}
 </div>
