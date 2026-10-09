@@ -2,11 +2,11 @@
 title: 'How to Pay for Senior Care: Every Option Explained'
 description: 'Senior care costs can be overwhelming. This guide breaks down every way to pay — from Medicare and Medicaid to LTC insurance, VA benefits, and more.'
 publishDate: 2026-10-04
-lastReviewed: 2026-10-04
+lastReviewed: 2026-10-09
 category: senior-care-costs
 isPillar: true
 readingTime: 13
-image: /images/senior-care-costs-complete-guide.png
+image: /images/senior-care-costs-complete-guide.webp
 imageAlt: 'Family reviewing senior care payment options and costs at kitchen table'
 tags: ["senior care costs", "how to pay for senior care", "Medicare senior care coverage", "long-term care insurance", "Medicaid", "VA benefits"]
 states: ["CA", "TX", "FL", "NY", "PA", "OH", "IL", "NC"]
@@ -18,19 +18,20 @@ sources:
   - "https://www.medicare.gov/coverage/home-health-services"
   - "https://www.medicare.gov/coverage/skilled-nursing-facility-care"
   - "https://www.medicaid.gov/medicaid/home-community-based-services/home-community-based-services-authorities/home-community-based-services-1915c"
-  - "https://investor.genworth.com/news-events/press-releases/detail/982/"
+  - "https://investor.genworth.com/news-events/press-releases/detail/1054/carescout-releases-2025-cost-of-care-survey-results"
   - "https://www.cms.gov/files/document/mm14279-medicare-deductible-coinsurance-premium-rates-cy-2026-update.pdf"
   - "https://www.va.gov/pension/aid-attendance-housebound/"
   - "https://www.hud.gov/program_offices/housing/sfh/hecm/hecmhome"
   - "https://eldercare.acl.gov/Public/Index.aspx"
   - "https://www.milliman.com/en/insight/ltci-2024-statistics-experience-reporting-forms"
   - "https://www.aaltci.org/long-term-care-insurance/learning-center/ltcfacts-2025.php"
+  - "https://www.medicaid.gov/federal-policy-guidance/downloads/cib04272026.pdf"
 ---
 > **Key Takeaways**
 > - Someone turning 65 today has almost a **70% chance of needing long-term care** at some point — yet most families have no plan for how to pay for it.
 > - **Medicare does not pay for long-term care.** It covers up to 100 days of skilled nursing after a hospital stay — nothing more. Assisted living, personal home care, and custodial nursing home care are not covered.
 > - **Medicaid is the primary payer** for long-term nursing home care in the U.S., but qualifying requires spending most assets down to roughly $2,000 first (varies by state).
-> - The national median cost of senior care ranges from **$26,000/year for adult day care** to **$127,750/year for a private nursing home room** (2024).
+> - The national median cost of senior care ranges from **$24,700/year for adult day health care** to **$129,575/year for a private nursing home room** (2025).
 > - There are more payment options than most families realize — including VA benefits, long-term care insurance, reverse mortgages, and state programs. This guide explains all of them.
 
 ---
@@ -43,22 +44,23 @@ This guide covers every realistic way to pay for senior care — from government
 
 ---
 
-## What Senior Care Actually Costs in 2024
+## What Senior Care Actually Costs in 2025
 
-Before looking at how to pay, you need to know what you're paying for. The **2024 Cost of Care Survey by Genworth and CareScout** — based on more than 15,000 providers surveyed nationwide from July to December 2024 — provides the most current national data:
+Before looking at how to pay, you need to know what you're paying for. The **2025 Cost of Care Survey by CareScout (Genworth)** — which collected more than 25,000 rates from long-term care providers nationwide between July and November 2025 — provides the most current national data:
 
 | Care Type | Annual Median Cost | Monthly Median |
 |---|---|---|
-| Adult day care (5 days/week) | $26,000 | $2,167 |
-| Homemaker services (44 hrs/week) | $75,504 | $6,292 |
-| Home health aide (44 hrs/week) | $77,792 | $6,483 |
-| Assisted living (private, 1 bedroom) | $70,800 | $5,900 |
-| Nursing home — semi-private room | $111,325 | $9,277 |
-| Nursing home — private room | $127,750 | $10,646 |
+| Adult day health care (5 days/week) | $24,700 | $2,058 |
+| Non-medical in-home caregiver (44 hrs/week, $35/hour) | $80,080 | $6,673 |
+| Assisted living (private, 1 bedroom) | $74,400 | $6,200 |
+| Nursing home — semi-private room | $114,975 | $9,581 |
+| Nursing home — private room | $129,575 | $10,798 |
 
-These are national medians. Costs in high-cost states like Alaska, Connecticut, or Massachusetts can be 50–100% higher. Lower-cost states in the South and Midwest can be 30–40% below the median. Use the interactive tool at **carescout.com/cost-of-care** to look up figures for your specific location.
+CareScout now reports home health aides and homemakers as one "non-medical caregiver" category, and the 2025 survey added skilled nursing in the home (a private duty nurse) at a national median of $90 per hour or $160 per visit.
 
-The critical planning reality: someone who needs nursing home care for two years will spend over $220,000 at the median rate. That number sits well beyond most families' savings — which is exactly why knowing your payment options matters before a crisis forces the decision.
+These are national medians. Costs in high-cost states can be 50% or more above the median — a semi-private nursing home room has a state median of $15,208 per month in Connecticut and $27,831 in Alaska. Lower-cost states can be 30–40% below the median, such as Texas ($5,627 per month) for a semi-private nursing home room. Browse our [senior care costs by state](/costs/) for all 50 states, or use the interactive tool at **carescout.com/cost-of-care** to look up figures for your specific location.
+
+The critical planning reality: someone who needs nursing home care for two years will spend nearly $230,000 at the median rate for a semi-private room. That number sits well beyond most families' savings — which is exactly why knowing your payment options matters before a crisis forces the decision.
 
 ---
 
@@ -116,7 +118,7 @@ What you cannot do: give assets away to family members to qualify faster. Medica
 
 ### Spousal Protections
 
-Federal law protects the "community spouse" — the partner who remains at home when their husband or wife enters a nursing home. The **Community Spouse Resource Allowance (CSRA)** lets the at-home spouse keep between $30,828 and $154,140 of the couple's combined assets (2024 federal range). They also keep their own income. States set the exact amounts within these federal limits.
+Federal law protects the "community spouse" — the partner who remains at home when their husband or wife enters a nursing home. The **Community Spouse Resource Allowance (CSRA)** lets the at-home spouse keep between $32,532 and $162,660 of the couple's combined assets (2026 federal range). They also keep their own income. States set the exact amounts within these federal limits.
 
 ### Medicaid for Home Care
 
@@ -126,7 +128,7 @@ Medicaid's **Home and Community-Based Services (HCBS) waiver programs** pay for 
 
 ## Long-Term Care Insurance: What It Is and How It Works
 
-Long-term care (LTC) insurance is private insurance purchased specifically to cover the costs of nursing home care, assisted living, home care, and adult day services. It's most effective when purchased before health problems develop — typically in your 50s or early 60s, when premiums are lower and acceptance is easier.
+Long-term care (LTC) insurance is private insurance purchased specifically to cover the costs of [nursing home care](/article/nursing-homes/nursing-homes-complete-guide/), [assisted living](/article/assisted-living/assisted-living-complete-guide/), [home care](/article/in-home-care/in-home-care-complete-guide/), and adult day services. It's most effective when purchased before health problems develop — typically in your 50s or early 60s, when premiums are lower and acceptance is easier.
 
 ### How a Policy Works
 
@@ -194,7 +196,7 @@ Private pay is common at the start of a care journey, and many families transiti
 - Keep documentation of all care expenses; these may count toward a Medicaid spend-down.
 - Consult an elder law attorney before making large asset moves, gifts, or transfers.
 
-There is no fixed timeline for how long private savings will last — it depends entirely on the cost of care in your area, how many hours of care are needed, and your starting assets. At the 2024 national median of $9,277/month for a semi-private nursing home room, $100,000 in savings lasts under one year.
+There is no fixed timeline for how long private savings will last — it depends entirely on the cost of care in your area, how many hours of care are needed, and your starting assets. At the 2025 national median of $9,581/month for a semi-private nursing home room, $100,000 in savings lasts about ten months.
 
 ---
 
@@ -251,7 +253,7 @@ Find your local Area Agency on Aging for referrals to elder law attorneys and fi
 No. Medicare covers up to 100 days of skilled nursing care after a qualifying hospital stay of at least 3 days, and it covers skilled home health care when a doctor orders it. It does not cover assisted living, custodial nursing home care, personal home care, or long-term stays once skilled care is no longer needed. After day 100 in a skilled nursing facility, Medicare pays nothing.
 
 ### What is the income limit to qualify for Medicaid for a nursing home?
-Income limits vary by state. In most states, monthly income cannot exceed a threshold tied to the cost of nursing home care — roughly $2,800–$3,000/month in many states (2024). In some states, income above the limit can be directed to a "Miller Trust" or income-only trust to qualify. Contact your state Medicaid office or an elder law attorney for current rules in your state.
+Income limits vary by state. In most states, monthly income cannot exceed a threshold tied to the cost of nursing home care — roughly $2,800–$3,000/month in many states (the 2026 federal cap for states that use it is $2,982/month). In some states, income above the limit can be directed to a "Miller Trust" or income-only trust to qualify. Contact your state Medicaid office or an elder law attorney for current rules in your state.
 
 ### How does long-term care insurance work?
 Once you purchase a policy, you pay premiums (typically monthly or annually). When you need care, you must meet a benefit trigger — usually needing help with 2 of 6 daily activities or having severe cognitive impairment — and satisfy an elimination period (typically 30–90 days of out-of-pocket care). After that, the policy pays a daily or monthly benefit toward your care costs, up to the policy's maximum amount and benefit period.
@@ -283,7 +285,7 @@ A HECM (Home Equity Conversion Mortgage) lets homeowners 62 and older borrow aga
 
 7. **Medicaid.gov.** "Home & Community-Based Services 1915(c)." https://www.medicaid.gov/medicaid/home-community-based-services/home-community-based-services-authorities/home-community-based-services-1915c. Accessed: 2026-10-04.
 
-8. **Genworth Financial / CareScout.** "2024 Cost of Care Survey." https://investor.genworth.com/news-events/press-releases/detail/982/. Published March 2025 (surveyed July–December 2024).
+8. **CareScout (Genworth).** "CareScout Releases 2025 Cost of Care Survey Results." https://investor.genworth.com/news-events/press-releases/detail/1054/carescout-releases-2025-cost-of-care-survey-results. Published March 2, 2026 (surveyed July–November 2025).
 
 9. **U.S. Department of Veterans Affairs.** "Aid & Attendance and Housebound Benefits." https://www.va.gov/pension/aid-attendance-housebound/. Accessed: 2026-10-04. (2026 rates effective December 1, 2025.)
 
@@ -296,3 +298,5 @@ A HECM (Home Equity Conversion Mortgage) lets homeowners 62 and older borrow aga
 13. **Milliman (Smetek, Gunnlaugsson, Giese, Clemens).** "The Long-Term Care Insurance Industry Through 2024: Summary Statistics and Observations from the Experience Reporting Forms." December 31, 2025. https://www.milliman.com/en/insight/ltci-2024-statistics-experience-reporting-forms.
 
 14. **American Association for Long-Term Care Insurance (AALTCI).** "2026 Long-Term Care Insurance Price Index." https://www.aaltci.org/long-term-care-insurance/learning-center/ltcfacts-2025.php. Data cited via AALTCI press release, 2026, and SmartAsset analysis of AALTCI data.
+
+15. **Centers for Medicare & Medicaid Services (CMS).** "Updated 2026 SSI and Spousal Impoverishment Standards." CMCS Informational Bulletin, April 27, 2026. https://www.medicaid.gov/federal-policy-guidance/downloads/cib04272026.pdf.

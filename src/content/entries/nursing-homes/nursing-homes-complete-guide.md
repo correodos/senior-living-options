@@ -4,10 +4,10 @@ description: 'What is a nursing home, what does it cost, and how do you find a g
 category: 'nursing-homes'
 tags: ['nursing homes', 'long-term care', 'skilled nursing facility', 'nursing home costs', 'Medicaid', 'Medicare']
 publishDate: 2026-10-04
-lastReviewed: 2026-10-04
+lastReviewed: 2026-10-09
 isPillar: true
 readingTime: 12
-image: '/images/nursing-homes-complete-guide.png'
+image: '/images/nursing-homes-complete-guide.webp'
 imageAlt: 'Senior resident in nursing home common area with caregiver'
 states: ['TX', 'FL', 'CA', 'PA', 'OH', 'IL', 'NY', 'MA']
 showTableOfContents: true
@@ -17,7 +17,7 @@ sources:
   - 'https://www.medicare.gov/care-compare/?redirect=true&providerType=NursingHome'
   - 'https://medicare.gov/care-compare/resources/nursing-home/staffing'
   - 'https://www.cms.gov/files/document/mm14279-medicare-deductible-coinsurance-premium-rates-cy-2026-update.pdf'
-  - 'https://www.carescout.com/cost-of-care'
+  - 'https://investor.genworth.com/news-events/press-releases/detail/1054/carescout-releases-2025-cost-of-care-survey-results'
   - 'https://medlineplus.gov/ency/patientinstructions/000956.htm'
   - 'https://www.aarp.org/medicare/current-long-term-nursing-home-coverage/'
   - 'https://www.cms.gov/nursing-homes/patients-caregivers/finding-home'
@@ -28,7 +28,7 @@ sources:
 ## Key Takeaways
 
 - **Nursing homes provide 24-hour skilled nursing and medical care** — they are not the same as assisted living, which offers far less clinical support.
-- **The national median cost of a nursing home is $9,277/month for a semi-private room** and **$10,646/month for a private room** (2024).
+- **The national median cost of a nursing home is $9,581/month for a semi-private room** and **$10,798/month for a private room** (2025).
 - **Medicare does not pay for long-term nursing home stays.** It covers up to 100 days of skilled nursing care after a qualifying hospital stay — and the coinsurance for days 21–100 is **$217/day in 2026**.
 - **Medicaid is the primary payer** for long-term nursing home care in the U.S. To qualify, most people must first spend down assets to roughly $2,000 (varies by state).
 - **Use Medicare's Care Compare tool** (medicare.gov/care-compare) to check star ratings, inspection results, staffing levels, and staff turnover rates for any facility you're considering.
@@ -45,7 +45,7 @@ If you're in that moment right now, this guide is for you. We'll explain what nu
 
 A nursing home — also called a **skilled nursing facility (SNF)** or long-term care facility — is a residential setting that provides **around-the-clock medical and personal care** for people who can no longer manage independently.
 
-The key word is *skilled*. Nursing homes are staffed by registered nurses, licensed practical nurses, and certified nursing assistants at all hours. This distinguishes them clearly from assisted living communities, which offer help with daily tasks but typically don't have nurses on staff 24/7.
+The key word is *skilled*. Nursing homes are staffed by registered nurses, licensed practical nurses, and certified nursing assistants at all hours. This distinguishes them clearly from [assisted living](/article/assisted-living/assisted-living-complete-guide/) communities, which offer help with daily tasks but typically don't have nurses on staff 24/7.
 
 **What services does a nursing home typically provide?**
 
@@ -74,25 +74,25 @@ These two terms get confused all the time, and the confusion has real consequenc
 | Memory care | Often available in dedicated units | Sometimes available |
 | Medicare coverage | Yes, for short-term skilled care (up to 100 days) | No |
 | Medicaid coverage | Yes, for long-term care | Rarely, and very limited by state |
-| Typical annual cost (2024) | $111,325–$127,750 | $70,800 |
+| Typical annual cost (2025) | $114,975–$129,575 | $74,400 |
 | Environment | More clinical | More residential |
 
 The practical rule of thumb: if your loved one needs a registered nurse to manage their care regularly — not just occasionally — a nursing home is the right level of care. If they need help with bathing and meals but are medically stable, assisted living may be enough. → [assisted living guide](/category/assisted-living/)
 
 ---
 
-## Nursing Home Costs in 2024
+## Nursing Home Costs in 2025
 
 Nursing homes are expensive. There's no way to soften that reality. But knowing the real numbers — and what drives them — helps you plan.
 
-According to the **2024 Cost of Care Survey by Genworth and CareScout** (the most comprehensive annual survey of long-term care costs in the U.S., covering more than 15,000 providers surveyed July–December 2024), the national median costs are:
+According to the **2025 Cost of Care Survey by CareScout (Genworth)** (the most comprehensive annual survey of long-term care costs in the U.S., collecting more than 25,000 rates from providers nationwide between July and November 2025), the national median costs are:
 
-| Room Type | Monthly Cost | Annual Cost | Change vs. 2023 |
+| Room Type | Monthly Cost | Annual Cost | Change vs. 2024 |
 |---|---|---|---|
-| Semi-private room | ~$9,277 | $111,325 | +7% |
-| Private room | ~$10,646 | $127,750 | +9% |
+| Semi-private room ($315/day) | $9,581 | $114,975 | +2% |
+| Private room ($355/day) | $10,798 | $129,575 | +1% |
 
-These are **national medians**. Your actual cost depends heavily on where you live. Costs in rural Mississippi can be under $5,000/month for a semi-private room, while facilities in urban Connecticut, New York, or Alaska can exceed $15,000/month.
+These are **national medians** (see our [senior care costs guide](/article/senior-care-costs/senior-care-costs-complete-guide/) for a full breakdown by care type). Your actual cost depends heavily on where you live. In the 2025 survey, the state median for a semi-private room ranged from $5,627/month in Texas to $27,831/month in Alaska. Five states had medians above $15,000/month: Alaska, Oregon ($16,760), New York ($15,528), Hawaii ($15,473), and Connecticut ($15,208). See [nursing home costs for every state](/costs/).
 
 **What's typically included in the base rate:**
 
@@ -111,7 +111,7 @@ These are **national medians**. Your actual cost depends heavily on where you li
 - Transportation to outside appointments
 - Cable, internet, phone
 
-Always ask for a complete written fee schedule before signing an admission agreement. Some facilities advertise a base rate that doesn't include items your loved one will need every day. → [nursing home admission contracts](/article/nursing-homes/nursing-home-admission-contracts/)
+Always ask for a complete written fee schedule before signing an admission agreement. Some facilities advertise a base rate that doesn't include items your loved one will need every day.
 
 ---
 
@@ -162,7 +162,7 @@ Medicaid is a federal-state program, and every state runs it differently — but
 
 **The spend-down process:** If your loved one has assets above the Medicaid limit, they must "spend down" those assets on care costs before Medicaid kicks in. This is legal and expected — it's not a loophole, it's how the system is designed. You can spend down on nursing home bills, medical expenses, home modifications, and other approved costs.
 
-**Important:** Medicaid has a **5-year look-back period**. Any assets transferred to family members or others within 5 years of applying may result in a period of Medicaid ineligibility. Consult an elder law attorney before making any gifts or asset transfers. → [Medicaid planning for nursing homes](/article/nursing-homes/medicaid-planning/)
+**Important:** Medicaid has a **5-year look-back period**. Any assets transferred to family members or others within 5 years of applying may result in a period of Medicaid ineligibility. Consult an elder law attorney before making any gifts or asset transfers.
 
 **Spousal protections:** Federal law protects a community spouse (the spouse still living at home) from losing all their resources. The Community Spouse Resource Allowance lets the at-home spouse keep a portion of the couple's assets. Rules vary by state.
 
@@ -176,7 +176,7 @@ Medicare and Medicaid don't cover everyone. Here are the other main options:
 
 **Private pay (out of pocket):** Many residents begin by paying privately. At $9,000–$10,000+ per month, savings deplete quickly. Some facilities offer better accommodations or amenities to private-pay residents and may transition to Medicaid once assets are spent down — ask specifically whether a facility accepts Medicaid before admitting a resident who may eventually need it.
 
-**Long-term care insurance:** Policies purchased before health declines may cover nursing home costs up to a daily or monthly benefit cap, for a set benefit period. Premiums are high and coverage varies widely. → [long-term care insurance guide](/article/nursing-homes/long-term-care-insurance/)
+**Long-term care insurance:** Policies purchased before health declines may cover nursing home costs up to a daily or monthly benefit cap, for a set benefit period. Premiums are high and coverage varies widely.
 
 **Veterans benefits (VA Aid & Attendance):** Wartime veterans and their surviving spouses may qualify for the VA's Aid & Attendance pension benefit, which pays a tax-free monthly amount toward the cost of nursing home care. For 2026 (rates effective December 1, 2025 through November 30, 2026), the maximum amounts are:
 
@@ -271,8 +271,8 @@ If you believe a facility is not honoring a resident's rights, contact your stat
 ### What is a nursing home, exactly?
 A nursing home is a licensed residential facility that provides 24-hour skilled nursing care, medical supervision, and personal care for people who can no longer live independently. They are also called skilled nursing facilities (SNFs). Nursing homes differ from assisted living in that they have registered nurses and licensed medical staff on site at all hours.
 
-### How much does a nursing home cost per month in 2024?
-The national median is $9,277/month for a semi-private room and $10,646/month for a private room (2024). Costs vary significantly by state — from under $5,000/month in some rural areas to over $15,000/month in high-cost states like Alaska or Connecticut.
+### How much does a nursing home cost per month in 2025?
+The national median is $9,581/month for a semi-private room and $10,798/month for a private room (2025). Costs vary significantly by state — a semi-private room has a state median from $5,627/month in Texas to $27,831/month in Alaska.
 
 ### Does Medicare pay for nursing home care?
 Medicare pays only for short-term skilled nursing care — up to 100 days per benefit period after a qualifying hospital stay of at least 3 days. It does not cover long-term custodial care, which is what most nursing home residents need. For days 21–100, patients owe $217/day in coinsurance (2026 rate). After day 100, Medicare pays nothing.
@@ -300,7 +300,7 @@ A nursing home can discharge a resident only under specific circumstances: if th
 
 5. **Centers for Medicare & Medicaid Services (CMS).** "Update to Medicare Deductible, Coinsurance and Premium Rates for CY 2026." Change Request 14279 / Transmittal R13504GI. Effective January 1, 2026. https://www.cms.gov/files/document/mm14279-medicare-deductible-coinsurance-premium-rates-cy-2026-update.pdf.
 
-6. **Genworth Financial / CareScout.** "2024 Cost of Care Survey." https://www.carescout.com/cost-of-care. Published: March 2025 (surveyed July–December 2024).
+6. **CareScout (Genworth).** "CareScout Releases 2025 Cost of Care Survey Results." https://investor.genworth.com/news-events/press-releases/detail/1054/carescout-releases-2025-cost-of-care-survey-results. Published: March 2, 2026 (surveyed July–November 2025).
 
 7. **MedlinePlus / U.S. National Library of Medicine.** "How to Choose a Nursing Home." https://medlineplus.gov/ency/patientinstructions/000956.htm. Accessed: 2026-10-04.
 

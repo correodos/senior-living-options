@@ -1,8 +1,10 @@
 ---
 title: 'The Complete Guide to Assisted Living: Costs, Services, and How to Choose'
 description: 'Everything families need to know about assisted living: what it is, what it costs in 2025, how Medicaid and VA benefits help, and how to choose the right facility.'
+seoTitle: 'Assisted Living Guide: Costs, Services & How to Choose'
+seoDescription: 'Everything families need to know about assisted living: what it is, 2025 costs, how Medicaid and VA benefits help, and how to choose the right facility.'
 publishDate: 2026-09-27
-lastReviewed: 2026-09-27
+lastReviewed: 2026-10-09
 category: assisted-living
 isPillar: true
 sources:
@@ -14,7 +16,7 @@ sources:
   - "https://www.aarp.org/caregiving/basics/assisted-living-options/"
   - "https://www.benefits.va.gov/persona/veteran-elderly.asp"
 readingTime: 14
-image: /images/assisted-living-complete-guide.png
+image: /images/assisted-living-complete-guide.webp
 imageAlt: 'Senior smiling in assisted living community common area'
 tags: ["assisted living", "senior care", "long-term care", "memory care", "aging parents"]
 states: ["CA", "TX", "FL", "NY", "MA", "NJ", "HI", "CT"]
@@ -40,7 +42,7 @@ This guide covers everything you need to make a confident decision: what assiste
 
 ## What Is Assisted Living?
 
-Assisted living is a residential care option for older adults who need help with daily activities but don't require the round-the-clock medical care that a nursing home provides. The goal is to support independence while filling in the gaps — help with bathing, dressing, medications, meals, and housekeeping, combined with 24-hour supervision and a community environment.
+Assisted living is a residential care option for older adults who need help with daily activities but don't require the round-the-clock medical care that a [nursing home](/article/nursing-homes/nursing-homes-complete-guide/) provides. The goal is to support independence while filling in the gaps — help with bathing, dressing, medications, meals, and housekeeping, combined with 24-hour supervision and a community environment.
 
 Facilities range in size from as few as 25 residents to 100 or more. Most offer private apartments or rooms with shared common areas. A typical community provides:
 
@@ -51,7 +53,7 @@ Facilities range in size from as few as 25 residents to 100 or more. Most offer 
 - 24-hour staff on-site and emergency call systems
 - Social activities, fitness programs, and transportation
 
-Some communities also offer specialized memory care units for residents with Alzheimer's disease or other forms of dementia. These units typically have secured entrances and staff trained specifically in dementia care. → [Learn more about memory care](/category/memory-care/)
+Some communities also offer specialized [memory care](/article/memory-care/memory-care-complete-guide/) units for residents with Alzheimer's disease or other forms of dementia. These units typically have secured entrances and staff trained specifically in dementia care. → [Learn more about memory care](/category/memory-care/)
 
 Assisted living is regulated at the **state level**, not federally, which means requirements and terminology vary significantly. Depending on where you live, these facilities may be called residential care facilities, adult care homes, personal care homes, or board and care homes.
 
@@ -109,15 +111,15 @@ Assisted living costs have risen significantly over the past several years. Acco
 |---|---|---|
 | **Assisted living** | $6,200 | $74,400 |
 | **Non-medical caregiver** (home health aide/homemaker) | $6,673 | $80,080 |
-| **Nursing home** (private room) | $10,798 | $129,576 |
+| **Nursing home** (private room) | $10,798 | $129,575 |
 
 *Note: Starting with the 2025 survey, CareScout merged the homemaker and home health aide categories into a single "non-medical caregiver" figure, reflecting price convergence between the two service types.*
 
-For context, assisted living costs jumped 10% between 2023 and 2024 (prior median: $5,900/month). The 2025 growth rate has slowed, tracking closer to broader rental housing trends.
+For context, assisted living costs jumped 10% between 2023 and 2024 (prior median: $5,900/month). The 2025 increase slowed to 5%.
 
 ### Cost Variation by State
 
-Location is the single biggest factor in how much you'll pay. States with higher costs of living — particularly in the Northeast and West Coast — can run nearly double the national median.
+Location is the single biggest factor in how much you'll pay (see [assisted living and other care costs in all 50 states](/costs/)). States with higher costs of living — particularly in the Northeast and West Coast — can run nearly double the national median.
 
 | State | Monthly Median (2025) | Annual Median (2025) |
 |---|---|---|
@@ -128,7 +130,7 @@ Location is the single biggest factor in how much you'll pay. States with higher
 | Florida | $5,610 | $67,320 |
 | **National median** | **$6,200** | **$74,400** |
 | California | $7,000 | $84,000 |
-| Maryland | $7,173 | $86,070 |
+| Maryland | $7,172 | $86,070 |
 | New Jersey | $8,710 | $104,520 |
 | Massachusetts | $9,600 | $115,200 |
 | Hawaii | $12,096 | $145,155 |
@@ -290,10 +292,10 @@ Verify that everything promised verbally is in writing, including:
 No. Medicare does not cover assisted living. Medicare is health insurance and does not pay for housing, personal care assistance, or daily support services provided in assisted living facilities. It may pay for specific medical services (like physical therapy or home health aide visits) that a resident receives while living there, but those are billed separately from facility fees.
 
 ### How much does assisted living cost per month in 2025?
-The national median is **$6,200 per month ($74,400 per year)** according to the 2025 CareScout/Genworth Cost of Care Survey — a 5% increase from 2024. Costs vary significantly by state and city, ranging from roughly $3,800–$4,400/month in lower-cost states to $8,500+/month in states like Massachusetts and New Jersey.
+The national median is **$6,200 per month ($74,400 per year)** according to the 2025 CareScout/Genworth Cost of Care Survey — a 5% increase from 2024. Costs vary significantly by state and city, ranging from about $4,400/month in lower-cost states like Mississippi ($4,369) and Alabama ($4,425) to $9,600/month in Massachusetts and $12,096/month in Hawaii.
 
 ### What is the difference between assisted living and a nursing home?
-Assisted living is for people who need help with daily activities but can live semi-independently. Nursing homes (skilled nursing facilities) provide 24/7 medical and nursing care for people with serious, ongoing health needs. Nursing homes are more medically intensive and significantly more expensive — the national median for a private room in 2024 was $10,646/month.
+Assisted living is for people who need help with daily activities but can live semi-independently. Nursing homes (skilled nursing facilities) provide 24/7 medical and nursing care for people with serious, ongoing health needs. Nursing homes are more medically intensive and significantly more expensive — the national median for a private room in 2025 was $10,798/month.
 
 ### Will Medicaid pay for assisted living?
 Possibly, depending on your state and your loved one's income and care needs. As of 2024, 46 states and D.C. offer some form of Medicaid assistance for assisted living through Home and Community Based Services (HCBS) waivers. However, Medicaid typically covers care services only — not room and board — and there are often waitlists. Income and asset limits apply. Contact your state Medicaid office or call the Eldercare Locator at 1-800-677-1116 for state-specific information.

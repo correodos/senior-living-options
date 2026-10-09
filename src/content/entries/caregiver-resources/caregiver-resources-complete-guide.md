@@ -6,7 +6,7 @@ lastReviewed: 2026-10-04
 category: caregiver-resources
 isPillar: true
 readingTime: 14
-image: /images/caregiver-resources-guide.png
+image: /images/caregiver-resources-guide.webp
 imageAlt: 'Family caregiver looking at resources on laptop with senior relative in background'
 tags: ["caregiver resources", "family caregiver resources", "caregiver burnout", "financial help for caregivers", "respite care", "VA caregiver support"]
 states: ["CA", "TX", "FL", "NY", "PA", "OH", "IL", "NC"]
@@ -76,7 +76,7 @@ To access NFCSP services in your area, contact your local Area Agency on Aging �
 
 ### Medicaid Home and Community-Based Services (HCBS)
 
-If your loved one qualifies for Medicaid, this is one of the most significant sources of support available. All 50 states allow family members to be paid caregivers through at least one Medicaid home care program. The key vehicle is usually a **self-directed care** or **consumer-directed** program, which lets the Medicaid recipient choose their own caregiver — including a family member.
+If your loved one qualifies for Medicaid, this is one of the most significant sources of support available. All 50 states allow family members to be paid caregivers through at least one Medicaid [home care](/article/in-home-care/in-home-care-complete-guide/) program. The key vehicle is usually a **self-directed care** or **consumer-directed** program, which lets the Medicaid recipient choose their own caregiver — including a family member.
 
 Rules vary considerably by state:
 
@@ -87,15 +87,11 @@ Rules vary considerably by state:
 
 Beyond paying family caregivers directly, Medicaid HCBS programs also fund training, support groups, and respite care for caregivers. Contact your state's Medicaid office or use the Eldercare Locator to find the right program in your state.
 
-→ [Medicaid Eligibility for Long-Term Care](/article/nursing-homes/medicaid-planning/)
-
 ### Medicare Coverage for Home Health and Skilled Care
 
 Medicare does **not** pay for long-term personal care provided by a family member. However, it does cover short-term skilled nursing care, physical therapy, and other home health services when your loved one is homebound and under a physician's care. This can meaningfully reduce the tasks falling on you.
 
 If your loved one has recently been hospitalized, Medicare also covers short-term stays in a skilled nursing facility (SNF) — up to 100 days under Part A, with cost-sharing beginning on day 21. Understanding what Medicare covers can help you plan which gaps a family caregiver or outside help needs to fill.
-
-→ [What Does Medicare Cover for Home Health Care?](/article/in-home-care/what-does-medicare-cover-home-health/)
 
 ---
 
@@ -123,7 +119,7 @@ Call the **VA Caregiver Support Line at 855-260-3274** to start the process or f
 
 ### Tax Deductions and Dependent Care Credits
 
-If you pay for care on your loved one's behalf or claim them as a dependent, there may be federal tax benefits available. The IRS allows a **medical expense deduction** for qualifying costs that exceed 7.5% of your adjusted gross income, which can include payments for home health aides and nursing home care. The **Dependent Care FSA** through an employer is another option if you're paying for adult day services.
+If you pay for care on your loved one's behalf or claim them as a dependent, there may be federal tax benefits available. The IRS allows a **medical expense deduction** for qualifying costs that exceed 7.5% of your adjusted gross income, which can include payments for home health aides and [nursing home care](/article/nursing-homes/nursing-homes-complete-guide/). The **Dependent Care FSA** through an employer is another option if you're paying for adult day services.
 
 The bipartisan **Credit for Caring Act** (S. 925 / H.R. 7165, 119th Congress) would create a nonrefundable federal tax credit of up to $5,000 for working family caregivers who spend more than $2,000 on qualifying care expenses. Despite broad support from AARP and dozens of advocacy organizations, the bill was not included in the major tax legislation signed in July 2025 and remains pending in Congress as of October 2026. It is worth watching — but it is not yet law.
 
@@ -181,8 +177,6 @@ Burnout isn't weakness. It's what happens when the demands of a role exceed the 
 - Ask for help from other family members with specific, concrete tasks
 - Contact a geriatric care manager for a professional assessment of your situation
 
-→ [Finding a Geriatric Care Manager Near You](/article/caregiver-resources/finding-geriatric-care-manager/)
-
 ---
 
 ## Resources for Veterans' Family Caregivers
@@ -210,7 +204,6 @@ Some conditions come with dedicated national organizations that offer caregiver-
 **Alzheimer's and Dementia**
 The Alzheimer's Association ([alz.org](https://www.alz.org)) runs a 24/7 helpline at **1-800-272-3900** with caregiver coaching, care consultations, and local chapter support groups. Dementia caregiving is among the most intensive forms of care — those caring for someone with dementia spend an average of nearly double what other caregivers spend out of pocket.
 
-→ [Dementia Caregiver Guide](/category/memory-care/)
 
 **Parkinson's Disease**
 The Parkinson's Foundation ([parkinson.org](https://www.parkinson.org/resources-support/carepartners)) runs a free Helpline at **1-800-473-4636** (Monday–Friday, 9 a.m.–8 p.m. ET), staffed by nurses, social workers, and health educators. Caregivers can get answers on disease progression, treatment options, and referrals to local PD specialists and support groups. Email support is also available at Helpline@Parkinson.org.

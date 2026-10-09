@@ -2,7 +2,7 @@
 title: 'Memory Care: A Complete Family Guide'
 description: "What is memory care, what does it cost, and how do you choose the right facility? A complete guide for families navigating Alzheimer's and dementia care."
 publishDate: 2026-09-27
-lastReviewed: 2026-09-27
+lastReviewed: 2026-10-09
 category: memory-care
 isPillar: true
 sources:
@@ -24,7 +24,7 @@ sources:
   - "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12761459/"
   - "https://www.alz.org/help-support/caregiving/helpline"
 readingTime: 15
-image: /images/memory-care-complete-guide.png
+image: /images/memory-care-complete-guide.webp
 imageAlt: 'Senior with dementia in memory care community common area'
 tags:
   - "memory care"
@@ -53,7 +53,7 @@ Memory care exists for exactly that situation. This guide covers what it is, how
 
 ## What is memory care?
 
-Memory care combines the personal care services of assisted living — help with bathing, dressing, meals, and medication — with features that standard assisted living doesn't provide: secured exits, staff trained in dementia behavior management, structured daily routines, and programming built around cognitive impairment.
+Memory care combines the personal care services of [assisted living](/article/assisted-living/assisted-living-complete-guide/) — help with bathing, dressing, meals, and medication — with features that standard assisted living doesn't provide: secured exits, staff trained in dementia behavior management, structured daily routines, and programming built around cognitive impairment.
 
 Facilities take different forms. Some are standalone communities dedicated entirely to dementia care. Others are secured wings within a larger assisted living building or nursing home. Still others are part of a Continuing Care Retirement Community (CCRC), which lets a resident stay on the same campus as their needs increase.
 
@@ -122,7 +122,7 @@ If you're unsure, a geriatric care manager or your loved one's neurologist can h
 
 Memory care costs more than standard assisted living — primarily because of higher staffing ratios, dementia training requirements, and secured building design. Industry estimates put the premium at 15–25% above standard assisted living rates.
 
-CareScout/Genworth, the most authoritative source for long-term care cost data, does not publish a separate national median for memory care in its annual Cost of Care Survey. Their 2025 survey tracks five categories: non-medical in-home care, private duty nursing, adult day care, assisted living, and nursing homes. Memory care falls between assisted living and nursing home care in both intensity and price, but isn't tracked as a separate line item.
+CareScout/Genworth, the most authoritative source for [long-term care cost data](/article/senior-care-costs/senior-care-costs-complete-guide/), does not publish a separate national median for memory care in its annual Cost of Care Survey. Their 2025 survey tracks five categories: non-medical in-home care, private duty nursing, adult day care, assisted living, and nursing homes. Memory care falls between assisted living and nursing home care in both intensity and price, but isn't tracked as a separate line item.
 
 The table below puts the CareScout 2025 official benchmarks alongside memory care estimates from researchers who survey those facilities directly:
 
@@ -139,7 +139,7 @@ The spread reflects real variation in who gets surveyed. Stand-alone memory care
 
 Several factors push memory care costs higher:
 
-- Location. Using assisted living state medians from CareScout 2025 as a floor, and applying the 15–25% memory care premium: Hawaii ($12,096/month AL median, likely $14,000+/month for memory care), Connecticut ($9,118), and Massachusetts ($9,600) are among the most expensive. Mississippi ($4,369 AL median) and Missouri ($5,400) remain the most affordable, with memory care potentially starting around $5,000–$5,500/month in those states. SeniorLiving.org research (2026) confirms state memory care medians ranging from $5,538/month (South Dakota) to $14,399/month (Hawaii).
+- Location. Using assisted living state medians from CareScout 2025 as a floor, and applying the 15–25% memory care premium: Hawaii ($12,096/month AL median, likely $14,000+/month for memory care), Connecticut ($9,118), and Massachusetts ($9,600) are among the most expensive. Mississippi ($4,369 AL median) and Alabama ($4,425) remain the most affordable, with memory care potentially starting around $5,000–$5,500/month in those states. SeniorLiving.org research (2026) confirms state memory care medians ranging from $5,538/month (South Dakota) to $14,399/month (Hawaii).
 - Facility type. Standalone memory care communities often charge differently from memory care wings within a larger assisted living campus.
 - Care level tiers. Most facilities assess residents and assign a care level tier; higher needs mean a higher monthly rate. Ask exactly how tiers are determined and what they cost.
 - Room type. Private rooms cost more than shared rooms.
