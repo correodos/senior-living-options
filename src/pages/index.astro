@@ -173,6 +173,19 @@ const faqs = [
               <div class="c-most-read__content">
                 <h3 class="c-most-read__title">
                   <a href={`/article/${entry.id}/`}>{entry.data.title}</a>
+                  {entry.data.isPillar && (
+                    <span
+                      class="c-badge c-badge--small"
+                      style={{
+                        marginLeft: 'var(--sl-space-2)',
+                        backgroundColor: 'var(--sl-color-primary-light)',
+                        color: 'var(--sl-color-primary)',
+                        fontSize: 'var(--sl-fs-xs)',
+                      }}
+                    >
+                      Complete guide
+                    </span>
+                  )}
                 </h3>
                 <p class="c-most-read__meta">
                   {readingTime} min read ·{' '}

@@ -70,14 +70,18 @@ function buildCanonical(code: string) {
 
 function buildJsonLd(stateName: string, code: string) {
   const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+  const meta = (costsByStateRaw as any)._meta;
+  const datePublished = meta?.published
+    ? new Date(meta.published).toISOString().split('T')[0]
+    : '2026-03-01';
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `Senior Care Costs in ${stateName} (2025)`,
-    description: `Median monthly costs for assisted living, nursing homes, and in-home care in ${stateName} in 2025.`,
+    headline: `Senior Care Costs in ${stateName} (${surveyYear})`,
+    description: `Median monthly costs for assisted living, nursing homes, and in-home care in ${stateName} in ${surveyYear}.`,
     url: `${SITE_URL}/costs/${code.toLowerCase()}/`,
-    datePublished: '2026-03-01',
-    dateModified: '2026-03-01',
+    datePublished,
+    dateModified: datePublished,
     author: {
       '@type': 'Organization',
       name: 'Senior Living Options',
@@ -243,8 +247,7 @@ const description = `Median monthly costs for assisted living, nursing homes, an
         </p>
       </div>
     </section>
-    <div style="height: var(--sl-space-8); background-color: var(--sl-color-bg);"></div>
-    <div style="height: var(--sl-space-16); background-color: var(--sl-color-bg);"></div>
+    <div style="height: var(--sl-space-12); background-color: var(--sl-color-bg);"></div>
     <section class="u-container u-py-16 u-bg-primary-light">
       <StateSelector
         label="Compare another state"

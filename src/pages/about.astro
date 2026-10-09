@@ -3,11 +3,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import SkipLink from '../components/layout/SkipLink.astro';
+
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Senior Living Options',
+  url: `${SITE_URL}/about/`,
+  description:
+    'Senior Living Options is an independent editorial project dedicated to helping families navigate senior care decisions with clear, source-backed information.',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Senior Living Options',
+    url: SITE_URL,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/images/logo.webp`,
+    },
+  },
+};
 ---
 
 <BaseLayout
   title="About | Senior Living Options"
   description="Senior Living Options is an independent editorial project dedicated to helping families navigate senior care decisions with clear, source-backed information."
+  canonical={`${SITE_URL}/about/`}
+  jsonLd={jsonLd}
 >
   <SkipLink />
   <Header />
