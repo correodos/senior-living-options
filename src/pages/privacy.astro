@@ -1,0 +1,114 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import SkipLink from '../components/layout/SkipLink.astro';
+
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+const lastUpdated = 'October 2026';
+---
+
+<BaseLayout
+  title="Privacy Policy | Senior Living Options"
+  description="Privacy policy for Senior Living Options. Learn what data we collect and how we use it."
+  canonical={`${SITE_URL}/privacy/`}
+  robots="noindex,follow"
+>
+  <SkipLink />
+  <Header />
+  <main id="main-content" role="main">
+    <div class="u-container u-py-16" style="max-width: 780px; margin: 0 auto;">
+      <header class="u-mb-12">
+        <p class="c-eyebrow">Legal</p>
+        <h1 style="font-family: var(--sl-font-serif);">Privacy Policy</h1>
+        <p class="u-text-muted u-mt-2">Last updated: {lastUpdated}</p>
+      </header>
+      <section class="u-mb-10">
+        <h2>Overview</h2>
+        <p>
+          Senior Living Options ("the Site") is committed to protecting your privacy. This policy
+          explains what information is collected when you visit the Site and how it is used.
+        </p>
+        <p>
+          This Site does not sell, rent, or share personal data with third parties for marketing
+          purposes.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>Information We Collect</h2>
+        <p>This Site does not require registration or login.</p>
+        <p>
+          <strong>Accessibility reports:</strong> If you submit an accessibility report through our
+          contact form, we collect the information you provide (page URL and issue description).
+          This data is processed by{' '}
+          <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener">
+            Formspree
+          </a>{' '}
+          and sent to us by email. We use it solely to fix accessibility issues and do not share it
+          with third parties.
+        </p>
+        <p>
+          When you visit the Site, Cloudflare Pages — our hosting provider — automatically collects
+          standard server logs including IP addresses, browser type, and pages visited. This data is
+          used solely for security and performance purposes and is governed by{' '}
+          <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">
+            Cloudflare's Privacy Policy
+          </a>
+          .
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>Cookies</h2>
+        <p>
+          This Site does not use tracking cookies or advertising cookies. Cloudflare may set
+          technical cookies necessary for security and performance. These cookies do not identify
+          you personally.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>Third-Party Links</h2>
+        <p>
+          This Site contains links to external websites including government agencies, nonprofits,
+          and research organizations. We are not responsible for the privacy practices of those
+          sites. We encourage you to review their privacy policies before providing any personal
+          information.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>Children's Privacy</h2>
+        <p>
+          This Site is not directed at children under the age of 13 and does not knowingly collect
+          personal information from children.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>Your Rights</h2>
+        <p>
+          Since we do not collect personal data directly, there is no personal information to
+          access, correct, or delete. If you have concerns about data collected by Cloudflare,
+          please refer to their{' '}
+          <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">
+            privacy policy
+          </a>{' '}
+          and data subject request process.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>Changes to This Policy</h2>
+        <p>
+          We may update this Privacy Policy when we add new features or services — for example, if
+          we introduce a newsletter or analytics tools in the future. The date at the top of this
+          page reflects the most recent revision.
+        </p>
+      </section>
+      <section>
+        <h2>Contact</h2>
+        <p>
+          If you have questions about this Privacy Policy, you can reach us through the{' '}
+          <a href="/about/">About page</a>.
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

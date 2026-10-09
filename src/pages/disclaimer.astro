@@ -1,0 +1,75 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import SkipLink from '../components/layout/SkipLink.astro';
+
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+const lastUpdated = 'October 2026';
+---
+
+<BaseLayout
+  title="Medical & Financial Disclaimer | Senior Living Options"
+  description="Important disclaimer regarding the medical and financial information published on Senior Living Options."
+  canonical={`${SITE_URL}/disclaimer/`}
+  robots="noindex,follow"
+>
+  <SkipLink />
+  <Header />
+  <main id="main-content" role="main">
+    <div class="u-container u-py-16" style="max-width: 780px; margin: 0 auto;">
+      <header class="u-mb-12">
+        <p class="c-eyebrow">Legal</p>
+        <h1 style="font-family: var(--sl-font-serif);">Medical & Financial Disclaimer</h1>
+        <p class="u-text-muted u-mt-2">Last updated: {lastUpdated}</p>
+      </header>
+      <section class="u-mb-10">
+        <h2>Not Medical Advice</h2>
+        <p>
+          The content on Senior Living Options &mdash; including articles, guides, checklists, and
+          cost data &mdash; is intended for general informational purposes only. It is not a
+          substitute for professional medical advice, diagnosis, or treatment.
+        </p>
+        <p>
+          Always seek the advice of your physician, geriatric specialist, or other qualified health
+          provider regarding any medical condition or care decision. Never disregard professional
+          medical advice or delay seeking it because of something you read on this Site.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>Not Financial or Legal Advice</h2>
+        <p>
+          Information about costs, Medicare, Medicaid, VA benefits, long-term care insurance, and
+          other financial topics is provided for educational purposes only. It does not constitute
+          financial, tax, or legal advice.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>Cost Data</h2>
+        <p>
+          Cost figures published on this Site are median estimates sourced from the
+          CareScout/Genworth Cost of Care Survey. Actual costs vary significantly by location,
+          facility type, level of care, and individual needs. Data is updated annually but may not
+          reflect current market conditions in your area.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>No Endorsement of Facilities or Providers</h2>
+        <p>
+          Senior Living Options does not recommend, endorse, or certify any specific senior care
+          facility, provider, insurance product, or financial service. Any mention of a facility or
+          service is for illustrative or informational purposes only.
+        </p>
+      </section>
+      <section>
+        <h2>Emergency Situations</h2>
+        <p>
+          If you or someone you care for is experiencing a medical emergency, call 911 or your local
+          emergency number immediately. Do not rely on information from this Site in emergency
+          situations.
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

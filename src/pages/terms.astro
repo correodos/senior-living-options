@@ -1,0 +1,105 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import SkipLink from '../components/layout/SkipLink.astro';
+
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+const lastUpdated = 'October 2026';
+---
+
+<BaseLayout
+  title="Terms of Use | Senior Living Options"
+  description="Terms of use for Senior Living Options. Read our policies on content, liability, and acceptable use."
+  canonical={`${SITE_URL}/terms/`}
+  robots="noindex,follow"
+>
+  <SkipLink />
+  <Header />
+  <main id="main-content" role="main">
+    <div class="u-container u-py-16" style="max-width: 780px; margin: 0 auto;">
+      <header class="u-mb-12">
+        <p class="c-eyebrow">Legal</p>
+        <h1 style="font-family: var(--sl-font-serif);">Terms of Use</h1>
+        <p class="u-text-muted u-mt-2">Last updated: {lastUpdated}</p>
+      </header>
+      <section class="u-mb-10">
+        <h2>1. Acceptance of Terms</h2>
+        <p>
+          By accessing or using Senior Living Options ("the Site"), you agree to be bound by these
+          Terms of Use. If you do not agree, please do not use the Site.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>2. Informational Purpose Only</h2>
+        <p>
+          All content published on Senior Living Options is provided for general informational
+          purposes only. Nothing on this Site constitutes professional legal, financial, medical, or
+          caregiving advice.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>3. No Professional Relationship</h2>
+        <p>
+          Use of this Site does not create a professional relationship of any kind between you and
+          Senior Living Options. We are not a licensed healthcare provider, legal firm, financial
+          advisor, or care placement agency.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>4. Accuracy of Information</h2>
+        <p>
+          We make reasonable efforts to ensure the information on this Site is accurate and up to
+          date. However, senior care regulations, costs, and benefit programs change frequently. We
+          cannot guarantee that all information is current or complete at the time of your visit.
+        </p>
+        <p>
+          Cost data is sourced from the CareScout/Genworth Cost of Care Survey and is updated
+          annually. Regulatory and benefit information is sourced from federal government agencies
+          and may not reflect the most recent changes.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>5. External Links</h2>
+        <p>
+          This Site contains links to third-party websites, including government agencies,
+          nonprofits, and research organizations. These links are provided for reference only.
+          Senior Living Options does not control, endorse, or take responsibility for the content of
+          external sites.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>6. Intellectual Property</h2>
+        <p>
+          All original content on this Site &mdash; including text, structure, and design &mdash; is
+          the property of Senior Living Options. You may share or quote content for non-commercial
+          purposes with proper attribution and a link to the original page.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>7. Limitation of Liability</h2>
+        <p>
+          To the fullest extent permitted by law, Senior Living Options shall not be liable for any
+          direct, indirect, incidental, or consequential damages arising from your use of this Site
+          or reliance on its content.
+        </p>
+      </section>
+      <section class="u-mb-10">
+        <h2>8. Changes to These Terms</h2>
+        <p>
+          We may update these Terms of Use from time to time. The date at the top of this page
+          reflects the most recent revision. Continued use of the Site after changes are posted
+          constitutes acceptance of the updated terms.
+        </p>
+      </section>
+      <section>
+        <h2>9. Contact</h2>
+        <p>
+          If you have questions about these terms, you can reach us through the{' '}
+          <a href="/about/">About page</a>.
+        </p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
