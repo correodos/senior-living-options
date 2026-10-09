@@ -166,7 +166,6 @@
     color: var(--sl-color-primary);
   }
 
-  .c-header__nav-link:hover,
   .c-footer__grid {
     display: grid;
     gap: var(--sl-space-8);
