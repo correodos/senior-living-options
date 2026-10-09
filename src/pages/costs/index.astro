@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import SkipLink from '../../components/layout/SkipLink.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import Button from '../../components/ui/Button.astro';
+import { SURVEY_YEAR, fmtUsd, meta, national, states, topStates } from '../../utils/costs';
+import { breadcrumbsToJsonLd, combineJsonLd } from '../../utils/seo';
+
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+const canonical = `${SITE_URL}/costs/`;
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Costs & Finance', href: '/category/senior-care-costs/' },
+  { label: 'Costs by State' },
+];
+
+const columns = [
+  { key: 'assistedLiving', label: 'Assisted living' },
+  { key: 'nursingHomeSemi', label: 'Nursing home (semi-private)' },
+  { key: 'nursingHomePrivate', label: 'Nursing home (private)' },
+  { key: 'inHomeCare', label: 'In-home care' },
+] as const;
+
+const mostExpensive = topStates('assistedLiving', 5, 'highest');
+const leastExpensive = topStates('assistedLiving', 5, 'lowest');
+
+const title = `Senior Care Costs by State (${SURVEY_YEAR})`;
+const description = `Compare assisted living, nursing home, and in-home care costs in all 50 states. ${SURVEY_YEAR} median monthly costs from the CareScout Cost of Care Survey.`;
+
+const collectionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: canonical,
+  datePublished: meta.publishedDate,
+  dateModified: meta.publishedDate,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: states.length,
+    itemListElement: states.map((state, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: `Senior care costs in ${state.name}`,
+      url: `${SITE_URL}/costs/${state.code.toLowerCase()}/`,
+    })),
+  },
+};
+
+const jsonLd = combineJsonLd(collectionJsonLd, breadcrumbsToJsonLd(breadcrumbs, canonical));
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
+  <SkipLink />
+  <Header />
+  <main id="main-content" role="main">
+    <div class="u-container u-py-4">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+
+    <header class="u-container u-py-10">
+      <p class="c-eyebrow">Senior Care Costs {SURVEY_YEAR}</p>
+      <h1 class="hub-title">Senior Care Costs by State</h1>
+      <p class="hub-intro">
+        Median monthly costs for assisted living, nursing homes, and in-home care in all{' '}
+        {states.length}
+        states, from the {SURVEY_YEAR} CareScout (Genworth) Cost of Care Survey. Nationally, the
+        median is {fmtUsd(national.assistedLiving.monthly)} per month for assisted living,{' '}
+        {fmtUsd(national.nursingHomeSemi.monthly)}
+        for a semi-private nursing home room, and {fmtUsd(national.inHomeCare.monthly)} for in-home
+        care at 44 hours a week. Select a state to see its rankings, annual and hourly rates, and
+        how it compares.
+      </p>
+    </header>
+
+    <section class="u-container u-pb-12" aria-labelledby="extremes-heading">
+      <h2 id="extremes-heading" class="hub-h2">
+        Assisted living: highest and lowest cost states
+      </h2>
+      <div class="c-grid c-grid--2">
+        <div class="c-card">
+          <div class="c-card__content">
+            <h3 class="hub-h3">Most expensive</h3>
+            <ol class="hub-list">
+              {mostExpensive.map((state) => (
+                <li>
+                  <a href={`/costs/${state.code.toLowerCase()}/`}>{state.name}</a>
+                  <span>{fmtUsd(state.assistedLiving)}/mo</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+        <div class="c-card">
+          <div class="c-card__content">
+            <h3 class="hub-h3">Least expensive</h3>
+            <ol class="hub-list">
+              {leastExpensive.map((state) => (
+                <li>
+                  <a href={`/costs/${state.code.toLowerCase()}/`}>{state.name}</a>
+                  <span>{fmtUsd(state.assistedLiving)}/mo</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="u-container u-pb-12" aria-labelledby="table-heading">
+      <h2 id="table-heading" class="hub-h2">
+        All states: median monthly costs
+      </h2>
+      <p class="hub-note">
+        Select a column heading to sort. Select a state name to see its full cost breakdown.
+      </p>
+      <div class="hub-table-wrap">
+        <table class="hub-table" id="costs-table">
+          <thead>
+            <tr>
+              <th scope="col" aria-sort="ascending">
+                <button type="button" class="hub-sort" data-col="0" data-type="text">
+                  State
+                </button>
+              </th>
+              {columns.map((column, index) => (
+                <th scope="col" aria-sort="none">
+                  <button type="button" class="hub-sort" data-col={index + 1} data-type="number">
+                    {column.label}
+                  </button>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {states.map((state) => (
+              <tr>
+                <th scope="row" data-value={state.name}>
+                  <a href={`/costs/${state.code.toLowerCase()}/`}>{state.name}</a>
+                </th>
+                {columns.map((column) => (
+                  <td data-value={state[column.key] ?? ''}>{fmtUsd(state[column.key])}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row">U.S. median</th>
+              <td>{fmtUsd(national.assistedLiving.monthly)}</td>
+              <td>{fmtUsd(national.nursingHomeSemi.monthly)}</td>
+              <td>{fmtUsd(national.nursingHomePrivate.monthly)}</td>
+              <td>{fmtUsd(national.inHomeCare.monthly)}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="hub-note">
+        N/A means CareScout did not have enough data to report that figure for the state.
+      </p>
+    </section>
+
+    <section class="u-container u-pb-12">
+      <div class="u-flex u-gap-4 u-flex-wrap">
+        <Button
+          href="/article/senior-care-costs/senior-care-costs-complete-guide/"
+          variant="primary"
+          size="lg"
+        >
+          How to pay for senior care →
+        </Button>
+        <Button href="/category/senior-care-costs/" variant="outline" size="lg">
+          More cost guides
+        </Button>
+      </div>
+    </section>
+
+    <section
+      class="u-container u-py-10 u-bg-primary-light u-rounded-lg"
+      aria-labelledby="hub-method-heading"
+    >
+      <h2 id="hub-method-heading" class="hub-h2">
+        Methodology and sources
+      </h2>
+      <div class="u-flex u-flex-col u-gap-4 u-fs-sm u-text-muted">
+        <p>
+          <strong>Data source:</strong>
+          {meta.source}, published by CareScout (Genworth) in {meta.published}. Rates were collected
+          from long-term care providers between {meta.dataCollection}.
+        </p>
+        <p>
+          <strong>How figures are calculated:</strong> Assisted living is the median monthly rate
+          for a private one-bedroom unit. In-home care assumes 44 hours of non-medical care per
+          week. Monthly figures are the annual rate divided by 12. These are state-level medians,
+          and costs can differ significantly between cities and individual communities.
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  const table = document.getElementById('costs-table') as HTMLTableElement | null;
+  if (table) {
+    const body = table.tBodies[0];
+    const buttons = Array.from(table.querySelectorAll<HTMLButtonElement>('.hub-sort'));
+
+    const cellValue = (row: HTMLTableRowElement, col: number) =>
+      row.cells[col].getAttribute('data-value') ?? '';
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const col = Number(button.dataset.col);
+        const isNumber = button.dataset.type === 'number';
+        const header = button.closest('th') as HTMLTableCellElement;
+        const ascending = header.getAttribute('aria-sort') !== 'ascending';
+
+        const rows = Array.from(body.rows);
+        rows.sort((a, b) => {
+          const aValue = cellValue(a, col);
+          const bValue = cellValue(b, col);
+          if (isNumber) {
+            if (aValue === '' && bValue === '') return 0;
+            if (aValue === '') return 1;
+            if (bValue === '') return -1;
+            return ascending ? Number(aValue) - Number(bValue) : Number(bValue) - Number(aValue);
+          }
+          return ascending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+        });
+        rows.forEach((row) => body.appendChild(row));
+
+        table.querySelectorAll('thead th').forEach((th) => th.setAttribute('aria-sort', 'none'));
+        header.setAttribute('aria-sort', ascending ? 'ascending' : 'descending');
+      });
+    });
+  }
+</script>
+
+<style>
+  .hub-title {
+    font-family: var(--sl-font-serif);
+  }
+  .hub-intro {
+    margin-top: var(--sl-space-3);
+    font-size: var(--sl-fs-lg);
+    line-height: var(--sl-lh-relaxed);
+    color: var(--sl-color-text-muted);
+  }
+  .hub-h2 {
+    font-family: var(--sl-font-serif);
+    font-size: var(--sl-fs-2xl);
+    margin-bottom: var(--sl-space-4);
+  }
+  .hub-h3 {
+    font-size: var(--sl-fs-xl);
+    margin-bottom: var(--sl-space-3);
+  }
+  .hub-note {
+    margin: var(--sl-space-3) 0;
+    color: var(--sl-color-text-muted);
+  }
+  .hub-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--sl-space-2);
+  }
+  .hub-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--sl-space-4);
+  }
+  .hub-list a {
+    font-weight: 600;
+  }
+  .hub-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--sl-color-border);
+    border-radius: var(--sl-radius-lg);
+  }
+  .hub-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--sl-fs-sm);
+  }
+  .hub-table th,
+  .hub-table td {
+    padding: var(--sl-space-3) var(--sl-space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--sl-color-border);
+    white-space: nowrap;
+  }
+  .hub-table thead th {
+    background-color: var(--sl-color-primary);
+    color: var(--sl-color-primary-text);
+  }
+  .hub-table tbody th {
+    font-weight: 600;
+  }
+  .hub-table tfoot th,
+  .hub-table tfoot td {
+    font-weight: 700;
+    background-color: var(--sl-color-bg-alt);
+    border-bottom: none;
+  }
+  .hub-sort {
+    all: unset;
+    cursor: pointer;
+    font-weight: 700;
+    border-radius: var(--sl-radius-sm);
+  }
+  .hub-sort:focus-visible {
+    outline: 2px solid var(--sl-color-primary-text);
+    outline-offset: 3px;
+  }
+  .hub-sort::after {
+    content: ' ↕';
+    opacity: 0.7;
+  }
+  th[aria-sort='ascending'] .hub-sort::after {
+    content: ' ↑';
+    opacity: 1;
+  }
+  th[aria-sort='descending'] .hub-sort::after {
+    content: ' ↓';
+    opacity: 1;
+  }
+</style>

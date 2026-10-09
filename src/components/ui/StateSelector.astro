@@ -78,7 +78,7 @@ const states = [
     <div class="c-state-selector-widget__stat">
       <p class="c-state-selector-widget__stat-label">Nursing Home</p>
       <p class="c-state-selector-widget__stat-value">
-        $9,277<span>/mo</span>
+        $9,581<span>/mo</span>
       </p>
       <p class="c-state-selector-widget__stat-note">national median</p>
     </div>
@@ -101,6 +101,9 @@ const states = [
       View costs →
     </button>
   </form>
+  <p class="c-state-selector-widget__browse">
+    <a href="/costs/">Browse costs for all 50 states →</a>
+  </p>
   <p class="c-state-selector-widget__source">Source: CareScout/Genworth Cost of Care Survey 2025</p>
 </div>
 
@@ -174,14 +177,27 @@ const states = [
     display: flex;
     gap: var(--sl-space-3);
     flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
   @media (min-width: 480px) {
     .c-state-selector-widget__form {
       flex-direction: row;
+      justify-content: center;
     }
   }
   .c-state-selector-widget__form .c-state-selector__select {
     flex: 1;
+  }
+  @media (min-width: 480px) {
+    .c-state-selector-widget__form .c-state-selector__select {
+      max-width: 300px;
+    }
+  }
+  .c-state-selector-widget__browse {
+    margin: var(--sl-space-4) 0 0;
+    text-align: center;
+    font-weight: 600;
   }
   .c-state-selector-widget__source {
     font-size: var(--sl-fs-xs);

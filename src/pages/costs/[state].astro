@@ -6,213 +6,324 @@ import SkipLink from '../../components/layout/SkipLink.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
 import Button from '../../components/ui/Button.astro';
 import StateSelector from '../../components/ui/StateSelector.astro';
-import costsByStateRaw from '../../data/costs-by-state.json';
+import {
+  MONTHLY_LABELS,
+  SURVEY_YEAR,
+  extremes,
+  fmtUsd,
+  meta,
+  national,
+  nationalMonthly,
+  pctLabel,
+  rankLabel,
+  similarStates,
+  stateFaqs,
+  stateSummary,
+  states,
+  twoYearCosts,
+  type MonthlyKey,
+} from '../../utils/costs';
+import { breadcrumbsToJsonLd, combineJsonLd, generateFAQPageJsonLd } from '../../utils/seo';
 
-interface StateCostData {
-  name: string;
-  assistedLiving: number | null;
-  nursingHomeSemi: number | null;
-  nursingHomePrivate: number | null;
-  inHomeCare: number | null;
+export function getStaticPaths() {
+  return states.map((state) => ({
+    params: { state: state.code.toLowerCase() },
+    props: { code: state.code },
+  }));
 }
 
-type CostsByState = Record<
-  string,
-  | StateCostData
-  | { source: string; url: string; dataCollection: string; published: string; notes: string }
->;
+const { code } = Astro.props as { code: string };
+const state = states.find((s) => s.code === code)!;
 
-export async function getStaticPaths() {
-  const costsByState = costsByStateRaw as CostsByState;
-  return Object.entries(costsByState)
-    .filter(([key]) => key !== '_meta')
-    .map(([code, data]) => ({
-      params: { state: code.toLowerCase() },
-      props: { code, data: data as StateCostData },
-    }));
-}
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+const canonical = `${SITE_URL}/costs/${code.toLowerCase()}/`;
 
-const { code, data } = Astro.props as { code: string; data: StateCostData };
+const cards: Array<{
+  key: MonthlyKey;
+  icon: string;
+  color: string;
+  annual: number | null;
+}> = [
+  {
+    key: 'assistedLiving',
+    icon: '🏠',
+    color: 'var(--sl-color-al-text)',
+    annual: state.assistedLivingAnnual,
+  },
+  {
+    key: 'nursingHomeSemi',
+    icon: '🏥',
+    color: 'var(--sl-color-nh-text)',
+    annual: state.nursingHomeSemiAnnual,
+  },
+  {
+    key: 'nursingHomePrivate',
+    icon: '🏥',
+    color: 'var(--sl-color-nh-text)',
+    annual: state.nursingHomePrivateAnnual,
+  },
+  {
+    key: 'inHomeCare',
+    icon: '🏡',
+    color: 'var(--sl-color-ihc-text)',
+    annual: state.inHomeCareAnnual,
+  },
+];
 
-const national = {
-  assistedLiving: 6200,
-  nursingHomeSemi: 9277,
-  nursingHomePrivate: 10798,
-  inHomeCare: 6673,
-};
+const compareKeys: MonthlyKey[] = [
+  'assistedLiving',
+  'nursingHomeSemi',
+  'nursingHomePrivate',
+  'inHomeCare',
+];
 
-function fmt(val: number | null) {
-  if (!val) return 'N/A';
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(val);
-}
-
-function diff(val: number | null, national: number) {
-  if (!val) return null;
-  const pct = Math.round(((val - national) / national) * 100);
-  return pct > 0 ? `+${pct}% vs national` : `${pct}% vs national`;
-}
-
-function diffColor(val: number | null, national: number) {
-  if (!val) return 'var(--sl-color-text-muted)';
-  return val > national ? 'var(--sl-color-error, #c0392b)' : 'var(--sl-color-success, #1a7a4a)';
-}
-
-const surveyYear = (costsByStateRaw as any)._meta?.published?.split(' ')[1] ?? '2025';
-
-function buildCanonical(code: string) {
-  const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
-  return `${SITE_URL}/costs/${code.toLowerCase()}/`;
-}
-
-function buildJsonLd(stateName: string, code: string) {
-  const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
-  const meta = (costsByStateRaw as any)._meta;
-  const datePublished = meta?.published
-    ? new Date(meta.published).toISOString().split('T')[0]
-    : '2026-03-01';
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: `Senior Care Costs in ${stateName} (${surveyYear})`,
-    description: `Median monthly costs for assisted living, nursing homes, and in-home care in ${stateName} in ${surveyYear}.`,
-    url: `${SITE_URL}/costs/${code.toLowerCase()}/`,
-    datePublished,
-    dateModified: datePublished,
-    author: {
-      '@type': 'Organization',
-      name: 'Senior Living Options',
-      url: SITE_URL,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Senior Living Options',
-      url: SITE_URL,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${SITE_URL}/images/logo.webp`,
-      },
-    },
-    isPartOf: {
-      '@type': 'WebSite',
-      name: 'Senior Living Options',
-      url: SITE_URL,
-    },
-  };
-}
+const faqs = stateFaqs(state);
+const similar = similarStates(code);
+const twoYears = twoYearCosts(state);
 
 const breadcrumbs = [
   { label: 'Home', href: '/' },
   { label: 'Costs & Finance', href: '/category/senior-care-costs/' },
-  { label: data.name },
+  { label: 'Costs by State', href: '/costs/' },
+  { label: state.name },
 ];
 
-const title = `Senior Care Costs in ${data.name} (${surveyYear}) | Senior Living Options`;
-const description = `Median monthly costs for assisted living, nursing homes, and in-home care in ${data.name} in ${surveyYear}, compared to national averages. Source: CareScout/Genworth Cost of Care Survey.`;
+const title = `Senior Care Costs in ${state.name} (${SURVEY_YEAR})`;
+const description = `${state.name} senior care costs ${SURVEY_YEAR}: assisted living ${fmtUsd(state.assistedLiving)}/mo, nursing home ${fmtUsd(state.nursingHomeSemi)}/mo, in-home care ${fmtUsd(state.inHomeCare)}/mo, compared with U.S. medians.`;
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  url: canonical,
+  datePublished: meta.publishedDate,
+  dateModified: meta.publishedDate,
+  author: { '@type': 'Organization', name: 'Senior Living Options', url: SITE_URL },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Senior Living Options',
+    url: SITE_URL,
+    logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/logo.webp` },
+  },
+  isPartOf: { '@type': 'WebSite', name: 'Senior Living Options', url: SITE_URL },
+};
+
+const jsonLd = combineJsonLd(
+  articleJsonLd,
+  breadcrumbsToJsonLd(breadcrumbs, canonical),
+  generateFAQPageJsonLd(faqs)
+);
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  canonical={buildCanonical(code)}
-  jsonLd={buildJsonLd(data.name, code)}
->
+<BaseLayout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
   <SkipLink />
   <Header />
   <main id="main-content" role="main">
-    <nav class="u-container u-py-4" aria-label="Breadcrumb navigation">
+    <div class="u-container u-py-4">
       <Breadcrumbs items={breadcrumbs} />
-    </nav>
+    </div>
+
     <header class="u-container u-py-10">
-      <p class="c-eyebrow">Senior Care Costs 2025</p>
-      <h1 style="font-family: var(--sl-font-serif);">Senior Care Costs in {data.name}</h1>
-      <p class="u-text-muted u-fs-lg u-mt-2">
-        Median monthly costs compared to the national average.
-      </p>
+      <p class="c-eyebrow">Senior Care Costs {SURVEY_YEAR}</p>
+      <h1 class="state-title">Senior Care Costs in {state.name}</h1>
+      <p class="state-summary">{stateSummary(state)}</p>
     </header>
-    <section class="u-container u-pb-16">
-      <div class="c-grid c-grid--2" style="gap: var(--sl-space-6);">
-        <div class="c-card" style="border-top: 3px solid var(--sl-color-al-text);">
+
+    <section class="u-container u-pb-12" aria-labelledby="medians-heading">
+      <h2 id="medians-heading" class="state-h2">
+        Median monthly costs in {state.name}
+      </h2>
+      <div class="c-grid c-grid--2">
+        {cards.map((card) => {
+          const value = state[card.key];
+          return (
+            <div class="c-card cost-card" style={`border-top: 3px solid ${card.color};`}>
+              <div class="c-card__content">
+                <p class="c-eyebrow" style={`color: ${card.color};`}>
+                  {card.icon} {MONTHLY_LABELS[card.key]}
+                </p>
+                <p class="cost-value">
+                  {fmtUsd(value)}
+                  {value !== null && <span class="cost-unit">/mo</span>}
+                </p>
+                {value !== null ? (
+                  <>
+                    <p class="cost-pct">{pctLabel(value, card.key)}</p>
+                    <p class="cost-meta">{rankLabel(code, card.key)}</p>
+                    <p class="cost-meta">
+                      {fmtUsd(card.annual)} per year · National median:{' '}
+                      {fmtUsd(nationalMonthly(card.key))}/mo
+                    </p>
+                  </>
+                ) : (
+                  <p class="cost-meta">
+                    CareScout did not have enough data to report this figure for {state.name}.
+                  </p>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="u-container u-pb-12" aria-labelledby="more-heading">
+      <h2 id="more-heading" class="state-h2">
+        Other care options in {state.name}
+      </h2>
+      <div class="c-grid c-grid--3">
+        <div class="c-card cost-card">
           <div class="c-card__content">
-            <p class="c-eyebrow" style="color: var(--sl-color-al-text);">
-              🏠 Assisted Living
+            <p class="c-eyebrow">Adult day health care</p>
+            <p class="cost-value">
+              {fmtUsd(state.adultDayDaily)}
+              {state.adultDayDaily !== null && <span class="cost-unit">/day</span>}
             </p>
-            <p style="font-family: var(--sl-font-serif); font-size: var(--sl-fs-3xl); font-weight: 700; margin: var(--sl-space-2) 0;">
-              {fmt(data.assistedLiving)}
-              <span style="font-size: var(--sl-fs-base); font-weight: 400; color: var(--sl-color-text-muted);">
-                /mo
-              </span>
+            <p class="cost-meta">
+              {state.adultDayAnnual !== null
+                ? `${fmtUsd(state.adultDayAnnual)} per year at 5 days a week`
+                : 'Not enough data reported for this state'}
             </p>
-            <p style="font-size: var(--sl-fs-sm); color: {diffColor(data.assistedLiving, national.assistedLiving)}; font-weight: 600;">
-              {diff(data.assistedLiving, national.assistedLiving)}
-            </p>
-            <p class="u-text-muted u-fs-sm u-mt-2">
-              National median: {fmt(national.assistedLiving)}/mo
-            </p>
+            <p class="cost-meta">National median: {fmtUsd(national.adultDay.daily)}/day</p>
           </div>
         </div>
-        <div class="c-card" style="border-top: 3px solid var(--sl-color-nh-text);">
+        <div class="c-card cost-card">
           <div class="c-card__content">
-            <p class="c-eyebrow" style="color: var(--sl-color-nh-text);">
-              🏥 Nursing Home (semi-private)
+            <p class="c-eyebrow">Non-medical caregiver</p>
+            <p class="cost-value">
+              {fmtUsd(state.inHomeCareHourly)}
+              <span class="cost-unit">/hour</span>
             </p>
-            <p style="font-family: var(--sl-font-serif); font-size: var(--sl-fs-3xl); font-weight: 700; margin: var(--sl-space-2) 0;">
-              {fmt(data.nursingHomeSemi)}
-              <span style="font-size: var(--sl-fs-base); font-weight: 400; color: var(--sl-color-text-muted);">
-                /mo
-              </span>
-            </p>
-            <p style="font-size: var(--sl-fs-sm); color: {diffColor(data.nursingHomeSemi, national.nursingHomeSemi)}; font-weight: 600;">
-              {diff(data.nursingHomeSemi, national.nursingHomeSemi)}
-            </p>
-            <p class="u-text-muted u-fs-sm u-mt-2">
-              National median: {fmt(national.nursingHomeSemi)}/mo
-            </p>
+            <p class="cost-meta">{fmtUsd(state.inHomeCareAnnual)} per year at 44 hours a week</p>
+            <p class="cost-meta">National median: {fmtUsd(national.inHomeCare.hourly)}/hour</p>
           </div>
         </div>
-        <div class="c-card" style="border-top: 3px solid var(--sl-color-nh-text);">
+        <div class="c-card cost-card">
           <div class="c-card__content">
-            <p class="c-eyebrow" style="color: var(--sl-color-nh-text);">
-              🏥 Nursing Home (private)
+            <p class="c-eyebrow">Private duty nurse (in the home)</p>
+            <p class="cost-value">
+              {fmtUsd(state.privateDutyNurseHourly)}
+              {state.privateDutyNurseHourly !== null && <span class="cost-unit">/hour</span>}
             </p>
-            <p style="font-family: var(--sl-font-serif); font-size: var(--sl-fs-3xl); font-weight: 700; margin: var(--sl-space-2) 0;">
-              {fmt(data.nursingHomePrivate)}
-              <span style="font-size: var(--sl-fs-base); font-weight: 400; color: var(--sl-color-text-muted);">
-                /mo
-              </span>
+            <p class="cost-meta">
+              {state.privateDutyNurseHourly !== null
+                ? 'Licensed nursing care provided at home'
+                : 'Not enough data reported for this state'}
             </p>
-            <p style="font-size: var(--sl-fs-sm); color: {diffColor(data.nursingHomePrivate, national.nursingHomePrivate)}; font-weight: 600;">
-              {diff(data.nursingHomePrivate, national.nursingHomePrivate)}
-            </p>
-            <p class="u-text-muted u-fs-sm u-mt-2">
-              National median: {fmt(national.nursingHomePrivate)}/mo
-            </p>
-          </div>
-        </div>
-        <div class="c-card" style="border-top: 3px solid var(--sl-color-ihc-text);">
-          <div class="c-card__content">
-            <p class="c-eyebrow" style="color: var(--sl-color-ihc-text);">
-              🏡 In-Home Care
-            </p>
-            <p style="font-family: var(--sl-font-serif); font-size: var(--sl-fs-3xl); font-weight: 700; margin: var(--sl-space-2) 0;">
-              {fmt(data.inHomeCare)}
-              <span style="font-size: var(--sl-fs-base); font-weight: 400; color: var(--sl-color-text-muted);">
-                /mo
-              </span>
-            </p>
-            <p style="font-size: var(--sl-fs-sm); color: {diffColor(data.inHomeCare, national.inHomeCare)}; font-weight: 600;">
-              {diff(data.inHomeCare, national.inHomeCare)}
-            </p>
-            <p class="u-text-muted u-fs-sm u-mt-2">
-              National median: {fmt(national.inHomeCare)}/mo
+            <p class="cost-meta">
+              National median: {fmtUsd(national.privateDutyNurse.hourly)}/hour
             </p>
           </div>
         </div>
       </div>
-      <div class="u-mt-10 u-flex u-gap-4 u-flex-wrap" style="padding-top: var(--sl-space-8);">
+    </section>
+
+    <section class="u-container u-pb-12" aria-labelledby="compare-heading">
+      <h2 id="compare-heading" class="state-h2">
+        How {state.name} compares
+      </h2>
+      <div class="state-table-wrap">
+        <table class="state-table">
+          <thead>
+            <tr>
+              <th scope="col">Monthly median</th>
+              <th scope="col">{state.name}</th>
+              <th scope="col">U.S. median</th>
+              <th scope="col">Lowest state</th>
+              <th scope="col">Highest state</th>
+            </tr>
+          </thead>
+          <tbody>
+            {compareKeys.map((key) => {
+              const { highest, lowest } = extremes(key);
+              return (
+                <tr>
+                  <th scope="row">{MONTHLY_LABELS[key]}</th>
+                  <td>{fmtUsd(state[key])}</td>
+                  <td>{fmtUsd(nationalMonthly(key))}</td>
+                  <td>
+                    <a href={`/costs/${lowest.code.toLowerCase()}/`}>{lowest.name}</a>{' '}
+                    {fmtUsd(lowest[key])}
+                  </td>
+                  <td>
+                    <a href={`/costs/${highest.code.toLowerCase()}/`}>{highest.name}</a>{' '}
+                    {fmtUsd(highest[key])}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="u-container u-pb-12" aria-labelledby="two-years-heading">
+      <h2 id="two-years-heading" class="state-h2">
+        What two years of care could cost
+      </h2>
+      <p class="state-note">
+        Illustrative totals using the {state.name} monthly median multiplied by 24 months. Actual
+        costs depend on the community, the level of care, and annual price increases.
+      </p>
+      <div class="state-table-wrap">
+        <table class="state-table">
+          <thead>
+            <tr>
+              <th scope="col">Care type</th>
+              <th scope="col">Two-year estimate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {twoYears.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td>{row.total === null ? 'N/A' : fmtUsd(row.total)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="u-container u-pb-12" aria-labelledby="similar-heading">
+      <h2 id="similar-heading" class="state-h2">
+        States with similar costs
+      </h2>
+      <p class="state-note">
+        These states have median assisted living, nursing home, and in-home care costs closest to
+        {state.name}.
+      </p>
+      <ul class="state-links">
+        {similar.map((other) => (
+          <li>
+            <a href={`/costs/${other.code.toLowerCase()}/`}>{other.name}</a>
+            <span>
+              Assisted living {fmtUsd(other.assistedLiving)}/mo · Nursing home{' '}
+              {fmtUsd(other.nursingHomeSemi)}/mo
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p class="state-note">
+        <a href="/costs/">Compare senior care costs in all 50 states →</a>
+      </p>
+    </section>
+
+    <section class="u-container u-pb-12" aria-labelledby="faq-heading">
+      <h2 id="faq-heading" class="state-h2">
+        Frequently asked questions about costs in {state.name}
+      </h2>
+      {faqs.map((faq) => (
+        <div class="state-faq">
+          <h3>{faq.question}</h3>
+          <p>{faq.answer}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="u-container u-pb-12">
+      <div class="u-flex u-gap-4 u-flex-wrap">
         <Button
           href="/article/senior-care-costs/senior-care-costs-complete-guide/"
           variant="primary"
@@ -225,30 +336,36 @@ const description = `Median monthly costs for assisted living, nursing homes, an
         </Button>
       </div>
     </section>
-    <div style="height: var(--sl-space-8); background-color: var(--sl-color-bg);"></div>
+
     <section
       class="u-container u-py-10 u-bg-primary-light u-rounded-lg"
       aria-labelledby="methodology-heading"
     >
-      <h2 id="methodology-heading" class="u-sr-only">
-        Methodology & Sources
+      <h2 id="methodology-heading" class="state-h2">
+        Methodology and sources
       </h2>
       <div class="u-flex u-flex-col u-gap-4 u-fs-sm u-text-muted">
         <p>
-          <strong>Data source:</strong> CareScout/Genworth Cost of Care Survey 2025 (
-          <a href="https://www.carescout.com/cost-of-care" target="_blank" rel="noopener">
-            carescout.com/cost-of-care
-          </a>
-          )
+          <strong>Data source:</strong>
+          {meta.source}, published by CareScout (Genworth) in {meta.published}. Rates were collected
+          from long-term care providers between {meta.dataCollection}.
         </p>
         <p>
-          <strong>Data collection:</strong> July–November 2025 | <strong>Published:</strong> March
-          2026
+          <strong>How figures are calculated:</strong> Assisted living is the median monthly rate
+          for a private one-bedroom unit. Nursing home figures are median monthly rates for
+          semi-private and private rooms. In-home care assumes 44 hours of non-medical care per
+          week, and adult day health care assumes five days per week. Annual figures are the
+          reported annual medians; monthly figures are the annual rate divided by 12.
+        </p>
+        <p>
+          <strong>Keep in mind:</strong> These are state-level medians. Costs can differ
+          significantly between cities and counties, and between individual communities. Use them to
+          plan and to ask better questions, and confirm current prices directly with providers.
         </p>
       </div>
     </section>
-    <div style="height: var(--sl-space-12); background-color: var(--sl-color-bg);"></div>
-    <section class="u-container u-py-16 u-bg-primary-light">
+
+    <section class="u-container u-py-16 u-bg-primary-light u-mt-8">
       <StateSelector
         label="Compare another state"
         subtitle="Select a different state to see its costs"
@@ -257,3 +374,108 @@ const description = `Median monthly costs for assisted living, nursing homes, an
   </main>
   <Footer />
 </BaseLayout>
+
+<style>
+  .state-title {
+    font-family: var(--sl-font-serif);
+  }
+  .state-summary {
+    margin-top: var(--sl-space-3);
+    font-size: var(--sl-fs-lg);
+    line-height: var(--sl-lh-relaxed);
+    color: var(--sl-color-text-muted);
+  }
+  .state-h2 {
+    font-family: var(--sl-font-serif);
+    font-size: var(--sl-fs-2xl);
+    margin-bottom: var(--sl-space-6);
+  }
+  .state-note {
+    margin-bottom: var(--sl-space-4);
+    color: var(--sl-color-text-muted);
+  }
+  .cost-value {
+    font-family: var(--sl-font-serif);
+    font-size: var(--sl-fs-3xl);
+    font-weight: 700;
+    margin: var(--sl-space-2) 0;
+  }
+  .cost-unit {
+    font-family: var(--sl-font-sans);
+    font-size: var(--sl-fs-base);
+    font-weight: 400;
+    color: var(--sl-color-text-muted);
+  }
+  .cost-pct {
+    font-size: var(--sl-fs-sm);
+    font-weight: 600;
+  }
+  .cost-meta {
+    margin-top: var(--sl-space-1);
+    font-size: var(--sl-fs-sm);
+    color: var(--sl-color-text-muted);
+  }
+  .state-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--sl-color-border);
+    border-radius: var(--sl-radius-lg);
+  }
+  .state-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--sl-fs-sm);
+  }
+  .state-table th,
+  .state-table td {
+    padding: var(--sl-space-3) var(--sl-space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--sl-color-border);
+    vertical-align: top;
+  }
+  .state-table thead th {
+    background-color: var(--sl-color-primary);
+    color: var(--sl-color-primary-text);
+    white-space: nowrap;
+  }
+  .state-table td a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .state-table tbody tr:last-child th,
+  .state-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .state-table tbody th {
+    font-weight: 600;
+  }
+  .state-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--sl-space-4);
+    display: grid;
+    gap: var(--sl-space-3);
+  }
+  .state-links li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sl-space-1) var(--sl-space-4);
+    align-items: baseline;
+  }
+  .state-links a {
+    font-weight: 600;
+  }
+  .state-links span {
+    font-size: var(--sl-fs-sm);
+    color: var(--sl-color-text-muted);
+  }
+  .state-faq {
+    margin-bottom: var(--sl-space-6);
+  }
+  .state-faq h3 {
+    font-size: var(--sl-fs-xl);
+    margin-bottom: var(--sl-space-2);
+  }
+  .state-faq p {
+    line-height: var(--sl-lh-relaxed);
+  }
+</style>
