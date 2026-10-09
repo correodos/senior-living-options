@@ -15,7 +15,15 @@ export default defineConfig({
   prefetch: {
     defaultStrategy: 'hover',
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) =>
+        !page.includes('/privacy/') &&
+        !page.includes('/terms/') &&
+        !page.includes('/disclaimer/') &&
+        !page.includes('/accessibility/'),
+    }),
+  ],
   vite: {
     build: {
       cssCodeSplit: true,

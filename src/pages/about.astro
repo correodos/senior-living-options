@@ -6,6 +6,8 @@ import SkipLink from '../components/layout/SkipLink.astro';
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
 
+const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
@@ -40,6 +42,7 @@ const jsonLd = {
         <h1 style="font-family: var(--sl-font-serif);">
           Honest information for one of the hardest decisions families face
         </h1>
+        <p class="u-text-muted u-mt-2">Last updated: {lastUpdated}</p>
         <p class="u-text-muted u-fs-lg u-mt-4">
           Senior Living Options is an independent editorial project. No facility advertising. No
           sponsored placements. Just clear, researched guides built from primary sources.
