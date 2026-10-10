@@ -2,7 +2,7 @@
 title: 'How to Pay for Senior Care: Every Option Explained'
 description: 'Senior care costs can be overwhelming. This guide breaks down every way to pay — from Medicare and Medicaid to LTC insurance, VA benefits, and more.'
 publishDate: 2026-10-04
-lastReviewed: 2026-10-09
+lastReviewed: 2026-10-10
 category: senior-care-costs
 isPillar: true
 readingTime: 13
@@ -12,7 +12,7 @@ tags: ["senior care costs", "how to pay for senior care", "Medicare senior care 
 states: ["CA", "TX", "FL", "NY", "PA", "OH", "IL", "NC"]
 showTableOfContents: true
 sources:
-  - "https://acl.gov/ltc/basic-needs/how-much-care-will-you-need"
+  - "https://aspe.hhs.gov/sites/default/files/documents/08b8b7825f7bc12d2c79261fd7641c88/ltss-risks-financing-2022.pdf"
   - "https://acl.gov/ltc/costs-and-who-pays/what-is-long-term-care-insurance/receiving-long-term-care-insurance-benefits"
   - "https://www.medicare.gov/coverage/nursing-home-care.html"
   - "https://www.medicare.gov/coverage/home-health-services"
@@ -24,11 +24,11 @@ sources:
   - "https://www.hud.gov/program_offices/housing/sfh/hecm/hecmhome"
   - "https://eldercare.acl.gov/Public/Index.aspx"
   - "https://www.milliman.com/en/insight/ltci-2024-statistics-experience-reporting-forms"
-  - "https://www.aaltci.org/long-term-care-insurance/learning-center/ltcfacts-2025.php"
+  - "https://www.aaltci.org/2026-AALTCI-Long-Term-Care-Insurance-Price-Index/"
   - "https://www.medicaid.gov/federal-policy-guidance/downloads/cib04272026.pdf"
 ---
 > **Key Takeaways**
-> - Someone turning 65 today has almost a **70% chance of needing long-term care** at some point — yet most families have no plan for how to pay for it.
+> - More than half (**56%**) of Americans turning 65 will need long-term care at some point, and about 1 in 5 will need it for more than five years (HHS, 2022) — yet most families have no plan for how to pay for it.
 > - **Medicare does not pay for long-term care.** It covers up to 100 days of skilled nursing after a hospital stay — nothing more. Assisted living, personal home care, and custodial nursing home care are not covered.
 > - **Medicaid is the primary payer** for long-term nursing home care in the U.S., but qualifying requires spending most assets down to roughly $2,000 first (varies by state).
 > - The national median cost of senior care ranges from **$24,700/year for adult day health care** to **$129,575/year for a private nursing home room** (2025).
@@ -154,15 +154,17 @@ Not all LTC policies are equivalent. Before a policy is useful, check:
 
 Many insurers now sell **hybrid life insurance / LTC policies** that combine death benefit coverage with long-term care benefits. If you never need LTC, your heirs receive the death benefit. These have become popular partly because the standalone LTC market has contracted significantly — covered lives in standalone plans have been declining by roughly 1–3% per year for the past decade, as of 2024. Only about **5.8 million Americans** hold standalone LTC insurance policies today — approximately 7% of people over 60. The top five insurers by in-force premium (Genworth, John Hancock, Northwestern Mutual, MetLife, and Unum) account for nearly 60% of all policyholders. Annual industry claims reached **$17 billion in 2024**, up over 80% since 2015, reflecting an aging policyholder base.
 
-**What standalone LTC premiums look like in 2026.** The American Association for Long-Term Care Insurance (AALTCI) publishes annual benchmarks based on a $165,000 benefit pool with 3% annual inflation protection. For a single healthy applicant purchasing in 2026:
+**What standalone LTC premiums look like in 2026.** The American Association for Long-Term Care Insurance (AALTCI), an industry trade group, publishes an annual price index. Its 2026 figures (July 2026, Illinois prices) are for a $165,000 initial benefit pool. "Level" means the benefit stays at $165,000; "3% growth" means it rises 3% a year to keep up with care costs:
 
-- **Age 55 male:** approximately $950–$1,000/year
-- **Age 55 female:** approximately $1,500–$1,600/year (women pay more due to longer lifespans and higher claim rates)
-- **Age 60 male:** approximately $1,200/year
-- **Age 60 female:** approximately $4,450/year for comparable protection
-- **Couple, both age 60:** quotes ranging from roughly $4,591 to $7,173/year depending on insurer
+- **Age 55 man:** about $950/year level, or $2,200/year with 3% growth
+- **Age 55 woman:** about $1,500/year level, or $3,750/year with 3% growth
+- **Age 60 woman:** about $4,450/year on average
+- **Couple, both age 60, with 3% growth:** roughly $4,591 to $7,173/year depending on the insurer
+- **Couple, both age 65, with 3% growth:** about $7,030/year on average
 
-Note that premiums for standalone policies are **not guaranteed to remain fixed** — many insurers have implemented substantial rate increases on in-force policies over the past two decades. This is a real risk to account for when purchasing. The longer the elimination period you choose, the lower the initial premium.
+These are industry estimates, not official figures. Your price will depend on your state, your health and the company, so compare quotes for the same benefits.
+
+Note that premiums for standalone policies are **not guaranteed to remain fixed** — many insurers have implemented substantial rate increases on in-force policies over the past two decades. This is a real risk to account for when purchasing. The longer the elimination period you choose, the lower the initial premium. To weigh whether a policy makes sense for you, including your odds of needing care and the 2026 tax rules, see [Long-Term Care Insurance: Is It Worth It?](/article/senior-care-costs/long-term-care-insurance-worth-it/)
 
 ---
 
@@ -271,7 +273,7 @@ A HECM (Home Equity Conversion Mortgage) lets homeowners 62 and older borrow aga
 
 ## Sources
 
-1. **Administration for Community Living (ACL) / LongTermCare.gov.** "How Much Care Will You Need?" https://acl.gov/ltc/basic-needs/how-much-care-will-you-need. Accessed: 2026-10-04.
+1. **U.S. Department of Health and Human Services, ASPE.** "Long-Term Services and Supports for Older Americans: Risks and Financing, 2022." Research brief, August 2022 (revised). https://aspe.hhs.gov/sites/default/files/documents/08b8b7825f7bc12d2c79261fd7641c88/ltss-risks-financing-2022.pdf. Accessed: 2026-10-10.
 
 2. **Administration for Community Living (ACL) / LongTermCare.gov.** "Receiving Long-Term Care Insurance Benefits." https://acl.gov/ltc/costs-and-who-pays/what-is-long-term-care-insurance/receiving-long-term-care-insurance-benefits. Accessed: 2026-10-04.
 
@@ -297,6 +299,6 @@ A HECM (Home Equity Conversion Mortgage) lets homeowners 62 and older borrow aga
 
 13. **Milliman (Smetek, Gunnlaugsson, Giese, Clemens).** "The Long-Term Care Insurance Industry Through 2024: Summary Statistics and Observations from the Experience Reporting Forms." December 31, 2025. https://www.milliman.com/en/insight/ltci-2024-statistics-experience-reporting-forms.
 
-14. **American Association for Long-Term Care Insurance (AALTCI).** "2026 Long-Term Care Insurance Price Index." https://www.aaltci.org/long-term-care-insurance/learning-center/ltcfacts-2025.php. Data cited via AALTCI press release, 2026, and SmartAsset analysis of AALTCI data.
+14. **American Association for Long-Term Care Insurance (AALTCI).** "2026 Long-Term Care Insurance Price Index." Updated July 2026. https://www.aaltci.org/2026-AALTCI-Long-Term-Care-Insurance-Price-Index/. Accessed: October 2026.
 
 15. **Centers for Medicare & Medicaid Services (CMS).** "Updated 2026 SSI and Spousal Impoverishment Standards." CMCS Informational Bulletin, April 27, 2026. https://www.medicaid.gov/federal-policy-guidance/downloads/cib04272026.pdf.
