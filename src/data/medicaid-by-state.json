@@ -1,0 +1,534 @@
+{
+  "_meta": {
+    "schemaVersion": 1,
+    "lastFullReview": "2026-10-10",
+    "description": "State Medicaid long-term care facts used on /costs/[state]/. Only entries with status \"verified\" are shown on the site. Updated by the update-medicaid-data skill.",
+    "statusValues": {
+      "verified": "value read directly from an official source (method \"read\")",
+      "review": "found but not confirmed from an official source; never shown on the site"
+    },
+    "agencyVerifiedBy": {
+      "http": "page returned HTTP 200",
+      "search-index": "page appears in the search index restricted to the official domain (automated access is blocked)"
+    }
+  },
+  "AK": {
+    "name": "Alaska",
+    "agency": {
+      "name": "Alaska Department of Health, Division of Public Assistance",
+      "url": "https://health.alaska.gov/en/services/division-of-public-assistance-services/",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "AL": {
+    "name": "Alabama",
+    "agency": {
+      "name": "Alabama Medicaid Agency",
+      "url": "https://medicaid.alabama.gov/content/3.0_Apply/3.2_Qualifying/3.2.4_Medicaid_Nursing_Home.aspx",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "AR": {
+    "name": "Arkansas",
+    "agency": {
+      "name": "Arkansas Department of Human Services, Medicaid",
+      "url": "https://humanservices.arkansas.gov/divisions-shared-services/medical-services/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "AZ": {
+    "name": "Arizona",
+    "agency": {
+      "name": "Arizona Health Care Cost Containment System (AHCCCS), Arizona Long Term Care System",
+      "url": "https://www.azahcccs.gov/Members/GetCovered/Categories/ALTCS.html",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "CA": {
+    "name": "California",
+    "agency": {
+      "name": "California Department of Health Care Services (Medi-Cal)",
+      "url": "https://www.dhcs.ca.gov/medi-cal/",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 130000,
+      "source": "https://www.dhcs.ca.gov/medi-cal/help/",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "review",
+      "method": "search-excerpt",
+      "note": "Limit stated by DHCS through 2027-06-30 ($65,000 per additional household member). DHCS blocks automated access; confirm by hand before publishing."
+    }
+  },
+  "CO": {
+    "name": "Colorado",
+    "agency": {
+      "name": "Colorado Department of Health Care Policy and Financing (Health First Colorado)",
+      "url": "https://hcpf.colorado.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "CT": {
+    "name": "Connecticut",
+    "agency": {
+      "name": "Connecticut Department of Social Services",
+      "url": "https://portal.ct.gov/dss",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "DE": {
+    "name": "Delaware",
+    "agency": {
+      "name": "Delaware Division of Medicaid and Medical Assistance",
+      "url": "https://dhss.delaware.gov/dmma/",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "FL": {
+    "name": "Florida",
+    "agency": {
+      "name": "Florida Department of Children and Families, Medicaid",
+      "url": "https://www.myflfamilies.com/medicaid",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "GA": {
+    "name": "Georgia",
+    "agency": {
+      "name": "Georgia Department of Community Health, Medicaid",
+      "url": "https://medicaid.georgia.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "HI": {
+    "name": "Hawaii",
+    "agency": {
+      "name": "Hawaii Med-QUEST Division",
+      "url": "https://medquest.hawaii.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "IA": {
+    "name": "Iowa",
+    "agency": {
+      "name": "Iowa Health and Human Services, Medicaid",
+      "url": "https://hhs.iowa.gov/programs/welcome-iowa-medicaid",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "ID": {
+    "name": "Idaho",
+    "agency": {
+      "name": "Idaho Department of Health and Welfare, Medicaid",
+      "url": "https://healthandwelfare.idaho.gov/services-programs/medicaid-health",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "IL": {
+    "name": "Illinois",
+    "agency": {
+      "name": "Illinois Department of Healthcare and Family Services",
+      "url": "https://hfs.illinois.gov/medicalprograms.html",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "IN": {
+    "name": "Indiana",
+    "agency": {
+      "name": "Indiana Family and Social Services Administration, Medicaid",
+      "url": "https://www.in.gov/medicaid/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "KS": {
+    "name": "Kansas",
+    "agency": {
+      "name": "KanCare (Kansas Medicaid)",
+      "url": "https://www.kancare.ks.gov/apply-now",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "KY": {
+    "name": "Kentucky",
+    "agency": {
+      "name": "Kentucky Department for Medicaid Services",
+      "url": "https://www.chfs.ky.gov/agencies/dms/member/Pages/Apply.aspx",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "LA": {
+    "name": "Louisiana",
+    "agency": {
+      "name": "Louisiana Department of Health, Medicaid",
+      "url": "https://ldh.la.gov/medicaid",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "MA": {
+    "name": "Massachusetts",
+    "agency": {
+      "name": "MassHealth",
+      "url": "https://www.mass.gov/masshealth",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "MD": {
+    "name": "Maryland",
+    "agency": {
+      "name": "Maryland Department of Health, Medicaid",
+      "url": "https://health.maryland.gov/mmcp/Pages/home.aspx",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "ME": {
+    "name": "Maine",
+    "agency": {
+      "name": "MaineCare (Office of MaineCare Services)",
+      "url": "https://www.maine.gov/dhhs/oms/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "MI": {
+    "name": "Michigan",
+    "agency": {
+      "name": "Michigan Department of Health and Human Services, Medicaid",
+      "url": "https://www.michigan.gov/mdhhs/assistance-programs/medicaid/portalhome/beneficiaries/apply",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "MN": {
+    "name": "Minnesota",
+    "agency": {
+      "name": "Minnesota Department of Human Services, Medical Assistance",
+      "url": "https://mn.gov/dhs/people-we-serve/adults/health-care/health-care-programs/programs-and-services/medical-assistance.jsp",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "MO": {
+    "name": "Missouri",
+    "agency": {
+      "name": "MO HealthNet (Missouri Medicaid)",
+      "url": "https://mydss.mo.gov/mhd",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "MS": {
+    "name": "Mississippi",
+    "agency": {
+      "name": "Mississippi Division of Medicaid",
+      "url": "https://medicaid.ms.gov/how-to-apply-2/",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "MT": {
+    "name": "Montana",
+    "agency": {
+      "name": "Montana Department of Public Health and Human Services",
+      "url": "https://dphhs.mt.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "NC": {
+    "name": "North Carolina",
+    "agency": {
+      "name": "North Carolina Medicaid",
+      "url": "https://medicaid.ncdhhs.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "ND": {
+    "name": "North Dakota",
+    "agency": {
+      "name": "North Dakota Health and Human Services, Medicaid",
+      "url": "https://www.hhs.nd.gov/healthcare/medicaid",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "NE": {
+    "name": "Nebraska",
+    "agency": {
+      "name": "Nebraska Department of Health and Human Services, Medicaid and Long-Term Care",
+      "url": "https://dhhs.ne.gov/",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "NH": {
+    "name": "New Hampshire",
+    "agency": {
+      "name": "New Hampshire Department of Health and Human Services, Medicaid",
+      "url": "https://www.dhhs.nh.gov/programs-services/medicaid/nh-medicaid-medical-assistance-eligibility",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "NJ": {
+    "name": "New Jersey",
+    "agency": {
+      "name": "New Jersey Division of Medical Assistance and Health Services",
+      "url": "https://www.nj.gov/humanservices/dmahs/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "NM": {
+    "name": "New Mexico",
+    "agency": {
+      "name": "New Mexico Health Care Authority, Medical Assistance Division",
+      "url": "https://www.hca.nm.gov/about_the_department/medical_assistance_division/",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "NV": {
+    "name": "Nevada",
+    "agency": {
+      "name": "Nevada Division of Health Care Financing and Policy",
+      "url": "https://dhcfp.nv.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "NY": {
+    "name": "New York",
+    "agency": {
+      "name": "New York State Department of Health, Medicaid",
+      "url": "https://www.health.ny.gov/health_care/medicaid/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    },
+    "homeEquityLimit": {
+      "value": 1130000,
+      "source": "https://healthweb-back.health.ny.gov/health_care/medicaid/publications/docs/gis/26ma03.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "communitySpouseResourceMin": {
+      "value": 74820,
+      "source": "https://healthweb-back.health.ny.gov/health_care/medicaid/publications/docs/gis/26ma03.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    }
+  },
+  "OH": {
+    "name": "Ohio",
+    "agency": {
+      "name": "Ohio Department of Medicaid",
+      "url": "https://medicaid.ohio.gov/families-and-individuals/ads/2-get-coverage",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "OK": {
+    "name": "Oklahoma",
+    "agency": {
+      "name": "Oklahoma Health Care Authority (SoonerCare)",
+      "url": "https://oklahoma.gov/ohca.html",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "OR": {
+    "name": "Oregon",
+    "agency": {
+      "name": "Oregon Health Authority, Oregon Health Plan",
+      "url": "https://www.oregon.gov/oha/hsd/ohp/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "PA": {
+    "name": "Pennsylvania",
+    "agency": {
+      "name": "Pennsylvania Department of Human Services, Medical Assistance",
+      "url": "https://www.pa.gov/agencies/dhs",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "RI": {
+    "name": "Rhode Island",
+    "agency": {
+      "name": "Rhode Island Executive Office of Health and Human Services",
+      "url": "https://eohhs.ri.gov/consumer/health-care",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "SC": {
+    "name": "South Carolina",
+    "agency": {
+      "name": "South Carolina Department of Health and Human Services",
+      "url": "https://www.scdhhs.gov/",
+      "verifiedBy": "search-index",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "SD": {
+    "name": "South Dakota",
+    "agency": {
+      "name": "South Dakota Department of Social Services, Medical Services",
+      "url": "https://dss.sd.gov/medicaid/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "TN": {
+    "name": "Tennessee",
+    "agency": {
+      "name": "TennCare",
+      "url": "https://www.tn.gov/tenncare.html",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "TX": {
+    "name": "Texas",
+    "agency": {
+      "name": "Texas Health and Human Services Commission, Medicaid",
+      "url": "https://www.hhs.texas.gov/services/health/medicaid-chip",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://fhb.hhs.texas.gov/node/23451",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://fhb.hhs.texas.gov/node/23451",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "avgPrivatePayRate": {
+      "value": 262.37,
+      "unit": "daily",
+      "source": "https://fhb.hhs.texas.gov/node/23451",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "review",
+      "method": "read",
+      "note": "Described as a current estimate; effective date not stated."
+    }
+  },
+  "UT": {
+    "name": "Utah",
+    "agency": {
+      "name": "Utah Department of Health and Human Services, Medicaid",
+      "url": "https://medicaid.utah.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "VA": {
+    "name": "Virginia",
+    "agency": {
+      "name": "Virginia Department of Medical Assistance Services",
+      "url": "https://www.dmas.virginia.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "VT": {
+    "name": "Vermont",
+    "agency": {
+      "name": "Vermont Department of Vermont Health Access",
+      "url": "https://dvha.vermont.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "WA": {
+    "name": "Washington",
+    "agency": {
+      "name": "Washington State Health Care Authority",
+      "url": "https://www.hca.wa.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "WI": {
+    "name": "Wisconsin",
+    "agency": {
+      "name": "Wisconsin Department of Health Services, Medicaid",
+      "url": "https://www.dhs.wisconsin.gov/medicaid/index.htm",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "WV": {
+    "name": "West Virginia",
+    "agency": {
+      "name": "West Virginia Bureau for Medical Services",
+      "url": "https://bms.wv.gov/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    }
+  },
+  "WY": {
+    "name": "Wyoming",
+    "agency": {
+      "name": "Wyoming Department of Health, Healthcare Financing (Medicaid)",
+      "url": "https://health.wyo.gov/healthcarefin/medicaid/",
+      "verifiedBy": "http",
+      "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://ecom.wyo.gov/tables/table1a",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "avgPrivatePayRate": {
+      "value": 10114,
+      "unit": "monthly",
+      "source": "https://ecom.wyo.gov/tables/table1a",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "review",
+      "method": "read",
+      "note": "Table 1A row C; unit is not stated on the page and is assumed monthly."
+    }
+  }
+}

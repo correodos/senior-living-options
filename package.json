@@ -12,7 +12,8 @@
     "lint:fix": "eslint src --ext .astro,.ts,.js --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "validate:content": "tsx scripts/validate-content.ts"
+    "validate:content": "tsx scripts/validate-content.ts && tsx scripts/validate-medicaid.ts",
+    "validate:medicaid": "tsx scripts/validate-medicaid.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

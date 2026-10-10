@@ -24,6 +24,7 @@ import {
   type MonthlyKey,
 } from '../../utils/costs';
 import { breadcrumbsToJsonLd, combineJsonLd, generateFAQPageJsonLd } from '../../utils/seo';
+import { getMedicaidInfo } from '../../utils/medicaid';
 
 export function getStaticPaths() {
   return states.map((state) => ({
@@ -77,6 +78,7 @@ const compareKeys: MonthlyKey[] = [
   'inHomeCare',
 ];
 
+const medicaid = getMedicaidInfo(code);
 const faqs = stateFaqs(state);
 const similar = similarStates(code);
 const twoYears = twoYearCosts(state);
@@ -310,6 +312,52 @@ const jsonLd = combineJsonLd(
       </p>
     </section>
 
+    {medicaid && (
+      <section class="u-container u-pb-12" aria-labelledby="medicaid-heading">
+        <h2 id="medicaid-heading" class="state-h2">
+          Paying with Medicaid in {state.name}
+        </h2>
+        <p class="state-note">
+          Medicaid can help pay for nursing home care when a person's income and assets are within
+          the limits set by their state. Rules differ from state to state and change over time, so
+          confirm the current figures with the agency before making decisions.
+        </p>
+        {medicaid.facts.length > 0 ? (
+          <dl class="medicaid-facts">
+            {medicaid.facts.map((fact) => (
+              <div class="medicaid-fact">
+                <dt>{fact.label}</dt>
+                <dd>
+                  <strong>{fact.value}</strong>
+                  <span class="medicaid-source">
+                    Source:{' '}
+                    <a href={fact.source} rel="noopener">
+                      {fact.sourceHost}
+                    </a>
+                    {fact.detail}
+                  </span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        ) : (
+          <p class="state-note">
+            We have not yet verified {state.name}'s specific Medicaid limits against official
+            sources, so we do not show them here.
+          </p>
+        )}
+        <p class="state-note">
+          <a href={medicaid.agency.url} rel="noopener">
+            Apply or get help: {medicaid.agency.name} →
+          </a>
+        </p>
+        <p class="state-note medicaid-disclaimer">
+          This is general information, not legal or financial advice. An elder law attorney or your
+          state agency can explain how the rules apply to a specific situation.
+        </p>
+      </section>
+    )}
+
     <section class="u-container u-pb-12" aria-labelledby="faq-heading">
       <h2 id="faq-heading" class="state-h2">
         Frequently asked questions about costs in {state.name}
@@ -467,6 +515,39 @@ const jsonLd = combineJsonLd(
   .state-links span {
     font-size: var(--sl-fs-sm);
     color: var(--sl-color-text-muted);
+  }
+  .medicaid-facts {
+    display: grid;
+    gap: var(--sl-space-3);
+    margin: 0 0 var(--sl-space-4);
+  }
+  .medicaid-fact {
+    border: 1px solid var(--sl-color-border);
+    border-radius: var(--sl-radius-lg);
+    padding: var(--sl-space-4);
+  }
+  .medicaid-fact dt {
+    font-weight: 600;
+    margin-bottom: var(--sl-space-1);
+  }
+  .medicaid-fact dd {
+    margin: 0;
+  }
+  .medicaid-fact strong {
+    font-size: var(--sl-fs-xl);
+  }
+  .medicaid-source {
+    display: block;
+    margin-top: var(--sl-space-1);
+    font-size: var(--sl-fs-sm);
+    color: var(--sl-color-text-muted);
+  }
+  .medicaid-source a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .medicaid-disclaimer {
+    font-size: var(--sl-fs-sm);
   }
   .state-faq {
     margin-bottom: var(--sl-space-6);
