@@ -90,13 +90,37 @@ const seo = buildSearchSEOMeta(query);
       return;
     }
 
-    const categoryInfo: Record<string, { label: string; color: string }> = {
-      'assisted-living': { label: 'Assisted Living', color: 'var(--sl-color-al)' },
-      'memory-care': { label: 'Memory Care', color: 'var(--sl-color-mc)' },
-      'nursing-homes': { label: 'Nursing Homes', color: 'var(--sl-color-nh)' },
-      'in-home-care': { label: 'In-Home Care', color: 'var(--sl-color-ihc)' },
-      'senior-care-costs': { label: 'Costs & Finance', color: 'var(--sl-color-cf)' },
-      'caregiver-resources': { label: 'Caregiver Help', color: 'var(--sl-color-cr)' },
+    const categoryInfo: Record<string, { label: string; color: string; bg: string }> = {
+      'assisted-living': {
+        label: 'Assisted Living',
+        color: 'var(--sl-color-al-text)',
+        bg: 'var(--sl-color-al-bg)',
+      },
+      'memory-care': {
+        label: 'Memory Care',
+        color: 'var(--sl-color-mc-text)',
+        bg: 'var(--sl-color-mc-bg)',
+      },
+      'nursing-homes': {
+        label: 'Nursing Homes',
+        color: 'var(--sl-color-nh-text)',
+        bg: 'var(--sl-color-nh-bg)',
+      },
+      'in-home-care': {
+        label: 'In-Home Care',
+        color: 'var(--sl-color-ihc-text)',
+        bg: 'var(--sl-color-ihc-bg)',
+      },
+      'senior-care-costs': {
+        label: 'Costs & Finance',
+        color: 'var(--sl-color-cf-text)',
+        bg: 'var(--sl-color-cf-bg)',
+      },
+      'caregiver-resources': {
+        label: 'Caregiver Help',
+        color: 'var(--sl-color-cr-text)',
+        bg: 'var(--sl-color-cr-bg)',
+      },
     };
 
     container.innerHTML = `
@@ -107,12 +131,13 @@ const seo = buildSearchSEOMeta(query);
             const cat = categoryInfo[item.category] || {
               label: item.category,
               color: 'var(--sl-color-primary)',
+              bg: 'var(--sl-color-primary-light)',
             };
             const excerpt = item.content.slice(0, 200).replace(/\s+\S*$/, '') + '…';
             return `
               <article class="c-card">
                 <div class="c-card__content">
-                  <span class="c-badge" style="background-color: ${cat.color}15; color: ${cat.color}">${cat.label}</span>
+                  <span class="c-badge" style="background-color: ${cat.bg}; color: ${cat.color}">${cat.label}</span>
                   <h3 class="c-card__title"><a href="${item.url}">${escapeHtml(item.title)}</a></h3>
                   <p class="c-card__excerpt">${escapeHtml(excerpt)}</p>
                   <a href="${item.url}" class="c-btn c-btn--secondary c-btn--sm u-mt-4">Read article</a>

@@ -539,7 +539,9 @@ const combinedJsonLd = combineJsonLd(
     padding: var(--sl-space-4) var(--sl-space-5);
     text-align: left;
     border-bottom: 1px solid var(--sl-color-border);
-    white-space: nowrap;
+    /* Long cells wrap so tables fit on phones; min-width keeps columns readable */
+    min-width: 5.5rem;
+    vertical-align: top;
   }
 
   .c-pillar-content :global(th) {
@@ -563,6 +565,11 @@ const combinedJsonLd = combineJsonLd(
   .c-pillar-content :global(strong) {
     color: var(--sl-color-text);
     font-weight: 700;
+  }
+
+  /* Bold text in header cells keeps the header color (not the dark body text color) */
+  .c-pillar-content :global(th strong) {
+    color: inherit;
   }
 
   .c-pillar-content :global(a) {
@@ -720,6 +727,12 @@ const combinedJsonLd = combineJsonLd(
     .c-pillar-content :global(blockquote) {
       padding: var(--sl-space-6) var(--sl-space-4);
       font-size: var(--sl-fs-base);
+    }
+    /* Tighter cells so wrapped 3-column tables fit a phone without scrolling */
+    .c-pillar-content :global(th),
+    .c-pillar-content :global(td) {
+      padding: var(--sl-space-3);
+      min-width: 4.5rem;
     }
     .c-pillar-content :global(ul:first-of-type) {
       padding: var(--sl-space-6);
@@ -982,8 +995,8 @@ const combinedJsonLd = combineJsonLd(
       const table = wrapper.querySelector('table');
       if (!table) return;
 
-      // Add scroll hint text on mobile
-      if (window.innerWidth < 640) {
+      // Add scroll hint text on mobile, only when the table actually scrolls
+      if (window.innerWidth < 640 && table.scrollWidth > table.clientWidth + 1) {
         const hint = document.createElement('div');
         hint.className = 'table-scroll-hint';
         hint.textContent = '← Swipe to see more →';

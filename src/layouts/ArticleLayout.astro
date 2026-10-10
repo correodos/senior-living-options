@@ -319,13 +319,20 @@ const combinedJsonLd = combineJsonLd(
     padding: var(--sl-space-3) var(--sl-space-4);
     text-align: left;
     border: 1px solid var(--sl-color-border);
-    white-space: nowrap;
+    /* Long cells wrap so tables fit on phones; min-width keeps columns readable */
+    min-width: 5.5rem;
+    vertical-align: top;
   }
 
   .c-article-content :global(th) {
     background-color: var(--sl-color-primary);
     color: var(--sl-color-primary-text);
     font-weight: 600;
+  }
+
+  /* Bold text in header cells keeps the header color (not the dark body text color) */
+  .c-article-content :global(th strong) {
+    color: inherit;
   }
 
   .c-article-content :global(tr:nth-child(even) td) {
@@ -452,6 +459,8 @@ const combinedJsonLd = combineJsonLd(
     width: 100%;
     max-height: 400px;
     object-fit: cover;
+    /* Keep faces in view: the 400px cap crops 16:9 photos to ~3:1 */
+    object-position: center 25%;
     border-radius: var(--sl-radius-lg);
     margin-top: var(--sl-space-6);
   }
