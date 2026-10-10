@@ -55,7 +55,7 @@ Facilities range in size from as few as 25 residents to 100 or more. Most offer 
 
 Some communities also offer specialized [memory care](/article/memory-care/memory-care-complete-guide/) units for residents with Alzheimer's disease or other forms of dementia. These units typically have secured entrances and staff trained specifically in dementia care. → [Learn more about memory care](/category/memory-care/)
 
-Assisted living is regulated at the **state level**, not federally, which means requirements and terminology vary significantly. Depending on where you live, these facilities may be called residential care facilities, adult care homes, personal care homes, or board and care homes.
+Assisted living is regulated at the **state level**, not federally, which means requirements and terminology vary significantly. Depending on where you live, these facilities may be called residential care facilities, adult care homes, personal care homes, or board and care homes. For a closer look at who lives in assisted living, what daily help it includes and why the names differ by state, see [What Is Assisted Living?](/article/assisted-living/what-is-assisted-living/)
 
 ### Assisted Living vs. Nursing Home: Key Differences
 

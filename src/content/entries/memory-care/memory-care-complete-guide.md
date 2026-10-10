@@ -92,7 +92,7 @@ When you visit a facility, ask directly: How many hours of dementia-specific tra
 
 ## Signs it's time to consider memory care
 
-The transition from home care or assisted living to memory care usually builds over weeks or months. According to the National Institute on Aging, these are the clearest signs that someone with dementia needs a higher level of care:
+The transition from home care or assisted living to memory care usually builds over weeks or months. For how memory care fits each stage of Alzheimer's and what to expect on moving day, see [What Is Memory Care?](/article/memory-care/what-is-memory-care/) According to the National Institute on Aging, these are the clearest signs that someone with dementia needs a higher level of care:
 
 ### Safety concerns that can't be managed at home:
 - Wandering outside the home, especially at night or in unsafe conditions
