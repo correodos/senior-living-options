@@ -35,3 +35,7 @@ coverage/
 *.temp
 # Saved official pages used to verify Medicaid data (kept local)
 docs/medicaid-sources/
+
+# Article drafts and image inbox (local until published)
+drafts/*
+!drafts/README.md

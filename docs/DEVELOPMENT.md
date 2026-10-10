@@ -36,8 +36,9 @@ está en **[NUEVO_ARTICULO.md](NUEVO_ARTICULO.md)**. Resumen:
 npm run validate:content
 ```
 
-El texto de los artículos lo escribe el dueño del sitio. El asistente no redacta artículos; solo
-mantiene la infraestructura.
+Los artículos nuevos se hacen con la skill `new-article` (`.claude/skills/new-article/`): el dueño
+da el título, el asistente escribe un borrador en `drafts/` y solo lo publica con su visto bueno.
+Flujo completo en [NUEVO_ARTICULO.md](NUEVO_ARTICULO.md#0-flujo-con-el-asistente).
 
 ### 2. Campos del frontmatter
 

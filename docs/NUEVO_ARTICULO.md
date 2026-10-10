@@ -3,8 +3,8 @@
 > Guía paso a paso para que un artículo nuevo quede igual que los actuales. Actualizada en octubre
 > de 2026. El texto del artículo se escribe en **inglés de EE. UU.**; esta guía está en español.
 >
-> El contenido lo escribe el dueño del sitio. El asistente no redacta artículos: solo mantiene la
-> plantilla, el diseño y el validador.
+> El asistente redacta artículos **solo cuando el dueño le da el título**, en `drafts/`, y solo los
+> publica con su visto bueno. Ver la sección 0.
 
 Referencias reales para copiar el formato:
 
@@ -12,6 +12,34 @@ Referencias reales para copiar el formato:
 | ----------------------- | ----------------------------------------------------------------------------------------------------- |
 | Guía pilar (modelo)     | `src/content/entries/assisted-living/assisted-living-complete-guide.md`                               |
 | Artículo normal/soporte | `src/content/entries/caregiver-resources/senior-living-options-complete-comparison-of-all-7-types.md` |
+
+---
+
+## 0. Flujo con el asistente
+
+Sistema cerrado: no se crea ningún artículo sin una orden del dueño con el título.
+
+1. **Orden**: `/new-article <título>` (o "el próximo artículo es: …"), con notas opcionales (tipo,
+   keywords, ángulo).
+2. **Borrador**: el asistente investiga solo en las fuentes autorizadas
+   (`.claude/skills/new-article/sources.md`), escribe `drafts/<categoria>/<slug>.md` y el prompt de
+   la imagen en `drafts/images/<slug>.prompt.md`. Entrega un resumen con fuentes, una tabla de
+   coherencia de datos con el resto del sitio y los marcadores pendientes (`[VERIFICAR]`…).
+3. **Revisión**: el dueño pide cambios o da el visto bueno. En el borrador cada cifra lleva
+   `(Source: …)` para poder comprobarla.
+4. **Imagen**: el dueño genera la imagen con el prompt y la deja en `drafts/images/<slug>.png` (o
+   `.jpg`/`.webp`). `npm run image:optimize -- <slug>` crea las tres WebP en `public/images/`.
+5. **Publicación** (solo con visto bueno): se quitan las citas `(Source: …)` y los enlaces externos
+   del texto (las fuentes quedan en `## Sources`), se mueve el archivo a `src/content/entries/`, se
+   enlaza desde la guía pilar y se valida y compila. Sin commit ni push.
+
+| Comando                                      | Qué hace                                                                             |
+| -------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `npm run validate:draft`                     | Valida todos los borradores (formato, fuentes autorizadas, enlaces, FAQ, marcadores) |
+| `npm run validate:draft -- <slug> --publish` | Control final antes de publicar                                                      |
+| `npm run image:optimize -- <slug>`           | Imagen del buzón → `public/images/<slug>.webp`, `-768`, `-480`                       |
+
+Instrucciones completas para el asistente: `.claude/skills/new-article/SKILL.md` y `prompt.md`.
 
 ---
 

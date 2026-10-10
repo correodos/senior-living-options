@@ -13,7 +13,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "validate:content": "tsx scripts/validate-content.ts && tsx scripts/validate-medicaid.ts",
-    "validate:medicaid": "tsx scripts/validate-medicaid.ts"
+    "validate:medicaid": "tsx scripts/validate-medicaid.ts",
+    "validate:draft": "tsx scripts/validate-draft.ts",
+    "image:optimize": "tsx scripts/optimize-image.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
