@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import SkipLink from '../components/layout/SkipLink.astro';
+
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Senior Living Options',
+  url: `${SITE_URL}/contact/`,
+  description:
+    'Report an error or outdated figure, or send feedback about Senior Living Options. We cannot give medical, legal, or personal financial advice.',
+  publisher: { '@type': 'Organization', name: 'Senior Living Options', url: SITE_URL },
+};
+---
+
+<BaseLayout
+  title="Contact | Senior Living Options"
+  description="Report an error or an outdated figure, or send feedback about Senior Living Options. We cannot give medical, legal, or personal financial advice."
+  canonical={`${SITE_URL}/contact/`}
+  jsonLd={jsonLd}
+>
+  <SkipLink />
+  <Header />
+  <main id="main-content" role="main">
+    <div class="u-container u-py-16" style="max-width: 780px; margin: 0 auto;">
+      <header class="u-mb-12">
+        <p class="c-eyebrow">Contact</p>
+        <h1 style="font-family: var(--sl-font-serif);">Contact us</h1>
+        <p class="u-text-muted u-mt-2">
+          Found a mistake, an outdated figure, or have a suggestion for the site? Send us a message.
+        </p>
+      </header>
+
+      <section class="u-mb-10">
+        <h2>What you can write to us about</h2>
+        <ul>
+          <li>An error, a broken link, or a figure that looks out of date.</li>
+          <li>A suggestion for a topic or a way to make a page clearer.</li>
+          <li>
+            A problem using the site. For accessibility issues, you can also use the
+            <a href="/accessibility/">accessibility form</a>.
+          </li>
+        </ul>
+      </section>
+
+      <section class="u-mb-10" aria-labelledby="no-advice">
+        <h2 id="no-advice">What we cannot help with</h2>
+        <p>
+          Senior Living Options is an independent information site. We are not doctors, nurses,
+          lawyers, or financial advisors, so we cannot answer questions about a person's health,
+          diagnosis, medication, or treatment, give legal or personal financial advice, help with a
+          Medicare or Medicaid application, or recommend a specific facility or provider.
+        </p>
+        <p>For those questions, these are better places to start:</p>
+        <ul>
+          <li>
+            <strong>Medical emergency:</strong> call 911.
+          </li>
+          <li>
+            <strong>Medicare questions:</strong>
+            <a href="https://www.medicare.gov/" rel="noopener">
+              Medicare.gov
+            </a>{' '}
+            or 1-800-MEDICARE (1-800-633-4227).
+          </li>
+          <li>
+            <strong>Medicaid:</strong> your state Medicaid agency. Every state page under
+            <a href="/costs/">Costs by State</a> links to it.
+          </li>
+          <li>
+            <strong>Local help and services for older adults:</strong> the
+            <a href="https://eldercare.acl.gov/" rel="noopener">
+              Eldercare Locator
+            </a>
+            (1-800-677-1116).
+          </li>
+          <li>
+            <strong>Legal or financial planning:</strong> an elder law attorney or a licensed
+            financial professional.
+          </li>
+        </ul>
+      </section>
+
+      <section class="u-mb-12" aria-labelledby="contact-form-title">
+        <h2 id="contact-form-title">Send a message</h2>
+        <p class="u-text-muted u-mb-8">
+          Please do not include medical or other sensitive personal information. We read every
+          message, but we cannot promise a reply to each one.
+        </p>
+        <form action="https://formspree.io/f/xdeazgzd" method="POST" class="c-form">
+          <input type="hidden" name="_subject" value="Contact form: Senior Living Options" />
+          <input type="hidden" name="_next" value={`${SITE_URL}/contact/thanks/`} />
+          <div class="c-form-group">
+            <label for="name" class="c-form-label">
+              Name (optional)
+            </label>
+            <input type="text" id="name" name="name" autocomplete="name" class="c-form-input" />
+          </div>
+          <div class="c-form-group">
+            <label for="email" class="c-form-label">
+              Email <span aria-hidden="true">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+              aria-describedby="email-hint"
+              class="c-form-input"
+            />
+            <span id="email-hint" class="c-form-hint">
+              Only used to reply to your message.
+            </span>
+          </div>
+          <div class="c-form-group">
+            <label for="reason" class="c-form-label">
+              What is it about? <span aria-hidden="true">*</span>
+            </label>
+            <select id="reason" name="reason" required class="c-form-input">
+              <option value="">Choose one</option>
+              <option>Error or outdated figure</option>
+              <option>Suggestion</option>
+              <option>Problem using the site</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="c-form-group">
+            <label for="page" class="c-form-label">
+              Page address (optional)
+            </label>
+            <input
+              type="url"
+              id="page"
+              name="page"
+              placeholder={`${SITE_URL}/...`}
+              class="c-form-input"
+            />
+          </div>
+          <div class="c-form-group">
+            <label for="message" class="c-form-label">
+              Message <span aria-hidden="true">*</span>
+            </label>
+            <textarea id="message" name="message" rows="6" required class="c-form-input"></textarea>
+          </div>
+          <input
+            type="text"
+            name="_gotcha"
+            style="display:none"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          <button type="submit" class="c-btn c-btn--primary c-btn--lg">
+            Send message
+          </button>
+        </form>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  section a,
+  main p a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

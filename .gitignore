@@ -33,3 +33,5 @@ coverage/
 # Temporary
 *.tmp
 *.temp
+# Saved official pages used to verify Medicaid data (kept local)
+docs/medicaid-sources/

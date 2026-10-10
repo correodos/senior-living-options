@@ -44,7 +44,8 @@ export default defineConfig({
         !page.includes('/privacy/') &&
         !page.includes('/terms/') &&
         !page.includes('/disclaimer/') &&
-        !page.includes('/accessibility/'),
+        !page.includes('/accessibility/') &&
+        !page.includes('/contact/thanks/'),
       serialize(item) {
         const relative = item.url.replace(SITE_URL + '/', '');
         const lastmod = relative.startsWith('costs/')

@@ -1,31 +1,118 @@
+---
+import { getCollection } from 'astro:content';
+import { getAllCategories } from '../../utils/category';
+
+const categories = getAllCategories();
+const entryIds = new Set((await getCollection('entries')).map((entry) => entry.id));
+
+const guides = [
+  ...categories
+    .filter((cat) => cat.pillarSlug && entryIds.has(cat.pillarSlug))
+    .map((cat) => ({ href: `/article/${cat.pillarSlug}/`, label: `${cat.label}: Complete Guide` })),
+  ...(entryIds.has('caregiver-resources/senior-living-options-complete-comparison-of-all-7-types')
+    ? [
+        {
+          href: '/article/caregiver-resources/senior-living-options-complete-comparison-of-all-7-types/',
+          label: 'Compare All 7 Senior Living Types',
+        },
+      ]
+    : []),
+];
+
+const aboutLinks = [
+  { href: '/about/', label: 'About' },
+  { href: '/editorial-policy/', label: 'Editorial Policy' },
+  { href: '/contact/', label: 'Contact' },
+  { href: '/search/', label: 'Search' },
+];
+
+const legalLinks = [
+  { href: '/privacy/', label: 'Privacy Policy' },
+  { href: '/terms/', label: 'Terms of Use' },
+  { href: '/disclaimer/', label: 'Disclaimer' },
+  { href: '/accessibility/', label: 'Accessibility' },
+];
+---
+
 <footer class="c-footer" role="contentinfo">
   <div class="u-container">
-    <div class="c-footer__content">
+    <div class="c-footer__grid">
+      <div class="c-footer__brand">
+        <a href="/" class="c-footer__logo">
+          Senior Living Options
+        </a>
+        <p class="c-footer__description">
+          Clear, source-based guides on senior living and elder care for families and caregivers.
+        </p>
+        <p class="c-footer__description">
+          Cost figures come from official and published sources, such as the CareScout 2025 survey,
+          CMS and state Medicaid agencies, and are reviewed every year.
+        </p>
+      </div>
+
+      <nav aria-labelledby="footer-topics">
+        <h2 id="footer-topics" class="c-footer__column-title">
+          Topics
+        </h2>
+        <ul class="c-footer__links">
+          {categories.map((cat) => (
+            <li>
+              <a href={`/category/${cat.slug}/`} class="c-footer__link">
+                {cat.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="/costs/" class="c-footer__link">
+              Costs by State
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="footer-guides">
+        <h2 id="footer-guides" class="c-footer__column-title">
+          Guides
+        </h2>
+        <ul class="c-footer__links">
+          {guides.map((guide) => (
+            <li>
+              <a href={guide.href} class="c-footer__link">
+                {guide.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="footer-about">
+        <h2 id="footer-site" class="c-footer__column-title">
+          Site
+        </h2>
+        <ul class="c-footer__links">
+          {aboutLinks.map((link) => (
+            <li>
+              <a href={link.href} class="c-footer__link">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="c-footer__bottom">
       <p>&copy; {new Date().getFullYear()} Senior Living Options. All rights reserved.</p>
       <p>
         The information on this site is for educational purposes only and does not constitute
         medical, legal, or financial advice.
       </p>
-      <nav aria-label="Footer">
-        <a href="/costs/" class="c-footer__link">
-          Costs by State
-        </a>
-        <span aria-hidden="true">·</span>
-        <a href="/privacy/" class="c-footer__link">
-          Privacy Policy
-        </a>
-        <span aria-hidden="true">·</span>
-        <a href="/terms/" class="c-footer__link">
-          Terms of Use
-        </a>
-        <span aria-hidden="true">·</span>
-        <a href="/disclaimer/" class="c-footer__link">
-          Disclaimer
-        </a>
-        <span aria-hidden="true">·</span>
-        <a href="/accessibility/" class="c-footer__link">
-          Accessibility
-        </a>
+      <nav aria-label="Legal" class="c-footer__legal">
+        {legalLinks.map((link) => (
+          <a href={link.href} class="c-footer__link">
+            {link.label}
+          </a>
+        ))}
       </nav>
     </div>
   </div>

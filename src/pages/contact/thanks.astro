@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import SkipLink from '../../components/layout/SkipLink.astro';
+
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+---
+
+<BaseLayout
+  title="Message sent | Senior Living Options"
+  description="Thank you for contacting Senior Living Options."
+  canonical={`${SITE_URL}/contact/thanks/`}
+  robots="noindex,follow"
+>
+  <SkipLink />
+  <Header />
+  <main id="main-content" role="main">
+    <div class="u-container u-py-16" style="max-width: 780px; margin: 0 auto;">
+      <h1 style="font-family: var(--sl-font-serif);">Thank you</h1>
+      <p class="u-mt-4">
+        We received your message and will read it. We cannot promise a reply to every message.
+      </p>
+      <p class="u-mt-4">
+        If you need medical, legal, or personal financial advice, please see the resources on the
+        <a href="/contact/">contact page</a>.
+      </p>
+      <p class="u-mt-4">
+        <a href="/">Back to the home page</a>
+      </p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  section a,
+  main p a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

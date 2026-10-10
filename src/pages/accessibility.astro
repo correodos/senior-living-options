@@ -56,7 +56,7 @@ const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year
           Found something that's hard to use? Tell us what happened and on which page. We read every
           report and will do our best to fix it.
         </p>
-        <form action="https://formspree.io/f/myekwvab" method="POST" class="c-accessibility-form">
+        <form action="https://formspree.io/f/myekwvab" method="POST" class="c-form">
           <div class="c-form-group">
             <label for="page" class="c-form-label">
               Page where the issue occurred
@@ -99,42 +99,3 @@ const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year
   </main>
   <Footer />
 </BaseLayout>
-
-<style>
-  .c-accessibility-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sl-space-6);
-    max-width: 560px;
-  }
-  .c-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sl-space-2);
-  }
-  .c-form-label {
-    font-size: var(--sl-fs-sm);
-    font-weight: 600;
-    color: var(--sl-color-text);
-  }
-  .c-form-input {
-    width: 100%;
-    padding: var(--sl-space-3) var(--sl-space-4);
-    border: 1px solid var(--sl-color-border);
-    border-radius: var(--sl-radius-md);
-    background-color: var(--sl-color-bg);
-    color: var(--sl-color-text);
-    font-size: var(--sl-fs-base);
-    font-family: var(--sl-font-sans);
-    transition: border-color 0.15s ease;
-  }
-  .c-form-input:focus {
-    outline: none;
-    border-color: var(--sl-color-primary);
-    box-shadow: 0 0 0 3px var(--sl-color-primary-light);
-  }
-  textarea.c-form-input {
-    resize: vertical;
-    min-height: 120px;
-  }
-</style>
