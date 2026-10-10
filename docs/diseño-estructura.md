@@ -38,7 +38,27 @@ el botón del tema de la cabecera).
 | Costs & Finance | `#f4eafb`  | `#7a1a9e` |
 | Caregiver Help  | `#fdf4ea`  | `#8a5a12` |
 
-Los textos del modo oscuro se ajustan para cumplir el contraste 4.5:1 (comprobado con axe).
+**Modo oscuro** (paleta "salvia", más tranquila que un verde intenso):
+
+| Token CSS                  | Valor (oscuro) | Uso                                 |
+| -------------------------- | -------------- | ----------------------------------- |
+| `--sl-color-bg`            | `#131614`      | Fondo general (gris con tono verde) |
+| `--sl-color-bg-alt`        | `#1c201d`      | Cards, cabecera                     |
+| `--sl-color-text`          | `#e8e8e4`      | Texto principal                     |
+| `--sl-color-text-muted`    | `#c2c6c1`      | Subtítulos, metadatos               |
+| `--sl-color-border`        | `#2f3530`      | Bordes                              |
+| `--sl-color-primary`       | `#8fd3ad`      | Botones, enlaces, foco              |
+| `--sl-color-primary-light` | `#1d2e24`      | Bandas y fondos sutiles             |
+
+Los colores de categoría también tienen versión oscura suavizada. Contraste medido en octubre de
+2026: todos los textos superan 4.5:1 en ambos modos (en oscuro, entre 7.9 y 10.7:1; el más justo es
+el naranja de Nursing Homes en claro, 4.9:1). Cualquier color nuevo se define en los dos bloques de
+modo oscuro de `tokens.css` (preferencia del sistema y `[data-theme='dark']`).
+
+### Iconos
+
+Iconos de línea SVG propios (`src/components/ui/Icon.astro`), trazo de 1.75px y esquinas
+redondeadas, con el color de cada categoría. **No se usan emoji** en ninguna parte del sitio.
 
 ### Tipografía
 
@@ -59,7 +79,14 @@ contenedor de 780px.
 
 - Espaciado por tokens `--sl-space-*` (múltiplos de 4px).
 - Bordes redondeados por tokens `--sl-radius-*`; pill badges con radio grande.
-- Sin sombras decorativas innecesarias; solo en cards al hacer hover.
+- Sin sombras decorativas innecesarias; solo en cards al hacer hover (elevación de 2px).
+
+### Interacción y accesibilidad
+
+- Anillo de foco de **3px** visible en ambos modos al navegar con teclado.
+- Animaciones cortas (hover de tarjetas, flecha de FAQ, botón "volver arriba"); todas se desactivan
+  con `prefers-reduced-motion`.
+- Objetivos de pulsación amplios: tarjetas y filas de listas enteras son clicables.
 
 ---
 
@@ -96,16 +123,23 @@ Cuatro columnas en escritorio (apiladas en móvil, con Topics y About en dos col
 Orden real de secciones:
 
 1. **Hero:** "Understanding your senior care options — without the overwhelm", párrafo corto y dos
-   botones: "Find the right care type →" y "Compare costs by state". No hay badge de "Trusted by N
-   families" (solo se pondría con un dato real y verificable).
-2. **Trust bar:** "Researched from government and nonprofit sources" · "Updated 2026".
+   botones: "Find the right care type →" y "Compare costs by state". Fondo con dos degradados
+   radiales suaves (verde arriba a la izquierda, melocotón abajo a la derecha) hechos con tokens,
+   sin imagen. No hay badge de "Trusted by N families" (solo se pondría con un dato real y
+   verificable).
+2. **Trust bar:** "Researched from government and nonprofit sources" · "Updated 2026". Lista
+   estática (en móvil, una línea debajo de otra); sin texto en movimiento.
 3. **Categorías (silos):** "What type of care do you need?" / "Explore care options by category".
-   Grid de 6 cards (icono, nombre, descripción corta); toda la card es un enlace.
+   Grid de 6 cards horizontales: icono a la izquierda en su color de categoría, título con flecha
+   "→" y descripción corta completa. Toda la card es un enlace.
 4. **Most read guides:** las 6 guías pilar en formato lista editorial (badge de categoría, título,
-   "Complete guide", minutos de lectura y fecha), ordenadas por fecha. Enlace "See all →".
+   "Complete guide", minutos de lectura y fecha), ordenadas por fecha. En móvil la categoría va
+   encima del título; desde 768px, en columna a la izquierda. Toda la fila es clicable. Enlace "See
+   all →".
 5. **Costes por estado:** "Senior care costs vary widely by state", medianas nacionales de assisted
    living, residencia y cuidado en casa, y un selector de estado que lleva a `/costs/<estado>/`.
-6. **Quick answers:** 5 preguntas desplegables con respuesta breve y enlace a la guía.
+6. **Quick answers:** 5 preguntas desplegables (flecha verde que gira al abrir) con respuesta breve
+   y enlace a la guía.
 7. **Not sure where to start?:** 4 pasos y el botón "Read the complete guide →".
 
 Ideas futuras (no implementadas): un quiz de orientación de 3 preguntas (`/quiz/`) y una sección
@@ -129,11 +163,15 @@ Hay dos layouts:
 - **Metadatos:** categoría, "Published" y "Updated" (fecha de revisión), minutos de lectura. La
   fecha de revisión es la importante en este nicho.
 - **No hay "Revisado por" ni botón de compartir.** No hay revisores reales y no se inventan.
-- **TOC:** en pilares, caja inline arriba ("In this guide", solo H2, sin sticky). En artículos
-  normales, sidebar sticky ("In this article", H2 y H3) con resaltado de la sección activa.
+- **TOC:** en pilares, caja inline arriba ("In this guide", solo H2 numerados 01, 02…, sin sticky).
+  En artículos normales, sidebar sticky ("In this article", H2 y H3) con resaltado de la sección
+  activa.
+- **Hero de pilares:** el texto sobre la foto (breadcrumbs, descripción, fechas) usa blanco fijo y
+  un velo oscuro en ambos modos para que siempre se lea.
 - **Key Takeaways:** sección `## Key Takeaways` al inicio del Markdown; se muestra con fondo
-  `--sl-color-primary-light` y checks verdes en las guías pilar. Es obligatoria como estándar
-  editorial en pilares, pero hoy solo la tienen 2 de las 6.
+  `--sl-color-primary-light` y checks verdes en las guías pilar. Es el estándar editorial
+  recomendado en pilares (el validador solo avisa si falta); hoy solo la tienen 2 de las 6. En
+  artículos normales se escribe como blockquote.
 - **Cuerpo:** tablas con cabecera y scroll horizontal accesible por teclado, blockquotes con borde
   verde, H2 con margen superior generoso, links verdes subrayados en el texto.
 - **CTA final:** en pilares, tres botones (la categoría, "costs" y búsqueda); en artículos normales,
@@ -143,7 +181,8 @@ Hay dos layouts:
   otros pilares.
 - **Barra de progreso de lectura** (3px) y botón "Back to Top".
 
-El detalle técnico de cada componente está en [CONTENT_MODEL.md](CONTENT_MODEL.md).
+El detalle técnico de cada componente está en [CONTENT_MODEL.md](CONTENT_MODEL.md) y el
+procedimiento para crear artículos nuevos, en [NUEVO_ARTICULO.md](NUEVO_ARTICULO.md).
 
 ---
 
@@ -151,15 +190,20 @@ El detalle técnico de cada componente está en [CONTENT_MODEL.md](CONTENT_MODEL
 
 ```
 [ Breadcrumbs: Home > Categoría ]
-[ Icono + H1 con el nombre ]
+[ Etiqueta con icono y fondo de su color + H1 con el nombre ]
 [ Descripción ]
 
 [ "Core Guides": guía pilar destacada con etiqueta "Pillar Article" ]
 
-[ "Articles & Guides": cards de artículos, o "More articles coming soon on …" si no hay ]
+[ "Articles & Guides": cards de artículos normales ("1 article" / "N articles") ]
+
+[ Solo en Costs & Finance: selector de estado ]
 
 [ "Explore Other Categories": cards de las otras 5 categorías con "View guides →" ]
 ```
+
+La sección "Articles & Guides" **solo aparece si la categoría tiene artículos normales**. Hoy solo
+la tiene Caregiver Help; en las demás aparecerá sola en cuanto se publique el primero.
 
 ---
 
@@ -173,7 +217,9 @@ El detalle técnico de cada componente está en [CONTENT_MODEL.md](CONTENT_MODEL
 
 ## 7. Costes por estado
 
-- `/costs/`: tabla ordenable con los 50 estados (medianas de la encuesta CareScout 2025).
+- `/costs/`: tabla ordenable con los 50 estados (medianas de la encuesta CareScout 2025). En móvil
+  muestra el aviso "Swipe the table sideways to see all columns →", la columna de estados queda fija
+  al deslizar y una sombra en el borde derecho indica que hay más columnas.
 - `/costs/[state]/`: costes del estado (mensual, anual, por hora, centro de día, enfermería
   privada), posición frente al resto, estados similares, FAQs, metodología y fuentes, y la sección
   "Paying with Medicaid in <estado>".
@@ -213,12 +259,12 @@ Las fechas "Last updated" de estas páginas son fijas: se cambian a mano cuando 
 
 ## 10. Comportamiento responsive
 
-| Breakpoint          | Cambios principales                                                                         |
-| ------------------- | ------------------------------------------------------------------------------------------- |
-| Mobile (< 640px)    | Hamburguesa · grid de categorías a 1 columna · TOC plegable · pie con marca a todo el ancho |
-| Tablet (640-1023px) | Grid de categorías a 2 columnas · sin sidebar de TOC · pie en 2 columnas                    |
-| Desktop (≥ 1024px)  | Grid de categorías a 3 columnas · TOC sticky en artículos normales · pie en 4 columnas      |
-| ≥ 1200px            | El menú de la cabecera pasa a una sola fila                                                 |
+| Breakpoint          | Cambios principales                                                                                                   |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Mobile (< 640px)    | Hamburguesa · grid de categorías a 1 columna · TOC plegable · pie con marca a todo el ancho · trust bar en dos líneas |
+| Tablet (640-1023px) | Grid de categorías a 2 columnas · sin sidebar de TOC · pie en 2 columnas                                              |
+| Desktop (≥ 1024px)  | Grid de categorías a 3 columnas · TOC sticky en artículos normales · pie en 4 columnas                                |
+| ≥ 1200px            | El menú de la cabecera pasa a una sola fila                                                                           |
 
 ---
 

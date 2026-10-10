@@ -138,7 +138,8 @@ const combinedJsonLd = combineJsonLd(
           </p>
           <div class="c-article-cta__actions">
             <a href={`/category/${data.category}/`} class="c-btn c-btn--primary c-btn--lg">
-              {categoryInfo && <Icon name={categoryInfo.icon} />} All {categoryInfo?.label || 'category'} articles
+              {categoryInfo && <Icon name={categoryInfo.icon} />} All{' '}
+              {categoryInfo?.label || 'category'} articles
             </a>
             {pillarSlug && (
               <a href={`/article/${pillarSlug}/`} class="c-btn c-btn--outline c-btn--lg">

@@ -13,12 +13,36 @@ const imageUrl = heroImageUrl(data.image) ?? '/images/og-default.jpg';
 const imageSrcset = responsiveSrcset(imageUrl);
 const imageAlt = data.imageAlt || data.title;
 const categoryInfo = {
-  'assisted-living': { label: 'Assisted Living', color: 'var(--sl-color-al-text)', bg: 'var(--sl-color-al-bg)' },
-  'memory-care': { label: 'Memory Care', color: 'var(--sl-color-mc-text)', bg: 'var(--sl-color-mc-bg)' },
-  'nursing-homes': { label: 'Nursing Homes', color: 'var(--sl-color-nh-text)', bg: 'var(--sl-color-nh-bg)' },
-  'in-home-care': { label: 'In-Home Care', color: 'var(--sl-color-ihc-text)', bg: 'var(--sl-color-ihc-bg)' },
-  'senior-care-costs': { label: 'Costs & Finance', color: 'var(--sl-color-cf-text)', bg: 'var(--sl-color-cf-bg)' },
-  'caregiver-resources': { label: 'Caregiver Help', color: 'var(--sl-color-cr-text)', bg: 'var(--sl-color-cr-bg)' },
+  'assisted-living': {
+    label: 'Assisted Living',
+    color: 'var(--sl-color-al-text)',
+    bg: 'var(--sl-color-al-bg)',
+  },
+  'memory-care': {
+    label: 'Memory Care',
+    color: 'var(--sl-color-mc-text)',
+    bg: 'var(--sl-color-mc-bg)',
+  },
+  'nursing-homes': {
+    label: 'Nursing Homes',
+    color: 'var(--sl-color-nh-text)',
+    bg: 'var(--sl-color-nh-bg)',
+  },
+  'in-home-care': {
+    label: 'In-Home Care',
+    color: 'var(--sl-color-ihc-text)',
+    bg: 'var(--sl-color-ihc-bg)',
+  },
+  'senior-care-costs': {
+    label: 'Costs & Finance',
+    color: 'var(--sl-color-cf-text)',
+    bg: 'var(--sl-color-cf-bg)',
+  },
+  'caregiver-resources': {
+    label: 'Caregiver Help',
+    color: 'var(--sl-color-cr-text)',
+    bg: 'var(--sl-color-cr-bg)',
+  },
 };
 const cat = categoryInfo[data.category as keyof typeof categoryInfo] || {
   label: data.category,

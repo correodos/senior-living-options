@@ -113,7 +113,7 @@ herramientas de desarrollo (ESLint, Prettier, `tsx`, `terser`). No hay React, Vu
 │   ├── components/
 │   │   ├── layout/         # Header, Footer, SkipLink, Breadcrumbs
 │   │   ├── content/        # Card, ArticleMeta, TableOfContents, RelatedArticles
-│   │   └── ui/             # Button, Search, StateSelector
+│   │   └── ui/             # Button, Icon (iconos SVG), Search, StateSelector
 │   ├── layouts/            # BaseLayout, HomeLayout, CategoryLayout, ArticleLayout,
 │   │                       # PillarArticleLayout
 │   ├── pages/              # Rutas (ver arriba)

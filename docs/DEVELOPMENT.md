@@ -24,12 +24,14 @@ Si el CSS parece antiguo en `npm run dev`, reinicia el servidor; la verdad está
 
 ### 1. Crear un artículo
 
+El procedimiento completo (archivo, imagen, frontmatter, estructura del texto, formato y validación)
+está en **[NUEVO_ARTICULO.md](NUEVO_ARTICULO.md)**. Resumen:
+
 ```bash
 # 1. Crear el archivo en la carpeta de su categoría
-touch src/content/entries/assisted-living/nombre-del-articulo.md
-
-# 2. Añadir frontmatter (plantilla abajo) y escribir el contenido
-# 3. Añadir la imagen hero en public/images/ (.webp + variantes -480 y -768)
+#    src/content/entries/<categoria>/<slug>.md
+# 2. Añadir la imagen: public/images/<slug>.webp (1200x675) + -768.webp + -480.webp
+# 3. Frontmatter y texto según NUEVO_ARTICULO.md
 # 4. Validar
 npm run validate:content
 ```
@@ -37,59 +39,16 @@ npm run validate:content
 El texto de los artículos lo escribe el dueño del sitio. El asistente no redacta artículos; solo
 mantiene la infraestructura.
 
-### 2. Plantilla de frontmatter
+### 2. Campos del frontmatter
 
-```yaml
----
-title: 'Título (máx 120 caracteres)'
-seoTitle: 'Título corto para Google (máx 60)' # si el title es largo
-description: 'Descripción para SEO y social (50-300 caracteres)'
-publishDate: 2026-10-01
-lastReviewed: 2026-10-01
-category: assisted-living # assisted-living | memory-care | nursing-homes | in-home-care | senior-care-costs | caregiver-resources
-isPillar: false
-sources: # 1-2 URLs en artículos normales; 7+ (.gov/.org) en pilares
-  - 'https://www.medicare.gov/...'
-readingTime: 8 # a mano (obligatorio en pilares)
-image: /images/nombre-del-articulo.webp
-imageAlt: 'Descripción accesible de la imagen'
-tags: ['costos', 'checklist']
----
-```
+Plantillas listas para copiar en [NUEVO_ARTICULO.md](NUEVO_ARTICULO.md#4-frontmatter) y detalle de
+todos los campos en [CONTENT_MODEL.md](CONTENT_MODEL.md).
 
-Los campos `states`, `tags`, `showTableOfContents`, `canonicalUrl` se aceptan pero hoy no tienen
-efecto. `relatedArticles` es opcional: sin él, los relacionados se calculan solos. Detalle de todos
-los campos en [CONTENT_MODEL.md](CONTENT_MODEL.md).
+### 3. Checklist antes de publicar un artículo
 
-### 3. Checklist de una guía pilar
-
-**Frontmatter**
-
-- [ ] `title` ≤ 120 caracteres (con `seoTitle` ≤ 60 si es largo)
-- [ ] `description` de 50-300 caracteres
-- [ ] `publishDate` ≤ `lastReviewed` ≤ hoy
-- [ ] `category` válida e `isPillar: true`
-- [ ] `sources`: 7 o más URLs, preferiblemente `.gov`/`.org` (3 es el mínimo que exige el validador)
-- [ ] `readingTime` (palabras totales / 200)
-- [ ] `image` `.webp` en `public/images/` y variantes `<nombre>-480.webp` y `<nombre>-768.webp`
-- [ ] `imageAlt` descriptivo
-- [ ] La guía está enlazada como `pillarSlug` de su categoría en `src/utils/category.ts`
-
-**Estructura Markdown**
-
-- [ ] `## Key Takeaways` (5-6 bullets con negrita inicial) y `---`
-- [ ] Intro empático de 2-3 párrafos
-- [ ] 6-8 secciones `## H2` (el TOC muestra solo los H2)
-- [ ] Al menos 2 tablas y 2 blockquotes con cita y enlace `.gov`/`.org`
-- [ ] Al menos 1 enlace interno a `/category/...`
-- [ ] `## Frequently Asked Questions` con 5-6 `###`
-- [ ] `## Sources` numeradas (7 o más)
-
-**Validación**
-
-- [ ] `npm run validate:content` sin errores (los warnings de pilar son recomendaciones)
-- [ ] `npm run check` y `npm run build` sin errores
-- [ ] Vista previa: hero, TOC, tablas con scroll en móvil, CTA final
+La checklist completa (archivo, imagen, frontmatter, texto y validación) está al final de
+[NUEVO_ARTICULO.md](NUEVO_ARTICULO.md#9-checklist-rápida). No se repite aquí para que no haya dos
+versiones distintas.
 
 ## Estructura de contenido
 
@@ -147,10 +106,22 @@ cuando sale la nueva encuesta: se sustituyen los valores del JSON y `_meta` (`su
 - Estilos compartidos en `src/styles/components.css`; estilos específicos de una página, en su
   `<style>`.
 - Mobile-first. Los textos van centrados y a ancho completo (sin `max-width` en párrafos).
+- **Colores siempre con tokens** (`var(--sl-color-...)`), nunca con hex fijos, para que funcionen en
+  modo claro y oscuro. Para fondos de categoría usa `bgColor`/`-bg` y para el texto `color`/`-text`
+  de `src/utils/category.ts`. No concatenes opacidad a una variable (`${color}15` no es CSS válido):
+  si hace falta transparencia, usa `color-mix(in srgb, <color> 30%, transparent)`.
+- **Iconos**: componente `src/components/ui/Icon.astro` (`<Icon name="memory-care" />`). Hereda
+  tamaño (`1em`) y color (`currentColor`). Para añadir uno, se añaden sus trazos SVG al objeto
+  `paths`. No usar emoji.
+- **Foco**: anillo de 3px con `--sl-color-border-focus` en todos los elementos interactivos.
+- **Movimiento**: animaciones cortas y suaves; respetar `prefers-reduced-motion` (ya hay una regla
+  global en `base.css`; en JS, comprobar `matchMedia('(prefers-reduced-motion: reduce)')`).
 
-**Estilos de la guía pilar** (`src/layouts/PillarArticleLayout.astro`): hero, TOC inline, Key
-Takeaways (`h2#key-takeaways + ul`), tablas, barra de progreso, botón "Back to Top" y CTA final.
-Detalle en [CONTENT_MODEL.md](CONTENT_MODEL.md#cómo-se-muestra-un-artículo).
+**Estilos de la guía pilar** (`src/layouts/PillarArticleLayout.astro`): hero, TOC inline numerado,
+Key Takeaways (`h2#key-takeaways + ul`), tablas, barra de progreso, botón "Back to Top" y CTA final.
+Dentro de un componente Astro, los estilos de elementos de otro componente hijo (por ejemplo
+`ArticleMeta` dentro del hero) necesitan `:global(...)`. Detalle en
+[CONTENT_MODEL.md](CONTENT_MODEL.md#cómo-se-muestra-un-artículo).
 
 ### Git
 

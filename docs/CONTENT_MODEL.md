@@ -2,6 +2,8 @@
 
 > Estado: actualizado en octubre de 2026. El contenido del sitio está en inglés de EE. UU.; esta
 > documentación, en español. El esquema real vive en `src/utils/entry-schema.ts`.
+>
+> **Para crear un artículo nuevo paso a paso, ver [NUEVO_ARTICULO.md](NUEVO_ARTICULO.md).**
 
 ## Collection: `entries`
 
@@ -136,7 +138,8 @@ Intro empático (2-3 párrafos) que conecte con la situación del lector.
 | Longitud                        | ~2500+ palabras | Objetivo, no hard limit                                  |
 
 Estado actual: solo `assisted-living` y `nursing-homes` tienen `## Key Takeaways`;
-`validate:content` lo avisa en las demás guías.
+`validate:content` lo avisa en las demás guías. Ninguna guía tiene todavía blockquotes con el enlace
+a la fuente en la misma línea, por eso todas muestran ese aviso.
 
 ## Cómo se muestra un artículo
 
@@ -144,15 +147,15 @@ Estado actual: solo `assisted-living` y `nursing-homes` tienen `## Key Takeaways
 
 | Componente           | Clase CSS                     | Comportamiento real                                                                                            |
 | -------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **Hero**             | `.c-pillar-hero`              | Imagen + overlay; crece con el contenido (altura mínima `min(40vh, 500px)`)                                    |
+| **Hero**             | `.c-pillar-hero`              | Imagen + velo oscuro fijo (no depende del tema); crece con el contenido (altura mínima `min(40vh, 500px)`)     |
 | **Título**           | `.c-pillar-hero__title`       | Blanco fijo `#ffffff` en ambos modos, serif, text-shadow                                                       |
-| **Descripción**      | `.c-pillar-hero__description` | `var(--sl-color-text-muted)`                                                                                   |
-| **Etiquetas**        | `.c-badge`                    | Categoría y "Pillar Article"                                                                                   |
-| **TOC**              | `.c-pillar-toc`               | Caja **inline arriba**, solo H2, título "In this guide". **No es sticky**                                      |
+| **Texto del hero**   | `.c-pillar-hero__description` | Breadcrumbs, descripción y fechas en blanco/blanco translúcido fijo en ambos modos                             |
+| **Etiquetas**        | `.c-badge`                    | Categoría (con su icono SVG) y "Pillar Article", una sola vez sobre el título                                  |
+| **TOC**              | `.c-pillar-toc`               | Caja **inline arriba**, solo H2, numerada (01, 02…), título "In this guide". **No es sticky**                  |
 | **Key Takeaways**    | `h2#key-takeaways + ul`       | Fondo `var(--sl-color-primary-light)`, checks ✓ (si la guía tiene la sección)                                  |
 | **Tablas**           | `.c-pillar-content table`     | Scroll horizontal accesible por teclado; las tablas de estados con más de 5 columnas pasan a tarjetas en móvil |
 | **Reading Progress** | `.c-reading-progress`         | Barra superior de 3px, `z-index: 201`                                                                          |
-| **Back to Top**      | `.c-back-to-top`              | Botón fijo abajo a la derecha tras hacer scroll                                                                |
+| **Back to Top**      | `.c-back-to-top`              | Botón con flecha SVG, abajo a la derecha, aparece tras 600px de scroll; respeta "reducir movimiento"           |
 | **CTA final**        | `.c-pillar-cta`               | Tres botones: categoría (primario), costes (outline) y búsqueda (outline)                                      |
 | **Relacionados**     | `RelatedArticles.astro`       | "Related Guides": misma categoría y luego otros pilares                                                        |
 | **FAQ Schema**       | Automático                    | JSON-LD `FAQPage` desde las H3 bajo "Frequently Asked Questions"                                               |
@@ -164,22 +167,25 @@ Estado actual: solo `assisted-living` y `nursing-homes` tienen `## Key Takeaways
 - Contenido en columna principal (`.c-article-main`) con **TOC sticky a la derecha** (H2 y H3,
   título "In this article") en pantallas grandes y un TOC plegable en móvil.
 - CTA final con dos botones (categoría y guía pilar) y artículos relacionados.
-- No tiene estilo propio de "Key Takeaways".
+- No tiene estilo propio de "Key Takeaways": en estos artículos se escriben como blockquote
+  (`> **Key Takeaways**` + `> - punto`).
 
 No se muestran "Revisado por" ni botón de compartir: no hay revisores reales y no se inventan.
 
 ### Categorías y Labels
 
-| Enum Value            | Label           | Token de color                    | Icono |
-| --------------------- | --------------- | --------------------------------- | ----- |
-| `assisted-living`     | Assisted Living | `--sl-color-al-bg` / `-al-text`   | 🏠    |
-| `memory-care`         | Memory Care     | `--sl-color-mc-bg` / `-mc-text`   | 🧠    |
-| `nursing-homes`       | Nursing Homes   | `--sl-color-nh-bg` / `-nh-text`   | 🏥    |
-| `in-home-care`        | In-Home Care    | `--sl-color-ihc-bg` / `-ihc-text` | 🏡    |
-| `senior-care-costs`   | Costs & Finance | `--sl-color-cf-bg` / `-cf-text`   | 💰    |
-| `caregiver-resources` | Caregiver Help  | `--sl-color-cr-bg` / `-cr-text`   | 🤝    |
+| Enum Value            | Label           | Token de color                    | Icono SVG         |
+| --------------------- | --------------- | --------------------------------- | ----------------- |
+| `assisted-living`     | Assisted Living | `--sl-color-al-bg` / `-al-text`   | Casa              |
+| `memory-care`         | Memory Care     | `--sl-color-mc-bg` / `-mc-text`   | Cerebro           |
+| `nursing-homes`       | Nursing Homes   | `--sl-color-nh-bg` / `-nh-text`   | Edificio con cruz |
+| `in-home-care`        | In-Home Care    | `--sl-color-ihc-bg` / `-ihc-text` | Casa con corazón  |
+| `senior-care-costs`   | Costs & Finance | `--sl-color-cf-bg` / `-cf-text`   | Moneda con `$`    |
+| `caregiver-resources` | Caregiver Help  | `--sl-color-cr-bg` / `-cr-text`   | Corazón           |
 
-Definidas en `src/utils/category.ts` (cada categoría tiene su `pillarSlug`).
+Definidas en `src/utils/category.ts` (cada categoría tiene su `pillarSlug`). El campo `icon` guarda
+el **nombre** del icono (igual que el slug de la categoría), que dibuja
+`src/components/ui/Icon.astro`. No se usan emoji en ninguna parte del sitio.
 
 ## Reglas de Contenido
 
@@ -213,7 +219,9 @@ src/content/entries/
     └── senior-living-options-complete-comparison-of-all-7-types.md   # artículo normal
 ```
 
-No hay más artículos de soporte planificados. Si se añaden, enlazan a su guía pilar.
+No hay más artículos de soporte planificados. Si se añaden, enlazan a su guía pilar y aparecen solos
+en la sección "Articles & Guides" de su categoría (esa sección no se muestra mientras la categoría
+no tenga artículos normales). Procedimiento en [NUEVO_ARTICULO.md](NUEVO_ARTICULO.md).
 
 ## Validaciones (`npm run validate:content`)
 

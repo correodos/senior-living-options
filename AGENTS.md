@@ -59,7 +59,18 @@ Cada subnicho tiene una pillar page y posts de soporte bajo ella.
 ## Contenido
 
 - Todos los artículos son informativos o comparativos
-- Las fuentes deben ser oficiales: medicare.gov, medicaid.gov, ssa.gov, cdc.gov
+- Fuentes, por orden de preferencia:
+  - **Oficiales (EE. UU.)**: medicare.gov, medicaid.gov, cms.gov, ssa.gov, cdc.gov, va.gov
+    (benefits.va.gov, caregiver.va.gov), nia.nih.gov, medlineplus.gov, ncbi.nlm.nih.gov, acl.gov
+    (eldercare.acl.gov, longtermcare.acl.gov), hud.gov, congress.gov, federalregister.gov y las
+    agencias de Medicaid de cada estado
+  - **Datos de costes**: encuesta CareScout/Genworth Cost of Care (carescout.com,
+    investor.genworth.com)
+  - **Organizaciones sin ánimo de lucro y de investigación**: aarp.org, alz.org, parkinson.org,
+    ahcancal.org, theconsumervoice.org, kff.org, nic.org, aaltci.org, milliman.com
+  - **Otras usadas puntualmente** para contexto: health.usnews.com, seniorhousingnews.com,
+    politifact.com, seniorliving.org, aplaceformom.com. Las cifras clave (costes, límites,
+    coberturas) deben venir de una fuente oficial o de la encuesta de costes
 - Tono claro, accesible, orientado a familias y cuidadores
 - Sin listados de negocios ni directorios de centros
 

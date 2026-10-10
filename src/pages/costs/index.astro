@@ -117,7 +117,9 @@ const jsonLd = combineJsonLd(collectionJsonLd, breadcrumbsToJsonLd(breadcrumbs, 
       <p class="hub-note">
         Select a column heading to sort. Select a state name to see its full cost breakdown.
       </p>
-      <p class="hub-scroll-hint" aria-hidden="true">Swipe the table sideways to see all columns →</p>
+      <p class="hub-scroll-hint" aria-hidden="true">
+        Swipe the table sideways to see all columns →
+      </p>
       <div class="hub-table-wrap">
         <table class="hub-table" id="costs-table">
           <thead>
@@ -286,8 +288,8 @@ const jsonLd = combineJsonLd(collectionJsonLd, breadcrumbsToJsonLd(breadcrumbs, 
     /* Shadow on the right edge while more columns are hidden */
     background:
       linear-gradient(to left, var(--sl-color-bg), transparent) right / 24px 100% no-repeat local,
-      radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.2), transparent) right / 14px
-        100% no-repeat scroll;
+      radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.2), transparent) right / 14px 100%
+        no-repeat scroll;
   }
   .hub-scroll-hint {
     display: none;

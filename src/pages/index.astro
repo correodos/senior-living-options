@@ -104,7 +104,10 @@ const faqs = [
     <div class="c-grid c-grid--2 c-grid--3">
       {categories.map((cat) => (
         <a href={`/category/${cat.slug}/`} class="c-category-card u-transition">
-          <span class="c-category-card__icon" style={{ backgroundColor: cat.bgColor, color: cat.color }}>
+          <span
+            class="c-category-card__icon"
+            style={{ backgroundColor: cat.bgColor, color: cat.color }}
+          >
             <Icon name={cat.icon} />
           </span>
           <h3 class="c-category-card__title">{cat.label}</h3>
