@@ -19,7 +19,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
       'Housing + support services for daily activities. No constant medical care needed.',
     color: 'var(--sl-color-al-text)',
     bgColor: 'var(--sl-color-al-bg)',
-    icon: '🏠',
+    icon: 'assisted-living',
     pillarSlug: 'assisted-living/assisted-living-complete-guide',
   },
   'memory-care': {
@@ -30,7 +30,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     descriptionShort: "Specialized care for Alzheimer's and dementia in secure environments.",
     color: 'var(--sl-color-mc-text)',
     bgColor: 'var(--sl-color-mc-bg)',
-    icon: '🧠',
+    icon: 'memory-care',
     pillarSlug: 'memory-care/memory-care-complete-guide',
   },
   'nursing-homes': {
@@ -41,7 +41,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     descriptionShort: '24/7 skilled nursing and medical care for complex health conditions.',
     color: 'var(--sl-color-nh-text)',
     bgColor: 'var(--sl-color-nh-bg)',
-    icon: '🏥',
+    icon: 'nursing-homes',
     pillarSlug: 'nursing-homes/nursing-homes-complete-guide',
   },
   'in-home-care': {
@@ -52,7 +52,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     descriptionShort: 'Care services at home so seniors can age in place comfortably.',
     color: 'var(--sl-color-ihc-text)',
     bgColor: 'var(--sl-color-ihc-bg)',
-    icon: '🏡',
+    icon: 'in-home-care',
     pillarSlug: 'in-home-care/in-home-care-complete-guide',
   },
   'senior-care-costs': {
@@ -63,7 +63,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
     descriptionShort: 'State-by-state costs, payment options, Medicare, Medicaid, VA benefits.',
     color: 'var(--sl-color-cf-text)',
     bgColor: 'var(--sl-color-cf-bg)',
-    icon: '💰',
+    icon: 'senior-care-costs',
     pillarSlug: 'senior-care-costs/senior-care-costs-complete-guide',
   },
   'caregiver-resources': {
@@ -75,7 +75,7 @@ export const CATEGORIES: Record<string, CategoryInfo> = {
       'Burnout prevention, daily checklists, respite care, legal & financial guides.',
     color: 'var(--sl-color-cr-text)',
     bgColor: 'var(--sl-color-cr-bg)',
-    icon: '🤝',
+    icon: 'caregiver-resources',
     pillarSlug: 'caregiver-resources/caregiver-resources-complete-guide',
   },
 } as const;

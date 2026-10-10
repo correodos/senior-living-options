@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/ui/Icon.astro';
 import { getCollection } from 'astro:content';
 import CategoryLayout from '../../layouts/CategoryLayout.astro';
 import { buildCategorySEOMeta } from '../../utils/seo';
@@ -41,16 +42,16 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
   <header class="c-category-header u-container">
     <span
       class="c-category-header__badge"
-      style={{ backgroundColor: `${catInfo.color}15`, color: catInfo.color }}
+      style={{ backgroundColor: catInfo.bgColor, color: catInfo.color }}
     >
-      {catInfo.icon} {catInfo.label}
+      <Icon name={catInfo.icon} /> {catInfo.label}
     </span>
     <h1 class="c-category-header__title">{catInfo.label}</h1>
     <p class="c-category-header__description">{catInfo.description}</p>
   </header>
 
   {pillarEntries.length > 0 && (
-    <section class="u-container u-mb-24" aria-labelledby="pillars-heading">
+    <section class="u-container u-mb-16" aria-labelledby="pillars-heading">
       <h2 id="pillars-heading" class="u-sr-only">
         Core Guides
       </h2>
@@ -62,28 +63,21 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
     </section>
   )}
 
-  <section class="u-container u-mb-16" aria-labelledby="articles-heading">
-    <div class="u-flex u-items-center u-justify-between u-mb-8">
-      <h2 id="articles-heading">Articles & Guides</h2>
-      <span class="u-text-muted u-fs-sm">{articleEntries.length} articles</span>
-    </div>
-
-    {articleEntries.length > 0 ? (
-      <>
-        <div class="c-grid c-grid--2 c-grid--3">
-          {articleEntries.map((entry) => (
-            <Card entry={entry} />
-          ))}
-        </div>
-      </>
-    ) : (
-      <div class="u-text-center u-py-16 u-bg-primary-light u-rounded-lg">
-        <p class="u-text-muted">More articles coming soon on {catInfo.label.toLowerCase()}.</p>
+  {articleEntries.length > 0 && (
+    <section class="u-container u-mb-16" aria-labelledby="articles-heading">
+      <div class="u-flex u-items-center u-justify-between u-mb-8">
+        <h2 id="articles-heading">Articles & Guides</h2>
+        <span class="u-text-muted u-fs-sm">
+          {articleEntries.length} {articleEntries.length === 1 ? 'article' : 'articles'}
+        </span>
       </div>
-    )}
-  </section>
-
-  <div style="height: var(--sl-space-16); background-color: var(--sl-color-bg);"></div>
+      <div class="c-grid c-grid--2 c-grid--3">
+        {articleEntries.map((entry) => (
+          <Card entry={entry} />
+        ))}
+      </div>
+    </section>
+  )}
 
   {category.slug === 'senior-care-costs' && (
     <section class="u-container u-py-16 u-bg-primary-light u-mb-16">
@@ -107,14 +101,14 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
             <a
               href={`/category/${cat.slug}/`}
               class="c-card u-transition"
-              style={{ borderColor: `${cat.color}40` }}
+              style={{ borderColor: `color-mix(in srgb, ${cat.color} 30%, transparent)` }}
             >
               <div class="c-card__content u-text-center">
                 <span
                   class="u-inline-flex u-items-center u-justify-center u-mb-4"
-                  style="width: 64px; height: 64px; border-radius: var(--sl-radius-xl); background-color: `${cat.color}15`; color: {cat.color}; font-size: 2rem;"
+                  style={{ width: '64px', height: '64px', borderRadius: 'var(--sl-radius-xl)', backgroundColor: cat.bgColor, color: cat.color, fontSize: '2rem' }}
                 >
-                  {cat.icon}
+                  <Icon name={cat.icon} />
                 </span>
                 <h3 class="c-card__title u-mb-2">{cat.label}</h3>
                 <p class="c-card__excerpt u-mb-4">{cat.description}</p>

@@ -1,4 +1,5 @@
 ---
+import Icon from '../../components/ui/Icon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/layout/Header.astro';
 import Footer from '../../components/layout/Footer.astro';
@@ -47,25 +48,25 @@ const cards: Array<{
 }> = [
   {
     key: 'assistedLiving',
-    icon: '🏠',
+    icon: 'assisted-living',
     color: 'var(--sl-color-al-text)',
     annual: state.assistedLivingAnnual,
   },
   {
     key: 'nursingHomeSemi',
-    icon: '🏥',
+    icon: 'nursing-homes',
     color: 'var(--sl-color-nh-text)',
     annual: state.nursingHomeSemiAnnual,
   },
   {
     key: 'nursingHomePrivate',
-    icon: '🏥',
+    icon: 'nursing-homes',
     color: 'var(--sl-color-nh-text)',
     annual: state.nursingHomePrivateAnnual,
   },
   {
     key: 'inHomeCare',
-    icon: '🏡',
+    icon: 'in-home-care',
     color: 'var(--sl-color-ihc-text)',
     annual: state.inHomeCareAnnual,
   },
@@ -143,7 +144,7 @@ const jsonLd = combineJsonLd(
             <div class="c-card cost-card" style={`border-top: 3px solid ${card.color};`}>
               <div class="c-card__content">
                 <p class="c-eyebrow" style={`color: ${card.color};`}>
-                  {card.icon} {MONTHLY_LABELS[card.key]}
+                  <Icon name={card.icon} /> {MONTHLY_LABELS[card.key]}
                 </p>
                 <p class="cost-value">
                   {fmtUsd(value)}

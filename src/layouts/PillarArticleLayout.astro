@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/ui/Icon.astro';
 import BaseLayout from './BaseLayout.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
@@ -31,21 +32,21 @@ const { title, description, data, content, tocHeadings, slug, canonical, jsonLd,
 
 const categoryInfo = getCategoryInfo(data.category);
 const categoryColors = {
-  'assisted-living': { bg: 'var(--sl-color-al-bg)', text: 'var(--sl-color-al-text)', icon: '🏠' },
-  'memory-care': { bg: 'var(--sl-color-mc-bg)', text: 'var(--sl-color-mc-text)', icon: '🧠' },
-  'nursing-homes': { bg: 'var(--sl-color-nh-bg)', text: 'var(--sl-color-nh-text)', icon: '🏥' },
-  'in-home-care': { bg: 'var(--sl-color-ihc-bg)', text: 'var(--sl-color-ihc-text)', icon: '🏡' },
-  'senior-care-costs': { bg: 'var(--sl-color-cf-bg)', text: 'var(--sl-color-cf-text)', icon: '💰' },
+  'assisted-living': { bg: 'var(--sl-color-al-bg)', text: 'var(--sl-color-al-text)', icon: 'assisted-living' },
+  'memory-care': { bg: 'var(--sl-color-mc-bg)', text: 'var(--sl-color-mc-text)', icon: 'memory-care' },
+  'nursing-homes': { bg: 'var(--sl-color-nh-bg)', text: 'var(--sl-color-nh-text)', icon: 'nursing-homes' },
+  'in-home-care': { bg: 'var(--sl-color-ihc-bg)', text: 'var(--sl-color-ihc-text)', icon: 'in-home-care' },
+  'senior-care-costs': { bg: 'var(--sl-color-cf-bg)', text: 'var(--sl-color-cf-text)', icon: 'senior-care-costs' },
   'caregiver-resources': {
     bg: 'var(--sl-color-cr-bg)',
     text: 'var(--sl-color-cr-text)',
-    icon: '🤝',
+    icon: 'caregiver-resources',
   },
 };
 const catColors = categoryColors[data.category as keyof typeof categoryColors] || {
   bg: 'var(--sl-color-primary-light)',
   text: 'var(--sl-color-primary)',
-  icon: '📄',
+  icon: 'document',
 };
 
 const heroImage = heroImageUrl(data.image);
@@ -79,6 +80,7 @@ const combinedJsonLd = combineJsonLd(
   {...rest}
 >
   <SkipLink />
+  <div class="c-reading-progress" id="reading-progress" aria-hidden="true"></div>
   <Header />
   <main id="main-content" role="main">
     <!-- Hero -->
@@ -130,7 +132,7 @@ const combinedJsonLd = combineJsonLd(
               class="c-badge c-badge--category"
               style={`background-color: ${catColors.bg}; color: ${catColors.text};`}
             >
-              {catColors.icon} {categoryInfo?.label || data.category}
+              <Icon name={catColors.icon} /> {categoryInfo?.label || data.category}
             </span>
             <span class="c-badge c-badge--pillar">Pillar Article</span>
           </div>
@@ -149,11 +151,11 @@ const combinedJsonLd = combineJsonLd(
         <ul class="c-pillar-toc__list">
           {tocHeadings
             .filter((h) => h.level === 2)
-            .map((h) => (
+            .map((h, i) => (
               <li class="c-pillar-toc__item">
                 <a href={`#${h.slug}`} class="c-pillar-toc__link">
                   <span class="c-pillar-toc__icon" aria-hidden="true">
-                    ▸
+                    {String(i + 1).padStart(2, '0')}
                   </span>
                   {h.text}
                 </a>
@@ -210,6 +212,21 @@ const combinedJsonLd = combineJsonLd(
       </section>
     </div>
   </main>
+  <button class="c-back-to-top" id="back-to-top" type="button" aria-label="Back to top">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
+  </button>
   <Footer />
 </BaseLayout>
 
@@ -264,9 +281,9 @@ const combinedJsonLd = combineJsonLd(
     min-width: 0;
     background: linear-gradient(
       180deg,
-      rgba(26, 26, 26, 0.3) 0%,
-      rgba(26, 26, 26, 0.7) 50%,
-      var(--sl-color-bg) 100%
+      rgba(15, 22, 18, 0.45) 0%,
+      rgba(15, 22, 18, 0.72) 55%,
+      rgba(15, 22, 18, 0.88) 100%
     );
     padding: var(--sl-space-8) 0 var(--sl-space-12);
     z-index: 1;
@@ -296,17 +313,33 @@ const combinedJsonLd = combineJsonLd(
     line-height: var(--sl-lh-relaxed);
     opacity: 1;
     margin-bottom: var(--sl-space-6);
-    text-shadow: none;
-    color: var(--sl-color-text-muted);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    color: rgba(255, 255, 255, 0.92);
   }
 
-  .c-pillar-hero .c-article-meta {
+  /* Text over the photo keeps fixed light colors in both themes */
+  .c-pillar-hero .c-breadcrumbs__link,
+  .c-pillar-hero .c-breadcrumbs__separator {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .c-pillar-hero .c-breadcrumbs__link:hover {
+    color: #ffffff;
+  }
+  .c-pillar-hero .c-breadcrumbs__current {
+    color: #ffffff;
+  }
+  .c-pillar-hero :global(.c-article-meta) {
     border-bottom-color: rgba(255, 255, 255, 0.2);
     color: rgba(255, 255, 255, 0.9);
   }
-  .c-pillar-hero .c-article-meta__item time,
-  .c-pillar-hero .c-article-meta__item span {
+  .c-pillar-hero :global(.c-article-meta__item),
+  .c-pillar-hero :global(.c-article-meta__item time),
+  .c-pillar-hero :global(.c-article-meta__item span) {
     color: inherit;
+  }
+  /* Category/pillar badges are already shown above the title */
+  .c-pillar-hero :global(.c-article-meta > .c-article-meta__item:first-child) {
+    display: none;
   }
   .c-pillar-hero .c-badge {
     background-color: rgba(255, 255, 255, 0.2);
@@ -415,7 +448,7 @@ const combinedJsonLd = combineJsonLd(
 
   /* Scrollbar styling */
   .c-pillar-content :global(table:focus-visible) {
-    outline: 2px solid var(--sl-color-border-focus);
+    outline: 3px solid var(--sl-color-border-focus);
     outline-offset: 2px;
   }
   .c-pillar-content :global(table)::-webkit-scrollbar {
@@ -766,7 +799,7 @@ const combinedJsonLd = combineJsonLd(
 
   .c-pillar-toc__link {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: var(--sl-space-3);
     padding: var(--sl-space-2) var(--sl-space-3);
     color: var(--sl-color-text);
@@ -784,14 +817,17 @@ const combinedJsonLd = combineJsonLd(
   }
 
   .c-pillar-toc__link:focus-visible {
-    outline: 2px solid var(--sl-color-border-focus);
+    outline: 3px solid var(--sl-color-border-focus);
     outline-offset: 2px;
   }
 
   .c-pillar-toc__icon {
     flex-shrink: 0;
+    min-width: 2ch;
     color: var(--sl-color-primary);
-    font-size: var(--sl-fs-lg);
+    font-size: var(--sl-fs-sm);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
     line-height: 1;
   }
 
@@ -838,6 +874,9 @@ const combinedJsonLd = combineJsonLd(
     transition: all var(--sl-transition-normal);
     box-shadow: var(--sl-shadow-lg);
     z-index: 999;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   .c-back-to-top--visible {
     opacity: 1;
@@ -849,7 +888,7 @@ const combinedJsonLd = combineJsonLd(
     transform: translateY(-2px);
   }
   .c-back-to-top:focus-visible {
-    outline: 2px solid var(--sl-color-border-focus);
+    outline: 3px solid var(--sl-color-border-focus);
     outline-offset: 2px;
   }
 
@@ -871,7 +910,7 @@ const combinedJsonLd = combineJsonLd(
     opacity: 1;
   }
   .c-copy-section-link:focus-visible {
-    outline: 2px solid var(--sl-color-border-focus);
+    outline: 3px solid var(--sl-color-border-focus);
     outline-offset: 2px;
     border-radius: var(--sl-radius-sm);
   }
@@ -1025,6 +1064,26 @@ const combinedJsonLd = combineJsonLd(
       }
     });
   }
+
+  // Reading progress bar and back-to-top button
+  const progressBar = document.getElementById('reading-progress');
+  const pillarArticle = document.querySelector<HTMLElement>('.c-pillar-article');
+  const backToTop = document.getElementById('back-to-top');
+  const onScroll = () => {
+    if (progressBar && pillarArticle) {
+      const scrolled = window.scrollY - pillarArticle.offsetTop + window.innerHeight / 2;
+      const progress = Math.min(Math.max((scrolled / pillarArticle.offsetHeight) * 100, 0), 100);
+      progressBar.style.width = `${progress}%`;
+    }
+    backToTop?.classList.toggle('c-back-to-top--visible', window.scrollY > 600);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  backToTop?.addEventListener('click', () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    document.getElementById('main-content')?.focus({ preventScroll: true });
+  });
 
   // Initialize all enhancements
   document.addEventListener('DOMContentLoaded', () => {

@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/ui/Icon.astro';
 import { getCollection } from 'astro:content';
 import HomeLayout from '../layouts/HomeLayout.astro';
 import { buildHomeSEOMeta } from '../utils/seo';
@@ -73,38 +74,7 @@ const faqs = [
 
   <section class="c-trust-bar" aria-label="Trust indicators">
     <div class="u-container">
-      <div class="c-trust-bar__marquee-wrapper" aria-hidden="true">
-        <ul class="c-trust-bar__marquee u-flex u-items-center u-gap-8">
-          <li class="c-trust-bar__item">
-            <span class="c-trust-bar__icon" aria-hidden="true">
-              ✓
-            </span>{' '}
-            Researched from government and nonprofit sources
-          </li>
-          <li class="c-trust-bar__item">
-            <span class="c-trust-bar__icon" aria-hidden="true">
-              ↻
-            </span>{' '}
-            Updated 2026
-          </li>
-          <li class="c-trust-bar__item">
-            <span class="c-trust-bar__icon" aria-hidden="true">
-              ✓
-            </span>{' '}
-            Researched from government and nonprofit sources
-          </li>
-          <li class="c-trust-bar__item">
-            <span class="c-trust-bar__icon" aria-hidden="true">
-              ↻
-            </span>{' '}
-            Updated 2026
-          </li>
-        </ul>
-      </div>
-      <ul
-        class="c-trust-bar__list u-flex-wrap u-justify-center u-hidden sm:u-flex"
-        aria-hidden="false"
-      >
+      <ul class="c-trust-bar__list u-flex u-flex-wrap u-justify-center">
         <li class="c-trust-bar__item">
           <span class="c-trust-bar__icon" aria-hidden="true">
             ✓
@@ -134,8 +104,8 @@ const faqs = [
     <div class="c-grid c-grid--2 c-grid--3">
       {categories.map((cat) => (
         <a href={`/category/${cat.slug}/`} class="c-category-card u-transition">
-          <span class="c-category-card__icon" style={{ backgroundColor: cat.bgColor }}>
-            {cat.icon}
+          <span class="c-category-card__icon" style={{ backgroundColor: cat.bgColor, color: cat.color }}>
+            <Icon name={cat.icon} />
           </span>
           <h3 class="c-category-card__title">{cat.label}</h3>
           <p class="c-category-card__desc">{getCategoryDescriptionShort(cat.slug)}</p>
@@ -164,7 +134,7 @@ const faqs = [
               <span
                 class="c-badge c-badge--small c-most-read__badge"
                 style={{
-                  backgroundColor: `${cat?.bgColor}33`,
+                  backgroundColor: cat?.bgColor,
                   color: cat?.color,
                 }}
               >

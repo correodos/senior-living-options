@@ -5,22 +5,23 @@ interface Props {
 const { data } = Astro.props;
 
 const categoryInfo = {
-  'assisted-living': { label: 'Assisted Living', color: 'var(--sl-color-al)' },
-  'memory-care': { label: 'Memory Care', color: 'var(--sl-color-mc)' },
-  'nursing-homes': { label: 'Nursing Homes', color: 'var(--sl-color-nh)' },
-  'in-home-care': { label: 'In-Home Care', color: 'var(--sl-color-ihc)' },
-  'senior-care-costs': { label: 'Costs & Finance', color: 'var(--sl-color-cf)' },
-  'caregiver-resources': { label: 'Caregiver Help', color: 'var(--sl-color-cr)' },
+  'assisted-living': { label: 'Assisted Living', color: 'var(--sl-color-al-text)', bg: 'var(--sl-color-al-bg)' },
+  'memory-care': { label: 'Memory Care', color: 'var(--sl-color-mc-text)', bg: 'var(--sl-color-mc-bg)' },
+  'nursing-homes': { label: 'Nursing Homes', color: 'var(--sl-color-nh-text)', bg: 'var(--sl-color-nh-bg)' },
+  'in-home-care': { label: 'In-Home Care', color: 'var(--sl-color-ihc-text)', bg: 'var(--sl-color-ihc-bg)' },
+  'senior-care-costs': { label: 'Costs & Finance', color: 'var(--sl-color-cf-text)', bg: 'var(--sl-color-cf-bg)' },
+  'caregiver-resources': { label: 'Caregiver Help', color: 'var(--sl-color-cr-text)', bg: 'var(--sl-color-cr-bg)' },
 };
 const cat = categoryInfo[data.category as keyof typeof categoryInfo] || {
   label: data.category,
   color: 'var(--sl-color-primary)',
+  bg: 'var(--sl-color-primary-light)',
 };
 ---
 
 <div class="c-article-meta">
   <span class="c-article-meta__item">
-    <span class="c-badge" style={{ backgroundColor: `${cat.color}15`, color: cat.color }}>
+    <span class="c-badge" style={{ backgroundColor: cat.bg, color: cat.color }}>
       {cat.label}
     </span>
     {data.isPillar && <span class="c-badge c-badge--pillar">Pillar Article</span>}

@@ -100,7 +100,7 @@
   }
 
   a:focus-visible {
-    outline: 2px solid var(--sl-color-border-focus);
+    outline: 3px solid var(--sl-color-border-focus);
     outline-offset: 2px;
     border-radius: var(--sl-radius-sm);
   }
@@ -195,7 +195,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--sl-color-border-focus);
+    outline: 3px solid var(--sl-color-border-focus);
     outline-offset: 2px;
   }
 

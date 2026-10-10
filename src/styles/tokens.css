@@ -35,17 +35,17 @@
     --sl-color-cr-text: #8a5a12;
 
     /* Dark mode colors */
-    --sl-color-bg-dark: #121212;
-    --sl-color-bg-alt-dark: #1e1e1e;
-    --sl-color-text-dark: #e8e8e8;
-    --sl-color-text-muted-dark: #c4c4c4;
-    --sl-color-text-light-dark: #b8b8b8;
-    --sl-color-border-dark: #333333;
-    --sl-color-border-focus-dark: #4ade80;
-    --sl-color-primary-dark: #4ade80;
-    --sl-color-primary-hover-dark: #22c55e;
-    --sl-color-primary-light-dark: #14532d;
-    --sl-color-primary-text-dark: #121212;
+    --sl-color-bg-dark: #131614;
+    --sl-color-bg-alt-dark: #1c201d;
+    --sl-color-text-dark: #e8e8e4;
+    --sl-color-text-muted-dark: #c2c6c1;
+    --sl-color-text-light-dark: #b0b5af;
+    --sl-color-border-dark: #2f3530;
+    --sl-color-border-focus-dark: #8fd3ad;
+    --sl-color-primary-dark: #8fd3ad;
+    --sl-color-primary-hover-dark: #a8dfc0;
+    --sl-color-primary-light-dark: #1d2e24;
+    --sl-color-primary-text-dark: #0f1411;
     --sl-color-secondary-dark: #7fc79f;
     --sl-color-secondary-hover-dark: #96d6b2;
   }
@@ -69,18 +69,18 @@
     --sl-color-secondary-hover: var(--sl-color-secondary-hover-dark);
 
     /* Category colors — darkened for dark mode */
-    --sl-color-al-bg: #1a2e22;
-    --sl-color-al-text: #6ee09a;
+    --sl-color-al-bg: #1d2e24;
+    --sl-color-al-text: #8fd3ad;
     --sl-color-mc-bg: #1a1e2e;
-    --sl-color-mc-text: #818cf8;
+    --sl-color-mc-text: #a5b0f5;
     --sl-color-nh-bg: #2e1f10;
-    --sl-color-nh-text: #fb923c;
-    --sl-color-ihc-bg: #10251a;
-    --sl-color-ihc-text: #4ade80;
+    --sl-color-nh-text: #f2a66a;
+    --sl-color-ihc-bg: #18291f;
+    --sl-color-ihc-text: #7fd6a3;
     --sl-color-cf-bg: #1e1028;
-    --sl-color-cf-text: #c084fc;
+    --sl-color-cf-text: #d1a6f5;
     --sl-color-cr-bg: #2a1e10;
-    --sl-color-cr-text: #fbbf24;
+    --sl-color-cr-text: #f0c766;
   }
 }
 
@@ -101,18 +101,18 @@
   --sl-color-secondary-hover: var(--sl-color-secondary-hover-dark);
 
   /* Category colors — darkened for dark mode */
-  --sl-color-al-bg: #1a2e22;
-  --sl-color-al-text: #6ee09a;
+  --sl-color-al-bg: #1d2e24;
+  --sl-color-al-text: #8fd3ad;
   --sl-color-mc-bg: #1a1e2e;
-  --sl-color-mc-text: #818cf8;
+  --sl-color-mc-text: #a5b0f5;
   --sl-color-nh-bg: #2e1f10;
-  --sl-color-nh-text: #fb923c;
-  --sl-color-ihc-bg: #10251a;
-  --sl-color-ihc-text: #4ade80;
+  --sl-color-nh-text: #f2a66a;
+  --sl-color-ihc-bg: #18291f;
+  --sl-color-ihc-text: #7fd6a3;
   --sl-color-cf-bg: #1e1028;
-  --sl-color-cf-text: #c084fc;
+  --sl-color-cf-text: #d1a6f5;
   --sl-color-cr-bg: #2a1e10;
-  --sl-color-cr-text: #fbbf24;
+  --sl-color-cr-text: #f0c766;
 }
 
 @layer base {

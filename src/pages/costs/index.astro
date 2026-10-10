@@ -117,6 +117,7 @@ const jsonLd = combineJsonLd(collectionJsonLd, breadcrumbsToJsonLd(breadcrumbs, 
       <p class="hub-note">
         Select a column heading to sort. Select a state name to see its full cost breakdown.
       </p>
+      <p class="hub-scroll-hint" aria-hidden="true">Swipe the table sideways to see all columns →</p>
       <div class="hub-table-wrap">
         <table class="hub-table" id="costs-table">
           <thead>
@@ -282,6 +283,33 @@ const jsonLd = combineJsonLd(collectionJsonLd, breadcrumbsToJsonLd(breadcrumbs, 
     overflow-x: auto;
     border: 1px solid var(--sl-color-border);
     border-radius: var(--sl-radius-lg);
+    /* Shadow on the right edge while more columns are hidden */
+    background:
+      linear-gradient(to left, var(--sl-color-bg), transparent) right / 24px 100% no-repeat local,
+      radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.2), transparent) right / 14px
+        100% no-repeat scroll;
+  }
+  .hub-scroll-hint {
+    display: none;
+    margin: 0 0 var(--sl-space-2);
+    font-size: var(--sl-fs-xs);
+    color: var(--sl-color-text-light);
+  }
+  @media (max-width: 767px) {
+    .hub-scroll-hint {
+      display: block;
+    }
+  }
+  .hub-table thead th:first-child,
+  .hub-table tbody th,
+  .hub-table tfoot th {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    box-shadow: 1px 0 0 var(--sl-color-border);
+  }
+  .hub-table tbody th {
+    background-color: var(--sl-color-bg);
   }
   .hub-table {
     width: 100%;
@@ -315,7 +343,7 @@ const jsonLd = combineJsonLd(collectionJsonLd, breadcrumbsToJsonLd(breadcrumbs, 
     border-radius: var(--sl-radius-sm);
   }
   .hub-sort:focus-visible {
-    outline: 2px solid var(--sl-color-primary-text);
+    outline: 3px solid var(--sl-color-primary-text);
     outline-offset: 3px;
   }
   .hub-sort::after {
