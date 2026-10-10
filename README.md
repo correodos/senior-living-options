@@ -1,37 +1,31 @@
 # Senior Living Options
 
-Guías completas para opciones de vivienda y cuidado de adultos mayores.
+Guías completas para opciones de vivienda y cuidado de adultos mayores. El sitio está en inglés de
+EE. UU.; la documentación del repositorio, en español.
 
 ## Stack Tecnológico
 
-- **Framework**: Astro 7.x (SSG puro, 0-JS por defecto)
+- **Framework**: Astro 7.x (SSG puro, casi 0 JS)
 - **Lenguaje**: TypeScript 6.x
-- **Validación**: Zod 4.x
+- **Validación**: Zod, incluido con Astro (`astro/zod`)
 - **Estilos**: CSS Vanilla con Design Tokens (Custom Properties)
-- **JS**: Vanilla ES Modules (solo search, nav, analytics)
-- **Contenido**: Markdown + Frontmatter (Collections Astro)
-- **Hosting**: Cloudflare Pages (integración nativa Git)
-- **CI**: GitHub Actions (validación y build)
+- **Contenido**: Markdown + Frontmatter (Collections de Astro) y datos JSON por estado
+- **Hosting**: Cloudflare Pages (integración nativa con Git)
+- **CI**: GitHub Actions (lint, tipos, validación y build)
 
 ## Inicio Rápido
 
 ```bash
-# Instalar dependencias
 npm install
 
-# Desarrollo local
-npm run dev        # http://localhost:4321
+npm run dev               # http://localhost:4321
 
-# Validaciones
-npm run check      # TypeScript + Astro
-npm run lint       # ESLint
-npm run format:check  # Prettier
-npm run validate:content  # Frontmatter, fechas, imágenes, links
+npm run check             # TypeScript + Astro
+npm run lint              # ESLint
+npm run format:check      # Prettier
+npm run validate:content  # Frontmatter, fechas, imágenes, links y datos de Medicaid
 
-# Build producción
-npm run build      # Genera dist/
-
-# Preview build
+npm run build             # Genera dist/
 npm run preview
 ```
 
@@ -39,16 +33,17 @@ npm run preview
 
 ```
 src/
-├── components/     # Componentes Astro reutilizables
-├── layouts/        # Layouts de página (Base, Home, Category, Article)
+├── components/     # Componentes Astro (layout, content, ui)
+├── layouts/        # Base, Home, Category, Article, PillarArticle
 ├── pages/          # Rutas (file-based routing)
 ├── styles/         # CSS vanilla (tokens, base, components, utilities)
-├── scripts/        # JS vanilla (search, nav, analytics)
-├── content/        # Collections Astro (Markdown)
-│   ├── config.ts   # Schema Zod
-│   └── entries/    # Artículos por categoría
-├── utils/          # Helpers (SEO, dates, markdown, category)
-└── types/          # Tipos globales
+├── content/        # Collections de Astro
+│   └── entries/    # Artículos Markdown por categoría
+├── content.config.ts   # Definición de la collection
+├── data/           # costs-by-state.json y medicaid-by-state.json
+└── utils/          # SEO, categorías, costes, Medicaid, esquema
+scripts/            # validate-content.ts y validate-medicaid.ts
+docs/               # Documentación (ver abajo)
 ```
 
 ## Categorías de Contenido
@@ -57,36 +52,27 @@ src/
 | --------------- | --------------------- | ------------------------------------------ |
 | Assisted Living | `assisted-living`     | Comunidades residenciales con apoyo        |
 | Memory Care     | `memory-care`         | Unidades especializadas Alzheimer/demencia |
-| Nursing Homes   | `nursing-homes`       | Atención enfermería 24/7                   |
+| Nursing Homes   | `nursing-homes`       | Atención de enfermería 24/7                |
 | In-Home Care    | `in-home-care`        | Cuidado en el hogar                        |
-| Costs & Finance | `senior-care-costs`   | Costos, Medicare, Medicaid, seguros        |
+| Costs & Finance | `senior-care-costs`   | Costes, Medicare, Medicaid, seguros        |
 | Caregiver Help  | `caregiver-resources` | Recursos para cuidadores familiares        |
 
 ## Documentación
 
-- [Arquitectura y Decisiones](ARCHITECTURE.md)
-- [Modelo de Contenido](CONTENT_MODEL.md)
-- [Guía de Desarrollo](DEVELOPMENT.md)
-- [Guía de Despliegue](DEPLOYMENT.md)
+Todo está en la carpeta [`docs/`](docs/README.md):
+
+- [Arquitectura y decisiones](docs/ARCHITECTURE.md)
+- [Modelo de contenido](docs/CONTENT_MODEL.md)
+- [Guía de desarrollo](docs/DEVELOPMENT.md)
+- [Guía de diseño y estructura](docs/diseño-estructura.md)
 
 ## CI / Despliegue
 
-**CI (GitHub Actions)**: En cada push/PR se ejecuta:
+**CI (GitHub Actions)**: en cada push o PR a `main` se ejecuta `npm ci`, `lint`, `format:check`,
+`check`, `validate:content` y `build`.
 
-- `npm ci` — instalación limpia
-- `npm run lint` — ESLint
-- `npm run format:check` — Prettier
-- `npm run check` — TypeScript + Astro
-- `npm run validate:content` — Frontmatter, fechas, imágenes, links
-- `npm run build` — Compilación completa a `dist/`
-
-**Despliegue (Cloudflare Pages nativo)**:
-
-- Push a `main` → Cloudflare Pages detecta commit → build automático → publica `dist/`
-- PRs → Cloudflare Pages genera preview automático
-- Configuración de build en Cloudflare: `npm run build` / output `dist/` / Node 22.x
-
-Ver [DEPLOYMENT.md](DEPLOYMENT.md) para configuración completa.
+**Despliegue (Cloudflare Pages)**: un push a `main` construye con `npm run build` y publica `dist/`
+(Node 22.x). La configuración de build está en el panel de Cloudflare Pages.
 
 ## Licencia
 

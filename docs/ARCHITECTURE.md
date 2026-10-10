@@ -1,180 +1,136 @@
 # Senior Living Options - Architecture Decision Record
 
+> Estado: actualizado en octubre de 2026 para reflejar el proyecto real. El sitio publicado y la web
+> están en inglés de EE. UU.; la documentación está en español.
+
 ## Stack Tecnológico
 
-| Capa       | Tecnología             | Versión | Justificación                                                    |
-| ---------- | ---------------------- | ------- | ---------------------------------------------------------------- |
-| Framework  | Astro                  | 7.x     | SSG nativo, islas de hidratación 0-JS por defecto, excelente SEO |
-| Lenguaje   | TypeScript             | 6.x     | Tipado estricto para collections y componentes                   |
-| Estilos    | CSS Vanilla            | -       | Sin dependencias, tokens CSS custom properties, ligero           |
-| JS         | Vanilla ES Modules     | -       | Solo para interactividad mínima (search, nav, analytics)         |
-| Contenido  | Markdown + Frontmatter | -       | Archivos locales, versionados en Git, sin CMS externo            |
-| Validación | Zod                    | 4.x     | Schema validation para content collections                       |
-| Hosting    | Cloudflare Pages       | -       | Gratis, edge network, integración nativa Git                     |
-| CI         | GitHub Actions         | -       | Lint, typecheck, build, validación en push/PR                    |
+| Capa       | Tecnología             | Versión | Justificación                                                     |
+| ---------- | ---------------------- | ------- | ----------------------------------------------------------------- |
+| Framework  | Astro                  | 7.x     | SSG nativo, 0 JS por defecto, excelente SEO                       |
+| Lenguaje   | TypeScript             | 6.x     | Tipado estricto para collections y componentes                    |
+| Estilos    | CSS Vanilla            | -       | Sin dependencias, tokens CSS custom properties, ligero            |
+| JS         | Vanilla                | -       | Solo interactividad mínima, inline en los componentes que la usan |
+| Contenido  | Markdown + Frontmatter | -       | Archivos locales, versionados en Git, sin CMS externo             |
+| Validación | Zod (`astro/zod`)      | 4.x     | Viene con Astro; no es una dependencia aparte                     |
+| Datos      | JSON + Zod             | -       | Costes por estado y datos de Medicaid, validados en CI            |
+| Hosting    | Cloudflare Pages       | -       | Gratis, edge network, integración nativa con Git                  |
+| CI         | GitHub Actions         | -       | Lint, typecheck, validación y build en cada push/PR               |
+
+Dependencias de ejecución: `astro`, `@astrojs/check`, `@astrojs/sitemap`, `typescript`. El resto son
+herramientas de desarrollo (ESLint, Prettier, `tsx`, `terser`). No hay React, Vue ni Svelte.
 
 ## Decisiones Clave
 
-### 1. Astro Puro (Sin React/Vue/Svelte)
+### 1. Astro puro (sin React/Vue/Svelte)
 
-- **Razón**: Sitio de contenido estático, no necesita hidratación compleja
-- **Beneficio**: 0 KB JS por defecto, build más rápido, bundle menor
-- **Excepción**: Solo si surge necesidad real de interactividad compleja (ej. calculadora de costos
-  interactiva)
+- **Razón**: sitio de contenido estático, no necesita hidratación compleja.
+- **Beneficio**: casi 0 KB de JS, build rápido, Lighthouse 98-100 en todas las métricas.
+- **Excepción**: solo si surge una necesidad real de interactividad compleja.
 
-### 2. Single Collection Schema con Category Enum
+### 2. Single collection con `category` enum
 
-- **Schema único** para todo el contenido (`src/content/entries/`)
-- **Campo `category`** enum: `assisted-living`, `memory-care`, `nursing-homes`, `in-home-care`,
-  `senior-care-costs`, `caregiver-resources`
-- **Campo `isPillar`** boolean: distingue pillar pages (completas, evergreen) de posts normales
-- **Ventaja**: Consultas unificadas, menos duplicación, fácil migración futura
+- **Schema único** en `src/utils/entry-schema.ts`, usado por `src/content.config.ts` y por
+  `scripts/validate-content.ts` (una sola fuente de verdad).
+- **Campo `category`**: `assisted-living`, `memory-care`, `nursing-homes`, `in-home-care`,
+  `senior-care-costs`, `caregiver-resources`.
+- **Campo `isPillar`**: distingue las guías completas (usan `PillarArticleLayout`) de los artículos
+  normales (usan `ArticleLayout`).
+- Ver [CONTENT_MODEL.md](CONTENT_MODEL.md).
 
-### 3. CSS Vanilla con Design Tokens
+### 3. CSS vanilla con design tokens
 
-- **Tokens** en `src/styles/tokens.css` (custom properties)
-- **Capas**: `@layer base, components, utilities`
-- **Metodología**: BEM simplificado + utility classes para spacing
-- **Responsive**: Mobile-first, breakpoints en tokens
+- **Tokens** en `src/styles/tokens.css` (prefijo `--sl-`), con modo claro y oscuro.
+- **Capas**: `@layer base, components` (las utilidades están en `utilities.css`).
+- **Metodología**: BEM simplificado (`.c-componente`, `.c-componente--variante`) y utilidades
+  `.u-*`.
+- **Responsive**: mobile-first. El menú de la cabecera pasa a una fila desde 1200px.
+- Las hojas de estilo se incluyen inline en el HTML (`inlineStylesheets: 'always'`).
 
-### 4. Estructura de Rutas (File-based Routing)
+### 4. Datos por estado como JSON validado
+
+- `src/data/costs-by-state.json`: costes de la encuesta CareScout 2025 por estado (mensual, anual,
+  por hora, centro de día, enfermería privada) y su metadata.
+- `src/data/medicaid-by-state.json`: datos de Medicaid por estado, cada valor con fuente oficial,
+  fecha efectiva y fecha de comprobación. Solo se muestran los valores `verified` y `read`.
+- Validación: `scripts/validate-medicaid.ts` (esquema en `src/utils/medicaid-schema.ts`).
+- Procedimiento de actualización: skill `.claude/skills/update-medicaid-data/`. Informes de cada
+  revisión en `docs/data-reports/`.
+
+### 5. SEO técnico
+
+- `@astrojs/sitemap` **activo**, con `lastmod` tomado de `lastReviewed` (artículos y categorías) y
+  de la fecha de la encuesta (páginas de costes). Se excluyen las páginas legales y la página
+  `/contact/thanks/`.
+- `public/robots.txt` estático, con la línea `Sitemap:`.
+- Meta tags dinámicos (Open Graph, Twitter Cards) y canonical automático.
+- JSON-LD: `Article`, `FAQPage`, `BreadcrumbList`, `CollectionPage`, `AboutPage`, `ContactPage`
+  (combinados con `combineJsonLd` en `src/utils/seo.ts`).
+- `lastReviewed` en el frontmatter alimenta `dateModified`.
+- Cabeceras de seguridad y caché en `public/_headers` (Cloudflare Pages).
+
+### 6. Performance
+
+| Métrica                  | Objetivo | Real (oct. 2026) |
+| ------------------------ | -------- | ---------------- |
+| Lighthouse Performance   | > 95     | 98-100           |
+| Lighthouse Accessibility | > 95     | 100              |
+| Lighthouse SEO           | > 95     | 100              |
+| Lighthouse Best Practice | > 95     | 100              |
+
+- Imágenes WebP con variantes `-480` y `-768` y `srcset` (`src/utils/images.ts`).
+- Fuentes del sistema y Georgia: sin fuentes externas.
+
+### 7. Accesibilidad (WCAG 2.1 AA)
+
+- HTML semántico, landmarks, skip link, foco visible, contraste 4.5:1 como mínimo.
+- Tablas con scroll horizontal accesibles por teclado.
+- Auditorías con axe sin violaciones en las páginas probadas.
+
+## Estructura de Rutas
 
 ```
-/                           → Home (pillar pages destacadas + latest)
-/category/[slug]/           → Listing por categoría (paginado)
-/article/[...slug]/         → Detail page individual (rest parameter para rutas anidadas)
-/search/                    → Búsqueda client-side (JS vanilla)
-/sitemap-index.xml          → Generado automáticamente (temporalmente deshabilitado por bug)
+/                           → Home (guías destacadas, costes por estado, FAQs rápidas)
+/category/[slug]/           → Listado por categoría (guía pilar destacada + artículos)
+/article/[...slug]/         → Artículo (id con carpeta: /article/<categoría>/<archivo>/)
+/costs/                     → Índice de costes por estado (ordenable)
+/costs/[state]/             → 50 páginas de estado (costes + Medicaid)
+/search/                    → Búsqueda en el cliente (usa /search-index.json)
+/about/                     → Qué es el sitio y quién está detrás
+/editorial-policy/          → Cómo se hacen los artículos, fuentes, cifras y correcciones
+/contact/  /contact/thanks/ → Formulario de contacto (Formspree) y página de confirmación
+/privacy/ /terms/ /disclaimer/ /accessibility/  → Páginas legales (noindex)
+/404                        → Página de error
+/sitemap-index.xml          → Generado en build
 /robots.txt                 → Estático en public/
 ```
-
-### 5. SEO Técnico
-
-- `@astrojs/sitemap` temporalmente deshabilitado (bug con `trailingSlash: always`)
-- `@astrojs/robots-txt` reemplazado por `public/robots.txt` estático
-- Meta tags dinámicos por página (Open Graph, Twitter Cards)
-- JSON-LD: `Article`, `WebSite`, `BreadcrumbList`, `FAQPage` (si aplica)
-- Canonical URLs automáticas
-- `lastReviewed` en frontmatter para `dateModified` en schema
-
-### 6. Content Model (Ver CONTENT_MODEL.md)
-
-- Un solo collection `entries` con schema Zod 4.x definido
-- Frontmatter validado en build time
-- Imágenes en `public/images/` referenciadas por ruta relativa
-- Loader `glob` para content collections (Astro 7)
-
-### 7. Performance Budget
-
-- **HTML**: < 30 KB gzipped
-- **CSS**: < 15 KB gzipped (crítico inline, resto async)
-- **JS**: < 10 KB gzipped (solo search + nav)
-- **Imágenes**: WebP/AVIF, responsive, lazy-loading nativo
-- **Lighthouse**: 95+ en todas las métricas
-
-### 8. Accessibility (WCAG 2.1 AA)
-
-- Semantic HTML5 obligatorio
-- Focus visible en todos los interactivos
-- Contraste 4.5:1 mínimo
-- Alt text en todas las imágenes
-- Skip links, landmarks ARIA
-
-## Convenciones de Código
-
-### TypeScript
-
-- `strict: true` en tsconfig
-- No `any` (usar `unknown` + type guards)
-- Interfaces para props de componentes Astro
-- Types derivados de collections con `CollectionEntry<'entries'>`
-
-### Astro Components
-
-- Un componente por archivo (`ComponentName.astro`)
-- Props tipadas con `interface Props`
-- Slot por defecto para composición
-- CSS scoped por defecto (no global)
-
-### CSS
-
-- Tokens en `:root` con prefijo `--sl-` (senior-living)
-- Clases utilitarias: `.u-mt-4`, `.u-flex`, `.u-sr-only`
-- Componentes: `.c-card`, `.c-button`, `.c-header`
-- BEM para variantes: `.c-card--featured`, `.c-button--secondary`
-
-### Git
-
-- **Main branch**: Solo código deployable (protegida)
-- **Feature branches**: `feat/descripcion-corta`
-- **Commits**: Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`)
-- **PRs**: Requieren CI pass + 1 approval
 
 ## Estructura de Carpetas
 
 ```
-├── public/                 # Assets estáticos servidos tal cual
-│   ├── images/             # Imágenes optimizadas (WebP/AVIF)
-│   ├── favicon.ico
-│   └── robots.txt          # Estático (generado en build temporalmente deshabilitado)
+├── public/                 # Assets estáticos (images/, favicon, robots.txt, _headers)
 ├── src/
-│   ├── components/         # Componentes Astro reutilizables
+│   ├── components/
 │   │   ├── layout/         # Header, Footer, SkipLink, Breadcrumbs
-│   │   ├── content/        # Card, ArticleMeta, TableOfContents
-│   │   └── ui/             # Button, Link, Icon, Badge, Search
-│   ├── layouts/            # Layouts de página
-│   │   ├── BaseLayout.astro
-│   │   ├── HomeLayout.astro
-│   │   ├── CategoryLayout.astro
-│   │   └── ArticleLayout.astro
-│   ├── pages/              # Rutas (file-based routing)
-│   │   ├── index.astro
-│   │   ├── category/
-│   │   │   └── [slug].astro
-│   │   ├── article/
-│   │   │   └── [...slug].astro
-│   │   └── search.astro
-│   ├── styles/             # CSS vanilla
-│   │   ├── tokens.css      # Design tokens (custom properties)
-│   │   ├── base.css        # Reset, tipografía, elementos base
-│   │   ├── components.css  # Estilos de componentes
-│   │   ├── utilities.css   # Utility classes
-│   │   └── global.css      # Importa todo (importado en BaseLayout)
-│   ├── scripts/            # JS vanilla (ES Modules)
-│   │   ├── search.js       # Búsqueda client-side
-│   │   ├── navigation.js   # Mobile menu, smooth scroll
-│   │   └── analytics.js    # Plausible/GA4 consent-mode
-│   ├── content/            # Collections Astro
-│   │   ├── config.ts       # Definición de collections (Zod 4 + glob loader)
-│   │   └── entries/        # Archivos .md/.mdx
-│   │       ├── assisted-living/
-│   │       ├── memory-care/
-│   │       ├── nursing-homes/
-│   │       ├── in-home-care/
-│   │       ├── senior-care-costs/
-│   │       └── caregiver-resources/
-│   ├── utils/              # Helpers puros
-│   │   ├── seo.ts          # Meta tags, JSON-LD generators
-│   │   └── category.ts     # Helpers de categoría (labels, colors)
-│   └── types/              # Tipos globales (env.d.ts, content.d.ts)
-├── scripts/                # Scripts de build/utilidades Node
-│   └── validate-content.ts
-├── .github/
-│   └── workflows/
-│       └── deploy.yml      # CI pipeline (validación + build verification)
-├── astro.config.mjs
-├── package.json
-├── tsconfig.json
-├── eslint.config.js
-├── prettier.config.js
-├── .prettierignore
-├── .gitignore
-├── README.md
-├── ARCHITECTURE.md
-├── CONTENT_MODEL.md
-├── DEVELOPMENT.md
-├── DEPLOYMENT.md
-└── .prettierignore
+│   │   ├── content/        # Card, ArticleMeta, TableOfContents, RelatedArticles
+│   │   └── ui/             # Button, Search, StateSelector
+│   ├── layouts/            # BaseLayout, HomeLayout, CategoryLayout, ArticleLayout,
+│   │                       # PillarArticleLayout
+│   ├── pages/              # Rutas (ver arriba)
+│   ├── styles/             # tokens.css, base.css, components.css, utilities.css, global.css
+│   ├── content/entries/    # Markdown por categoría
+│   ├── content.config.ts   # Collection `entries` (glob loader + schema)
+│   ├── data/               # costs-by-state.json, medicaid-by-state.json
+│   ├── utils/              # category, costs, images, medicaid, medicaid-schema, entry-schema, seo
+│   ├── scripts/            # Reservada (vacía): el JS vive inline en los componentes
+│   └── types/              # Reservada (vacía)
+├── scripts/                # validate-content.ts, validate-medicaid.ts
+├── .claude/skills/         # update-medicaid-data (procedimiento y registro de fuentes)
+├── .github/workflows/      # deploy.yml (CI)
+├── docs/                   # Esta documentación, data-reports/ y medicaid-sources/ (local)
+├── astro.config.mjs, package.json, tsconfig.json, eslint.config.js, prettier.config.js
+├── AGENTS.md               # Reglas de trabajo con el asistente
+└── README.md
 ```
 
 ## Scripts NPM
@@ -183,13 +139,14 @@
 {
   "dev": "astro dev", // localhost:4321
   "build": "astro check && astro build",
-  "preview": "astro preview", // Test build local
-  "check": "astro check", // TypeScript + Astro validation
+  "preview": "astro preview",
+  "check": "astro check",
   "lint": "eslint src --ext .astro,.ts,.js",
   "lint:fix": "eslint src --ext .astro,.ts,.js --fix",
   "format": "prettier --write .",
   "format:check": "prettier --check .",
-  "validate:content": "tsx scripts/validate-content.ts"
+  "validate:content": "tsx scripts/validate-content.ts && tsx scripts/validate-medicaid.ts",
+  "validate:medicaid": "tsx scripts/validate-medicaid.ts"
 }
 ```
 
@@ -199,9 +156,10 @@
 | ------------------ | ---------------- | --------- | ----------------------------------------- |
 | `PUBLIC_SITE_URL`  | Cloudflare Pages | Sí        | `https://senior-living-options.pages.dev` |
 | `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Living Options`                   |
-| `ANALYTICS_ID`     | Cloudflare Pages | No        | -                                         |
 
-### Desarrollo Local (`.env.local`)
+No hay variables de analítica: el sitio no usa analytics.
+
+En `.env.local` para desarrollo:
 
 ```env
 PUBLIC_SITE_URL=http://localhost:4321
@@ -210,42 +168,22 @@ PUBLIC_SITE_NAME=Senior Living Options (Dev)
 
 ## CI / Despliegue
 
-### CI (GitHub Actions)
+### CI (GitHub Actions, `.github/workflows/deploy.yml`)
 
-En cada push/PR se ejecuta:
+En cada push o PR a `main` se ejecuta (Node 22.12):
 
-- `npm ci` — instalación limpia
-- `npm run lint` — ESLint
-- `npm run format:check` — Prettier
-- `npm run check` — TypeScript + Astro
-- `npm run validate:content` — Frontmatter, fechas, imágenes, links
-- `npm run build` — Compilación completa a `dist/` (verificación)
+- `npm ci`, `npm run lint`, `npm run format:check`, `npm run check`
+- `npm run validate:content` (frontmatter, fechas, imágenes y datos de Medicaid)
+- `npm run build` (verificación; el despliegue no lo hace este workflow)
 
-### Despliegue (Cloudflare Pages Nativo)
+### Despliegue (Cloudflare Pages)
 
-- Push a `main` → Cloudflare Pages detecta commit → build automático → publica `dist/`
-- PRs → Cloudflare Pages genera preview automático
-- Configuración de build en Cloudflare: `npm run build` / output `dist/` / Node 22.x
+- Push a `main` → Cloudflare Pages construye con `npm run build` y publica `dist/` (Node 22.x).
+- Los PRs, si se usan, generan una vista previa.
+- Los logs de build están en el panel de Cloudflare Pages, no en GitHub Actions.
 
-### Variables de Build en Cloudflare Pages
+## Pendiente
 
-| Variable           | Valor                                     |
-| ------------------ | ----------------------------------------- |
-| `PUBLIC_SITE_URL`  | `https://senior-living-options.pages.dev` |
-| `PUBLIC_SITE_NAME` | `Senior Living Options`                   |
-| `ANALYTICS_ID`     | (opcional)                                |
-
-## Próximos Pasos
-
-1. ✅ Definir arquitectura (este documento)
-2. ✅ Crear `package.json` + configs (TS, ESLint, Prettier)
-3. ✅ Estructura de carpetas + `astro.config.mjs`
-4. ✅ Collection schema (`src/content/config.ts`) con Zod 4 + glob loader
-5. ✅ Layouts base + design tokens CSS
-6. ✅ Páginas principales
-7. ✅ SEO + robots.txt
-8. ✅ GitHub repo + CI pipeline
-9. ✅ Documentación `DEVELOPMENT.md` + `DEPLOYMENT.md`
-10. ⬜ Configurar Cloudflare Pages nativo en dashboard
-11. ⬜ Configurar variables de entorno en Cloudflare Pages
-12. ⬜ Configurar dominio personalizado (cuando esté disponible)
+1. Configurar un dominio propio (cuando exista).
+2. Publicidad (AdSense): añadir consentimiento de cookies y ajustar la CSP de `public/_headers`.
+3. Revisión anual de cifras: costes (marzo, nueva encuesta) y Medicaid (enero y julio).

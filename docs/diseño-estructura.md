@@ -1,9 +1,10 @@
 # Guía de Diseño y Estructura — Senior Living Options
 
-Documento de referencia para el diseño visual, estructura de páginas y patrones de UI. Basado en el
-mockup inicial (`senior_living_homepage_mockup.html`) y el proyecto Astro existente.
+Documento de referencia del diseño visual, la estructura de páginas y los patrones de interfaz.
+Actualizado en octubre de 2026 para reflejar el sitio real.
 
------- La página web tiene que estar en inglés de Estados Unidos ------
+> **La página web tiene que estar en inglés de Estados Unidos.** Esta guía está en español, pero
+> todos los textos que ve el lector (títulos, botones, etiquetas, mensajes) se escriben en inglés.
 
 ---
 
@@ -11,21 +12,22 @@ mockup inicial (`senior_living_homepage_mockup.html`) y el proyecto Astro existe
 
 ### Paleta de color
 
-El sitio usa una paleta editorial de confianza: fondo cálido, verde oscuro como color principal, con
-colores de acento por categoría.
+Paleta editorial de confianza: fondo cálido, verde oscuro como color principal y acentos por
+categoría. Los valores viven en `src/styles/tokens.css`, con versión clara y oscura (se cambia con
+el botón del tema de la cabecera).
 
-| Token CSS                  | Valor     | Uso                                          |
-| -------------------------- | --------- | -------------------------------------------- |
-| `--sl-color-bg`            | `#f8f7f4` | Fondo general de página                      |
-| `--sl-color-bg-alt`        | `#ffffff` | Fondo de cards, hero, nav                    |
-| `--sl-color-text`          | `#1a1a1a` | Texto principal                              |
-| `--sl-color-text-muted`    | `#666666` | Subtítulos, metadatos                        |
-| `--sl-color-border`        | `#e5e3de` | Divisores, bordes de card                    |
-| `--sl-color-primary`       | `#1a4d3a` | Verde oscuro — acción principal, logo, links |
-| `--sl-color-primary-hover` | `#143d2e` | Hover de primary                             |
-| `--sl-color-primary-light` | `#eaf4ef` | Fondos sutiles (badges, banners)             |
+| Token CSS                  | Valor (claro) | Uso                                          |
+| -------------------------- | ------------- | -------------------------------------------- |
+| `--sl-color-bg`            | `#f8f7f4`     | Fondo general de página                      |
+| `--sl-color-bg-alt`        | `#ffffff`     | Fondo de cards, hero, nav                    |
+| `--sl-color-text`          | `#1a1a1a`     | Texto principal                              |
+| `--sl-color-text-muted`    | `#555555`     | Subtítulos, metadatos                        |
+| `--sl-color-border`        | `#e5e3de`     | Divisores, bordes de card                    |
+| `--sl-color-primary`       | `#1a4d3a`     | Verde oscuro — acción principal, logo, links |
+| `--sl-color-primary-hover` | `#143d2e`     | Hover de primary                             |
+| `--sl-color-primary-light` | `#eaf4ef`     | Fondos sutiles (badges, banners)             |
 
-**Colores por categoría** (para badges e iconos):
+**Colores por categoría** (badges e iconos):
 
 | Categoría       | Background | Texto     |
 | --------------- | ---------- | --------- |
@@ -34,456 +36,201 @@ colores de acento por categoría.
 | Nursing Homes   | `#fef3ea`  | `#9e5a1a` |
 | In-Home Care    | `#f0faf5`  | `#1a6640` |
 | Costs & Finance | `#f4eafb`  | `#7a1a9e` |
-| Caregiver Help  | `#fdf4ea`  | `#9e6a1a` |
+| Caregiver Help  | `#fdf4ea`  | `#8a5a12` |
+
+Los textos del modo oscuro se ajustan para cumplir el contraste 4.5:1 (comprobado con axe).
 
 ### Tipografía
 
-El sitio usa **dos familias** con roles claramente separados:
+Dos familias con roles separados:
 
-- **Georgia, serif** — Títulos `h1`, `h2`, logo, pull quotes. Comunica autoridad editorial y
-  confianza. Line-height `1.25`.
-- **System UI, sans-serif** (`-apple-system, sans-serif`) — Todo lo demás: body, labels, botones,
-  metadatos, navegación. Line-height `1.6` para cuerpo, `1.4` para UI.
+- **Georgia, serif** — `h1`, `h2`, logo y pull quotes. Autoridad editorial.
+- **System UI, sans-serif** — cuerpo, etiquetas, botones, metadatos y navegación.
 
-**Escala tipográfica:**
+La escala está en `tokens.css` (`--sl-fs-*`). El texto base es **18px** (`1.125rem`) y el pequeño
+**16px**, pensados para lectores mayores. El interlineado del cuerpo es relajado
+(`--sl-lh-relaxed`).
 
-| Uso            | Tamaño                   | Familia | Peso                                 |
-| -------------- | ------------------------ | ------- | ------------------------------------ |
-| H1 hero        | `30px` (desktop: `36px`) | Georgia | 700                                  |
-| H2 sección     | `20px`                   | Georgia | 700                                  |
-| H3 card        | `14px`                   | Sans    | 600                                  |
-| Body           | `15px`                   | Sans    | 400                                  |
-| UI labels      | `13px`                   | Sans    | 400–500                              |
-| Badges / meta  | `11–12px`                | Sans    | 500–600                              |
-| Eyebrow labels | `11px`                   | Sans    | 600, uppercase, letter-spacing 0.8px |
-
-**Longitud de línea:** máximo `65ch` para body text en artículos. El hero usa `max-width: 540px`.
+**Longitud de línea:** no hay máximo en los párrafos. Los textos van **centrados en la página y a
+ancho completo** (decisión del dueño del sitio). Las páginas legales y de confianza usan un
+contenedor de 780px.
 
 ### Espaciado y radio
 
-- Espaciado base: múltiplos de `4px` (4, 8, 10, 12, 16, 20, 24, 28, 32, 48px)
-- Bordes redondeados: `8px` para botones y cards, `4–5px` para badges, `20px` para pill badges
-- Sin sombras decorativas innecesarias — solo en cards al hacer hover
+- Espaciado por tokens `--sl-space-*` (múltiplos de 4px).
+- Bordes redondeados por tokens `--sl-radius-*`; pill badges con radio grande.
+- Sin sombras decorativas innecesarias; solo en cards al hacer hover.
 
 ---
 
 ## 2. Componentes globales
 
-### Navegación (Header)
+### Cabecera (Header)
 
 ```
-[ Logo ]                [ Link ] [ Link ] [ Link ] [ Link ]
+[ Logo ]     [ Assisted Living ] [ Memory Care ] [ Nursing Homes ] [ In-Home Care ]
+             [ Costs & Finance ] [ Caregiver Help ] [ About ]            [ theme ]
 ```
 
-- Altura fija: `52px`
-- Fondo blanco, borde inferior `1px #e5e3de`
-- Logo: Georgia, 17px, verde oscuro, con segunda palabra en color `#5a9e7a`
-- Links de nav: Sans, 13px, color `#555`, hover verde oscuro
-- Mobile: hamburguer icon → menú desplegable con los mismos links en columna + botón "Buscar"
-- El header NO es sticky en mobile; sí puede ser sticky en desktop si el contenido es largo
+- Altura de la barra: `52px`; **sticky** en todos los tamaños.
+- Menú en una sola fila desde **1200px**; por debajo, botón hamburguesa con menú desplegable.
+- Hover y foco solo cambian el color (el texto no se desplaza).
+- Botón de cambio de tema claro/oscuro solo aquí (no en el hero de los artículos).
 
-### Footer
+### Pie de página (Footer)
 
-- Fondo `#f8f7f4`, borde superior
-- Una sola línea: copyright + disclaimer legal
-- Sans, 11px, color `#aaa`
-- Opcionalmente: columnas con links a categorías y páginas legales si el sitio crece
+Cuatro columnas en escritorio (apiladas en móvil, con Topics y About en dos columnas):
+
+- **Marca:** nombre, una frase y la nota "Cost figures come from official and published sources… and
+  are reviewed every year."
+- **Topics:** las 6 categorías y "Costs by State".
+- **Guides:** las 6 guías pilar ("<Categoría>: Complete Guide").
+- **About:** About, Editorial Policy, Contact y Search.
+- **Franja inferior:** copyright, aviso de que es información educativa y los enlaces legales
+  (Privacy Policy, Terms of Use, Disclaimer, Accessibility).
 
 ---
 
 ## 3. Página de inicio (Home)
 
-### 3.1 Hero
+Orden real de secciones:
 
-**Objetivo:** capturar al visitante que llega agobiado buscando ayuda para un familiar.
+1. **Hero:** "Understanding your senior care options — without the overwhelm", párrafo corto y dos
+   botones: "Find the right care type →" y "Compare costs by state". No hay badge de "Trusted by N
+   families" (solo se pondría con un dato real y verificable).
+2. **Trust bar:** "Researched from government and nonprofit sources" · "Updated 2026".
+3. **Categorías (silos):** "What type of care do you need?" / "Explore care options by category".
+   Grid de 6 cards (icono, nombre, descripción corta); toda la card es un enlace.
+4. **Most read guides:** las 6 guías pilar en formato lista editorial (badge de categoría, título,
+   "Complete guide", minutos de lectura y fecha), ordenadas por fecha. Enlace "See all →".
+5. **Costes por estado:** "Senior care costs vary widely by state", medianas nacionales de assisted
+   living, residencia y cuidado en casa, y un selector de estado que lleva a `/costs/<estado>/`.
+6. **Quick answers:** 5 preguntas desplegables con respuesta breve y enlace a la guía.
+7. **Not sure where to start?:** 4 pasos y el botón "Read the complete guide →".
 
-**Estructura:**
-
-```
-[ Badge: "Trusted by 50,000+ families" ]
-[ H1: Titular empático y claro ]
-[ Párrafo: 1-2 líneas de propuesta de valor ]
-[ CTA primario ] [ CTA secundario ]
-```
-
-**Reglas:**
-
-- El H1 debe validar la emoción del usuario, no vender. Ejemplo: _"Understanding your senior care
-  options — without the overwhelm"_. Evitar lenguajes corporativos ("soluciones integrales",
-  "recursos de calidad").
-- El badge superior solo si hay un número real y verificable. Si no, omitir.
-- CTA primario: acción de descubrimiento ("Find the right care type →")
-- CTA secundario: acción de comparación ("Compare costs by state")
-- Fondo blanco para el hero, contrasta con el `#f8f7f4` del resto
-
-### 3.2 Trust Bar
-
-Aparece inmediatamente después del hero, antes del contenido.
-
-```
-[ ✓ Researched from government and nonprofit sources ] · [ ↻ Updated 2026 ]
-```
-
-- Fondo `#f8f7f4`, borde inferior
-- Sans, 12px, gris, con icono verde al frente
-- Máximo 3 ítems — si hay más, elegir los más verificables
-
-### 3.3 Grid de categorías (Silos)
-
-**Objetivo:** orientar al usuario que no sabe qué tipo de cuidado necesita.
-
-```
-[ Eyebrow: "What type of care do you need?" ]
-[ Subtítulo: instrucción clara ]
-[ Grid 3×2 de cards de categoría ]
-```
-
-**Card de categoría:**
-
-- Fondo blanco, borde `1px #e5e3de`, radio `10px`
-- Icono emoji en cuadrado redondeado con color de fondo de la categoría
-- Título: Sans 14px bold
-- Descripción: Sans 11px, gris, máx. 2 líneas
-- Hover: borde cambia a verde (`#5a9e7a`)
-- El card entero es clickeable → va a la página de categoría
-
-**Idea a añadir — quiz de orientación:** Antes o debajo de este grid, un banner tipo:
-
-```
-[ ¿No sabes por dónde empezar? → Responde 3 preguntas y te orientamos ]
-```
-
-Lleva a una página o modal con 3 preguntas simples (¿necesita ayuda médica constante? / ¿puede vivir
-solo? / ¿tiene presupuesto limitado?) y recomienda el tipo de cuidado más adecuado. Muy efectivo
-para engagement.
-
-### 3.4 Artículos más leídos
-
-**Objetivo:** mostrar el contenido de mayor valor sin imagen, formato lista editorial.
-
-```
-[ H2: "Most read guides" ]                    [ See all → ]
-[ Badge categoría ] [ Título del artículo ]
-                    [ Tiempo de lectura · Fecha ]
-```
-
-**Reglas:**
-
-- Sin imágenes en esta sección — formato lista limpio
-- Máximo 4-6 artículos
-- Badge de categoría con color de la categoría correspondiente
-- Tiempo de lectura es un dato de confianza; incluirlo siempre
-- Ordenar por relevancia/tráfico, no por fecha
-
-### 3.5 FAQs rápidas
-
-**Objetivo:** responder las preguntas más comunes directamente en home (SEO + UX).
-
-```
-[ H2: "Quick answers" ]
----
-[ Pregunta en negrita ]
-[ Respuesta corta ] [ link → ]
----
-[ Pregunta ]
-[ Respuesta ] [ link → ]
-```
-
-**Reglas:**
-
-- Máximo 4 preguntas
-- Las respuestas son breves (1-2 líneas) con un link a la guía completa
-- El contenido debe ser factual y actualizado con año
-- Las preguntas deben ser exactamente como las busca la gente en Google (usa Search Console o
-  SEMrush para elegirlas)
-
-**Ideas de preguntas para el home:**
-
-1. How much does assisted living cost per month?
-2. Does Medicare cover assisted living?
-3. What's the difference between memory care and assisted living?
-4. How do I know when it's time for a nursing home?
-
-### 3.6 Módulo adicional recomendado — Costos por estado
-
-Entre la sección de artículos y las FAQs, añadir un módulo destacado:
-
-```
-[ Título: "Senior care costs vary widely by state" ]
-[ Subtítulo: "Find out what you'd pay in your state" ]
-[ Selector de estado (dropdown) ] [ → Ver costos ]
-```
-
-Este módulo puede ser solo un selector que lleva a la página de costos filtrada. Es el contenido más
-buscado en este nicho y da una razón clara para interactuar en la home.
-
-### 3.7 Módulo adicional — Checklist de primeros pasos
-
-Para usuarios en crisis que no saben por dónde empezar:
-
-```
-[ Título: "Not sure where to start?" ]
-[ 3-4 pasos numerados con icono y texto muy corto ]
-[ CTA: "Read the complete guide →" ]
-```
-
-Ejemplo de pasos:
-
-1. Evaluate the level of care needed
-2. Understand your budget and payment options
-3. Research facilities in your area
-4. Visit and ask the right questions
-
-### 3.8 Newsletter / Suscripción
-
-Al final de la home, antes del footer:
-
-```
-[ Título: "Stay informed" ]
-[ Subtítulo: sin spam, cancelar cuando quieras ]
-[ Input email ] [ Botón: Subscribe ]
-[ Link a política de privacidad ]
-```
-
-**Importante:** Este formulario necesita un backend o un servicio (Mailchimp, ConvertKit, Resend).
-Actualmente en el código es un placeholder sin action. Conectarlo antes de publicar o quitarlo.
+Ideas futuras (no implementadas): un quiz de orientación de 3 preguntas (`/quiz/`) y una sección
+"Stay informed" con suscripción (requeriría un servicio de email y actualizar la política de
+privacidad).
 
 ---
 
 ## 4. Página de artículo
 
-### 4.1 Estructura general (desktop)
+Hay dos layouts:
 
-```
-┌─────────────────────────────────────────────────────────┐
-│ HEADER                                                  │
-├─────────────────────────────────────────────────────────┤
-│ Breadcrumb: Inicio > Categoría > Artículo               │
-├─────────────────┬───────────────────────┬───────────────┤
-│                 │ Badge categoría       │               │
-│  (espacio)      │ H1 del artículo       │  TOC sticky   │
-│                 │ Meta: fecha · tiempo  │               │
-│                 ├───────────────────────┤  260px        │
-│                 │ Caja "Key Takeaways"  │               │
-│                 ├───────────────────────┤               │
-│                 │ Contenido del         │               │
-│                 │ artículo              │               │
-│                 │                       │               │
-│                 │ ...                   │               │
-│                 ├───────────────────────┤               │
-│                 │ Fuentes               │               │
-│                 ├───────────────────────┤               │
-│                 │ Artículos relacionados│               │
-└─────────────────┴───────────────────────┴───────────────┘
-│ FOOTER                                                  │
-```
+- **Guía pilar** (`PillarArticleLayout`): hero con imagen, breadcrumbs, categoría y la etiqueta
+  **Pillar Article**, TOC inline y contenido a ancho completo.
+- **Artículo normal** (`ArticleLayout`): cabecera sencilla, contenido en columna principal y TOC
+  sticky a la derecha en pantallas grandes (plegable en móvil).
 
-### 4.2 Header del artículo
+### 4.1 Elementos comunes
 
-```
-[ Badge: categoría ]     [ Badge: "Artículo Pilar" — si aplica ]
-[ H1 ]
-[ Revisado: fecha · Actualizado: fecha · X min lectura ]
-[ Revisado por: nombre/organización ]        [ Compartir → ]
-```
+- **Breadcrumbs:** Home > Categoría > Artículo.
+- **Metadatos:** categoría, "Published" y "Updated" (fecha de revisión), minutos de lectura. La
+  fecha de revisión es la importante en este nicho.
+- **No hay "Revisado por" ni botón de compartir.** No hay revisores reales y no se inventan.
+- **TOC:** en pilares, caja inline arriba ("In this guide", solo H2, sin sticky). En artículos
+  normales, sidebar sticky ("In this article", H2 y H3) con resaltado de la sección activa.
+- **Key Takeaways:** sección `## Key Takeaways` al inicio del Markdown; se muestra con fondo
+  `--sl-color-primary-light` y checks verdes en las guías pilar. Es obligatoria como estándar
+  editorial en pilares, pero hoy solo la tienen 2 de las 6.
+- **Cuerpo:** tablas con cabecera y scroll horizontal accesible por teclado, blockquotes con borde
+  verde, H2 con margen superior generoso, links verdes subrayados en el texto.
+- **CTA final:** en pilares, tres botones (la categoría, "costs" y búsqueda); en artículos normales,
+  dos (la categoría y la guía pilar).
+- **Fuentes:** sección `## Sources` en el Markdown, con la fecha de última revisión.
+- **Relacionados:** "Related Guides" (`RelatedArticles`): primero de la misma categoría y luego
+  otros pilares.
+- **Barra de progreso de lectura** (3px) y botón "Back to Top".
 
-**Reglas:**
-
-- El H1 no debe repetir el eyebrow del badge de categoría
-- La fecha de revisión es más importante que la de publicación para este nicho — mostrarla
-  prominentemente
-- "Revisado por" añade credibilidad médica/legal. Si no hay revisor real, omitir (no inventar)
-
-### 4.3 Caja "Key Takeaways" (puntos clave)
-
-Inmediatamente después del H1, antes del cuerpo:
-
-```
-┌─────────────────────────────────────────────┐
-│  📋 Key Takeaways                           │
-│                                             │
-│  • El costo medio nacional es $4,500/mes    │
-│  • Medicare no cubre assisted living        │
-│  • Medicaid sí puede ayudar en algunos      │
-│    estados                                  │
-│  • El proceso de búsqueda tarda 2-3 meses   │
-└─────────────────────────────────────────────┘
-```
-
-Fondo `#eaf4ef`, borde izquierdo verde 3px, 3-5 bullets máximo. Es lo primero que lee quien escanea.
-
-### 4.4 Tabla de contenidos (TOC)
-
-- Sticky en sidebar derecho (desktop), colapsable en mobile
-- Solo H2 y H3 del artículo
-- Highlight del heading activo mientras se hace scroll
-- Título: "In this guide" o "En esta guía"
-
-### 4.5 Estilos del cuerpo del artículo
-
-- Tablas: siempre con header, bordes sutiles, fondo alterno en filas
-- Blockquotes: borde izquierdo verde, fondo `#eaf4ef`
-- H2: divisor implícito — añadir margen top generoso (`2.5rem`)
-- Listas: spacing generoso entre items (no comprimidos)
-- Links: color verde, subrayado al hover, siempre descriptivos (no "click aquí")
-- Imágenes: `max-width: 100%`, con caption opcional debajo en sans pequeño
-
-### 4.6 CTA contextual al final del artículo
-
-```
-┌─────────────────────────────────────────────┐
-│  ¿Buscas algo específico?                   │
-│  Usa nuestra guía de costos por estado      │
-│  para ver precios reales en tu zona.        │
-│                                             │
-│  [ Ver costos por estado → ]                │
-└─────────────────────────────────────────────┘
-```
-
-El CTA debe ser relevante al contenido del artículo, no genérico. Definir uno por categoría.
-
-### 4.7 Fuentes y referencias
-
-Al final del artículo:
-
-```
-[ H2: Sources ]
-[ Lista numerada de fuentes con links ]
-[ "Última revisión: fecha" ]
-```
-
-Es importante para el EEAT (Experience, Expertise, Authoritativeness, Trustworthiness) de Google.
-Todas las URLs de fuentes ya están en el frontmatter de los `.md`.
-
-### 4.8 Artículos relacionados
-
-```
-[ H2: "También puede interesarte" ]
-[ Grid 2-3 cards mini con título + categoría ]
-```
-
-Evitar mostrar el mismo artículo que se está leyendo. Cada artículo de soporte enlaza a su pillar
-page (obligatorio), a 2 artículos del mismo silo y a 1 artículo de otro silo relacionado.
+El detalle técnico de cada componente está en [CONTENT_MODEL.md](CONTENT_MODEL.md).
 
 ---
 
 ## 5. Página de categoría
 
-### 5.1 Estructura
-
 ```
-[ Breadcrumb: Inicio > Categoría ]
-[ H1: nombre de la categoría ]
-[ Descripción: 2-3 líneas explicando qué es ]
-[ Dato destacado: ej. "Costo medio: $4,500/mes" ]
+[ Breadcrumbs: Home > Categoría ]
+[ Icono + H1 con el nombre ]
+[ Descripción ]
 
-[ Artículo pilar destacado — diseño diferenciado ]
+[ "Core Guides": guía pilar destacada con etiqueta "Pillar Article" ]
 
-[ H2: "Todas las guías" ]
-[ Grid de cards de artículos ]
+[ "Articles & Guides": cards de artículos, o "More articles coming soon on …" si no hay ]
+
+[ "Explore Other Categories": cards de las otras 5 categorías con "View guides →" ]
 ```
-
-### 5.2 Artículo pilar destacado
-
-El artículo pilar de la categoría merece un tratamiento visual diferente al resto:
-
-```
-┌─────────────────────────────────────────────────────┐
-│  [ Imagen hero ]                                    │
-│  Badge "Guía Completa"                              │
-│  H2 del artículo (más grande que los demás)         │
-│  Descripción completa (2-3 líneas)                  │
-│  Tiempo lectura · Fecha · [ Leer la guía → ]        │
-└─────────────────────────────────────────────────────┘
-```
-
-### 5.3 Grid de artículos regulares
-
-- Cards con imagen, badge de categoría, título, excerpt y metadatos
-- Grid 2 columnas en tablet, 3 en desktop
-- Si no hay artículos aún en una categoría, mostrar mensaje amigable ("Próximamente — estamos
-  trabajando en estas guías") en lugar de página vacía
 
 ---
 
-## 6. Página de búsqueda
+## 6. Búsqueda
 
-- Input de búsqueda prominente al entrar
-- Resultados en lista (no grid) — más fácil de escanear
-- Cada resultado: título + excerpt + badge de categoría + fecha
-- Si no hay resultados: sugerir categorías relacionadas
-- La búsqueda funciona con el índice JSON generado en build — **conectar el script
-  `generate-search-index.ts` al proceso de build antes de publicar**
+- Página `/search/` con un campo de búsqueda; funciona en el navegador con el índice generado en el
+  build (`src/pages/search-index.json.ts` → `/search-index.json`).
+- `robots.txt` no indexa `/search/`.
 
 ---
 
-## 7. Patrones de UI reutilizables
+## 7. Costes por estado
 
-### Badges de categoría
-
-```html
-<span class="badge" style="background: #eaf4ef; color: #1a4d3a">Assisted Living</span>
-```
-
-- Padding: `3px 8px`, radio: `4px`, sans 10-11px, font-weight 600
-- Usar siempre el color de la categoría correspondiente
-
-### Eyebrow labels (etiquetas de sección)
-
-```
-WHAT TYPE OF CARE DO YOU NEED?
-```
-
-- Sans, 11px, uppercase, letter-spacing 0.8px, color verde primario
-- Solo como orientador de sección, no abusarlos
-
-### Divisores
-
-- `<hr>` o `border-bottom: 1px solid #e5e3de` entre secciones relacionadas
-- Nunca decorativos, siempre tienen función separadora
-
-### Cards de artículo (variante mini — para artículos relacionados)
-
-- Sin imagen
-- Badge + título (2 líneas max) + tiempo de lectura
-- Borde en hover
+- `/costs/`: tabla ordenable con los 50 estados (medianas de la encuesta CareScout 2025).
+- `/costs/[state]/`: costes del estado (mensual, anual, por hora, centro de día, enfermería
+  privada), posición frente al resto, estados similares, FAQs, metodología y fuentes, y la sección
+  "Paying with Medicaid in <estado>".
+- La sección de Medicaid solo muestra valores verificados en documentos oficiales, cada uno con su
+  fuente y fechas. Si no pudimos verificar el estado, muestra una nota con la fecha y el enlace a la
+  agencia. Algunos estados llevan además un aviso "Keep in mind" (campo `readerNotes`).
 
 ---
 
-## 8. Comportamiento responsive
+## 8. Páginas de confianza y legales
 
-| Breakpoint          | Cambios principales                                                                                                                        |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Mobile (< 640px)    | Nav colapsa a hamburger · Grid de silos pasa a 2 columnas · TOC desaparece (reemplazar por collapse inline) · Hero: tipografía más pequeña |
-| Tablet (640-1023px) | Grid 2 columnas · Sidebar TOC desaparece · Nav puede seguir visible                                                                        |
-| Desktop (≥ 1024px)  | Layout completo · TOC sticky · Nav horizontal                                                                                              |
+| Página                                                    | Indexable | Contenido                                                                                                      |
+| --------------------------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------- |
+| `/about/`                                                 | Sí        | Por qué existe el sitio y quién está detrás (proyecto de una persona, sin nombre)                              |
+| `/editorial-policy/`                                      | Sí        | Cómo se hacen los artículos (con ayuda de IA y revisión humana), fuentes, cifras, independencia y correcciones |
+| `/contact/`                                               | Sí        | Formulario (Formspree) y a quién acudir para consejo médico, legal o financiero                                |
+| `/contact/thanks/`                                        | No        | Confirmación del envío                                                                                         |
+| `/privacy/`, `/terms/`, `/disclaimer/`, `/accessibility/` | No        | Páginas legales (`noindex`, fuera del sitemap)                                                                 |
+| `/404`                                                    | -         | Página de error                                                                                                |
 
----
-
-## 9. Páginas pendientes de crear
-
-Estas páginas no existen aún y son importantes:
-
-| Página      | Prioridad | Descripción                                                     |
-| ----------- | --------- | --------------------------------------------------------------- |
-| `/about/`   | Alta      | Quiénes somos, proceso editorial, revisores                     |
-| `/privacy/` | Alta      | Política de privacidad (requerida legalmente si hay newsletter) |
-| `/404`      | Media     | Página de error personalizada con sugerencias                   |
-| `/quiz/`    | Media     | Quiz de orientación de 3 preguntas                              |
-| `/sitemap/` | Baja      | Sitemap HTML para usuarios                                      |
+Las fechas "Last updated" de estas páginas son fijas: se cambian a mano cuando cambia el texto.
 
 ---
 
-## 10. Cosas a resolver antes de publicar
+## 9. Patrones de UI reutilizables
 
-1. **Conectar el sitemap XML** — habilitar `@astrojs/sitemap` en `astro.config.mjs` o resolver el
-   bug reportado
-2. **Crear imágenes faltantes** — `og-default.webp` y `logo.webp` en `/public/images/`
-3. **Conectar el formulario de newsletter** a Mailchimp, ConvertKit u otro proveedor
-4. **Integrar `generate-search-index.ts`** en el script de build para que la búsqueda funcione
-5. **Corregir el render de markdown** en `[...slug].astro` (usar `entry.render()` de Astro)
-6. **Añadir RSS real** o quitar el `<link rel="alternate">` del head
+- **Badges de categoría:** `.c-badge` con los colores de su categoría; la etiqueta "Pillar Article"
+  usa `.c-badge--pillar`.
+- **Eyebrow labels:** `.c-eyebrow`, mayúsculas, color verde primario, solo como orientador de
+  sección.
+- **Formularios:** `.c-form`, `.c-form-group`, `.c-form-label`, `.c-form-input`, `.c-form-hint` (en
+  `components.css`). Los campos llevan etiqueta visible; los obligatorios se marcan con `*` y
+  atributo `required`.
+- **Divisores:** `<hr>` o borde inferior; nunca decorativos.
 
 ---
 
-_Documento creado: Septiembre 2026. Actualizar cuando cambie la dirección de diseño._
+## 10. Comportamiento responsive
+
+| Breakpoint          | Cambios principales                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------------- |
+| Mobile (< 640px)    | Hamburguesa · grid de categorías a 1 columna · TOC plegable · pie con marca a todo el ancho |
+| Tablet (640-1023px) | Grid de categorías a 2 columnas · sin sidebar de TOC · pie en 2 columnas                    |
+| Desktop (≥ 1024px)  | Grid de categorías a 3 columnas · TOC sticky en artículos normales · pie en 4 columnas      |
+| ≥ 1200px            | El menú de la cabecera pasa a una sola fila                                                 |
+
+---
+
+## 11. Pendiente
+
+1. **Dominio propio** (ahora `senior-living-options.pages.dev`).
+2. **Publicidad (AdSense):** consentimiento de cookies y ajuste de la CSP en `public/_headers`;
+   revisar la política de privacidad y la política editorial en ese momento.
+3. **Ideas opcionales:** quiz de orientación (`/quiz/`), mapa del sitio en HTML, suscripción por
+   email, campo opcional de email en el formulario de accesibilidad.
+
+---
+
+_Creado en septiembre de 2026; revisado en octubre de 2026. Actualizar cuando cambie la dirección de
+diseño._

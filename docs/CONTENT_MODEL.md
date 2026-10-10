@@ -1,23 +1,25 @@
 # Content Model - Senior Living Options
 
+> Estado: actualizado en octubre de 2026. El contenido del sitio está en inglés de EE. UU.; esta
+> documentación, en español. El esquema real vive en `src/utils/entry-schema.ts`.
+
 ## Collection: `entries`
 
-Un solo collection para todo el contenido del sitio. Cada archivo Markdown en `src/content/entries/`
-sigue este schema.
+Una sola collection para todo el contenido. Cada archivo Markdown en `src/content/entries/` sigue
+este esquema. Se define en `src/content.config.ts` (glob loader) y el esquema se comparte con
+`scripts/validate-content.ts`.
 
-### Schema Zod
+### Schema Zod (resumen de `src/utils/entry-schema.ts`)
 
 ```typescript
-import { z } from 'astro:content';
+import { z } from 'astro/zod';
 
 export const entrySchema = z.object({
-  // Campos obligatorios
+  // Obligatorios
   title: z.string().min(1).max(120),
-  description: z.string().min(50).max(300), // Para meta description + social
-  publishDate: z.date(),
-  lastReviewed: z.date(),
-
-  // Categoría (enum - define el subnicho)
+  description: z.string().min(50).max(300), // meta description + social
+  publishDate: z.coerce.date(),
+  lastReviewed: z.coerce.date(),
   category: z.enum([
     'assisted-living',
     'memory-care',
@@ -26,445 +28,243 @@ export const entrySchema = z.object({
     'senior-care-costs',
     'caregiver-resources',
   ]),
+  isPillar: z.boolean().default(false),
 
-  // Tipo de contenido
-  isPillar: z.boolean().default(false), // true = pillar page completa, false = artículo/post
-
-  // Campos opcionales
-  sources: z.array(z.string().url()).optional(), // URLs gubernamentales (.gov, .org)
-  readingTime: z.number().int().positive().optional(), // Minutos, calculado en build
-  image: z.string().optional(), // Ruta relativa desde /public/images/
-  imageAlt: z.string().optional(), // Alt text descriptivo
-
-  // SEO opcional (sobrescribe defaults)
+  // Opcionales
+  sources: z.array(z.url()).optional(),
+  readingTime: z.number().int().positive().optional(), // minutos, se escribe a mano
+  image: z.string().optional(), // ruta desde /public, .webp
+  imageAlt: z.string().optional(),
   seoTitle: z.string().max(60).optional(),
   seoDescription: z.string().max(160).optional(),
-  canonicalUrl: z.string().url().optional(),
-
-  // Taxonomía adicional
+  canonicalUrl: z.url().optional(),
   tags: z.array(z.string()).optional(),
-  states: z.array(z.string()).optional(), // Para contenido específico por estado
-
-  // Configuración de página
+  states: z.array(z.string()).optional(),
   noIndex: z.boolean().default(false),
   noFollow: z.boolean().default(false),
   showTableOfContents: z.boolean().default(true),
-  relatedArticles: z.array(z.string()).optional(), // slugs de artículos relacionados
+  relatedArticles: z.array(z.string()).optional(),
 });
 ```
 
-### Frontmatter Ejemplo (Pillar Page Completo)
+### Qué campos usa realmente el código
+
+| Campo                                                   | Uso hoy                                                                                  |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `title`, `description`, `category`, `isPillar`          | Páginas, tarjetas, SEO, JSON-LD                                                          |
+| `publishDate`, `lastReviewed`                           | Fechas en pantalla, `dateModified`, `lastmod` del sitemap                                |
+| `sources`                                               | Esquema `Article`; la lista visible es la sección `## Sources` del Markdown              |
+| `readingTime`                                           | "N min read" (obligatorio en pilares; se escribe a mano)                                 |
+| `image`, `imageAlt`                                     | Hero y tarjetas. Si existen `-480.webp` y `-768.webp`, se genera `srcset`                |
+| `seoTitle`, `seoDescription`                            | Sobrescriben título y descripción en `<head>` (`src/utils/seo.ts`)                       |
+| `noIndex`, `noFollow`                                   | Robots meta, índice de búsqueda y artículos relacionados                                 |
+| `relatedArticles`                                       | Se lee en los layouts; hoy ningún artículo lo rellena (los relacionados son automáticos) |
+| `states`, `tags`, `showTableOfContents`, `canonicalUrl` | **Definidos en el esquema pero sin efecto todavía.** El TOC siempre se muestra           |
+
+### Frontmatter de ejemplo (pilar)
 
 ```yaml
 ---
 title: 'The Complete Guide to Assisted Living: Costs, Services, and How to Choose'
+seoTitle: 'Assisted Living Guide: Costs, Services & How to Choose'
 description:
   'Everything families need to know about assisted living: what it is, what it costs in 2025, how
   Medicaid and VA benefits help, and how to choose the right facility.'
 publishDate: 2026-09-27
-lastReviewed: 2026-09-27
+lastReviewed: 2026-10-09
 category: assisted-living
 isPillar: true
 sources:
-  - 'https://www.nia.nih.gov/health/assisted-living-and-nursing-homes/long-term-care-facilities-assisted-living-nursing-homes'
-  - 'https://www.nia.nih.gov/health/caregiving/does-older-adult-your-life-need-help'
-  - 'https://www.nia.nih.gov/health/assisted-living-and-nursing-homes/how-choose-nursing-home-or-other-long-term-care-facility'
-  - 'https://www.ahcancal.org/Assisted-Living/Facts-and-Figures/Pages/default.aspx'
-  - 'https://investor.genworth.com/news-events/press-releases/detail/1054/carescout-releases-2025-cost-of-care-survey-results'
-  - 'https://www.aarp.org/caregiving/basics/assisted-living-options/'
-  - 'https://www.benefits.va.gov/persona/veteran-elderly.asp'
+  - 'https://www.nia.nih.gov/health/...'
+  # mínimo 3 (error), recomendado 7 o más (.gov/.org)
 readingTime: 14
-image: /images/assisted-living-complete-guide.png
+image: /images/assisted-living-complete-guide.webp
 imageAlt: 'Senior smiling in assisted living community common area'
-tags:
-  - 'assisted living'
-  - 'senior care'
-  - 'long-term care'
-  - 'memory care'
-  - 'aging parents'
-states:
-  - 'CA'
-  - 'TX'
-  - 'FL'
-  - 'NY'
-  - 'MA'
-  - 'NJ'
-  - 'HI'
-  - 'CT'
+tags: ['assisted living', 'senior care', 'long-term care']
 showTableOfContents: true
-relatedArticles:
-  - 'assisted-living-vs-memory-care'
-  - 'medicare-assisted-living'
-  - 'when-nursing-home'
 ---
 ```
 
-### Estructura Estándar Pillar Page
+`title` puede tener hasta 120 caracteres; si supera unos 60, añade `seoTitle` (máximo 60) para que
+no se corte en los resultados de Google.
 
-Todos los artículos pilar (`isPillar: true`) deben seguir esta estructura exacta basada en el
-artículo de referencia `assisted-living-complete-guide.md`:
+## Estructura estándar de una guía pilar
+
+Las guías pilar (`isPillar: true`) siguen esta estructura. Es una **recomendación editorial**: el
+validador solo avisa (warning) de lo que falta.
 
 ```markdown
----
-[frontmatter completo - ver arriba]
----
-
 ## Key Takeaways
 
-- **Punto clave 1** — descripción concisa con dato específico.
-- **Punto clave 2** — descripción concisa con dato específico.
-- **Punto clave 3** — descripción concisa con dato específico.
-- **Punto clave 4** — descripción concisa con dato específico.
-- **Punto clave 5** — descripción concisa con dato específico.
-- **Punto clave 6** — descripción concisa con dato específico.
+- **Punto clave 1** — descripción concisa con dato específico. (5-6 bullets, negrita inicial)
 
 ---
 
-Párrafo de introducción empático (2-3 párrafos) que conecte con la situación del lector. Establece
-autoridad: "The information here comes from federal health agencies and independent research, not
-from facilities trying to fill beds."
+Intro empático (2-3 párrafos) que conecte con la situación del lector.
 
 ---
 
 ## What Is [Topic]?
 
-[Definición clara, nivel de cuidado, para quién es, servicios típicos]
+### Tabla comparativa principal
 
-### [Subsección comparativa clave]
+## Costs (tabla nacional con fuente CareScout + variación por estado)
 
-[Tabla comparativa principal - MÍN 1 tabla por artículo pilar]
+## Who Pays: Medicare, Medicaid, VA, seguro de cuidados a largo plazo
 
-|                         | [Opción A] | [Opción B] |
-| ----------------------- | ---------- | ---------- |
-| **Care level**          | ...        | ...        |
-| **Who it's for**        | ...        | ...        |
-| **Median monthly cost** | $X,XXX     | $X,XXX     |
-| **Medicare coverage**   | ...        | ...        |
-| **Medicaid coverage**   | ...        | ...        |
+## Services / What's Included
 
----
+## How to Choose (pasos + tabla "What to look for")
 
-## [Sección H2 Principal 2]
+## Frequently Asked Questions (5-6 preguntas con `###`)
 
-[Contenido profundo con subsecciones H3]
-
-### [Subsección H3]
-
-[Detalles, listas, datos]
-
-> **Cita institucional** — Texto de fuente .gov/.org con autoridad. →
-> [Enlace a fuente](https://www.nia.nih.gov/...)
-
----
-
-## [Sección H2 Principal 3]: Costos
-
-### National Median Costs ([Año])
-
-[Tabla de costos nacionales con fuente Genworth/CareScout]
-
-| Care Type    | Monthly Median | Annual Median |
-| ------------ | -------------- | ------------- |
-| **[Topic]**  | $X,XXX         | $XX,XXX       |
-| [Comparable] | $X,XXX         | $XX,XXX       |
-
-_Source: [Fuente] ([año]). [Enlace]._
-
-### Cost Variation by State
-
-[Tabla top 5-10 estados caros/baratos]
-
-| State    | Monthly Median | Annual Median |
-| -------- | -------------- | ------------- |
-| [Estado] | $X,XXX         | $XX,XXX       |
-
----
-
-## [Sección H2 Principal 4]: Who Pays / Financiamiento
-
-### Medicare: What It Does and Doesn't Cover
-
-**Medicare does not pay for [topic].** [Explicación clara].
-
-[Detalles de qué SÍ cubre Medicare en este contexto]
-
-### Medicaid: Possible, But Complex
-
-[Explicación HCBS waivers, 46 states + DC, qué cubre/no cubre, eligibility basics]
-
-### VA Benefits for Veterans
-
-[Tabla VA Aid & Attendance rates año actual]
-
-| Status                 | Monthly Maximum | Annual Maximum |
-| ---------------------- | --------------- | -------------- |
-| Single veteran         | $X,XXX          | $XX,XXX        |
-| Veteran with dependent | $X,XXX          | $XX,XXX        |
-| Surviving spouse       | $X,XXX          | $XX,XXX        |
-
-### Long-Term Care Insurance
-
-[Guidance sobre revisar pólizas, benefit triggers, elimination periods]
-
----
-
-## [Sección H2 Principal 5]: Services / What's Included
-
-### Standard Services (Included in Base Rate)
-
-- [Lista servicios base]
-
-### Services That Vary by Facility
-
-- [Lista servicios variables]
-
----
-
-## [Sección H2 Principal 6]: How to Choose
-
-### Step 1: Define the Care Needs
-
-[Preguntas clave, assessment]
-
-### Step 2: Narrow Your List
-
-[Eldercare Locator, Area Agency on Aging, referrals]
-
-### Step 3: Visit in Person — More Than Once
-
-[Tabla: Area | What to Look For]
-
-| Area                     | What to Look For |
-| ------------------------ | ---------------- |
-| **Staff interactions**   | ...              |
-| **Residents' demeanor**  | ...              |
-| **Physical environment** | ...              |
-| **Dining**               | ...              |
-| **Safety features**      | ...              |
-| **Activities**           | ...              |
-
-### Step 4: Ask the Hard Questions
-
-[Lista preguntas esenciales: staff ratios, turnover, care plans, discharge, family notification,
-arbitration]
-
-### Step 5: Review the Contract Carefully
-
-[Arbritration clauses, fee increases, what happens if funds run out]
-
----
-
-## Frequently Asked Questions
-
-### [Pregunta 1]?
-
-[Respuesta concisa, autoritativa, con dato específico si aplica]
-
-### [Pregunta 2]?
-
-[Respuesta...]
-
-### [Pregunta 3]?
-
-[Respuesta...]
-
-### [Pregunta 4]?
-
-[Respuesta...]
-
-### [Pregunta 5]?
-
-[Respuesta...]
-
-### [Pregunta 6]?
-
-[Respuesta...]
-
----
-
-## Sources
-
-1. **Fuente 1.** "Título exacto." URL. Reviewed/Accessed: [fecha].
-2. **Fuente 2.** "Título exacto." URL. Reviewed/Accessed: [fecha].
-3. **Fuente 3.** "Título exacto." URL. Reviewed/Accessed: [fecha].
-4. **Fuente 4.** "Título exacto." URL. Reviewed/Accessed: [fecha].
-5. **Fuente 5.** "Título exacto." URL. Reviewed/Accessed: [fecha].
-6. **Fuente 6.** "Título exacto." URL. Reviewed/Accessed: [fecha].
-7. **Fuente 7.** "Título exacto." URL. Reviewed/Accessed: [fecha].
-
-[MÍNIMO 7 fuentes, preferiblemente .gov/.org, numeradas consecutivamente]
+## Sources (lista numerada, mínimo 7 recomendado, preferiblemente .gov/.org)
 ```
 
-### Reglas de Estructura Pillar (Resumen)
+### Reglas de estructura (resumen)
 
-| Elemento                        | Requerido       | Detalle                                       |
-| ------------------------------- | --------------- | --------------------------------------------- |
-| `## Key Takeaways`              | Sí              | 5-6 bullets, **negrita inicial**, `---` abajo |
-| Intro empático                  | Sí              | 2-3 párrafos tras `---`                       |
-| Secciones `## H2`               | Mín 6           | Principales temas del artículo                |
-| Tablas comparativas             | Mín 2-3         | Sintaxis pipe `                               | --- | --- | `   |
-| Blockquotes `>`                 | Mín 2-3         | Con cita + fuente .gov/.org + enlace          |
-| Enlaces internos                | Mín 1           | A `/category/[slug]/` relacionadas            |
-| `## Frequently Asked Questions` | Sí              | 5-6 preguntas con `###`                       |
-| `## Sources`                    | Sí              | Mín 7, numeradas, formato consistente         |
-| Divisores `---`                 | Sí              | Entre secciones mayores                       |
-| Longitud                        | ~2500+ palabras | Objetivo, no hard limit                       |
+| Elemento                        | Requerido       | Detalle                                                  |
+| ------------------------------- | --------------- | -------------------------------------------------------- |
+| `## Key Takeaways`              | Recomendado     | 5-6 bullets, negrita inicial, `---` abajo                |
+| Intro empático                  | Sí              | 2-3 párrafos                                             |
+| Secciones `## H2`               | Mín 6           | Alimentan el TOC (solo H2)                               |
+| Tablas comparativas             | Mín 2           | Sintaxis pipe                                            |
+| Blockquotes con fuente          | Mín 2           | Cita + enlace .gov/.org                                  |
+| Enlaces internos                | Mín 1           | A `/category/[slug]/` u otras guías                      |
+| `## Frequently Asked Questions` | Sí              | Se convierte en JSON-LD `FAQPage` (H3 bajo esta sección) |
+| `## Sources`                    | Sí              | Lista numerada                                           |
+| Longitud                        | ~2500+ palabras | Objetivo, no hard limit                                  |
 
-### Componentes Visuales Pillar (Renderizado)
+Estado actual: solo `assisted-living` y `nursing-homes` tienen `## Key Takeaways`;
+`validate:content` lo avisa en las demás guías.
 
-El layout `PillarArticleLayout.astro` aplica automáticamente:
+## Cómo se muestra un artículo
 
-| Componente           | Clase CSS                     | Comportamiento                                                       |
-| -------------------- | ----------------------------- | -------------------------------------------------------------------- |
-| **Hero**             | `.c-pillar-hero`              | Imagen full-width + overlay gradiente + breadcrumbs inline           |
-| **Título**           | `.c-pillar-hero__title`       | Blanco fijo `#ffffff` ambos modos, serif, text-shadow                |
-| **Descripción**      | `.c-pillar-hero__description` | Gris `var(--sl-color-text-muted)` ambos modos                        |
-| **TOC Inline**       | `.c-pillar-toc`               | Solo H2, iconos ▸, sticky en desktop                                 |
-| **Key Takeaways**    | `h2#key-takeaways + ul`       | Fondo `var(--sl-color-primary-light)`, checks ✓ verdes               |
-| **Tablas**           | `.c-pillar-content table`     | Scroll horizontal mobile + card layout auto (>5 filas, ≥3 cols)      |
-| **Reading Progress** | `.c-reading-progress`         | Barra superior 3px, z-index 199                                      |
-| **Back to Top**      | `.c-back-to-top`              | Botón fijo esquina inf-dcha, aparece tras scroll                     |
-| **CTA Final**        | `.c-pillar-cta`               | 2 botones (primary + outline), fondo `var(--sl-color-primary-light)` |
-| **FAQ Schema**       | Auto                          | JSON-LD FAQPage extraído de H3 bajo "Frequently Asked Questions"     |
-| **Theme Toggle**     | En Header                     | Solo en Header global, NO en hero del artículo                       |
+### Guía pilar (`PillarArticleLayout.astro`)
 
----
+| Componente           | Clase CSS                     | Comportamiento real                                                                                            |
+| -------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Hero**             | `.c-pillar-hero`              | Imagen + overlay; crece con el contenido (altura mínima `min(40vh, 500px)`)                                    |
+| **Título**           | `.c-pillar-hero__title`       | Blanco fijo `#ffffff` en ambos modos, serif, text-shadow                                                       |
+| **Descripción**      | `.c-pillar-hero__description` | `var(--sl-color-text-muted)`                                                                                   |
+| **Etiquetas**        | `.c-badge`                    | Categoría y "Pillar Article"                                                                                   |
+| **TOC**              | `.c-pillar-toc`               | Caja **inline arriba**, solo H2, título "In this guide". **No es sticky**                                      |
+| **Key Takeaways**    | `h2#key-takeaways + ul`       | Fondo `var(--sl-color-primary-light)`, checks ✓ (si la guía tiene la sección)                                  |
+| **Tablas**           | `.c-pillar-content table`     | Scroll horizontal accesible por teclado; las tablas de estados con más de 5 columnas pasan a tarjetas en móvil |
+| **Reading Progress** | `.c-reading-progress`         | Barra superior de 3px, `z-index: 201`                                                                          |
+| **Back to Top**      | `.c-back-to-top`              | Botón fijo abajo a la derecha tras hacer scroll                                                                |
+| **CTA final**        | `.c-pillar-cta`               | Tres botones: categoría (primario), costes (outline) y búsqueda (outline)                                      |
+| **Relacionados**     | `RelatedArticles.astro`       | "Related Guides": misma categoría y luego otros pilares                                                        |
+| **FAQ Schema**       | Automático                    | JSON-LD `FAQPage` desde las H3 bajo "Frequently Asked Questions"                                               |
+| **Theme Toggle**     | En el Header                  | Solo en la cabecera global                                                                                     |
+
+### Artículo normal (`ArticleLayout.astro`)
+
+- Breadcrumbs, categoría, título y metadatos ("Published" y "Updated" con la fecha de revisión).
+- Contenido en columna principal (`.c-article-main`) con **TOC sticky a la derecha** (H2 y H3,
+  título "In this article") en pantallas grandes y un TOC plegable en móvil.
+- CTA final con dos botones (categoría y guía pilar) y artículos relacionados.
+- No tiene estilo propio de "Key Takeaways".
+
+No se muestran "Revisado por" ni botón de compartir: no hay revisores reales y no se inventan.
 
 ### Categorías y Labels
 
-| Enum Value            | Label (ES)      | Label (EN)      | Color Token      | Icono |
-| --------------------- | --------------- | --------------- | ---------------- | ----- |
-| `assisted-living`     | Assisted Living | Assisted Living | `--sl-color-al`  | 🏠    |
-| `memory-care`         | Memory Care     | Memory Care     | `--sl-color-mc`  | 🧠    |
-| `nursing-homes`       | Nursing Homes   | Nursing Homes   | `--sl-color-nh`  | 🏥    |
-| `in-home-care`        | In-Home Care    | In-Home Care    | `--sl-color-ihc` | 🏡    |
-| `senior-care-costs`   | Costs & Finance | Costs & Finance | `--sl-color-cf`  | 💰    |
-| `caregiver-resources` | Caregiver Help  | Caregiver Help  | `--sl-color-cr`  | 🤝    |
+| Enum Value            | Label           | Token de color                    | Icono |
+| --------------------- | --------------- | --------------------------------- | ----- |
+| `assisted-living`     | Assisted Living | `--sl-color-al-bg` / `-al-text`   | 🏠    |
+| `memory-care`         | Memory Care     | `--sl-color-mc-bg` / `-mc-text`   | 🧠    |
+| `nursing-homes`       | Nursing Homes   | `--sl-color-nh-bg` / `-nh-text`   | 🏥    |
+| `in-home-care`        | In-Home Care    | `--sl-color-ihc-bg` / `-ihc-text` | 🏡    |
+| `senior-care-costs`   | Costs & Finance | `--sl-color-cf-bg` / `-cf-text`   | 💰    |
+| `caregiver-resources` | Caregiver Help  | `--sl-color-cr-bg` / `-cr-text`   | 🤝    |
 
-### Reglas de Contenido
+Definidas en `src/utils/category.ts` (cada categoría tiene su `pillarSlug`).
 
-#### Pillar Pages (`isPillar: true`)
+## Reglas de Contenido
 
-- **Longitud**: 2,500+ palabras
-- **Estructura**: Ver [Estructura Estándar Pillar Page](#estructura-estandar-pillar-page) — TOC
-  obligatorio, 6+ H2, 2+ tablas, 2+ blockquotes, FAQ, Sources
-- **Actualización**: `lastReviewed` cada 6 meses máximo
-- **Fuentes**: Mínimo 7 fuentes `.gov/.org` verificables
-- **SEO**: Target keyword principal + 5-10 long-tail
-- **Ejemplos**:
-  - `/article/assisted-living-complete-guide/`
+### Guías pilar (`isPillar: true`)
 
-#### Artículos Normales (`isPillar: false`)
+- **Longitud**: 2,500+ palabras. **Actualización**: `lastReviewed` cada 6 meses como máximo.
+- **Fuentes**: mínimo 3 (el validador da error con menos) y 7 o más recomendadas, `.gov/.org`.
+- **Imagen**: `.webp` en `public/images/`, más las variantes `<nombre>-480.webp` y `-768.webp`.
+- **Ejemplo de URL**: `/article/assisted-living/assisted-living-complete-guide/`
 
-- **Longitud**: 800-2,000 palabras
-- **Enfoque**: Pregunta específica, ángulo narrow
-- **Actualización**: `lastReviewed` cada 12 meses
-- **Fuentes**: 1-2 fuentes mínimas
-- **Ejemplos**:
-  - `/article/senales-que-es-momento-assisted-living/`
-  - `/article/medicare-cubre-memory-care/`
+### Artículos normales (`isPillar: false`)
 
-### Estructura de Carpetas de Contenido
+- **Longitud**: 800-2,000 palabras (los actuales son más largos). **Revisión**: cada 12 meses.
+- **Fuentes**: 1-2 como mínimo.
+- **Ejemplo de URL**:
+  `/article/caregiver-resources/senior-living-options-complete-comparison-of-all-7-types/`
+
+El `slug`/`id` de un artículo incluye su carpeta de categoría.
+
+## Contenido actual
 
 ```
 src/content/entries/
-├── assisted-living/
-│   ├── assisted-living-complete-guide.md          # pillar (actual)
-│   ├── senales-momento-assisted-living.md
-│   ├── assisted-living-vs-memory-care.md
-│   └── como-pagar-assisted-living.md
-├── memory-care/
-│   ├── complete-guide-memory-care.md              # pillar (pendiente)
-│   ├── alzheimer-vs-demencia-diferencias.md
-│   └── costos-memory-care-por-estado.md
-├── nursing-homes/
-│   ├── complete-guide-nursing-homes.md            # pillar (pendiente)
-│   ├── nursing-home-vs-assisted-living.md
-│   └── como-elegir-nursing-home.md
-├── in-home-care/
-│   ├── complete-guide-in-home-care.md             # pillar (pendiente)
-│   ├── tipos-cuidado-domicilio.md
-│   └── agencias-vs-cuidadores-independientes.md
-├── senior-care-costs/
-│   ├── complete-guide-senior-care-costs.md        # pillar (pendiente)
-│   ├── medicare-medicaid-diferencias.md
-│   ├── seguros-cuidado-largo-plazo.md
-│   └── beneficios-veteranos-aid-attendance.md
+├── assisted-living/assisted-living-complete-guide.md           # pilar
+├── memory-care/memory-care-complete-guide.md                   # pilar
+├── nursing-homes/nursing-homes-complete-guide.md               # pilar
+├── in-home-care/in-home-care-complete-guide.md                 # pilar
+├── senior-care-costs/senior-care-costs-complete-guide.md       # pilar
 └── caregiver-resources/
-    ├── complete-guide-caregiver-resources.md      # pillar (pendiente)
-    - burnout-cuidadores-senales-soluciones.md
-    - recursos-apoyo-cuidadores-familia.md
-    - checklist-cuidado-diario.md
+    ├── caregiver-resources-complete-guide.md                   # pilar
+    └── senior-living-options-complete-comparison-of-all-7-types.md   # artículo normal
 ```
 
-> **Nota**: Los slugs de pillar pages pendientes (`complete-guide-*`) son placeholders. El slug real
-> se definirá al crear cada artículo.
+No hay más artículos de soporte planificados. Si se añaden, enlazan a su guía pilar.
 
-### Validaciones en Build
+## Validaciones (`npm run validate:content`)
 
-El script `scripts/validate-content.ts` (ejecutado con `tsx`) verifica:
+`scripts/validate-content.ts` (con `tsx`) comprueba:
 
-1. **Schema Zod** - Frontmatter válido
-2. **Fechas** - `publishDate` ≤ `lastReviewed` ≤ hoy
-3. **Pillar pages** - Tienen `readingTime`, `image`, `sources` (mín 7, .gov/.org), estructura
-   markdown completa
-4. **Imágenes** - Archivo existe en `public/images/`
-5. **Links internos** - `relatedArticles` slugs existen
-6. **Duplicados** - No hay slugs repetidos
-7. **SEO** - `title` ≤ 60 chars, `description` 50-160 chars
+1. **Schema Zod**: frontmatter válido.
+2. **Fechas**: `publishDate` ≤ `lastReviewed` ≤ hoy.
+3. **Pilares (errores)**: tienen `readingTime`, `image` y al menos 3 `sources`.
+4. **Imágenes**: el archivo existe en `public/` (error en artículos normales, aviso en pilares).
+5. **Relacionados**: los slugs de `relatedArticles` existen.
+6. **Duplicados**: no hay slugs repetidos.
+7. **SEO**: `seoTitle` ≤ 60 y `seoDescription` entre 50 y 160 caracteres.
 
-**Validaciones adicionales Pillar (WARNING only, no fallan build):**
+Avisos solo (no rompen el build), para pilares: menos de 7 fuentes, fuentes que no sean `.gov/.org`,
+menos de 2500 palabras, falta de `## Key Takeaways`, `## Frequently Asked Questions` o `## Sources`,
+menos de 2 tablas, menos de 2 blockquotes con URL y ningún enlace a `/category/`.
 
-- `sources.length >= 7` y todas `.gov` o `.org`
-- Word count >= 2500
-- Presencia de secciones: `## Key Takeaways`, `## Frequently Asked Questions`, `## Sources`
-- Mínimo 2 tablas (patrón `|---|---|`)
-- Mínimo 2 blockquotes con URLs `.gov`/`.org`
-- Al menos 1 enlace interno a `/category/`
-- Imagen hero existe en `public/images/`
+Después encadena `scripts/validate-medicaid.ts` (datos de Medicaid, ver abajo).
 
-### Consultas Comunes (Astro Content API)
+## Datos por estado (no son Markdown)
+
+- `src/data/costs-by-state.json`: costes por estado de la encuesta CareScout 2025. Alimenta
+  `/costs/` y `/costs/[state]/`.
+- `src/data/medicaid-by-state.json`: datos de Medicaid por estado, con fuente oficial, fecha
+  efectiva y fecha de comprobación por valor. Solo se muestran los valores con `status: "verified"`
+  y `method: "read"`. El campo opcional `readerNotes` muestra avisos "Keep in mind" a los lectores.
+- Procedimiento y fuentes: `.claude/skills/update-medicaid-data/`. Informes en `docs/data-reports/`.
+
+## Consultas comunes (Astro Content API)
 
 ```typescript
-// Todas las entradas
-const allEntries = await getCollection('entries');
+import { getCollection } from 'astro:content';
 
-// Solo pillar pages
-const pillars = (await getCollection('entries')).filter((e) => e.data.isPillar);
+const all = await getCollection('entries');
+
+// Solo guías pilar
+const pillars = all.filter((e) => e.data.isPillar);
 
 // Por categoría
-const assistedLiving = (await getCollection('entries')).filter(
-  (e) => e.data.category === 'assisted-living'
-);
+const assistedLiving = all.filter((e) => e.data.category === 'assisted-living');
 
-// Por categoría + pillar
-const alPillars = (await getCollection('entries')).filter(
-  (e) => e.data.category === 'assisted-living' && e.data.isPillar
-);
-
-// Últimas 5 publicaciones (ordenadas por publishDate)
-const latest = (await getCollection('entries'))
+// Últimas 5 publicaciones
+const latest = [...all]
   .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
   .slice(0, 5);
 
-// Artículos relacionados (misma categoría, excluyendo actual)
-const related = (await getCollection('entries'))
-  .filter((e) => e.data.category === currentCategory && e.slug !== currentSlug)
-  .slice(0, 3);
+// Mismo artículo: usar e.id (incluye la carpeta), no e.slug
+const related = all.filter((e) => e.data.category === currentCategory && e.id !== currentId);
 ```
 
-### Migración Futura
+## Migración futura
 
-Si se necesita separar en collections por categoría:
-
-```typescript
-// astro.config.mjs
-collections: {
-  'assisted-living': defineCollection({ schema: entrySchema }),
-  'memory-care': defineCollection({ schema: entrySchema }),
-  // ...
-}
-```
-
-Los archivos `.md` se moverían a subcarpetas y el campo `category` se volvería implícito por la
-collection.
+Si hiciera falta separar en collections por categoría, los `.md` pasarían a subcarpetas con su
+propia collection y `category` sería implícito. Hoy no hace falta.
