@@ -5,7 +5,7 @@ import Footer from '../components/layout/Footer.astro';
 import SkipLink from '../components/layout/SkipLink.astro';
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
-const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+const lastUpdated = 'October 2026';
 ---
 
 <BaseLayout
@@ -55,8 +55,9 @@ const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year
         </p>
         <p>
           Cost data is sourced from the CareScout/Genworth Cost of Care Survey and is updated
-          annually. Regulatory and benefit information is sourced from federal government agencies
-          and may not reflect the most recent changes.
+          annually. Regulatory and benefit information is sourced from federal and state government
+          agencies and may not reflect the most recent changes. Where we could not verify a figure
+          against an official source, we say so.
         </p>
       </section>
       <section class="u-mb-10">
@@ -96,7 +97,7 @@ const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year
         <h2>9. Contact</h2>
         <p>
           If you have questions about these terms, you can reach us through the{' '}
-          <a href="/about/">About page</a>.
+          <a href="/contact/">contact page</a>.
         </p>
       </section>
     </div>

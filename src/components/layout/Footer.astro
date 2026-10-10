@@ -5,19 +5,9 @@ import { getAllCategories } from '../../utils/category';
 const categories = getAllCategories();
 const entryIds = new Set((await getCollection('entries')).map((entry) => entry.id));
 
-const guides = [
-  ...categories
-    .filter((cat) => cat.pillarSlug && entryIds.has(cat.pillarSlug))
-    .map((cat) => ({ href: `/article/${cat.pillarSlug}/`, label: `${cat.label}: Complete Guide` })),
-  ...(entryIds.has('caregiver-resources/senior-living-options-complete-comparison-of-all-7-types')
-    ? [
-        {
-          href: '/article/caregiver-resources/senior-living-options-complete-comparison-of-all-7-types/',
-          label: 'Compare All 7 Senior Living Types',
-        },
-      ]
-    : []),
-];
+const guides = categories
+  .filter((cat) => cat.pillarSlug && entryIds.has(cat.pillarSlug))
+  .map((cat) => ({ href: `/article/${cat.pillarSlug}/`, label: `${cat.label}: Complete Guide` }));
 
 const aboutLinks = [
   { href: '/about/', label: 'About' },

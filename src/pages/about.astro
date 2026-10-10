@@ -6,7 +6,7 @@ import SkipLink from '../components/layout/SkipLink.astro';
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
 
-const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+const lastUpdated = 'October 2026';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -44,7 +44,7 @@ const jsonLd = {
         </h1>
         <p class="u-text-muted u-mt-2">Last updated: {lastUpdated}</p>
         <p class="u-text-muted u-fs-lg u-mt-4">
-          Senior Living Options is an independent editorial project. No facility advertising. No
+          Senior Living Options is an independent editorial project. No facility listings. No
           sponsored placements. Just clear, researched guides built from primary sources.
         </p>
       </header>
@@ -63,172 +63,21 @@ const jsonLd = {
           without a sales agenda.
         </p>
       </section>
-      <section class="u-mb-12" aria-labelledby="how-title">
-        <h2 id="how-title">How articles are made</h2>
+      <section class="u-mb-12" aria-labelledby="who-title">
+        <h2 id="who-title">Who is behind it</h2>
         <p>
-          Each article is researched from primary sources — federal health agencies, government
-          databases, and established nonprofit organizations — and reviewed by a human editor before
-          publication. AI tools assist with research organization and initial drafting; every claim
-          is then verified against its original source and corrected where needed before anything
-          goes live.
+          This is a one-person project. There is no corporate agenda, no facility listings, and no
+          sponsored placements. Articles are published under the name of the site, and the person
+          behind it is not a doctor, nurse, lawyer, or financial advisor.
         </p>
         <p>
-          This is a one-person project. That means no editorial shortcuts, but also no corporate
-          agenda. When something is uncertain or varies by state, the article says so. When a number
-          changes — costs, Medicaid limits, VA benefit rates — the article is updated.
+          How articles are researched, how figures are checked and updated, and how mistakes are
+          corrected are explained in our <a href="/editorial-policy/">Editorial Policy</a>. If you
+          find an error or have a suggestion, please <a href="/contact/">contact us</a>.
         </p>
       </section>
-      <section class="u-mb-12" aria-labelledby="sources-title">
-        <h2 id="sources-title">Primary sources we rely on</h2>
-        <p class="u-text-muted u-mb-8">
-          All factual claims are sourced to the original publication. Sources are listed at the
-          bottom of every article.
-        </p>
-        <div class="u-mb-8">
-          <h3
-            class="u-fs-base u-mb-4"
-            style="text-transform: uppercase; letter-spacing: 0.08em; color: var(--sl-color-text-muted); font-family: var(--sl-font-sans);"
-          >
-            Federal government
-          </h3>
-          <ul class="c-source-list">
-            <li>
-              <a href="https://www.medicare.gov" target="_blank" rel="noopener">
-                Medicare.gov
-              </a>{' '}
-              — coverage rules, nursing home costs, facility inspection records via Care Compare.
-            </li>
-            <li>
-              <a href="https://www.medicaid.gov" target="_blank" rel="noopener">
-                Medicaid.gov
-              </a>{' '}
-              — eligibility rules, HCBS waivers, spend-down rules, state-by-state coverage.
-            </li>
-            <li>
-              <a href="https://acl.gov" target="_blank" rel="noopener">
-                ACL.gov
-              </a>{' '}
-              (Administration for Community Living) — federal agency for aging services; primary
-              source for in-home care and caregiver resources.
-            </li>
-            <li>
-              <a href="https://www.nia.nih.gov" target="_blank" rel="noopener">
-                NIA.NIH.gov
-              </a>{' '}
-              (National Institute on Aging) — peer-reviewed research on aging, dementia, and care
-              decisions.
-            </li>
-            <li>
-              <a href="https://www.va.gov" target="_blank" rel="noopener">
-                VA.gov
-              </a>{' '}
-              — long-term care options and benefit rates for veterans and surviving spouses.
-            </li>
-            <li>
-              <a href="https://www.hhs.gov" target="_blank" rel="noopener">
-                HHS.gov
-              </a>{' '}
-              — Department of Health and Human Services; source for broad health statistics.
-            </li>
-            <li>
-              <a href="https://medlineplus.gov" target="_blank" rel="noopener">
-                MedlinePlus.gov
-              </a>{' '}
-              — NIH medical library; used for clinical definitions.
-            </li>
-            <li>
-              <a href="https://eldercare.acl.gov" target="_blank" rel="noopener">
-                Eldercare.ACL.gov
-              </a>{' '}
-              — official locator for state-level aging services.
-            </li>
-          </ul>
-        </div>
-        <div class="u-mb-8">
-          <h3
-            class="u-fs-base u-mb-4"
-            style="text-transform: uppercase; letter-spacing: 0.08em; color: var(--sl-color-text-muted); font-family: var(--sl-font-sans);"
-          >
-            Professional organizations
-          </h3>
-          <ul class="c-source-list">
-            <li>
-              <a href="https://www.aarp.org" target="_blank" rel="noopener">
-                AARP.org
-              </a>{' '}
-              — the leading nonprofit for adults 50+; widely cited across the sector.
-            </li>
-            <li>
-              <a href="https://www.alz.org" target="_blank" rel="noopener">
-                Alz.org
-              </a>{' '}
-              (Alzheimer's Association) — primary source for all memory care and dementia content.
-            </li>
-            <li>
-              <a href="https://www.ahcancal.org" target="_blank" rel="noopener">
-                NCAL.org
-              </a>{' '}
-              (National Center for Assisted Living) — industry statistics on costs and services.
-            </li>
-            <li>
-              <a href="https://www.healthinaging.org" target="_blank" rel="noopener">
-                HealthinAging.org
-              </a>{' '}
-              (American Geriatrics Society) — clinical guidelines for senior care environments.
-            </li>
-            <li>
-              <a href="https://www.hcaoa.org" target="_blank" rel="noopener">
-                HCAOA.org
-              </a>{' '}
-              (Home Care Association of America) — in-home care sector data and policy.
-            </li>
-            <li>
-              <a href="https://longtermcare.gov" target="_blank" rel="noopener">
-                LongTermCare.gov
-              </a>{' '}
-              — official government portal for long-term care planning.
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h3
-            class="u-fs-base u-mb-4"
-            style="text-transform: uppercase; letter-spacing: 0.08em; color: var(--sl-color-text-muted); font-family: var(--sl-font-sans);"
-          >
-            Cost data
-          </h3>
-          <ul class="c-source-list">
-            <li>
-              <a href="https://www.carescout.com/cost-of-care" target="_blank" rel="noopener">
-                CareScout / Genworth Cost of Care Survey
-              </a>{' '}
-              — the most comprehensive annual study of senior care costs by state. Published each
-              March.
-            </li>
-            <li>
-              <a href="https://www.payingforseniorcare.com" target="_blank" rel="noopener">
-                PayingForSeniorCare.com
-              </a>{' '}
-              — secondary reference for financing options and payment strategies.
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section class="u-mb-12" aria-labelledby="updates-title">
-        <h2 id="updates-title">Keeping information current</h2>
-        <p>
-          Senior care costs, Medicaid income limits, and VA benefit rates change every year.
-          Articles include a "Last reviewed" date and are updated when key figures change —
-          typically when the annual CareScout/Genworth survey is published (March), when VA benefit
-          rates adjust (December), and when Medicaid thresholds are revised by CMS.
-        </p>
-      </section>
-      <section aria-labelledby="contact-title">
-        <h2 id="contact-title">Corrections and feedback</h2>
-        <p>
-          If you find an error, an outdated figure, or a source that contradicts something published
-          here, please reach out. Accuracy matters more than being right.
-        </p>
+      <section aria-labelledby="advice-title">
+        <h2 id="advice-title">Not personal advice</h2>
         <p>
           This site does not provide personal legal, financial, or medical advice. For decisions
           specific to your situation, consult a licensed elder law attorney, a certified financial
@@ -241,22 +90,8 @@ const jsonLd = {
 </BaseLayout>
 
 <style>
-  .c-source-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--sl-space-3);
-  }
-  .c-source-list li {
-    padding-left: var(--sl-space-4);
-    border-left: 2px solid var(--sl-color-primary-light);
-    font-size: var(--sl-fs-sm);
-    line-height: 1.6;
-  }
-  .c-source-list a {
-    font-weight: 600;
-    color: var(--sl-color-primary);
+  section a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 </style>

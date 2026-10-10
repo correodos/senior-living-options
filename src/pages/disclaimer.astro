@@ -5,7 +5,7 @@ import Footer from '../components/layout/Footer.astro';
 import SkipLink from '../components/layout/SkipLink.astro';
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
-const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+const lastUpdated = 'October 2026';
 ---
 
 <BaseLayout
@@ -50,7 +50,9 @@ const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year
           Cost figures published on this Site are median estimates sourced from the
           CareScout/Genworth Cost of Care Survey. Actual costs vary significantly by location,
           facility type, level of care, and individual needs. Data is updated annually but may not
-          reflect current market conditions in your area.
+          reflect current market conditions in your area. Medicaid limits shown on our state pages
+          come from official state and federal documents, are shown with their source and the date
+          we checked them, and can change at any time.
         </p>
       </section>
       <section class="u-mb-10">

@@ -5,7 +5,7 @@ import Footer from '../components/layout/Footer.astro';
 import SkipLink from '../components/layout/SkipLink.astro';
 
 const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
-const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+const lastUpdated = 'October 2026';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -37,45 +37,177 @@ const jsonLd = {
       <section class="u-mb-10">
         <h2>Who writes this site</h2>
         <p>
-          Senior Living Options is an independent editorial project. Articles are published under
-          the name of the site rather than under an individual author. The people behind the site
-          are not doctors, nurses, lawyers, or financial advisors, and we do not claim any
-          professional credentials. We organize and explain information from official and published
-          sources so families can understand their options.
+          Senior Living Options is an independent, one-person editorial project. Articles are
+          published under the name of the site rather than under an individual author. The person
+          behind the site is not a doctor, nurse, lawyer, or financial advisor and does not claim
+          any professional credentials. The goal is to organize and explain information from
+          official and published sources so families can understand their options.
         </p>
       </section>
 
       <section class="u-mb-10">
-        <h2>Where our information comes from</h2>
-        <ul>
-          <li>
-            <strong>Official sources first:</strong> government and agency sources such as
-            Medicare.gov, Medicaid.gov, the Social Security Administration, the CDC, and state
-            Medicaid agencies.
-          </li>
-          <li>
-            <strong>Published surveys for cost figures:</strong> for example, the CareScout 2025
-            Cost of Care Survey. The source and year are named wherever a figure appears.
-          </li>
-          <li>
-            <strong>Sources are listed:</strong> each article shows the sources it relies on and the
-            date it was last reviewed.
-          </li>
-          <li>
-            <strong>No law-firm blogs or calculators as a source of a figure.</strong> We may use
-            them to find where to look, but never as the citation.
-          </li>
-        </ul>
+        <h2>How articles are made</h2>
+        <p>
+          Each article is researched from primary sources: federal health agencies, government
+          databases, and established nonprofit organizations. AI tools assist with organizing the
+          research and with initial drafting. Every article is then reviewed by a person, and each
+          claim is checked against its original source and corrected where needed before anything is
+          published.
+        </p>
+        <p>
+          When something is uncertain or varies by state, the article says so. Sources are listed at
+          the bottom of every article, together with the date it was last reviewed.
+        </p>
+      </section>
+
+      <section class="u-mb-12" aria-labelledby="sources-title">
+        <h2 id="sources-title">Sources we rely on</h2>
+        <p class="u-text-muted u-mb-8">
+          Factual claims are sourced to the original publication. Official sources come first;
+          published surveys are used for cost figures, and the source and year are named wherever a
+          figure appears.
+        </p>
+        <div class="u-mb-8">
+          <h3
+            class="u-fs-base u-mb-4"
+            style="text-transform: uppercase; letter-spacing: 0.08em; color: var(--sl-color-text-muted); font-family: var(--sl-font-sans);"
+          >
+            Federal government
+          </h3>
+          <ul class="c-source-list">
+            <li>
+              <a href="https://www.medicare.gov" target="_blank" rel="noopener">
+                Medicare.gov
+              </a>{' '}
+              — coverage rules, nursing home costs, facility inspection records via Care Compare.
+            </li>
+            <li>
+              <a href="https://www.medicaid.gov" target="_blank" rel="noopener">
+                Medicaid.gov
+              </a>{' '}
+              — eligibility rules, HCBS waivers, spend-down rules, state-by-state coverage.
+            </li>
+            <li>
+              <a href="https://acl.gov" target="_blank" rel="noopener">
+                ACL.gov
+              </a>{' '}
+              (Administration for Community Living) — federal agency for aging services; primary
+              source for in-home care and caregiver resources.
+            </li>
+            <li>
+              <a href="https://www.nia.nih.gov" target="_blank" rel="noopener">
+                NIA.NIH.gov
+              </a>{' '}
+              (National Institute on Aging) — peer-reviewed research on aging, dementia, and care
+              decisions.
+            </li>
+            <li>
+              <a href="https://www.va.gov" target="_blank" rel="noopener">
+                VA.gov
+              </a>{' '}
+              — long-term care options and benefit rates for veterans and surviving spouses.
+            </li>
+            <li>
+              <a href="https://www.hhs.gov" target="_blank" rel="noopener">
+                HHS.gov
+              </a>{' '}
+              — Department of Health and Human Services; source for broad health statistics.
+            </li>
+            <li>
+              <a href="https://medlineplus.gov" target="_blank" rel="noopener">
+                MedlinePlus.gov
+              </a>{' '}
+              — NIH medical library; used for clinical definitions.
+            </li>
+            <li>
+              <a href="https://eldercare.acl.gov" target="_blank" rel="noopener">
+                Eldercare.ACL.gov
+              </a>{' '}
+              — official locator for state-level aging services.
+            </li>
+          </ul>
+        </div>
+        <div class="u-mb-8">
+          <h3
+            class="u-fs-base u-mb-4"
+            style="text-transform: uppercase; letter-spacing: 0.08em; color: var(--sl-color-text-muted); font-family: var(--sl-font-sans);"
+          >
+            Professional organizations
+          </h3>
+          <ul class="c-source-list">
+            <li>
+              <a href="https://www.aarp.org" target="_blank" rel="noopener">
+                AARP.org
+              </a>{' '}
+              — the leading nonprofit for adults 50+; widely cited across the sector.
+            </li>
+            <li>
+              <a href="https://www.alz.org" target="_blank" rel="noopener">
+                Alz.org
+              </a>{' '}
+              (Alzheimer's Association) — primary source for all memory care and dementia content.
+            </li>
+            <li>
+              <a href="https://www.ahcancal.org" target="_blank" rel="noopener">
+                NCAL.org
+              </a>{' '}
+              (National Center for Assisted Living) — industry statistics on costs and services.
+            </li>
+            <li>
+              <a href="https://www.healthinaging.org" target="_blank" rel="noopener">
+                HealthinAging.org
+              </a>{' '}
+              (American Geriatrics Society) — clinical guidelines for senior care environments.
+            </li>
+            <li>
+              <a href="https://www.hcaoa.org" target="_blank" rel="noopener">
+                HCAOA.org
+              </a>{' '}
+              (Home Care Association of America) — in-home care sector data and policy.
+            </li>
+            <li>
+              <a href="https://longtermcare.gov" target="_blank" rel="noopener">
+                LongTermCare.gov
+              </a>{' '}
+              — official government portal for long-term care planning.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3
+            class="u-fs-base u-mb-4"
+            style="text-transform: uppercase; letter-spacing: 0.08em; color: var(--sl-color-text-muted); font-family: var(--sl-font-sans);"
+          >
+            Cost data
+          </h3>
+          <ul class="c-source-list">
+            <li>
+              <a href="https://www.carescout.com/cost-of-care" target="_blank" rel="noopener">
+                CareScout / Genworth Cost of Care Survey
+              </a>{' '}
+              — the most comprehensive annual study of senior care costs by state. Published each
+              March.
+            </li>
+            <li>
+              <a href="https://www.payingforseniorcare.com" target="_blank" rel="noopener">
+                PayingForSeniorCare.com
+              </a>{' '}
+              — secondary reference for financing options and payment strategies.
+            </li>
+          </ul>
+        </div>
       </section>
 
       <section class="u-mb-10">
         <h2>How we handle figures</h2>
         <p>
-          Costs, Medicaid limits, and similar numbers change. We review them at least once a year.
-          On our state pages, a Medicaid figure is shown only when it was read in an official
-          document, and it appears with its source and the date we checked it. When we could not
-          verify a state's figures, we say so instead of showing an unconfirmed number. Where an
-          official source gives conflicting information, we point it out.
+          Costs, Medicaid limits, and benefit rates change, so we review them at least once a year:
+          when the annual CareScout/Genworth survey is published (March), when VA benefit rates
+          adjust (December), and when Medicaid thresholds are revised by CMS (January). On our state
+          pages, a Medicaid figure is shown only when it was read in an official document, and it
+          appears with its source and the date we checked it. When we could not verify a state's
+          figures, we say so instead of showing an unconfirmed number. Where an official source
+          gives conflicting information, we point it out.
         </p>
       </section>
 
@@ -91,9 +223,9 @@ const jsonLd = {
       <section class="u-mb-10">
         <h2>Corrections</h2>
         <p>
-          If you find a mistake or an outdated figure, please
-          <a href="/contact/">tell us</a>. We will check it against the official source and fix it,
-          and we update the review date on the page when we do.
+          If you find a mistake, an outdated figure, or a source that contradicts something
+          published here, please <a href="/contact/">tell us</a>. We will check it against the
+          official source and fix it, and we update the review date on the page when we do.
         </p>
       </section>
 
@@ -102,7 +234,7 @@ const jsonLd = {
         <p>
           Nothing on this site is medical, legal, or financial advice, and it cannot replace a
           conversation with a qualified professional or the agency that decides your eligibility.
-          See our <a href="/disclaimer/">disclaimer</a>.
+          See our <a href="/disclaimer/">disclaimer</a> and our <a href="/about/">about page</a>.
         </p>
       </section>
     </div>
@@ -115,5 +247,23 @@ const jsonLd = {
   main p a {
     text-decoration: underline;
     text-underline-offset: 2px;
+  }
+  .c-source-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sl-space-3);
+  }
+  .c-source-list li {
+    padding-left: var(--sl-space-4);
+    border-left: 2px solid var(--sl-color-primary-light);
+    font-size: var(--sl-fs-sm);
+    line-height: 1.6;
+  }
+  .c-source-list a {
+    font-weight: 600;
+    color: var(--sl-color-primary);
   }
 </style>
