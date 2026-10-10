@@ -50,6 +50,9 @@ than a guessed one.**
 | `communitySpouseResourceMin` | State minimum the at-home spouse may keep                         | Federal 2026 range $32,532 to $162,660; the state chooses the minimum                                                                                                            |
 | `avgPrivatePayRate`          | Average private-pay nursing home rate used for transfer penalties | Needs a clear unit (`daily` or `monthly`)                                                                                                                                        |
 
+`readerNotes` (optional list of strings) is shown on the state page under "Keep in mind". Use it for
+official figures that conflict or cannot be confirmed, only when the user asks for it.
+
 Add new fields only after asking the user: update the schema, the validator and `medicaid.ts`
 together.
 

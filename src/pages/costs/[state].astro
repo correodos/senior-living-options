@@ -24,7 +24,7 @@ import {
   type MonthlyKey,
 } from '../../utils/costs';
 import { breadcrumbsToJsonLd, combineJsonLd, generateFAQPageJsonLd } from '../../utils/seo';
-import { getMedicaidInfo } from '../../utils/medicaid';
+import { formatIsoDate, getMedicaidInfo } from '../../utils/medicaid';
 
 export function getStaticPaths() {
   return states.map((state) => ({
@@ -342,9 +342,20 @@ const jsonLd = combineJsonLd(
           </dl>
         ) : (
           <p class="state-note">
-            We have not yet verified {state.name}'s specific Medicaid limits against official
-            sources, so we do not show them here.
+            As of {formatIsoDate(medicaid.agency.checkedOn)}, we could not verify {state.name}'s
+            Medicaid limits against official sources, so we do not show any figures here. Please
+            check the current limits with the state agency below.
           </p>
+        )}
+        {medicaid.notes.length > 0 && (
+          <div class="medicaid-notes">
+            <h3 class="medicaid-notes-title">Keep in mind</h3>
+            <ul>
+              {medicaid.notes.map((note) => (
+                <li>{note}</li>
+              ))}
+            </ul>
+          </div>
         )}
         <p class="state-note">
           <a href={medicaid.agency.url} rel="noopener">
@@ -545,6 +556,19 @@ const jsonLd = combineJsonLd(
   .medicaid-source a {
     text-decoration: underline;
     text-underline-offset: 2px;
+  }
+  .medicaid-notes {
+    border-left: 4px solid var(--sl-color-secondary);
+    padding: var(--sl-space-2) var(--sl-space-4);
+    margin: 0 0 var(--sl-space-4);
+  }
+  .medicaid-notes-title {
+    font-size: var(--sl-fs-lg);
+    margin-bottom: var(--sl-space-2);
+  }
+  .medicaid-notes ul {
+    margin: 0;
+    padding-left: var(--sl-space-5);
   }
   .medicaid-disclaimer {
     font-size: var(--sl-fs-sm);

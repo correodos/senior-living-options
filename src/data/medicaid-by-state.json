@@ -19,6 +19,15 @@
       "url": "https://health.alaska.gov/en/services/division-of-public-assistance-services/",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://www.akleg.gov/basis/get_documents.asp?docid=12755",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Alaska Division of Public Assistance chart \"Medicaid Income Eligibility Standards\" (revised 04/26), line \"NH, HCB Waiver, TEFRA Income Standard\". Hosted on the Alaska Legislature site. Read from an archived copy because health.alaska.gov blocks automated access."
     }
   },
   "AL": {
@@ -28,6 +37,22 @@
       "url": "https://medicaid.alabama.gov/content/3.0_Apply/3.2_Qualifying/3.2.4_Medicaid_Nursing_Home.aspx",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://medicaid.alabama.gov/documents/3.0_Apply/3.2_Qualifying_Medicaid/3.2_Medicaid_Income_Limits_2026_3-11-26.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://medicaid.alabama.gov/content/3.0_Apply/3.2_Qualifying/3.2.4_Medicaid_Nursing_Home.aspx",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "AR": {
@@ -37,6 +62,22 @@
       "url": "https://humanservices.arkansas.gov/divisions-shared-services/medical-services/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://humanservices.arkansas.gov/divisions-shared-services/county-operations/medicaid-quick-reference-chart/",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://humanservices.arkansas.gov/divisions-shared-services/county-operations/medicaid-quick-reference-chart/",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "AZ": {
@@ -46,6 +87,15 @@
       "url": "https://www.azahcccs.gov/Members/GetCovered/Categories/ALTCS.html",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://www.azahcccs.gov/Members/Downloads/Publications/DE-817_english.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Read from an archived copy (web.archive.org) of the official document, because the agency site blocks automated access."
     }
   },
   "CA": {
@@ -58,12 +108,12 @@
     },
     "assetLimitSingle": {
       "value": 130000,
-      "source": "https://www.dhcs.ca.gov/medi-cal/help/",
-      "effective": null,
+      "source": "https://www.dhcs.ca.gov/services/medi-cal/eligibility/letters/Documents/25-18.pdf",
+      "effective": "2026-01-01",
       "checkedOn": "2026-10-10",
-      "status": "review",
-      "method": "search-excerpt",
-      "note": "Limit stated by DHCS through 2027-06-30 ($65,000 per additional household member). DHCS blocks automated access; confirm by hand before publishing."
+      "status": "verified",
+      "method": "read",
+      "note": "ACWDL 25-18 (October 9, 2025): $130,000 for one person, plus $65,000 per additional household member. Read from an archived copy because dhcs.ca.gov blocks automated access. DHCS states the limit runs through June 30, 2027 and a 2027 change has been proposed."
     }
   },
   "CO": {
@@ -73,6 +123,22 @@
       "url": "https://hcpf.colorado.gov/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://hcpf.colorado.gov/sites/hcpf/files/HCPF%20OM%2025-073%202026%20Social%20Security%20Cost%20of%20Living%20Adjustments.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "homeEquityLimit": {
+      "value": 1130000,
+      "source": "https://hcpf.colorado.gov/sites/hcpf/files/HCPF%20OM%2025-073%202026%20Social%20Security%20Cost%20of%20Living%20Adjustments.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "CT": {
@@ -82,6 +148,22 @@
       "url": "https://portal.ct.gov/dss",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 1600,
+      "source": "https://portal.ct.gov/OPM/PDPD-HHS-Long-Term-Care/Consumer/Partnership-Consumer-Government-Programs",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "homeEquityLimit": {
+      "value": 1130000,
+      "source": "https://portal.ct.gov/OPM/PDPD-HHS-Long-Term-Care/Consumer/Partnership-Consumer-Government-Programs",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "DE": {
@@ -109,6 +191,22 @@
       "url": "https://medicaid.georgia.gov/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://medicaid.georgia.gov/document/document/2026-abd-fm-income-resource-limits/download",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://medicaid.georgia.gov/document/document/2026-abd-fm-income-resource-limits/download",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "HI": {
@@ -127,6 +225,22 @@
       "url": "https://hhs.iowa.gov/programs/welcome-iowa-medicaid",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://hhs.iowa.gov/medicaid/services-care/nursing-facilities",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://hhs.iowa.gov/medicaid/services-care/nursing-facilities",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "ID": {
@@ -136,7 +250,27 @@
       "url": "https://healthandwelfare.idaho.gov/services-programs/medicaid-health",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
-    }
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://healthandwelfare.idaho.gov/medicaid-program-income-limits",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://healthandwelfare.idaho.gov/medicaid-program-income-limits",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "review",
+      "method": "read",
+      "note": "Idaho lists $3,002 for Long-Term Facility Care, $20 above the federal cap of $2,982 (likely a $20 income disregard). The value does not fit the field; confirm with the agency."
+    },
+    "readerNotes": [
+      "Idaho's health agency lists a monthly income limit of $3,002 for nursing home coverage, which is $20 above the federal limit of $2,982. We could not confirm why the figures differ, so check the exact limit with the agency."
+    ]
   },
   "IL": {
     "name": "Illinois",
@@ -154,6 +288,30 @@
       "url": "https://www.in.gov/medicaid/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://www.in.gov/fssa/ompp/files/Medicaid_PM_3000.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://www.in.gov/fssa/ompp/files/Medicaid_PM_3000.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "homeEquityLimit": {
+      "value": 752000,
+      "source": "https://www.in.gov/fssa/ompp/files/Medicaid_PM_3000.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "KS": {
@@ -181,6 +339,24 @@
       "url": "https://ldh.la.gov/medicaid",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://ldh.la.gov/assets/medicaid/MedicaidEligibilityPolicy/Z-700.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Read from an archived copy (web.archive.org) of the official document, because the agency site blocks automated access."
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://ldh.la.gov/assets/medicaid/MedicaidEligibilityPolicy/Z-700.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Read from an archived copy (web.archive.org) of the official document, because the agency site blocks automated access."
     }
   },
   "MA": {
@@ -190,6 +366,30 @@
       "url": "https://www.mass.gov/masshealth",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://www.mass.gov/info-details/program-financial-guidelines-for-certain-masshealth-applicants-and-members",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "homeEquityLimit": {
+      "value": 1130000,
+      "source": "https://www.mass.gov/info-details/program-financial-guidelines-for-certain-masshealth-applicants-and-members",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://www.mass.gov/info-details/program-financial-guidelines-for-certain-masshealth-applicants-and-members",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "MD": {
@@ -199,7 +399,27 @@
       "url": "https://health.maryland.gov/mmcp/Pages/home.aspx",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
-    }
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://health.maryland.gov/mmcp/Medicaid%20Manual/Appendix%20schedules%202026%20Eff%201_1_2026%20updates.docx.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2500,
+      "source": "https://health.maryland.gov/mmcp/Medicaid%20Manual/Appendix%20schedules%202026%20Eff%201_1_2026%20updates.docx.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "review",
+      "method": "read",
+      "note": "Schedule MA-2 (medically needy) lists $2,500 and Schedule MA-2A (categorically needy) lists $2,000; the document does not say which applies to nursing home applicants."
+    },
+    "readerNotes": [
+      "Maryland publishes two asset limits: $2,500 for its medically needy program and $2,000 for its categorically needy program. We could not confirm which one applies to nursing home applicants, so ask the state before relying on either."
+    ]
   },
   "ME": {
     "name": "Maine",
@@ -226,6 +446,14 @@
       "url": "https://mn.gov/dhs/people-we-serve/adults/health-care/health-care-programs/programs-and-services/medical-assistance.jsp",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 3000,
+      "source": "https://hcopub.dhs.state.mn.us/epm/2_1_3_1.htm",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "MO": {
@@ -235,6 +463,14 @@
       "url": "https://mydss.mo.gov/mhd",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 6220.5,
+      "source": "https://dssmanuals.mo.gov/wp-content/uploads/2018/10/appendix_k.pdf",
+      "effective": "2026-07-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "MS": {
@@ -244,6 +480,33 @@
       "url": "https://medicaid.ms.gov/how-to-apply-2/",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://medicaid.ms.gov/wp-content/uploads/2025/12/LTC-ABD-Nursing-Home.January-2026.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Read from an archived copy (web.archive.org) of the official document, because the agency site blocks automated access."
+    },
+    "assetLimitSingle": {
+      "value": 4000,
+      "source": "https://medicaid.ms.gov/wp-content/uploads/2025/12/LTC-ABD-Nursing-Home.January-2026.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Read from an archived copy (web.archive.org) of the official document, because the agency site blocks automated access."
+    },
+    "homeEquityLimit": {
+      "value": 752000,
+      "source": "https://medicaid.ms.gov/wp-content/uploads/2025/12/LTC-ABD-Nursing-Home.January-2026.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Read from an archived copy (web.archive.org) of the official document, because the agency site blocks automated access."
     }
   },
   "MT": {
@@ -262,6 +525,22 @@
       "url": "https://medicaid.ncdhhs.gov/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://policies.ncdhhs.gov/wp-content/uploads/MA-2231-CSRP-1.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://policies.ncdhhs.gov/wp-content/uploads/MA-2231-CSRP-1.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "ND": {
@@ -271,6 +550,22 @@
       "url": "https://www.hhs.nd.gov/healthcare/medicaid",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://www.nd.gov/dhs/policymanuals/51005/Content/510_05_65_20.htm",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 3000,
+      "source": "https://www.nd.gov/dhs/policymanuals/51005/Content/510_05_65_15.htm",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "NE": {
@@ -280,6 +575,24 @@
       "url": "https://dhhs.ne.gov/",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 4000,
+      "source": "https://dhhs.ne.gov/Guidance%20Docs/Medicaid%20Income%20Levels,%20Federal%20Poverty%20Levels,%20and%20Resources.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Read from an archived copy (web.archive.org) of the official document, because the agency site blocks automated access."
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://dhhs.ne.gov/Guidance%20Docs/Medicaid%20Income%20Levels,%20Federal%20Poverty%20Levels,%20and%20Resources.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "review",
+      "method": "search-excerpt",
+      "note": "Seen only in a search excerpt; the page could not be opened by automated tools. A human must confirm it."
     }
   },
   "NH": {
@@ -289,6 +602,30 @@
       "url": "https://www.dhhs.nh.gov/programs-services/medicaid/nh-medicaid-medical-assistance-eligibility",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://www.dhhs.nh.gov/sr_htm/html/sr_26-01_dated_01_26.htm",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://www.dhhs.nh.gov/sr_htm/html/sr_26-01_dated_01_26.htm",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "homeEquityLimit": {
+      "value": 752000,
+      "source": "https://www.dhhs.nh.gov/sr_htm/html/sr_26-01_dated_01_26.htm",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "NJ": {
@@ -298,6 +635,38 @@
       "url": "https://www.nj.gov/humanservices/dmahs/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://www.nj.gov/humanservices/dmahs/documents/providers-stakeholders/resources/medicaid/2026/26-03_Income_Eligibility_Standards_Effective_January-1-2026.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "homeEquityLimit": {
+      "value": 1130000,
+      "source": "https://www.nj.gov/humanservices/dmahs/documents/providers-stakeholders/resources/medicaid/2026/26-03_Income_Eligibility_Standards_Effective_January-1-2026.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://www.nj.gov/humanservices/dmahs/documents/providers-stakeholders/resources/medicaid/2026/26-03_Income_Eligibility_Standards_Effective_January-1-2026.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://www.nj.gov/humanservices/dmahs/documents/about/NJFC-ABD-MLTSS-BRO-E-2026_Web.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "NM": {
@@ -307,6 +676,22 @@
       "url": "https://www.hca.nm.gov/about_the_department/medical_assistance_division/",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://www.hca.nm.gov/wp-content/uploads/Eligibility-Pamphlet-1.1.2026.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://www.hca.nm.gov/wp-content/uploads/Eligibility-Pamphlet-1.1.2026.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "NV": {
@@ -316,6 +701,14 @@
       "url": "https://dhcfp.nv.gov/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://www.dss.nv.gov/siteassets/dwss.nv.gov/content/medical/E-400_TYPES_OF_RESOURCES.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "NY": {
@@ -350,6 +743,39 @@
       "url": "https://medicaid.ohio.gov/families-and-individuals/ads/2-get-coverage",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://dam.assets.ohio.gov/image/upload/medicaid.ohio.gov/About%20Us/PoliciesGuidelines/MEPL/MEPL_191_-_2026_COLA.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "homeEquityLimit": {
+      "value": 752000,
+      "source": "https://dam.assets.ohio.gov/image/upload/medicaid.ohio.gov/About%20Us/PoliciesGuidelines/MEPL/MEPL_191_-_2026_COLA.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://dam.assets.ohio.gov/image/upload/medicaid.ohio.gov/About%20Us/PoliciesGuidelines/MEPL/MEPL_191_-_2026_COLA.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://codes.ohio.gov/ohio-administrative-code/rule-5160:1-3-05.1",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "OAC 5160:1-3-05.1: for an individual the resource limit is $2,000. Read from an archived copy because codes.ohio.gov refuses automated connections."
     }
   },
   "OK": {
@@ -359,6 +785,30 @@
       "url": "https://oklahoma.gov/ohca.html",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://oklahoma.gov/content/dam/ok/en/okdhs/documents/searchcenter/okdhsformresults/c-1.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://oklahoma.gov/content/dam/ok/en/okdhs/documents/searchcenter/okdhsformresults/c-1.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "homeEquityLimit": {
+      "value": 752000,
+      "source": "https://oklahoma.gov/content/dam/ok/en/okdhs/documents/searchcenter/okdhsformresults/c-1.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "OR": {
@@ -368,6 +818,15 @@
       "url": "https://www.oregon.gov/oha/hsd/ohp/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://www.oregon.gov/odhs/transmittals/oeptransmittals/pt25045.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Transmittal OEP-PT-25-045 states the minimum share under OAR 461-160-0580."
     }
   },
   "PA": {
@@ -377,7 +836,35 @@
       "url": "https://www.pa.gov/agencies/dhs",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
-    }
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://www.pa.gov/agencies/dhs/resources/aging-physical-disabilities/medicaid-payment-long-term-care",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "homeEquityLimit": {
+      "value": 752000,
+      "source": "https://www.pa.gov/agencies/dhs/resources/aging-physical-disabilities/medicaid-payment-long-term-care",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://www.pa.gov/agencies/dhs/resources/aging-physical-disabilities/medicaid-payment-long-term-care",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "review",
+      "method": "read",
+      "note": "PA states $2,000 plus a $6,000 disregard when income is at or below 300% of the federal benefit rate, and $2,400 when income is above it. Two values, so it does not fit one field."
+    },
+    "readerNotes": [
+      "According to Pennsylvania's Department of Human Services, the asset limit depends on income: $2,000 plus a $6,000 resource disregard if income is at or below $2,982 a month, or $2,400 if income is above that. We could not confirm how this applies to each case, so check with your county assistance office."
+    ]
   },
   "RI": {
     "name": "Rhode Island",
@@ -386,6 +873,14 @@
       "url": "https://eohhs.ri.gov/consumer/health-care",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 4000,
+      "source": "https://rules.sos.ri.gov/regulations/part/210-50-00-6",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "SC": {
@@ -395,6 +890,24 @@
       "url": "https://www.scdhhs.gov/",
       "verifiedBy": "search-index",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://www.scdhhs.gov/sites/dhhs/files/pdf/links/Medicaid%20Eligibility%20Groups%20Effective%201.1.pdf",
+      "effective": "2026-03-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Read from an archived copy (web.archive.org) of the official document, because the agency site blocks automated access."
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://www.scdhhs.gov/sites/dhhs/files/pdf/links/Medicaid%20Eligibility%20Groups%20Effective%201.1.pdf",
+      "effective": "2026-03-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Read from an archived copy (web.archive.org) of the official document, because the agency site blocks automated access."
     }
   },
   "SD": {
@@ -404,6 +917,22 @@
       "url": "https://dss.sd.gov/medicaid/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://dss.sd.gov/economicassistance/medical_programs.aspx",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://dss.sd.gov/economicassistance/medical_programs.aspx",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "TN": {
@@ -413,6 +942,22 @@
       "url": "https://www.tn.gov/tenncare.html",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://www.tn.gov/content/dam/tn/tenncare/documents/InstitutionalMedicaid.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://www.tn.gov/content/dam/tn/tenncare/documents/InstitutionalMedicaid.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "TX": {
@@ -457,6 +1002,33 @@
       "url": "https://medicaid.utah.gov/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://medicaid-documents.dhhs.utah.gov/Documents/pdfs/Medicaid_nursing_home_information.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "Read from an archived copy (web.archive.org) of the official document, because the agency site blocks automated access."
+    },
+    "homeEquityLimit": {
+      "value": 752000,
+      "source": "https://oepmanuals.dhhs.utah.gov/Tables/TABLE_II-A_-_Long_Term_Care_figures.htm",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "review",
+      "method": "search-excerpt",
+      "note": "Seen only in a search excerpt; the page could not be opened by automated tools. A human must confirm it."
+    },
+    "communitySpouseResourceMin": {
+      "value": 32532,
+      "source": "https://oepmanuals.dhhs.utah.gov/Tables/TABLE_II-A_-_Long_Term_Care_figures.htm",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "review",
+      "method": "search-excerpt",
+      "note": "Seen only in a search excerpt; the page could not be opened by automated tools. A human must confirm it."
     }
   },
   "VA": {
@@ -484,6 +1056,39 @@
       "url": "https://www.hca.wa.gov/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "incomeCapMonthly": {
+      "value": 2982,
+      "source": "https://www.hca.wa.gov/assets/free-or-low-cost/income-standards-20260101.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "homeEquityLimit": {
+      "value": 1130000,
+      "source": "https://www.hca.wa.gov/assets/free-or-low-cost/income-standards-20260101.pdf",
+      "effective": "2026-01-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "communitySpouseResourceMin": {
+      "value": 72529,
+      "source": "https://www.hca.wa.gov/assets/free-or-low-cost/income-standards-20260101.pdf",
+      "effective": "2025-07-01",
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://app.leg.wa.gov/WAC/default.aspx?cite=182-513-1350",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read",
+      "note": "WAC 182-513-1350: resource standard is $2,000 for a single person or an institutionalized spouse (SSI-related long-term care)."
     }
   },
   "WI": {
@@ -493,6 +1098,14 @@
       "url": "https://www.dhs.wisconsin.gov/medicaid/index.htm",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://www.dhs.wisconsin.gov/publications/p1/p10063.pdf",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "WV": {
@@ -502,6 +1115,14 @@
       "url": "https://bms.wv.gov/",
       "verifiedBy": "http",
       "checkedOn": "2026-10-10"
+    },
+    "assetLimitSingle": {
+      "value": 2000,
+      "source": "https://bfa.wv.gov/media/2406/download",
+      "effective": null,
+      "checkedOn": "2026-10-10",
+      "status": "verified",
+      "method": "read"
     }
   },
   "WY": {

@@ -65,5 +65,5 @@ export function getMedicaidInfo(code: string) {
     });
   }
 
-  return { agency: state.agency, facts };
+  return { agency: state.agency, facts, notes: state.readerNotes ?? [] };
 }

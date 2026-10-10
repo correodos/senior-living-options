@@ -75,6 +75,8 @@ export const stateMedicaidSchema = z.object({
   homeEquityLimit: amountField(500000, 2000000).optional(),
   communitySpouseResourceMin: amountField(10000, 200000).optional(),
   avgPrivatePayRate: rateField.optional(),
+  // Reader-facing caveats shown on the state page (for example figures we could not confirm).
+  readerNotes: z.array(z.string().min(20)).optional(),
 });
 
 export const medicaidFileSchema = z
