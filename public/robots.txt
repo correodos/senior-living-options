@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /search/
 
 Sitemap: https://seniorcareexplained.com/sitemap-index.xml

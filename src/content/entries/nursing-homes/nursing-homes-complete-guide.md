@@ -4,7 +4,7 @@ description: 'What is a nursing home, what does it cost, and how do you find a g
 category: 'nursing-homes'
 tags: ['nursing homes', 'long-term care', 'skilled nursing facility', 'nursing home costs', 'Medicaid', 'Medicare']
 publishDate: 2026-10-04
-lastReviewed: 2026-10-09
+lastReviewed: 2026-10-13
 isPillar: true
 readingTime: 12
 image: '/images/nursing-homes-complete-guide.webp'
@@ -37,7 +37,7 @@ sources:
 
 When a parent, spouse, or sibling can no longer safely manage at home — and when the level of care they need goes beyond what family or home aides can realistically provide — the idea of a nursing home comes up. It's one of the hardest conversations a family can have, and it often happens fast: after a fall, a stroke, or a diagnosis that changes everything overnight.
 
-If you're in that moment right now, this guide is for you. We'll explain what nursing homes actually are (and how they differ from other facilities), what they cost in 2024, how Medicare and Medicaid fit in, and — critically — how to evaluate and choose a facility that will give your loved one good care. We won't oversimplify, but we won't bury you in jargon either.
+If you're in that moment right now, this guide is for you. We'll explain what nursing homes actually are (and how they differ from other facilities), what they cost in 2025, how Medicare and Medicaid fit in, and — critically — how to evaluate and choose a facility that will give your loved one good care. We won't oversimplify, but we won't bury you in jargon either.
 
 ---
 
@@ -166,7 +166,7 @@ Medicaid is a federal-state program, and every state runs it differently — but
 
 **Spousal protections:** Federal law protects a community spouse (the spouse still living at home) from losing all their resources. The Community Spouse Resource Allowance lets the at-home spouse keep a portion of the couple's assets. Rules vary by state.
 
-**Income rules:** Once Medicaid covers nursing home care, nearly all of your loved one's monthly income (Social Security, pension, etc.) goes toward the cost of care. Medicaid pays the balance. Your loved one is allowed to keep a small **Personal Needs Allowance (PNA)** for personal expenses. This amount varies significantly by state — from as low as $30/month to as high as $200/month, with the national average around $70/month (2024). The federal minimum has not been raised since 1988.
+**Income rules:** Once Medicaid covers nursing home care, nearly all of your loved one's monthly income (Social Security, pension, etc.) goes toward the cost of care. Medicaid pays the balance. Your loved one is allowed to keep a small **Personal Needs Allowance (PNA)** for personal expenses. This amount varies significantly by state — from as low as $30/month to as high as $200/month, with the national average around $75.89/month (2026). The federal minimum has not been raised since 1987.
 
 ---
 

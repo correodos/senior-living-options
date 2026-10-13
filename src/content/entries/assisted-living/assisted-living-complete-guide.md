@@ -4,7 +4,7 @@ description: 'Everything families need to know about assisted living: what it is
 seoTitle: 'Assisted Living Guide: Costs, Services & How to Choose'
 seoDescription: 'Everything families need to know about assisted living: what it is, 2025 costs, how Medicaid and VA benefits help, and how to choose the right facility.'
 publishDate: 2026-09-27
-lastReviewed: 2026-10-09
+lastReviewed: 2026-10-13
 category: assisted-living
 isPillar: true
 sources:
@@ -15,6 +15,8 @@ sources:
   - "https://investor.genworth.com/news-events/press-releases/detail/1054/carescout-releases-2025-cost-of-care-survey-results"
   - "https://www.aarp.org/caregiving/basics/assisted-living-options/"
   - "https://www.benefits.va.gov/persona/veteran-elderly.asp"
+  - "https://www.kff.org/medicaid/what-services-does-medicaid-cover-in-assisted-living-facilities/"
+  - "https://www.medicaid.gov/federal-policy-guidance/downloads/cib04272026.pdf"
 readingTime: 14
 image: /images/assisted-living-complete-guide.webp
 imageAlt: 'Senior smiling in assisted living community common area'
@@ -28,7 +30,7 @@ showTableOfContents: true
 - **Assisted living bridges the gap** between independent living and nursing home care — for those who need help with daily activities but not 24/7 medical care.
 - **National median cost:** $6,200/month ($74,400/year) as of 2025, up 5% from 2024.
 - **Medicare does not cover assisted living** — it only covers specific medical services, not room, board, or personal care.
-- **Medicaid may help** through state HCBS waiver programs (46 states + D.C.), but typically covers care services only, not room and board.
+- **Medicaid may help** through state HCBS waiver programs (32 states use them for assisted living, 2024), but typically covers care services only, not room and board.
 - **VA Aid and Attendance** provides up to $2,424/month for qualifying veterans and $1,558/month for surviving spouses (2026 rates).
 - **~41,465 communities** with nearly 1.4 million licensed beds exist nationwide.
 
@@ -166,7 +168,7 @@ Medicare may pay for specific medical services received *while* someone lives in
 
 Medicaid is the primary public payer for long-term care in the United States, but its role in assisted living is complicated. Unlike nursing home care, which Medicaid covers directly in every state, assisted living coverage is optional and varies dramatically.
 
-As of 2024, 46 states and Washington, D.C. offer some level of Medicaid assistance for people in assisted living or similar residential care settings. Most do this through **Home and Community Based Services (HCBS) waivers**, which allow Medicaid to fund care services in non-nursing-home settings. → [Medicaid.gov HCBS 1915(c) info](https://www.medicaid.gov/medicaid/home-community-based-services/home-community-based-services-authorities/home-community-based-services-1915c)
+In KFF's 2024 survey of state Medicaid programs, **41 of the 47 states that responded** covered services provided in assisted living through at least one Medicaid home care program. The most common route is the **Home and Community Based Services (HCBS) waiver**, used by 32 states, which allows Medicaid to fund care services in non-nursing-home settings. Medicaid law prohibits paying for room and board. → [Medicaid.gov HCBS 1915(c) info](https://www.medicaid.gov/medicaid/home-community-based-services/home-community-based-services-authorities/home-community-based-services-1915c)
 
 **What Medicaid typically covers through waivers:**
 - Personal care assistance (help with ADLs)
@@ -175,8 +177,8 @@ As of 2024, 46 states and Washington, D.C. offer some level of Medicaid assistan
 
 **What Medicaid almost never covers:** room and board. Even if you qualify for a waiver, you'll still pay for housing separately.
 
-**Eligibility basics for most state waivers (2024):**
-- Income limit: approximately $2,982/month (equal to 300% of the SSI federal benefit rate; varies by state — California caps at $1,801/month, New York at $1,836/month)
+**Eligibility basics for most state waivers (2026):**
+- Income limit: approximately $2,982/month (equal to 300% of the SSI federal benefit rate; varies by state)
 - Asset limit: generally $2,000 in countable assets for individuals
 - Functional requirement: must demonstrate need for nursing-facility-level care, assessed through a state evaluation
 
@@ -298,7 +300,7 @@ The national median is **$6,200 per month ($74,400 per year)** according to the 
 Assisted living is for people who need help with daily activities but can live semi-independently. Nursing homes (skilled nursing facilities) provide 24/7 medical and nursing care for people with serious, ongoing health needs. Nursing homes are more medically intensive and significantly more expensive — the national median for a private room in 2025 was $10,798/month.
 
 ### Will Medicaid pay for assisted living?
-Possibly, depending on your state and your loved one's income and care needs. As of 2024, 46 states and D.C. offer some form of Medicaid assistance for assisted living through Home and Community Based Services (HCBS) waivers. However, Medicaid typically covers care services only — not room and board — and there are often waitlists. Income and asset limits apply. Contact your state Medicaid office or call the Eldercare Locator at 1-800-677-1116 for state-specific information.
+Possibly, depending on your state and your loved one's income and care needs. In KFF's 2024 survey, 41 of the 47 responding states covered services in assisted living through at least one Medicaid program, most often through Home and Community Based Services (HCBS) waivers (32 states). However, Medicaid typically covers care services only — not room and board — and there are often waitlists. Income and asset limits apply. Contact your state Medicaid office or call the Eldercare Locator at 1-800-677-1116 for state-specific information.
 
 ### What questions should I ask when visiting an assisted living facility?
 The most important questions cover staffing (ratios and turnover), care plan development and frequency, what happens if needs increase, discharge policies, and how families are kept informed. The NIA recommends also making an unscheduled visit to see the facility's day-to-day reality, not just what's shown during a planned tour.
@@ -329,3 +331,7 @@ Yes. Wartime veterans and their surviving spouses may qualify for the **VA Aid a
 9. **Eldercare Locator / Administration for Community Living (ACL).** https://eldercare.acl.gov. Phone: 1-800-677-1116.
 
 10. **Medicaid.gov / Centers for Medicare & Medicaid Services.** Home and Community-Based Services (HCBS). https://www.medicaid.gov/medicaid/home-community-based-services/home-community-based-services-authorities/home-community-based-services-1915c. Accessed: September 2026.
+
+11. **KFF.** "What Services Does Medicaid Cover in Assisted Living Facilities?" https://www.kff.org/medicaid/what-services-does-medicaid-cover-in-assisted-living-facilities/. Published: March 2025.
+
+12. **Centers for Medicare & Medicaid Services (CMS).** "Updated 2026 SSI and Spousal Impoverishment Standards." CMCS Informational Bulletin, April 27, 2026. https://www.medicaid.gov/federal-policy-guidance/downloads/cib04272026.pdf. Accessed: October 2026.

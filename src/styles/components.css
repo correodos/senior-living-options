@@ -813,8 +813,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: var(--sl-space-3);
-    padding-bottom: var(--sl-space-3);
   }
 
   .c-trust-bar__list {

@@ -1,3 +1,6 @@
+/* Layer order: later layers win, so utility classes (u-*) override component styles (c-*). */
+@layer base, components, utilities;
+
 @import './tokens.css';
 @import './base.css';
 @import './components.css';

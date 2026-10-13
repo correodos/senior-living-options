@@ -39,7 +39,7 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
 ---
 
 <CategoryLayout title={seo.title} description={seo.description} category={category.slug} {...seo}>
-  <header class="c-category-header u-container">
+  <header class="c-category-header u-container u-mb-12">
     <span
       class="c-category-header__badge"
       style={{ backgroundColor: catInfo.bgColor, color: catInfo.color }}
@@ -118,7 +118,7 @@ const seo = buildCategorySEOMeta(category.slug, catInfo.label, catInfo.descripti
                   <Icon name={cat.icon} />
                 </span>
                 <h3 class="c-card__title u-mb-2">{cat.label}</h3>
-                <p class="c-card__excerpt u-mb-4">{cat.description}</p>
+                <p class="c-card__excerpt">{cat.description}</p>
                 <Button variant="outline" size="sm">
                   View guides →
                 </Button>

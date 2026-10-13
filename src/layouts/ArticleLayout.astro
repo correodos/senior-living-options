@@ -27,6 +27,7 @@ interface Props {
   tocHeadings: Array<{ level: number; text: string; slug: string }>;
   canonical?: string;
   ogImage?: string;
+  robots?: string;
   jsonLd?: Record<string, unknown> | null;
 }
 const { title, description, data, content, tocHeadings, slug, canonical, jsonLd, ...rest } =

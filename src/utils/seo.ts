@@ -23,7 +23,7 @@ const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.jpg`;
 
 export function generateArticleJsonLd(entry: CollectionEntry<'entries'>): Record<string, unknown> {
   const { data } = entry;
-  const url = `${SITE_URL}/article/${entry.id}/`;
+  const url = data.canonicalUrl || `${SITE_URL}/article/${entry.id}/`;
 
   return {
     '@context': 'https://schema.org',
@@ -105,7 +105,7 @@ export function generateCategoryJsonLd(
 
 export function buildSEOMeta(entry: CollectionEntry<'entries'>, customOgImage?: string): SEOMeta {
   const { data } = entry;
-  const url = `${SITE_URL}/article/${entry.id}/`;
+  const url = data.canonicalUrl || `${SITE_URL}/article/${entry.id}/`;
   const ogImage = customOgImage || (data.image ? `${SITE_URL}${data.image}` : DEFAULT_OG_IMAGE);
 
   return {
@@ -152,7 +152,7 @@ export function buildCategorySEOMeta(
 
 export function buildHomeSEOMeta(): SEOMeta {
   return {
-    title: `${SITE_NAME} - Complete Guides for Senior Living and Care Options`,
+    title: `${SITE_NAME}: Guides to Senior Living and Care`,
     description:
       'Find the best care option for your loved one. Expert guides on Assisted Living, Memory Care, Nursing Homes, In-Home Care, costs, and caregiver resources.',
     canonical: SITE_URL,

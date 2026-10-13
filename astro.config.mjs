@@ -10,6 +10,7 @@ const costsMeta = JSON.parse(
 const lastmodByUrl = new Map();
 lastmodByUrl.set('costs/', costsMeta.publishedDate);
 const categoryLastmod = new Map();
+const noIndexUrls = new Set();
 
 for (const category of fs.readdirSync(ENTRIES_DIR)) {
   const dir = path.join(ENTRIES_DIR, category);
@@ -18,7 +19,9 @@ for (const category of fs.readdirSync(ENTRIES_DIR)) {
     const text = fs.readFileSync(path.join(dir, file), 'utf-8');
     const reviewed = text.match(/^lastReviewed:\s*['"]?(\d{4}-\d{2}-\d{2})/m)?.[1];
     if (!reviewed) continue;
-    lastmodByUrl.set(`article/${category}/${file.replace(/\.md$/, '')}/`, reviewed);
+    const articleUrl = `article/${category}/${file.replace(/\.md$/, '')}/`;
+    if (/^noIndex:\s*true\s*$/m.test(text)) noIndexUrls.add(articleUrl);
+    lastmodByUrl.set(articleUrl, reviewed);
     if (reviewed > (categoryLastmod.get(category) ?? '')) categoryLastmod.set(category, reviewed);
   }
 }
@@ -41,11 +44,13 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) =>
+        !noIndexUrls.has(page.replace(SITE_URL + '/', '')) &&
         !page.includes('/privacy/') &&
         !page.includes('/terms/') &&
         !page.includes('/disclaimer/') &&
         !page.includes('/accessibility/') &&
-        !page.includes('/contact/thanks/'),
+        !page.includes('/contact/thanks/') &&
+        !page.includes('/search/'),
       serialize(item) {
         const relative = item.url.replace(SITE_URL + '/', '');
         const lastmod = relative.startsWith('costs/')

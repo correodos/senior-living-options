@@ -2,7 +2,7 @@
 title: "Senior Living Options: Complete Comparison of All 7 Types"
 description: "Compare all 7 senior living options — from in-home care to nursing homes — with 2025 costs, who each fits, and how Medicare and Medicaid apply."
 publishDate: 2026-10-09
-lastReviewed: 2026-10-09
+lastReviewed: 2026-10-13
 category: caregiver-resources
 isPillar: false
 readingTime: 12

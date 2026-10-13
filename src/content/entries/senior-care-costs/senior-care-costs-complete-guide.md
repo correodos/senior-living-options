@@ -2,7 +2,7 @@
 title: 'How to Pay for Senior Care: Every Option Explained'
 description: 'Senior care costs can be overwhelming. This guide breaks down every way to pay — from Medicare and Medicaid to LTC insurance, VA benefits, and more.'
 publishDate: 2026-10-04
-lastReviewed: 2026-10-10
+lastReviewed: 2026-10-13
 category: senior-care-costs
 isPillar: true
 readingTime: 13

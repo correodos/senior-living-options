@@ -27,7 +27,13 @@ const SITE_NAME = import.meta.env.PUBLIC_SITE_NAME || 'Senior Care Explained';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/images/og-default.jpg`;
 const finalCanonical = canonical || Astro.url.href;
 const finalOgImage = ogImage || DEFAULT_OG_IMAGE;
-const finalTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+// Google shows about 60 characters of the title, so the site name is only appended when it fits.
+const MAX_TITLE_LENGTH = 60;
+const titleWithSiteName = `${title} | ${SITE_NAME}`;
+const finalTitle =
+  title.includes(SITE_NAME) || titleWithSiteName.length > MAX_TITLE_LENGTH
+    ? title
+    : titleWithSiteName;
 ---
 
 <!doctype html>

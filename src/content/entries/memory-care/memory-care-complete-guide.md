@@ -2,7 +2,7 @@
 title: 'Memory Care: A Complete Family Guide'
 description: "What is memory care, what does it cost, and how do you choose the right facility? A complete guide for families navigating Alzheimer's and dementia care."
 publishDate: 2026-09-27
-lastReviewed: 2026-10-09
+lastReviewed: 2026-10-13
 category: memory-care
 isPillar: true
 sources:

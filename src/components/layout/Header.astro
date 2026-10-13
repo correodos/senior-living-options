@@ -108,11 +108,11 @@ const categories = getAllCategories();
   >
     <nav class="u-p-4 u-flex u-flex-col u-gap-2">
       {categories.map((cat) => (
-        <a href={`/category/${cat.slug}/`} class="c-header__nav-link u-py-2">
+        <a href={`/category/${cat.slug}/`} class="c-header__nav-link">
           {cat.label}
         </a>
       ))}
-      <a href="/about/" class="c-header__nav-link u-py-2">
+      <a href="/about/" class="c-header__nav-link">
         About
       </a>
       <a href="/search/" class="c-btn c-btn--primary u-mt-4">

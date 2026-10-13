@@ -34,7 +34,7 @@ const categories = getAllCategories();
         <h2 style="font-family: var(--sl-font-serif); font-size: var(--sl-fs-xl); margin-bottom: var(--sl-space-6);">
           Browse our guides
         </h2>
-        <div class="c-grid c-grid--2 u-gap-4">
+        <div class="c-grid c-grid--2">
           {categories.map((cat) => (
             <a href={`/category/${cat.slug}/`} class="c-btn c-btn--outline c-btn--full">
               <Icon name={cat.icon} /> {cat.label}

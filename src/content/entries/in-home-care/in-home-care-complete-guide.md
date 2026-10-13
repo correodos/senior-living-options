@@ -4,7 +4,7 @@ description: 'Everything families need to know about in-home care: what it is, w
 seoTitle: 'In-Home Care Guide: Costs, Services & How to Choose'
 seoDescription: 'Everything families need to know about in-home care: what it is, 2025 costs, how Medicare, Medicaid, and VA benefits help, and how to choose a provider.'
 publishDate: 2026-10-04
-lastReviewed: 2026-10-09
+lastReviewed: 2026-10-13
 category: in-home-care
 isPillar: true
 readingTime: 14

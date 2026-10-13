@@ -73,7 +73,7 @@ const faqs = [
   </section>
 
   <section class="c-trust-bar" aria-label="Trust indicators">
-    <div class="u-container">
+    <div class="u-container u-py-3">
       <ul class="c-trust-bar__list u-flex u-flex-wrap u-justify-center">
         <li class="c-trust-bar__item">
           <span class="c-trust-bar__icon" aria-hidden="true">
@@ -103,7 +103,7 @@ const faqs = [
     </header>
     <div class="c-grid c-grid--2 c-grid--3">
       {categories.map((cat) => (
-        <a href={`/category/${cat.slug}/`} class="c-category-card u-transition">
+        <a href={`/category/${cat.slug}/`} class="c-category-card">
           <span
             class="c-category-card__icon"
             style={{ backgroundColor: cat.bgColor, color: cat.color }}

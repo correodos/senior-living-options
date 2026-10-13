@@ -21,7 +21,8 @@ All new articles are `isPillar: false` (the six pillar guides already exist).
 
 ## Frontmatter
 
-Single-line values in double quotes (the validator's parser does not read folded YAML).
+Single-line values in double quotes, like the existing articles (the validators read real YAML, so
+this is a house style, not a limit of the parser).
 
 ```yaml
 ---
