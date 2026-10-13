@@ -144,10 +144,10 @@ Dentro de un componente Astro, los estilos de elementos de otro componente hijo 
 
 ## Variables de entorno
 
-| Variable           | Dónde configurar | Requerida | Valor por defecto                         |
-| ------------------ | ---------------- | --------- | ----------------------------------------- |
+| Variable           | Dónde configurar | Requerida | Valor por defecto                 |
+| ------------------ | ---------------- | --------- | --------------------------------- |
 | `PUBLIC_SITE_URL`  | Cloudflare Pages | Sí        | `https://seniorcareexplained.com` |
-| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Care Explained`                   |
+| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Care Explained`           |
 
 En `.env.local` para desarrollo:
 

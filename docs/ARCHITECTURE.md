@@ -152,10 +152,10 @@ herramientas de desarrollo (ESLint, Prettier, `tsx`, `terser`). No hay React, Vu
 
 ## Variables de Entorno
 
-| Variable           | Dónde configurar | Requerida | Valor por defecto                         |
-| ------------------ | ---------------- | --------- | ----------------------------------------- |
+| Variable           | Dónde configurar | Requerida | Valor por defecto                 |
+| ------------------ | ---------------- | --------- | --------------------------------- |
 | `PUBLIC_SITE_URL`  | Cloudflare Pages | Sí        | `https://seniorcareexplained.com` |
-| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Care Explained`                   |
+| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Care Explained`           |
 
 No hay variables de analítica: el sitio no usa analytics.
 
