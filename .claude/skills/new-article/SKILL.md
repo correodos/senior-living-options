@@ -143,7 +143,9 @@ Trigger: explicit approval of a specific draft.
 8. **Pillar link:** add one natural link to the new article from its pillar guide (`pillarSlug` in
    `src/utils/category.ts`), in the most relevant section. Tell the owner the exact sentence added.
 9. **Log the image:** add a row to `image-log.md` ("Published by the new-article system"), then
-   delete `drafts/images/<slug>.*` (original and prompt).
+   delete `drafts/images/<slug>.*` (original and prompt). Then clean `drafts/`: remove the now-empty
+   `drafts/<category>/` folder and anything else left over from this article, and leave only
+   `drafts/README.md` and the empty `drafts/images/` inbox.
 10. **Check:** `npm run validate:content`, `npm run build`, then `npx prettier --check .`. Open
     `/article/<category>/<slug>/` in the preview: mobile and desktop, light and dark; table of
     contents, tables on mobile, FAQ, Sources, card in `/category/<category>/`.

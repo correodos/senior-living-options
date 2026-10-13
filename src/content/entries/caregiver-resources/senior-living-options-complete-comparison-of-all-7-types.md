@@ -43,7 +43,7 @@ Before going deep on each option, here's how they compare on the dimensions that
 
 | Type | Care Level | Median Monthly Cost (2025) | Medicare Covers? | Medicaid Covers? |
 |---|---|---|---|---|
-| In-Home Care | Low–Moderate | $35/hr ($6,160/mo at 44 hrs/wk) | Skilled care only, short-term | Sometimes (HCBS waivers) |
+| In-Home Care | Low–Moderate | $35/hr ($6,673/mo at 44 hrs/wk) | Skilled care only, short-term | Sometimes (HCBS waivers) |
 | Independent Living | Minimal | ~$3,200–$3,747/mo | No | No |
 | Board & Care / Residential Care | Low–Moderate | Typically less than assisted living | No | Some states |
 | Assisted Living | Moderate | $6,200 | No | Some states (waiver programs) |

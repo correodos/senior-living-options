@@ -17,22 +17,22 @@
     --sl-color-secondary-hover: #326248;
     --sl-color-secondary-light: #eaf4ef;
 
-    --sl-color-accent: #7a1a9e;
-    --sl-color-accent-hover: #63157d;
+    --sl-color-accent: #6b3a85;
+    --sl-color-accent-hover: #582f6e;
     --sl-color-accent-light: #f4eafb;
 
     --sl-color-al-bg: #eaf4ef;
     --sl-color-al-text: #1a4d3a;
     --sl-color-mc-bg: #eef1fb;
-    --sl-color-mc-text: #3a4d9e;
+    --sl-color-mc-text: #4a5590;
     --sl-color-nh-bg: #fef3ea;
-    --sl-color-nh-text: #9e5a1a;
+    --sl-color-nh-text: #8a5530;
     --sl-color-ihc-bg: #fbeef3;
-    --sl-color-ihc-text: #9e2a55;
+    --sl-color-ihc-text: #8a3a58;
     --sl-color-cf-bg: #f4eafb;
-    --sl-color-cf-text: #7a1a9e;
+    --sl-color-cf-text: #6b3a85;
     --sl-color-cr-bg: #fdf4ea;
-    --sl-color-cr-text: #8a5a12;
+    --sl-color-cr-text: #7a5a2a;
 
     /* Dark mode colors */
     --sl-color-bg-dark: #131614;
@@ -72,15 +72,15 @@
     --sl-color-al-bg: #1d2e24;
     --sl-color-al-text: #8fd3ad;
     --sl-color-mc-bg: #1a1e2e;
-    --sl-color-mc-text: #a5b0f5;
+    --sl-color-mc-text: #b0b8e8;
     --sl-color-nh-bg: #2e1f10;
-    --sl-color-nh-text: #f2a66a;
+    --sl-color-nh-text: #e0b48e;
     --sl-color-ihc-bg: #2e1520;
-    --sl-color-ihc-text: #f2a3c0;
+    --sl-color-ihc-text: #e0b0c4;
     --sl-color-cf-bg: #1e1028;
-    --sl-color-cf-text: #d1a6f5;
+    --sl-color-cf-text: #c7b0e0;
     --sl-color-cr-bg: #2a1e10;
-    --sl-color-cr-text: #f0c766;
+    --sl-color-cr-text: #e0c98e;
   }
 }
 
@@ -104,15 +104,15 @@
   --sl-color-al-bg: #1d2e24;
   --sl-color-al-text: #8fd3ad;
   --sl-color-mc-bg: #1a1e2e;
-  --sl-color-mc-text: #a5b0f5;
+  --sl-color-mc-text: #b0b8e8;
   --sl-color-nh-bg: #2e1f10;
-  --sl-color-nh-text: #f2a66a;
+  --sl-color-nh-text: #e0b48e;
   --sl-color-ihc-bg: #2e1520;
-  --sl-color-ihc-text: #f2a3c0;
+  --sl-color-ihc-text: #e0b0c4;
   --sl-color-cf-bg: #1e1028;
-  --sl-color-cf-text: #d1a6f5;
+  --sl-color-cf-text: #c7b0e0;
   --sl-color-cr-bg: #2a1e10;
-  --sl-color-cr-text: #f0c766;
+  --sl-color-cr-text: #e0c98e;
 }
 
 @layer base {

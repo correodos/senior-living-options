@@ -114,7 +114,7 @@ Spending down means paying for care out of pocket until assets reach the Medicai
 - Prepaid funeral and burial arrangements
 - Personal needs and household items
 
-What you cannot do: give assets away to family members to qualify faster. Medicaid has a **5-year look-back period** — any assets transferred to others within 5 years of applying may result in a period of ineligibility, calculated based on the value transferred. This is a firm federal rule.
+What you cannot do: give assets away to family members to qualify faster. Medicaid has a **5-year look-back period** — any assets transferred to others within 5 years of applying may result in a period of ineligibility, calculated based on the value transferred. This is a firm federal rule. For how asset and income spend-down work, and what happens to the estate after death, see [What Is Medicaid Spend-Down and How Does It Work?](/article/senior-care-costs/what-is-medicaid-spend-down/)
 
 ### Spousal Protections
 

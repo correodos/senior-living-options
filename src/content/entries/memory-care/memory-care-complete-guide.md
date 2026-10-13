@@ -12,7 +12,7 @@ sources:
   - "https://www.nia.nih.gov/health/alzheimers-and-dementia/frequently-asked-questions-about-alzheimers-disease"
   - "https://www.carescout.com/cost-of-care"
   - "https://www.va.gov/pension/veterans-pension-rates/"
-  - "https://www.medicaid.gov/medicaid/home-community-based-services/index.html"
+  - "https://www.medicaid.gov/medicaid/home-community-based-services/home-community-based-services-authorities/home-community-based-services-1915c"
   - "https://www.aarp.org/caregiving/basics/assisted-living-options/"
   - "https://www.va.gov/family-and-caregiver-benefits/survivor-compensation/survivors-pension/rates/"
   - "https://public-inspection.federalregister.gov/2026-02993.pdf"
@@ -310,7 +310,7 @@ The most important questions cover staff turnover (high turnover is a quality re
 
 7. **U.S. Department of Veterans Affairs.** "Current Survivors Pension Benefit Rates." https://www.va.gov/family-and-caregiver-benefits/survivor-compensation/survivors-pension/rates/. Updated: August 2026. Accessed: September 2026.
 
-8. **Medicaid.gov / Centers for Medicare & Medicaid Services.** "Home and Community-Based Services." https://www.medicaid.gov/medicaid/home-community-based-services/index.html. Accessed: September 2026.
+8. **Medicaid.gov / Centers for Medicare & Medicaid Services.** "Home and Community-Based Services." https://www.medicaid.gov/medicaid/home-community-based-services/home-community-based-services-authorities/home-community-based-services-1915c. Accessed: September 2026.
 
 9. **Eldercare Locator / Administration for Community Living (ACL).** https://eldercare.acl.gov. Phone: 1-800-677-1116.
 

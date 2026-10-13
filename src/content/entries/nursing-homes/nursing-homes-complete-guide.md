@@ -142,7 +142,7 @@ For reference, the 2024 coinsurance was $204/day and the 2025 rate was $209.50/d
 - Long-term stays once skilled care is no longer medically necessary
 - Assisted living costs (at all)
 
-Most families are surprised to discover that Medicare's nursing home coverage runs out much sooner than they expected. After 100 days, you're paying privately or relying on Medicaid.
+Most families are surprised to discover that Medicare's nursing home coverage runs out much sooner than they expected. After 100 days, you're paying privately or relying on Medicaid. For the full rules, including what happens when coverage ends and how to appeal, see [Does Medicare Pay for Nursing Home Care?](/article/nursing-homes/does-medicare-pay-for-nursing-home-care/)
 
 ---
 

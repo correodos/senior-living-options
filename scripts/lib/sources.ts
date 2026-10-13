@@ -24,12 +24,15 @@ const ALLOWED: Record<string, SourceTier> = {
   'ncoa.org': 'reference',
   'usaging.org': 'reference',
   'milliman.com': 'reference',
+  'justiceinaging.org': 'reference',
   // Context only: never the source of a key figure
   'aaltci.org': 'context',
   'hcaoa.org': 'context',
   'health.usnews.com': 'context',
   'seniorhousingnews.com': 'context',
   'politifact.com': 'context',
+  'law.cornell.edu': 'context',
+  'elderlawanswers.com': 'context',
 };
 
 // Explicitly rejected: parked/impostor domains and referral sites paid by facilities.

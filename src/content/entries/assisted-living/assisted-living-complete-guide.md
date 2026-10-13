@@ -160,13 +160,13 @@ Most families pay out of pocket. This is the reality no one wants to hear, but u
 
 **Medicare does not pay for assisted living.** This is one of the most common misconceptions families encounter. Medicare is health insurance — it covers doctor visits, hospital stays, and certain medical services. It does not cover room and board in assisted living, or the personal care assistance that makes up the bulk of what these communities provide.
 
-Medicare may pay for specific medical services received *while* someone lives in an assisted living facility — such as a visit from a home health aide for wound care, or physical therapy following a hospitalization — but those are separate from the facility's fees.
+Medicare may pay for specific medical services received *while* someone lives in an assisted living facility — such as a visit from a home health aide for wound care, or physical therapy following a hospitalization — but those are separate from the facility's fees. For a closer look at what Medicare does and doesn't pay for, see [Does Medicare Cover Assisted Living?](/article/assisted-living/does-medicare-cover-assisted-living/)
 
 ### Medicaid: Possible, But Complex
 
 Medicaid is the primary public payer for long-term care in the United States, but its role in assisted living is complicated. Unlike nursing home care, which Medicaid covers directly in every state, assisted living coverage is optional and varies dramatically.
 
-As of 2024, 46 states and Washington, D.C. offer some level of Medicaid assistance for people in assisted living or similar residential care settings. Most do this through **Home and Community Based Services (HCBS) waivers**, which allow Medicaid to fund care services in non-nursing-home settings. → [Medicaid.gov HCBS info](https://www.medicaid.gov/medicaid/home-community-based-services/index.html)
+As of 2024, 46 states and Washington, D.C. offer some level of Medicaid assistance for people in assisted living or similar residential care settings. Most do this through **Home and Community Based Services (HCBS) waivers**, which allow Medicaid to fund care services in non-nursing-home settings. → [Medicaid.gov HCBS 1915(c) info](https://www.medicaid.gov/medicaid/home-community-based-services/home-community-based-services-authorities/home-community-based-services-1915c)
 
 **What Medicaid typically covers through waivers:**
 - Personal care assistance (help with ADLs)
@@ -328,4 +328,4 @@ Yes. Wartime veterans and their surviving spouses may qualify for the **VA Aid a
 
 9. **Eldercare Locator / Administration for Community Living (ACL).** https://eldercare.acl.gov. Phone: 1-800-677-1116.
 
-10. **Medicaid.gov / Centers for Medicare & Medicaid Services.** Home and Community-Based Services (HCBS). https://www.medicaid.gov/medicaid/home-community-based-services/index.html. Accessed: September 2026.
+10. **Medicaid.gov / Centers for Medicare & Medicaid Services.** Home and Community-Based Services (HCBS). https://www.medicaid.gov/medicaid/home-community-based-services/home-community-based-services-authorities/home-community-based-services-1915c. Accessed: September 2026.

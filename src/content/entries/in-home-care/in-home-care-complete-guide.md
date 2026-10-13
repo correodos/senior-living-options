@@ -130,7 +130,7 @@ The 2025 survey also added a new category: **skilled nursing in the home (privat
 
 A few important notes on these numbers:
 
-The annual figures assume 44 hours of care per week — roughly one full-time caregiver working standard business hours. If your loved one needs only 10–15 hours of help per week, the actual cost is proportionally lower. At the same time, if 24-hour coverage is needed, costs rise sharply above these medians.
+The annual figures assume 44 hours of care per week — roughly one full-time caregiver working standard business hours. If your loved one needs only 10–15 hours of help per week, the actual cost is proportionally lower. At the same time, if 24-hour coverage is needed, costs rise sharply above these medians. To see what different weekly hours cost per month, see [How Much Does In-Home Care Cost Per Month? Hourly vs Monthly Rates](/article/in-home-care/how-much-does-in-home-care-cost-per-month/).
 
 Costs vary enormously by state. In the 2025 survey, Wyoming had the highest non-medical caregiver costs at an annual median of $105,248 ($46/hour), while Mississippi had the lowest at $54,912 ($24/hour) — roughly half as much. See [in-home care costs for every state](/costs/). Always use the CareScout interactive tool at **carescout.com/cost-of-care** to look up median costs for your specific state and county.
 
