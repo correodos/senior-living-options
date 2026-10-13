@@ -24,7 +24,7 @@ for (const category of fs.readdirSync(ENTRIES_DIR)) {
 }
 for (const [category, date] of categoryLastmod) lastmodByUrl.set(`category/${category}/`, date);
 
-const SITE_URL = 'https://senior-living-options.pages.dev';
+const SITE_URL = 'https://seniorcareexplained.com';
 
 export default defineConfig({
   site: SITE_URL,

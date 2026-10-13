@@ -4,7 +4,7 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import SkipLink from '../components/layout/SkipLink.astro';
 
-const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://seniorcareexplained.com';
 const lastUpdated = 'October 2026';
 
 const jsonLd = {
@@ -13,14 +13,14 @@ const jsonLd = {
   name: 'Editorial Policy',
   url: `${SITE_URL}/editorial-policy/`,
   description:
-    'How Senior Living Options chooses sources, reviews figures, and corrects mistakes, and what this site is not.',
-  publisher: { '@type': 'Organization', name: 'Senior Living Options', url: SITE_URL },
+    'How Senior Care Explained chooses sources, reviews figures, and corrects mistakes, and what this site is not.',
+  publisher: { '@type': 'Organization', name: 'Senior Care Explained', url: SITE_URL },
 };
 ---
 
 <BaseLayout
-  title="Editorial Policy | Senior Living Options"
-  description="How Senior Living Options chooses sources, reviews figures, and corrects mistakes, and what this site is not."
+  title="Editorial Policy | Senior Care Explained"
+  description="How Senior Care Explained chooses sources, reviews figures, and corrects mistakes, and what this site is not."
   canonical={`${SITE_URL}/editorial-policy/`}
   jsonLd={jsonLd}
 >
@@ -37,7 +37,7 @@ const jsonLd = {
       <section class="u-mb-10">
         <h2>Who writes this site</h2>
         <p>
-          Senior Living Options is an independent, one-person editorial project. Articles are
+          Senior Care Explained is an independent, one-person editorial project. Articles are
           published under the name of the site rather than under an individual author. The person
           behind the site is not a doctor, nurse, lawyer, or financial advisor and does not claim
           any professional credentials. The goal is to organize and explain information from

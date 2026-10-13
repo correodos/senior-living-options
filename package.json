@@ -1,7 +1,7 @@
 {
   "name": "senior-living-options",
   "version": "1.0.0",
-  "description": "Senior Living Options - Guías completas para opciones de vivienda y cuidado de adultos mayores",
+  "description": "Senior Care Explained - Guías completas para opciones de vivienda y cuidado de adultos mayores",
   "type": "module",
   "scripts": {
     "dev": "astro dev",

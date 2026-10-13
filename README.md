@@ -1,4 +1,4 @@
-# Senior Living Options
+# Senior Care Explained
 
 Guías completas para opciones de vivienda y cuidado de adultos mayores. El sitio está en inglés de
 EE. UU.; la documentación del repositorio, en español.

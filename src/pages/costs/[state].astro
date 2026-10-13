@@ -37,7 +37,7 @@ export function getStaticPaths() {
 const { code } = Astro.props as { code: string };
 const state = states.find((s) => s.code === code)!;
 
-const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://senior-living-options.pages.dev';
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://seniorcareexplained.com';
 const canonical = `${SITE_URL}/costs/${code.toLowerCase()}/`;
 
 const cards: Array<{
@@ -102,14 +102,14 @@ const articleJsonLd = {
   url: canonical,
   datePublished: meta.publishedDate,
   dateModified: meta.publishedDate,
-  author: { '@type': 'Organization', name: 'Senior Living Options', url: SITE_URL },
+  author: { '@type': 'Organization', name: 'Senior Care Explained', url: SITE_URL },
   publisher: {
     '@type': 'Organization',
-    name: 'Senior Living Options',
+    name: 'Senior Care Explained',
     url: SITE_URL,
     logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/logo.webp` },
   },
-  isPartOf: { '@type': 'WebSite', name: 'Senior Living Options', url: SITE_URL },
+  isPartOf: { '@type': 'WebSite', name: 'Senior Care Explained', url: SITE_URL },
 };
 
 const jsonLd = combineJsonLd(

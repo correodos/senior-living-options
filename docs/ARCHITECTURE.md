@@ -1,4 +1,4 @@
-# Senior Living Options - Architecture Decision Record
+# Senior Care Explained - Architecture Decision Record
 
 > Estado: actualizado en octubre de 2026 para reflejar el proyecto real. El sitio publicado y la web
 > están en inglés de EE. UU.; la documentación está en español.
@@ -154,8 +154,8 @@ herramientas de desarrollo (ESLint, Prettier, `tsx`, `terser`). No hay React, Vu
 
 | Variable           | Dónde configurar | Requerida | Valor por defecto                         |
 | ------------------ | ---------------- | --------- | ----------------------------------------- |
-| `PUBLIC_SITE_URL`  | Cloudflare Pages | Sí        | `https://senior-living-options.pages.dev` |
-| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Living Options`                   |
+| `PUBLIC_SITE_URL`  | Cloudflare Pages | Sí        | `https://seniorcareexplained.com` |
+| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Care Explained`                   |
 
 No hay variables de analítica: el sitio no usa analytics.
 
@@ -163,7 +163,7 @@ En `.env.local` para desarrollo:
 
 ```env
 PUBLIC_SITE_URL=http://localhost:4321
-PUBLIC_SITE_NAME=Senior Living Options (Dev)
+PUBLIC_SITE_NAME=Senior Care Explained (Dev)
 ```
 
 ## CI / Despliegue

@@ -744,6 +744,7 @@
     height: 44px;
     background: none;
     border: none;
+    color: var(--sl-color-text);
     cursor: pointer;
   }
 

@@ -1,4 +1,4 @@
-# Content Model - Senior Living Options
+# Content Model - Senior Care Explained
 
 > Estado: actualizado en octubre de 2026. El contenido del sitio está en inglés de EE. UU.; esta
 > documentación, en español. El esquema real vive en `src/utils/entry-schema.ts`.

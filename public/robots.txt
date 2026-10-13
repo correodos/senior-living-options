@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /search/
 
-Sitemap: https://senior-living-options.pages.dev/sitemap-index.xml
+Sitemap: https://seniorcareexplained.com/sitemap-index.xml

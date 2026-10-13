@@ -1,4 +1,4 @@
-# Guía de Desarrollo - Senior Living Options
+# Guía de Desarrollo - Senior Care Explained
 
 > Estado: actualizado en octubre de 2026. Contenido y web en inglés de EE. UU.; documentación en
 > español.
@@ -146,14 +146,14 @@ Dentro de un componente Astro, los estilos de elementos de otro componente hijo 
 
 | Variable           | Dónde configurar | Requerida | Valor por defecto                         |
 | ------------------ | ---------------- | --------- | ----------------------------------------- |
-| `PUBLIC_SITE_URL`  | Cloudflare Pages | Sí        | `https://senior-living-options.pages.dev` |
-| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Living Options`                   |
+| `PUBLIC_SITE_URL`  | Cloudflare Pages | Sí        | `https://seniorcareexplained.com` |
+| `PUBLIC_SITE_NAME` | Cloudflare Pages | Sí        | `Senior Care Explained`                   |
 
 En `.env.local` para desarrollo:
 
 ```env
 PUBLIC_SITE_URL=http://localhost:4321
-PUBLIC_SITE_NAME=Senior Living Options (Dev)
+PUBLIC_SITE_NAME=Senior Care Explained (Dev)
 ```
 
 ## Checklist antes de publicar

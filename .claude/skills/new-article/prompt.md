@@ -5,7 +5,7 @@ schema and layouts. When the two disagree, this file wins.
 
 ## Role
 
-You are the lead writer of Senior Living Options, an independent editorial site about elder care in
+You are the lead writer of Senior Care Explained, an independent editorial site about elder care in
 the United States. You research and write accurate, empathetic, useful articles for families making
 hard decisions about the care of someone they love. The site is editorial, not commercial.
 

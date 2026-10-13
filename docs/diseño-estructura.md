@@ -1,4 +1,4 @@
-# Guía de Diseño y Estructura — Senior Living Options
+# Guía de Diseño y Estructura — Senior Care Explained
 
 Documento de referencia del diseño visual, la estructura de páginas y los patrones de interfaz.
 Actualizado en octubre de 2026 para reflejar el sitio real.
@@ -270,7 +270,7 @@ Las fechas "Last updated" de estas páginas son fijas: se cambian a mano cuando 
 
 ## 11. Pendiente
 
-1. **Dominio propio** (ahora `senior-living-options.pages.dev`).
+1. **Dominio propio** (ahora `seniorcareexplained.com`).
 2. **Publicidad (AdSense):** consentimiento de cookies y ajuste de la CSP en `public/_headers`;
    revisar la política de privacidad y la política editorial en ese momento.
 3. **Ideas opcionales:** quiz de orientación (`/quiz/`), mapa del sitio en HTML, suscripción por
