@@ -53,6 +53,19 @@ const finalTitle =
         } catch (e) {}
       })();
     </script>
+    {import.meta.env.PROD && (
+      <>
+        <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-MXCFBFK97E" />
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-MXCFBFK97E');
+        </script>
+      </>
+    )}
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={finalCanonical} />
     <meta name="robots" content={noFollow ? robots.replace('follow', 'nofollow') : robots} />
