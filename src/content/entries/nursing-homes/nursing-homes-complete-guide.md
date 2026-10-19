@@ -4,7 +4,7 @@ description: 'What is a nursing home, what does it cost, and how do you find a g
 category: 'nursing-homes'
 tags: ['nursing homes', 'long-term care', 'skilled nursing facility', 'nursing home costs', 'Medicaid', 'Medicare']
 publishDate: 2026-10-04
-lastReviewed: 2026-10-13
+lastReviewed: 2026-10-19
 isPillar: true
 readingTime: 12
 image: '/images/nursing-homes-complete-guide.webp'
@@ -92,7 +92,7 @@ According to the **2025 Cost of Care Survey by CareScout (Genworth)** (the most 
 | Semi-private room ($315/day) | $9,581 | $114,975 | +2% |
 | Private room ($355/day) | $10,798 | $129,575 | +1% |
 
-These are **national medians** (see our [senior care costs guide](/article/senior-care-costs/senior-care-costs-complete-guide/) for a full breakdown by care type). Your actual cost depends heavily on where you live. In the 2025 survey, the state median for a semi-private room ranged from $5,627/month in Texas to $27,831/month in Alaska. Five states had medians above $15,000/month: Alaska, Oregon ($16,760), New York ($15,528), Hawaii ($15,473), and Connecticut ($15,208). See [nursing home costs for every state](/costs/).
+These are **national medians** (see our [senior care costs guide](/article/senior-care-costs/senior-care-costs-complete-guide/) for a full breakdown by care type). Your actual cost depends heavily on where you live. In the 2025 survey, the state median for a semi-private room ranged from $5,627/month in Texas to $27,831/month in Alaska. Five states had medians above $15,000/month: Alaska, Oregon ($16,760), New York ($15,528), Hawaii ($15,473), and Connecticut ($15,208). See [nursing home costs for every state](/costs/), or read [How Much Does a Nursing Home Cost Per Month?](/article/nursing-homes/how-much-does-a-nursing-home-cost-per-month/) for a closer look at room types and what a stay costs over time.
 
 **What's typically included in the base rate:**
 

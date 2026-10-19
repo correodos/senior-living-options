@@ -2,7 +2,7 @@
 title: 'Memory Care: A Complete Family Guide'
 description: "What is memory care, what does it cost, and how do you choose the right facility? A complete guide for families navigating Alzheimer's and dementia care."
 publishDate: 2026-09-27
-lastReviewed: 2026-10-13
+lastReviewed: 2026-10-19
 category: memory-care
 isPillar: true
 sources:
@@ -16,13 +16,11 @@ sources:
   - "https://www.aarp.org/caregiving/basics/assisted-living-options/"
   - "https://www.va.gov/family-and-caregiver-benefits/survivor-compensation/survivors-pension/rates/"
   - "https://public-inspection.federalregister.gov/2026-02993.pdf"
-  - "https://www.seniorliving.org/memory-care/costs/"
-  - "https://health.usnews.com/best-senior-living/memory-care/articles/how-much-does-memory-care-cost"
-  - "https://www.aplaceformom.com/caregiver-resources/articles/cost-of-memory-care"
   - "https://www.cms.gov/priorities/innovation/innovation-models/guide"
   - "https://www.alz.org/help-support/caregiving/financial-legal-planning/medicare-guide-program-for-dementia-care"
-  - "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12761459/"
+  - "https://pmc.ncbi.nlm.nih.gov/articles/PMC12761459/"
   - "https://www.alz.org/help-support/caregiving/helpline"
+  - "https://www.alz.org/help-support/caregiving/financial-legal-planning/planning-for-care-costs"
 readingTime: 15
 image: /images/memory-care-complete-guide.webp
 imageAlt: 'Senior with dementia in memory care community common area'
@@ -39,7 +37,7 @@ showTableOfContents: true
 > **Key Takeaways**
 > - Memory care is a specialized form of residential care for people with Alzheimer's disease or other dementias. It provides a secured environment, dementia-trained staff, and structured programming that standard assisted living does not.
 > - An estimated 7.4 million Americans age 65 and older are living with Alzheimer's disease in 2026, and that number is projected to nearly double by 2060.
-> - Memory care typically costs 15–25% more than standard assisted living. National estimates for 2025–2026 range from $6,690 to $8,019/month depending on the data source and region. CareScout/Genworth does not publish a separate memory care median. The $6,200/month assisted living figure is the closest official benchmark.
+> - CareScout/Genworth does not publish a separate memory care price. The closest official benchmarks (2025) are assisted living at $6,200/month and nursing home care at $9,581–$10,798/month.
 > - Neither Medicare nor most private health insurance covers room and board or personal care in memory care. Medicaid may help through HCBS waiver programs, but availability varies by state and waitlists are common.
 > - When choosing a facility, staff turnover rate and dementia-specific training hours matter more than lobby aesthetics. Visit more than once, including unannounced.
 
@@ -59,7 +57,7 @@ Facilities take different forms. Some are standalone communities dedicated entir
 
 Alzheimer's disease is the most common reason families seek memory care; it accounts for 60–80% of all dementia cases. But memory care also serves people with other forms of dementia, including vascular dementia, Lewy body dementia, and frontotemporal dementia. Each has different behavioral patterns, and a good memory care facility should have staff trained to recognize those differences.
 
-An estimated 7.4 million Americans age 65 and older are living with Alzheimer's in 2026. By 2060, that number is projected to reach nearly 13.8 million if no cure or effective prevention is found. Three in four people with Alzheimer's are age 75 or older. → [https://www.alz.org/alzheimers-dementia/facts-figures](https://www.alz.org/alzheimers-dementia/facts-figures)
+An estimated 7.4 million Americans age 65 and older are living with Alzheimer's in 2026. By 2060, that number is projected to reach nearly 13.8 million if no cure or effective prevention is found. Three in four people with Alzheimer's are age 75 or older.
 
 ---
 
@@ -73,18 +71,18 @@ Both memory care and standard assisted living provide housing, meals, personal c
 | Staff training | General senior care | Dementia-specific training, behavior management, de-escalation |
 | Staff-to-resident ratio | Lower (varies by state) | Higher — more direct supervision required |
 | Programming | General social activities | Structured routines designed for cognitive impairment |
-| Cost (2025–2026 estimates) | $6,200/month (CareScout 2025) | $6,690–$8,019/month (sector estimates) |
+| Cost (2025) | $6,200/month (CareScout median) | No official national median |
 | Wandering prevention | Basic emergency call systems | Secured exits, wander alert systems, enclosed outdoor areas |
 
 ### Why the physical design matters
 
 The layout of a memory care unit is part of the care. Simplified, circular floor plans reduce disorientation. Visual cues like picture labels on doors or color-coded hallways help residents with wayfinding without requiring them to read or remember. Enclosed outdoor spaces allow residents to move around safely without risk of elopement (leaving the facility undetected).
 
-Wandering is one of the most serious safety risks in dementia care. According to the Alzheimer's Association, 6 in 10 people with dementia will wander at some point. Standard assisted living facilities aren't designed to prevent this, and memory care units are. → [https://www.alz.org](https://www.alz.org)
+Wandering is one of the most serious safety risks in dementia care. According to the Alzheimer's Association, 6 in 10 people with dementia will wander at some point. Standard assisted living facilities aren't designed to prevent this, and memory care units are.
 
 ### Staff training: the most important difference
 
-The quality of dementia-specific training varies considerably across states. Research published in 2023 found that 45 states have some form of dementia-specific regulations for memory care settings, but requirements differ widely in the number of training hours required, the topics covered, and whether training applies to all staff or only direct care workers.
+The quality of dementia-specific training varies considerably across states. A 2025 study found that 45 states have dementia-specific policies for memory care in assisted living, but requirements differ widely in the number of training hours required, the topics covered, and whether training applies to all staff or only direct care workers.
 
 When you visit a facility, ask directly: How many hours of dementia-specific training do staff receive at hire? How many hours of ongoing training per year? What does that training cover? Facilities that can't answer these questions specifically are a red flag.
 
@@ -114,44 +112,46 @@ The transition from home care or assisted living to memory care usually builds o
 ### Caregiver crisis:
 Nearly 13 million Americans provide unpaid care for people with Alzheimer's or other dementias. In 2025, those caregivers provided more than 19 billion hours of care, valued at over $446 billion. When your own health, sleep, work, or safety is deteriorating because of caregiving demands, that's a signal too — for everyone involved, not just your loved one.
 
-If you're unsure, a geriatric care manager or your loved one's neurologist can help assess whether the current situation is still safe. The Alzheimer's Association 24/7 Helpline (800-272-3900) is also a free resource for families at any stage. → [https://www.alz.org/help-support/caregiving/helpline](https://www.alz.org/help-support/caregiving/helpline)
+If you're unsure, a geriatric care manager or your loved one's neurologist can help assess whether the current situation is still safe. The Alzheimer's Association 24/7 Helpline (800-272-3900) is also a free resource for families at any stage.
 
 ---
 
 ## What does memory care cost?
 
-Memory care costs more than standard assisted living — primarily because of higher staffing ratios, dementia training requirements, and secured building design. Industry estimates put the premium at 15–25% above standard assisted living rates.
+Memory care generally costs more than standard assisted living, but there is no official national figure for it. Prices depend on the community and on the level of care your loved one needs.
 
-CareScout/Genworth, the most authoritative source for [long-term care cost data](/article/senior-care-costs/senior-care-costs-complete-guide/), does not publish a separate national median for memory care in its annual Cost of Care Survey. Their 2025 survey tracks five categories: non-medical in-home care, private duty nursing, adult day care, assisted living, and nursing homes. Memory care falls between assisted living and nursing home care in both intensity and price, but isn't tracked as a separate line item.
+CareScout/Genworth, the most authoritative source for [long-term care cost data](/article/senior-care-costs/senior-care-costs-complete-guide/), does not publish a separate national median for memory care in its annual Cost of Care Survey. Their 2025 survey tracks five categories: non-medical in-home care, private duty nursing, adult day care, assisted living, and nursing homes. Memory care isn't tracked as a separate line item, so the closest benchmarks are the assisted living and nursing home medians.
 
-The table below puts the CareScout 2025 official benchmarks alongside memory care estimates from researchers who survey those facilities directly:
+The table below shows the CareScout 2025 official benchmarks:
 
-| Care Type | 2025–2026 National Median (Monthly) | Source |
+| Care Type | 2025 National Median (Monthly) | Source |
 |---|---|---|
-| Assisted Living | $6,200 | CareScout/Genworth 2025 (official) |
-| Memory Care | $6,690–$8,019 | A Place for Mom (2026); SeniorLiving.org (2026); U.S. News (2026) |
-| Nursing Home (semi-private) | $9,581 | CareScout/Genworth 2025 (official) |
-| Nursing Home (private room) | $10,798 | CareScout/Genworth 2025 (official) |
+| Assisted Living | $6,200 | CareScout/Genworth 2025 |
+| Memory Care | Not published | CareScout does not report it separately |
+| Nursing Home (semi-private) | $9,581 | CareScout/Genworth 2025 |
+| Nursing Home (private room) | $10,798 | CareScout/Genworth 2025 |
 
-The spread reflects real variation in who gets surveyed. Stand-alone memory care facilities tend to run higher than memory care wings within a larger assisted living campus. U.S. News puts the national average at $7,645/month (2026); A Place for Mom's network average is $6,690/month; SeniorLiving.org puts the 2026 median at $8,019/month. Your local market will land somewhere in that range — or outside it entirely.
+Ask each community for its own monthly rate in writing and compare it with these benchmarks. Your local market may fall below, between or above them.
 
 ### What affects the price
 
-Several factors push memory care costs higher:
+Several factors affect the price:
 
-- Location. Using assisted living state medians from CareScout 2025 as a floor, and applying the 15–25% memory care premium: Hawaii ($12,096/month AL median, likely $14,000+/month for memory care), Connecticut ($9,118), and Massachusetts ($9,600) are among the most expensive. Mississippi ($4,369 AL median) and Alabama ($4,425) remain the most affordable, with memory care potentially starting around $5,000–$5,500/month in those states. SeniorLiving.org research (2026) confirms state memory care medians ranging from $5,538/month (South Dakota) to $14,399/month (Hawaii).
+- Location. The 2025 CareScout state medians for assisted living show how much prices vary: Hawaii ($12,096/month), Alaska ($9,882), Massachusetts ($9,600), and Connecticut ($9,118) are the highest, and Mississippi ($4,369) and Alabama ($4,425) are the lowest. Memory care prices in your area will differ, so ask local communities.
 - Facility type. Standalone memory care communities often charge differently from memory care wings within a larger assisted living campus.
 - Care level tiers. Most facilities assess residents and assign a care level tier; higher needs mean a higher monthly rate. Ask exactly how tiers are determined and what they cost.
 - Room type. Private rooms cost more than shared rooms.
-- One-time fees. Community fees or move-in fees can range from $1,000 to $5,000+.
+- One-time fees. Some communities charge a community fee or move-in fee. Ask what it is and whether it is refundable.
 
 Always request the complete fee schedule in writing before visiting. Ask specifically what's included in the base rate and what triggers additional charges.
 
-State cost data for assisted living (2025, monthly median) from CareScout can serve as a baseline reference before adding the memory care premium: → [/category/senior-care-costs/](/category/senior-care-costs/)
+See assisted living and nursing home medians for every state in our [costs by state guide](/costs/).
 
 ---
 
 ## Who pays for memory care?
+
+For a step-by-step look at every option, including VA benefits, insurance, home equity and taxes, see [How to Pay for Memory Care: Every Option Explained](/article/memory-care/how-to-pay-for-memory-care/).
 
 ### Medicare: what it does and doesn't cover
 
@@ -159,7 +159,7 @@ Medicare does not cover room and board in memory care, and it doesn't pay for th
 
 What Medicare does cover are the medical services a resident receives while living there: doctor visits, prescription drugs (including FDA-approved Alzheimer's medications under Part D), hospital stays, and short-term skilled nursing following a qualifying hospital admission. Those are billed separately and don't offset the facility's monthly fees.
 
-CMS's GUIDE (Guiding an Improved Dementia Experience) model launched on July 1, 2024, and is currently active. Running through 2032, with approximately 390 participating provider organizations nationwide, GUIDE pays enrolled providers to deliver a standardized package of dementia care coordination, caregiver education and support, and a respite care allowance, all at no cost to eligible Medicare beneficiaries with a dementia diagnosis. It does not cover facility room and board, but the respite funds and care navigation can meaningfully reduce caregiver burden and help delay or reduce reliance on full-time memory care. Ask your loved one's physician or neurologist whether they participate in GUIDE, or find participating organizations through the Alzheimer's Association (alz.org/guide).
+CMS's GUIDE (Guiding an Improved Dementia Experience) model launched on July 1, 2024, and is currently active. The model runs for 8 years, and CMS lists 292 participants (Medicare Part B providers and suppliers). GUIDE provides care navigation, caregiver education and support, and respite services, reimbursed up to $2,500 per year per eligible patient, at no cost to eligible people. It does not cover facility room and board, but the respite funds and care navigation can meaningfully reduce caregiver burden and help delay or reduce reliance on full-time memory care. Ask your loved one's physician or neurologist whether they participate in GUIDE, or find participating organizations through the Alzheimer's Association (alz.org/guide).
 
 ### Medicaid: the primary public option
 
@@ -194,7 +194,7 @@ Apply via VA Form 21P-527EZ at VA.gov, or work with a VA-accredited claims agent
 
 ### Long-term care insurance
 
-If your loved one purchased a long-term care insurance policy, review it carefully, since many policies cover memory care. Key things to check: what triggers the benefit (typically inability to perform 2+ ADLs, or cognitive impairment), the elimination period (waiting period before benefits start, often 60–90 days), and the daily benefit maximum and inflation protection. Contact the insurer directly to initiate a claim.
+If your loved one purchased a long-term care insurance policy, review it carefully, since many policies cover memory care. Key things to check: what triggers the benefit, the elimination period (the waiting period before benefits start), and the daily benefit maximum and inflation protection. Contact the insurer directly to initiate a claim. The Alzheimer's Association says this coverage is usually not available for purchase after symptoms of Alzheimer's appear, so an existing policy is worth checking now.
 
 ---
 
@@ -270,11 +270,11 @@ Confirm in writing: what is included in the base rate, what triggers additional 
 
 ### What is memory care and how is it different from assisted living?
 
-Memory care is a specialized form of residential care for people with Alzheimer's disease or other dementias. Unlike standard assisted living, memory care facilities have secured environments to prevent wandering, staff with dementia-specific training, and programming designed for cognitive impairment. Memory care typically costs 15–25% more than standard assisted living.
+Memory care is a specialized form of residential care for people with Alzheimer's disease or other dementias. Unlike standard assisted living, memory care facilities have secured environments to prevent wandering, staff with dementia-specific training, and programming designed for cognitive impairment.
 
 ### How much does memory care cost per month?
 
-National estimates for 2025–2026 range from $6,690 to $8,019/month depending on the source. U.S. News estimates the national average at $7,645/month; A Place for Mom's network average is $6,690/month; SeniorLiving.org puts the 2026 median at $8,019/month. Memory care typically runs 15–25% above standard assisted living (national median: $6,200/month per CareScout/Genworth 2025). CareScout does not publish a separate memory care median; these estimates come from sector researchers who survey memory care providers directly. Costs vary widely by state, with Hawaii and the Northeast running well above $10,000/month. Always request a full fee schedule in writing before choosing a facility.
+There is no official national median for memory care. CareScout/Genworth does not publish a separate figure, so the closest benchmarks are assisted living at $6,200/month and nursing home care at $9,581/month for a semi-private room and $10,798/month for a private room (2025). Costs vary widely by state and by community. Always request a full fee schedule in writing before choosing a facility.
 
 ### Does Medicare pay for memory care?
 
@@ -318,14 +318,10 @@ The most important questions cover staff turnover (high turnover is a quality re
 
 11. **Federal Register / Department of Veterans Affairs.** "Veterans and Survivors Pension COLA Notice — Effective December 1, 2025." https://public-inspection.federalregister.gov/2026-02993.pdf. Published: February 2026.
 
-12. **Smith et al.** "Differentiating Memory Care: Regulatory Differences for Memory Care in Assisted Living." NIH/NCBI, PMC12761459. Published: 2024.
+12. **Smith et al.** "Differentiating Memory Care: Regulatory Differences for Memory Care in Assisted Living." *Innovation in Aging* 9(Suppl 2), December 2025. https://pmc.ncbi.nlm.nih.gov/articles/PMC12761459/.
 
-13. **SeniorLiving.org.** "2026 Average Memory Care Costs by State." https://www.seniorliving.org/memory-care/costs/. Updated: June 2026.
+13. **Centers for Medicare & Medicaid Services (CMS).** "GUIDE Model — Guiding an Improved Dementia Experience." https://www.cms.gov/priorities/innovation/innovation-models/guide. Accessed: October 2026.
 
-14. **U.S. News & World Report.** "How Much Does Memory Care Cost? 2026 State-by-State Guide." https://health.usnews.com/best-senior-living/memory-care/articles/how-much-does-memory-care-cost. Updated: April 2026.
+14. **Alzheimer's Association.** "GUIDE: Free Dementia Care Services." https://www.alz.org/help-support/caregiving/financial-legal-planning/medicare-guide-program-for-dementia-care. Accessed: October 2026.
 
-15. **A Place for Mom.** "Cost of Memory Care: State-by-State Prices." https://www.aplaceformom.com/caregiver-resources/articles/cost-of-memory-care. Accessed: September 2026.
-
-16. **Centers for Medicare & Medicaid Services (CMS).** "GUIDE Model — Guiding an Improved Dementia Experience." https://www.cms.gov/priorities/innovation/innovation-models/guide. Launched: July 1, 2024.
-
-17. **Alzheimer's Association.** "GUIDE: Free Dementia Care Services." https://www.alz.org/help-support/caregiving/financial-legal-planning/medicare-guide-program-for-dementia-care. Accessed: September 2026.
+15. **Alzheimer's Association.** "Planning for Care Costs." https://www.alz.org/help-support/caregiving/financial-legal-planning/planning-for-care-costs. Accessed: October 2026.

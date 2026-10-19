@@ -4,7 +4,7 @@ description: 'Everything families need to know about in-home care: what it is, w
 seoTitle: 'In-Home Care Guide: Costs, Services & How to Choose'
 seoDescription: 'Everything families need to know about in-home care: what it is, 2025 costs, how Medicare, Medicaid, and VA benefits help, and how to choose a provider.'
 publishDate: 2026-10-04
-lastReviewed: 2026-10-13
+lastReviewed: 2026-10-19
 category: in-home-care
 isPillar: true
 readingTime: 14
@@ -127,6 +127,8 @@ In-home care costs significantly less than [nursing home care](/article/nursing-
 | Nursing home semi-private (for comparison) | $114,975 | $9,581 | +2% |
 
 The 2025 survey also added a new category: **skilled nursing in the home (private duty nurse)**, with a national median of **$90 per hour** or **$160 per visit**. Unlike the non-medical caregiver rate, this covers licensed nursing care ordered by a physician.
+
+If your loved one needs company and supervision during the day rather than help at home, adult day health care can cost less. See [Home Care vs Adult Day Care: Which Is Better?](/article/in-home-care/home-care-vs-adult-day-care/) for a side-by-side comparison.
 
 A few important notes on these numbers:
 
