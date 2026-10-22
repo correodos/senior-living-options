@@ -4,7 +4,7 @@ description: 'Everything families need to know about assisted living: what it is
 seoTitle: 'Assisted Living Guide: Costs, Services & How to Choose'
 seoDescription: 'Everything families need to know about assisted living: what it is, 2025 costs, how Medicaid and VA benefits help, and how to choose the right facility.'
 publishDate: 2026-09-27
-lastReviewed: 2026-10-13
+lastReviewed: 2026-10-22
 category: assisted-living
 isPillar: true
 sources:
@@ -118,6 +118,8 @@ Assisted living costs have risen significantly over the past several years. Acco
 *Note: Starting with the 2025 survey, CareScout merged the homemaker and home health aide categories into a single "non-medical caregiver" figure, reflecting price convergence between the two service types.*
 
 For context, assisted living costs jumped 10% between 2023 and 2024 (prior median: $5,900/month). The 2025 increase slowed to 5%.
+
+For the national and state medians in one place, plus what the monthly fee covers, see [How Much Does Assisted Living Cost Per Month in the US?](/article/assisted-living/how-much-does-assisted-living-cost-per-month/)
 
 ### Cost Variation by State
 

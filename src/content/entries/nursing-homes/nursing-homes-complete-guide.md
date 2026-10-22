@@ -4,7 +4,7 @@ description: 'What is a nursing home, what does it cost, and how do you find a g
 category: 'nursing-homes'
 tags: ['nursing homes', 'long-term care', 'skilled nursing facility', 'nursing home costs', 'Medicaid', 'Medicare']
 publishDate: 2026-10-04
-lastReviewed: 2026-10-19
+lastReviewed: 2026-10-22
 isPillar: true
 readingTime: 12
 image: '/images/nursing-homes-complete-guide.webp'
@@ -167,6 +167,8 @@ Medicaid is a federal-state program, and every state runs it differently — but
 **Spousal protections:** Federal law protects a community spouse (the spouse still living at home) from losing all their resources. The Community Spouse Resource Allowance lets the at-home spouse keep a portion of the couple's assets. Rules vary by state.
 
 **Income rules:** Once Medicaid covers nursing home care, nearly all of your loved one's monthly income (Social Security, pension, etc.) goes toward the cost of care. Medicaid pays the balance. Your loved one is allowed to keep a small **Personal Needs Allowance (PNA)** for personal expenses. This amount varies significantly by state — from as low as $30/month to as high as $200/month, with the national average around $75.89/month (2026). The federal minimum has not been raised since 1987.
+
+For the three eligibility tests, the 2026 income limit and how to apply, see [Medicaid and Nursing Homes: Eligibility, Income Limits and How It Works](/article/nursing-homes/medicaid-and-nursing-homes/).
 
 ---
 
