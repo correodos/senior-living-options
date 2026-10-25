@@ -2,7 +2,7 @@
 title: 'Memory Care: A Complete Family Guide'
 description: "What is memory care, what does it cost, and how do you choose the right facility? A complete guide for families navigating Alzheimer's and dementia care."
 publishDate: 2026-09-27
-lastReviewed: 2026-10-19
+lastReviewed: 2026-10-25
 category: memory-care
 isPillar: true
 sources:
@@ -175,6 +175,8 @@ HCBS (Home and Community-Based Services) waivers allow states to use Medicaid fu
 - Functional requirement: must require nursing facility-level care
 
 Waitlists are real and often long. If you think your loved one may eventually qualify for Medicaid, apply as early as possible. Contact your state Medicaid office or the Eldercare Locator (1-800-677-1116 / eldercare.acl.gov) for state-specific guidance.
+
+For what Medicaid pays in each type of setting, and the points families often miss, see [Does Medicaid Cover Memory Care? What Families Often Miss](/article/memory-care/does-medicaid-cover-memory-care/).
 
 ### VA benefits for veterans
 

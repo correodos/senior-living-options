@@ -4,7 +4,7 @@ description: 'Everything families need to know about assisted living: what it is
 seoTitle: 'Assisted Living Guide: Costs, Services & How to Choose'
 seoDescription: 'Everything families need to know about assisted living: what it is, 2025 costs, how Medicaid and VA benefits help, and how to choose the right facility.'
 publishDate: 2026-09-27
-lastReviewed: 2026-10-22
+lastReviewed: 2026-10-25
 category: assisted-living
 isPillar: true
 sources:
@@ -185,6 +185,8 @@ In KFF's 2024 survey of state Medicaid programs, **41 of the 47 states that resp
 - Functional requirement: must demonstrate need for nursing-facility-level care, assessed through a state evaluation
 
 Waitlists are common. If you think your loved one may eventually qualify, applying early matters. Contact your state's Medicaid office or local Area Agency on Aging (Eldercare Locator: 1-800-677-1116) to get state-specific information. → [Eldercare Locator](https://eldercare.acl.gov)
+
+If the monthly fee is more than your family can pay, see [What If You Can't Afford Assisted Living? Medicaid, VA and Other Ways to Pay](/article/assisted-living/cant-afford-assisted-living/).
 
 ### VA Benefits for Veterans
 
