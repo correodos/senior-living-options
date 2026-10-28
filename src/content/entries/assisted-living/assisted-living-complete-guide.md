@@ -4,7 +4,7 @@ description: 'Everything families need to know about assisted living: what it is
 seoTitle: 'Assisted Living Guide: Costs, Services & How to Choose'
 seoDescription: 'Everything families need to know about assisted living: what it is, 2025 costs, how Medicaid and VA benefits help, and how to choose the right facility.'
 publishDate: 2026-09-27
-lastReviewed: 2026-10-25
+lastReviewed: 2026-10-28
 category: assisted-living
 isPillar: true
 sources:
@@ -72,6 +72,8 @@ These two types of care are often confused, but they serve different needs.
 | **Medicare coverage** | Not covered | Covered short-term under specific conditions |
 | **Medicaid coverage** | Possible via state waiver programs | Covered for those who qualify |
 
+For a closer look at the cost gap, care levels and how to decide, read [Assisted Living vs Nursing Home: Costs, Care Levels and How to Choose](/article/assisted-living/assisted-living-vs-nursing-home/).
+
 ---
 
 ## Signs It May Be Time for Assisted Living
@@ -100,6 +102,8 @@ Knowing when to make the move is often the hardest part. There's rarely a single
 When family members are providing care, burnout is real. If caregiving is affecting your own health, work, relationships, or finances, that's also a signal that professional help may be needed — for everyone involved.
 
 > The NIA recommends having a direct, honest conversation with your loved one about what you've noticed, framing concerns without criticism and focusing on specific observations: *"I noticed you haven't been eating much. Is shopping getting harder?"*
+
+If your loved one wants to stay at home, paid help at home may be an option first. Our article [Assisted Living vs In-Home Care: Cost, Safety and Which Fits Your Parent](/article/assisted-living/assisted-living-vs-in-home-care/) shows how many hours of home care cost the same as assisted living.
 
 ---
 
